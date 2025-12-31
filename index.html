@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RCMI IDC - Morgan State University</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #FF6B35;
+            --accent: #F7931E;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #2c3e50;
+            --border: #e0e6ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            animation: slideDown 0.6s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            height: 90vh;
+            background: linear-gradient(135deg, var(--primary) 0%, #004080 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 30%, rgba(247, 147, 30, 0.1) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease 0.3s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            color: white;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            max-width: 650px;
+            font-weight: 300;
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 3rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #ff5722;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .section-label {
+            color: var(--secondary);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--primary);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-description {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .feature-card a {
+            display: inline-block;
+            margin-top: 1.5rem;
+            color: var(--secondary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        /* Stats Section */
+        .stats {
+            background: linear-gradient(135deg, var(--primary), #002244);
+            padding: 6rem 5%;
+            margin: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 50%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(247, 147, 30, 0.15) 0%, transparent 50%);
+        }
+
+        .stats-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--accent);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        /* Leadership Section */
+        .leadership {
+            padding: 8rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--light);
+        }
+
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .leader-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .leader-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .leader-image {
+            width: 100%;
+            height: 360px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            overflow: hidden;
+            position: relative;
+        }
+
+        .leader-image-img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center 10%;
+        }
+
+        .leader-info {
+            padding: 2rem;
+        }
+
+        .leader-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .leader-info .title {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">RCMI <span>IDC</span></div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faculty.html">Faculty</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="opportunities.html">Opportunities</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="tagline">Morgan State University</div>
+            <h1>Investigator<br>Development Core</h1>
+            <p class="subtitle">Empowering diverse researchers to advance biomedical science and reduce health disparities through mentorship, funding, and collaborative innovation.</p>
+            <div class="cta-buttons">
+                <a href="opportunities.html" class="btn btn-primary">Explore Opportunities</a>
+                <a href="about.html" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="section-header">
+            <div class="section-label">What We Do</div>
+            <h2 class="section-title">Building the Next Generation of Researchers</h2>
+            <p class="section-description">
+                The Investigator Development Core supports and enhances the competitiveness of diverse investigators in basic biomedical, behavioral, and clinical sciences, with particular emphasis on early-stage investigators.
+            </p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Pilot Grant Program</h3>
+                <p>Competitive funding opportunities for innovative research projects that address health disparities and advance biomedical knowledge.</p>
+                <a href="opportunities.html">View Programs →</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">✍️</div>
+                <h3>Writing & Research Support</h3>
+                <p>Comprehensive support for grant writing, manuscript preparation, and research design to maximize success rates.</p>
+                <a href="about.html">Learn More →</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🤝</div>
+                <h3>Community Building</h3>
+                <p>Foster collaborative networks through seminars, workshops, and mentorship programs connecting researchers across disciplines.</p>
+                <a href="opportunities.html">Get Involved →</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Active Researchers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">$2M+</div>
+                    <div class="stat-label">Grants Awarded</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">Publications</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Commitment</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="leadership">
+        <div class="section-header">
+            <div class="section-label">Leadership</div>
+            <h2 class="section-title">Meet Our Team</h2>
+            <p class="section-description">
+                Our dedicated leaders bring decades of research experience and a passion for developing the next generation of biomedical investigators.
+            </p>
+        </div>
+
+        <div class="leadership-grid">
+            <div class="leader-card">
+                 <div class="leader-image"><img src="img/Christine.jpg" alt="Dr. Christine Hohmann" class="leader-image-img"></div>
+                <div class="leader-info">
+                    <h3>Dr. Christine Hohmann</h3>
+                    <div class="title">Lead, Investigator Development Core</div>
+                    <p>Expert in neuroscience and investigator development</p>
+                </div>
+            </div>
+
+            <div class="leader-card">
+                <div class="leader-image"><img src="img/shiva.jpg" alt="Dr. Shiva Mehravaran" class="leader-image-img"></div>
+                <div class="leader-info">
+                    <h3>Dr. Shiva Mehravaran</h3>
+                    <div class="title">Co-Lead, Investigator Development Core</div>
+                    <p>Specialist in research methodology and mentorship</p>
+                </div>
+            </div>
+
+            <div class="leader-card">
+                <div class="leader-image"><img src="img/placeholder.png" alt="Diane Hughes" class="leader-image-img"></div>
+                <div class="leader-info">
+                    <h3>Diane Hughes</h3>
+                    <div class="title">Program Manager</div>
+                    <p>Administrative leadership and program coordination</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>RCMI IDC</h4>
+                <p>Center for Urban Health Disparities Research and Innovation</p>
+                <p>Morgan State University</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="about.html">About RCMI & IDC</a>
+                <a href="faculty.html">Faculty & Staff</a>
+                <a href="research.html">Research Projects</a>
+                <a href="opportunities.html">Opportunities</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Portage Avenue Campus, Room 113</p>
+                <p>1700 E Cold Spring Lane</p>
+                <p>Baltimore, MD 21251</p>
+                <p>Phone: 443-885-4534</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="mailto:diane.hughes@morgan.edu">Email Us</a>
+                <a href="https://www.morgan.edu/rcmi">RCMI Program</a>
+                <a href="#">Apply for Funding</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Morgan State University RCMI IDC. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opportunities - RCMI IDC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #FF6B35;
+            --accent: #F7931E;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #2c3e50;
+            --border: #e0e6ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-top: 80px;
+            padding: 6rem 5% 4rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #004080 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 30%, rgba(247, 147, 30, 0.1) 0%, transparent 50%);
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: white;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Main Content */
+        .opportunities-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            color: var(--secondary);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--primary);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-description {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Opportunity Cards */
+        .opportunities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .opportunity-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+        }
+
+        .opportunity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .opportunity-header {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            padding: 2.5rem;
+            color: white;
+        }
+
+        .opportunity-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .opportunity-type {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .opportunity-content {
+            padding: 2.5rem;
+        }
+
+        .opportunity-description {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: var(--text);
+        }
+
+        .opportunity-details {
+            margin-bottom: 2rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 10px;
+        }
+
+        .detail-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .detail-content h4 {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        .detail-content p {
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .opportunity-benefits {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .opportunity-benefits li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        .opportunity-benefits li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .opportunity-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            flex: 1;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            background: var(--light);
+            padding: 6rem 5%;
+            margin: 4rem 0;
+        }
+
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--secondary), var(--accent));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.65rem;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary);
+            border: 4px solid white;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--light);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .timeline-content h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .timeline-date {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .timeline-content p {
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* Support Services */
+        .support-services {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 5%;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+            color: white;
+        }
+
+        .service-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .opportunities-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .opportunity-cta {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">RCMI <span>IDC</span></div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faculty.html">Faculty</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="opportunities.html">Opportunities</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1>Funding & Opportunities</h1>
+        <p>Discover pathways to advance your research career and make an impact</p>
+    </section>
+
+    <section class="opportunities-container">
+        <div class="section-header">
+            <div class="section-label">Available Programs</div>
+            <h2 class="section-title">How We Support You</h2>
+            <p class="section-description">
+                The RCMI IDC offers comprehensive support for investigators at all career stages, from pilot grants to professional development opportunities.
+            </p>
+        </div>
+
+        <div class="opportunities-grid">
+            <!-- Pilot Grant Program -->
+            <div class="opportunity-card">
+                <div class="opportunity-header">
+                    <div class="opportunity-type">FUNDING OPPORTUNITY</div>
+                    <h3>Pilot Grant Program</h3>
+                </div>
+                <div class="opportunity-content">
+                    <p class="opportunity-description">
+                        Competitive seed funding for innovative research projects that address health disparities and advance biomedical knowledge. Perfect for early-stage investigators developing preliminary data for larger grant applications.
+                    </p>
+
+                    <div class="opportunity-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">💰</div>
+                            <div class="detail-content">
+                                <h4>Funding Amount</h4>
+                                <p>Up to $50,000 per year</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">📅</div>
+                            <div class="detail-content">
+                                <h4>Duration</h4>
+                                <p>1-2 years</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">👥</div>
+                            <div class="detail-content">
+                                <h4>Eligibility</h4>
+                                <p>MSU faculty with emphasis on early-stage investigators</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="opportunity-benefits">
+                        <li>Direct research funding</li>
+                        <li>Mentorship from senior investigators</li>
+                        <li>Access to core facilities and resources</li>
+                        <li>Grant writing support</li>
+                        <li>Publication assistance</li>
+                    </ul>
+
+                    <div class="opportunity-cta">
+                        <a href="#" class="btn btn-primary">Apply Now</a>
+                        <a href="#" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Writing & Research Support -->
+            <div class="opportunity-card">
+                <div class="opportunity-header">
+                    <div class="opportunity-type">SUPPORT SERVICES</div>
+                    <h3>Writing & Research Support</h3>
+                </div>
+                <div class="opportunity-content">
+                    <p class="opportunity-description">
+                        Comprehensive support services to enhance the quality and competitiveness of your research proposals, manuscripts, and presentations.
+                    </p>
+
+                    <div class="opportunity-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">✍️</div>
+                            <div class="detail-content">
+                                <h4>Grant Writing</h4>
+                                <p>One-on-one consultation and editing support</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">📊</div>
+                            <div class="detail-content">
+                                <h4>Statistical Support</h4>
+                                <p>Study design and data analysis assistance</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">📝</div>
+                            <div class="detail-content">
+                                <h4>Manuscript Development</h4>
+                                <p>Writing guidance and publication support</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="opportunity-benefits">
+                        <li>Expert feedback on proposals and manuscripts</li>
+                        <li>Research design consultation</li>
+                        <li>Biostatistical analysis support</li>
+                        <li>Literature review assistance</li>
+                        <li>Presentation preparation</li>
+                    </ul>
+
+                    <div class="opportunity-cta">
+                        <a href="#" class="btn btn-primary">Request Support</a>
+                        <a href="#" class="btn btn-secondary">View Services</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mentorship Program -->
+            <div class="opportunity-card">
+                <div class="opportunity-header">
+                    <div class="opportunity-type">PROFESSIONAL DEVELOPMENT</div>
+                    <h3>Mentorship Program</h3>
+                </div>
+                <div class="opportunity-content">
+                    <p class="opportunity-description">
+                        Structured mentorship connecting early-stage investigators with experienced researchers for career guidance, networking, and professional growth.
+                    </p>
+
+                    <div class="opportunity-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">👥</div>
+                            <div class="detail-content">
+                                <h4>Mentorship Match</h4>
+                                <p>Paired with senior investigators in your field</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">🎯</div>
+                            <div class="detail-content">
+                                <h4>Career Development</h4>
+                                <p>Personalized guidance and goal setting</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">🤝</div>
+                            <div class="detail-content">
+                                <h4>Networking</h4>
+                                <p>Access to research networks and collaborations</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="opportunity-benefits">
+                        <li>Regular meetings with mentors</li>
+                        <li>Career planning and strategy</li>
+                        <li>Grant application guidance</li>
+                        <li>Research collaboration opportunities</li>
+                        <li>Professional networking events</li>
+                    </ul>
+
+                    <div class="opportunity-cta">
+                        <a href="#" class="btn btn-primary">Join Program</a>
+                        <a href="#" class="btn btn-secondary">Meet Mentors</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Workshops & Training -->
+            <div class="opportunity-card">
+                <div class="opportunity-header">
+                    <div class="opportunity-type">TRAINING & EDUCATION</div>
+                    <h3>Workshops & Seminars</h3>
+                </div>
+                <div class="opportunity-content">
+                    <p class="opportunity-description">
+                        Regular workshops, seminars, and training sessions on topics essential for research success, from grant writing to data management.
+                    </p>
+
+                    <div class="opportunity-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">🎓</div>
+                            <div class="detail-content">
+                                <h4>Grant Writing Workshops</h4>
+                                <p>Learn to craft competitive proposals</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">🔬</div>
+                            <div class="detail-content">
+                                <h4>Research Methods</h4>
+                                <p>Advanced methodology and techniques</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-icon">💻</div>
+                            <div class="detail-content">
+                                <h4>Technology Training</h4>
+                                <p>Core facilities and equipment</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="opportunity-benefits">
+                        <li>Monthly seminars featuring guest speakers</li>
+                        <li>Hands-on training workshops</li>
+                        <li>Networking with fellow investigators</li>
+                        <li>Continuing education credits</li>
+                        <li>Access to recorded sessions</li>
+                    </ul>
+
+                    <div class="opportunity-cta">
+                        <a href="#" class="btn btn-primary">View Schedule</a>
+                        <a href="#" class="btn btn-secondary">Register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="timeline-section">
+        <div class="timeline-container">
+            <div class="section-header">
+                <div class="section-label">Application Timeline</div>
+                <h2 class="section-title">Pilot Grant Cycle</h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Call for Applications</h4>
+                        <div class="timeline-date">September - October</div>
+                        <p>Annual call for pilot grant proposals distributed to MSU faculty. Information sessions held to answer questions and provide guidance on application process.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Application Deadline</h4>
+                        <div class="timeline-date">November 1</div>
+                        <p>Complete applications due. All proposals must include research plan, budget, biosketch, and letter of support from department chair.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Review Process</h4>
+                        <div class="timeline-date">November - December</div>
+                        <p>Expert panel reviews applications based on scientific merit, innovation, potential impact, and investigator qualifications. Top proposals may be invited for interviews.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Award Notification</h4>
+                        <div class="timeline-date">January</div>
+                        <p>Successful applicants notified and award process initiated. Awardees work with program staff to finalize budgets and establish project timelines.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Project Start</h4>
+                        <div class="timeline-date">February - March</div>
+                        <p>Funded projects begin. Investigators receive orientation on reporting requirements, core facility access, and support services available through the program.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="support-services">
+        <div class="section-header">
+            <div class="section-label">Additional Resources</div>
+            <h2 class="section-title">Support Services</h2>
+            <p class="section-description">
+                Comprehensive support to help you succeed at every stage of your research journey
+            </p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">📚</div>
+                <h4>Literature & Resources</h4>
+                <p>Access to research databases, reference management tools, and library resources for comprehensive literature reviews.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h4>Core Facilities</h4>
+                <p>State-of-the-art equipment and technical expertise through MCB Core Lab and other shared research facilities.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h4>Data Management</h4>
+                <p>Guidance on data collection, storage, analysis, and compliance with federal data sharing requirements.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🎤</div>
+                <h4>Presentation Skills</h4>
+                <p>Training and feedback on scientific presentations, poster design, and conference communication.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🔗</div>
+                <h4>Collaboration Network</h4>
+                <p>Connection to national RCMI consortium and research partners for enhanced collaboration opportunities.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📈</div>
+                <h4>Career Development</h4>
+                <p>Workshops on tenure preparation, promotion strategies, and building an independent research program.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>RCMI IDC</h4>
+                <p>Center for Urban Health Disparities Research and Innovation</p>
+                <p>Morgan State University</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="about.html">About RCMI & IDC</a>
+                <a href="faculty.html">Faculty & Staff</a>
+                <a href="research.html">Research Projects</a>
+                <a href="opportunities.html">Opportunities</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Portage Avenue Campus, Room 113</p>
+                <p>1700 E Cold Spring Lane</p>
+                <p>Baltimore, MD 21251</p>
+                <p>Phone: 443-885-4534</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="mailto:diane.hughes@morgan.edu">Email Us</a>
+                <a href="https://www.morgan.edu/rcmi">RCMI Program</a>
+                <a href="#">Apply for Funding</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Morgan State University RCMI IDC. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

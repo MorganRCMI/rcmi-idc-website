@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - RCMI IDC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #FF6B35;
+            --accent: #F7931E;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #2c3e50;
+            --border: #e0e6ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-top: 80px;
+            padding: 6rem 5% 4rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #004080 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 30%, rgba(247, 147, 30, 0.1) 0%, transparent 50%);
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: white;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Contact Container */
+        .contact-container {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
+        }
+
+        .contact-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .info-content h3 {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .info-content p {
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .info-content a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .info-content a:hover {
+            color: var(--accent);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
+        }
+
+        .contact-form h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Team Section */
+        .team-section {
+            background: var(--light);
+            padding: 6rem 5%;
+            margin-top: 4rem;
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            color: var(--secondary);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--primary);
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .team-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .team-photo {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto 1.5rem;
+        }
+
+        .team-photo-img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center 10%;
+        }
+
+        .team-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .team-card .title {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .team-card p {
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .team-card a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .team-card a:hover {
+            color: var(--accent);
+        }
+
+        /* Map Section */
+        .map-section {
+            max-width: 1200px;
+            margin: 6rem auto 0;
+            padding: 0 5%;
+        }
+
+        .map-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .map-container h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--light), #e0e6ed);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            font-size: 1.2rem;
+            margin-top: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">RCMI <span>IDC</span></div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faculty.html">Faculty</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="opportunities.html">Opportunities</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1>Get in Touch</h1>
+        <p>We're here to answer your questions and support your research journey</p>
+    </section>
+
+    <section class="contact-container">
+        <div class="contact-info">
+            <h2>Contact Information</h2>
+
+            <div class="info-item">
+                <div class="info-icon">📍</div>
+                <div class="info-content">
+                    <h3>Our Location</h3>
+                    <p>
+                        Portage Avenue Campus, Room 113<br>
+                        1700 E Cold Spring Lane<br>
+                        Baltimore, Maryland 21251
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon">📞</div>
+                <div class="info-content">
+                    <h3>Phone</h3>
+                    <p><a href="tel:443-885-4534">(443) 885-4534</a></p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon">✉️</div>
+                <div class="info-content">
+                    <h3>Email</h3>
+                    <p>
+                        General Inquiries:<br>
+                        <a href="mailto:diane.hughes@morgan.edu">diane.hughes@morgan.edu</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon">🕐</div>
+                <div class="info-content">
+                    <h3>Office Hours</h3>
+                    <p>
+                        Monday - Friday<br>
+                        9:00 AM - 5:00 PM EST
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-form">
+            <h2>Send Us a Message</h2>
+            <form>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject *</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Please select...</option>
+                        <option value="pilot-grant">Pilot Grant Information</option>
+                        <option value="support-services">Support Services</option>
+                        <option value="mentorship">Mentorship Program</option>
+                        <option value="collaboration">Collaboration Opportunities</option>
+                        <option value="general">General Inquiry</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="team-container">
+            <div class="section-header">
+                <div class="section-label">Our Team</div>
+                <h2 class="section-title">Contact Our Leadership</h2>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-photo"><img src="img/Christine.jpg" alt="Dr. Christine Hohmann" class="team-photo-img"></div>
+                    <h3>Dr. Christine Hohmann</h3>
+                    <div class="title">Lead, IDC</div>
+                    <p>For inquiries about investigator development, mentorship programs, and research support.</p>
+                    <a href="mailto:christine.hohmann@morgan.edu">christine.hohmann@morgan.edu</a>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-photo"><img src="img/shiva.jpg" alt="Dr. Shiva Mehravaran" class="team-photo-img"></div>
+                    <h3>Dr. Shiva Mehravaran</h3>
+                    <div class="title">Co-Lead, IDC</div>
+                    <p>For questions about research methodology, statistical support, and program design.</p>
+                    <a href="mailto:shiva.mehravaran@morgan.edu">shiva.mehravaran@morgan.edu</a>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-photo"><img src="img/placeholder.png" alt="Diane Hughes" class="team-photo-img"></div>
+                    <h3>Diane Hughes</h3>
+                    <div class="title">Program Manager</div>
+                    <p>For administrative questions, program coordination, and general information.</p>
+                    <a href="mailto:diane.hughes@morgan.edu">diane.hughes@morgan.edu</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-section">
+        <div class="map-container">
+            <h2>Visit Us</h2>
+            <p style="color: var(--text); margin-bottom: 1rem;">
+                Located on the Portage Avenue Campus of Morgan State University in Baltimore, Maryland
+            </p>
+            <div class="map-placeholder">
+                🗺️ Interactive Map<br>
+                <span style="font-size: 0.9rem; margin-top: 1rem; display: block;">
+                    (Embed Google Maps or campus map here)
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>RCMI IDC</h4>
+                <p>Center for Urban Health Disparities Research and Innovation</p>
+                <p>Morgan State University</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="about.html">About RCMI & IDC</a>
+                <a href="faculty.html">Faculty & Staff</a>
+                <a href="research.html">Research Projects</a>
+                <a href="opportunities.html">Opportunities</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Portage Avenue Campus, Room 113</p>
+                <p>1700 E Cold Spring Lane</p>
+                <p>Baltimore, MD 21251</p>
+                <p>Phone: 443-885-4534</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="mailto:diane.hughes@morgan.edu">Email Us</a>
+                <a href="https://www.morgan.edu/rcmi">RCMI Program</a>
+                <a href="#">Apply for Funding</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Morgan State University RCMI IDC. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

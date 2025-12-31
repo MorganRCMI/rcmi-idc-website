@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research - RCMI IDC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #FF6B35;
+            --accent: #F7931E;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #2c3e50;
+            --border: #e0e6ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-top: 80px;
+            padding: 6rem 5% 4rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #004080 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 30%, rgba(247, 147, 30, 0.1) 0%, transparent 50%);
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: white;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Research Areas */
+        .research-areas {
+            max-width: 1400px;
+            margin: 6rem auto;
+            padding: 0 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            color: var(--secondary);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--primary);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-description {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .area-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .area-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            border-radius: 20px 20px 0 0;
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .area-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .area-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .area-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .area-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .area-card p {
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .area-card ul {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .area-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text);
+        }
+
+        .area-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* Featured Projects */
+        .featured-projects {
+            background: var(--light);
+            padding: 6rem 5%;
+            margin: 4rem 0;
+        }
+
+        .projects-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .project-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        .meta-label {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .project-card p {
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .project-tag {
+            padding: 0.5rem 1.2rem;
+            background: var(--light);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            border: 1px solid var(--border);
+            font-weight: 500;
+        }
+
+        /* Infrastructure Section */
+        .infrastructure {
+            max-width: 1400px;
+            margin: 6rem auto;
+            padding: 0 5%;
+        }
+
+        .infrastructure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .infrastructure-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .infrastructure-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .infrastructure-card .icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            color: white;
+        }
+
+        .infrastructure-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .infrastructure-card p {
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), #002244);
+            padding: 6rem 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 50%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(247, 147, 30, 0.15) 0%, transparent 50%);
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .btn {
+            padding: 1.2rem 3rem;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .areas-grid,
+            .infrastructure-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">RCMI <span>IDC</span></div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faculty.html">Faculty</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="opportunities.html">Opportunities</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1>Research Excellence</h1>
+        <p>Advancing biomedical science and addressing health disparities through innovative research</p>
+    </section>
+
+    <section class="research-areas">
+        <div class="section-header">
+            <div class="section-label">Focus Areas</div>
+            <h2 class="section-title">Our Research Portfolio</h2>
+            <p class="section-description">
+                The RCMI IDC supports diverse research areas that address critical health challenges affecting minority and underserved populations.
+            </p>
+        </div>
+
+        <div class="areas-grid">
+            <div class="area-card">
+                <div class="area-icon">🧬</div>
+                <h3>Molecular & Cellular Biology</h3>
+                <p>Investigating fundamental biological mechanisms at the molecular and cellular level to understand disease processes.</p>
+                <ul>
+                    <li>Cell signaling pathways</li>
+                    <li>Gene expression regulation</li>
+                    <li>RNA-protein interactions</li>
+                    <li>Melanocortin receptor mechanisms</li>
+                </ul>
+            </div>
+
+            <div class="area-card">
+                <div class="area-icon">🧠</div>
+                <h3>Neuroscience & Behavior</h3>
+                <p>Exploring the biological basis of behavior and cognitive function across the lifespan.</p>
+                <ul>
+                    <li>Developmental neurobiology</li>
+                    <li>Cognitive aging</li>
+                    <li>Risky behaviors</li>
+                    <li>Drug abuse mechanisms</li>
+                </ul>
+            </div>
+
+            <div class="area-card">
+                <div class="area-icon">🏥</div>
+                <h3>Public Health & Disparities</h3>
+                <p>Addressing health inequities through community-engaged research and evidence-based interventions.</p>
+                <ul>
+                    <li>Community-based participatory research</li>
+                    <li>Health disparities intervention</li>
+                    <li>Tobacco control</li>
+                    <li>Urban health challenges</li>
+                </ul>
+            </div>
+
+            <div class="area-card">
+                <div class="area-icon">📊</div>
+                <h3>Biostatistics & Methodology</h3>
+                <p>Developing and applying advanced statistical methods to strengthen research design and analysis.</p>
+                <ul>
+                    <li>Study design optimization</li>
+                    <li>Statistical modeling</li>
+                    <li>Data analysis methods</li>
+                    <li>Program evaluation</li>
+                </ul>
+            </div>
+
+            <div class="area-card">
+                <div class="area-icon">💊</div>
+                <h3>Chronic Disease Research</h3>
+                <p>Investigating mechanisms and interventions for diseases that disproportionately affect minority populations.</p>
+                <ul>
+                    <li>Cardiovascular health</li>
+                    <li>Metabolic disorders</li>
+                    <li>Cancer disparities</li>
+                    <li>Neurological conditions</li>
+                </ul>
+            </div>
+
+            <div class="area-card">
+                <div class="area-icon">🔬</div>
+                <h3>Translational Research</h3>
+                <p>Bridging basic science discoveries with clinical applications to improve health outcomes.</p>
+                <ul>
+                    <li>Bench to bedside translation</li>
+                    <li>Clinical trial development</li>
+                    <li>Intervention implementation</li>
+                    <li>Community health programs</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-projects">
+        <div class="projects-container">
+            <div class="section-header">
+                <div class="section-label">Current Work</div>
+                <h2 class="section-title">Featured Research Projects</h2>
+            </div>
+
+            <div class="project-card">
+                <h3>Melanocortin Receptor Signaling in Health and Disease</h3>
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">PI:</span>
+                        <span>Dr. James Wachira</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Department:</span>
+                        <span>Biology</span>
+                    </div>
+                </div>
+                <p>
+                    This project delineates the mechanisms of signaling through melanocortin receptors, which play important roles in diverse physiological processes including energy homeostasis, pigmentation, and inflammation. Understanding these pathways has implications for treating obesity, metabolic disorders, and inflammatory diseases.
+                </p>
+                <div class="project-tags">
+                    <span class="project-tag">Cell Signaling</span>
+                    <span class="project-tag">Molecular Biology</span>
+                    <span class="project-tag">Metabolic Disease</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>Developmental Neurobiology of Risky Behaviors</h3>
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">PI:</span>
+                        <span>Dr. Ingrid Tulloch</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Department:</span>
+                        <span>Psychology</span>
+                    </div>
+                </div>
+                <p>
+                    Using both human participants and animal models, this research investigates how early developmental experiences shape adult behavioral outcomes and cognitive aging. The work has important implications for understanding substance abuse vulnerability and developing prevention strategies.
+                </p>
+                <div class="project-tags">
+                    <span class="project-tag">Neuroscience</span>
+                    <span class="project-tag">Behavioral Research</span>
+                    <span class="project-tag">Drug Abuse</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>Community-Based Health Interventions in Urban Settings</h3>
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">PI:</span>
+                        <span>Dr. Payam Sheikhattari</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Department:</span>
+                        <span>Public Health</span>
+                    </div>
+                </div>
+                <p>
+                    This research employs community-based participatory approaches to address health disparities in urban populations, with a focus on tobacco control and nicotine dependence. The project develops and tests culturally-appropriate interventions that can be sustained in community settings.
+                </p>
+                <div class="project-tags">
+                    <span class="project-tag">Public Health</span>
+                    <span class="project-tag">CBPR</span>
+                    <span class="project-tag">Health Disparities</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>RNA Packaging and Gene Expression Control</h3>
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">PI:</span>
+                        <span>Dr. James Wachira</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Department:</span>
+                        <span>Biology</span>
+                    </div>
+                </div>
+                <p>
+                    Investigating the biophysical principles underlying RNA-protein interactions to gain insight into cellular RNA packaging pathways and the control of gene expression at the RNA level. This fundamental research has implications for understanding cancer, developmental disorders, and potential therapeutic targets.
+                </p>
+                <div class="project-tags">
+                    <span class="project-tag">RNA Biology</span>
+                    <span class="project-tag">Gene Expression</span>
+                    <span class="project-tag">Molecular Mechanisms</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="infrastructure">
+        <div class="section-header">
+            <div class="section-label">Resources</div>
+            <h2 class="section-title">Research Infrastructure</h2>
+            <p class="section-description">
+                State-of-the-art facilities and support services that enable cutting-edge research
+            </p>
+        </div>
+
+        <div class="infrastructure-grid">
+            <div class="infrastructure-card">
+                <div class="icon">🔬</div>
+                <h4>MCB Core Laboratory</h4>
+                <p>Molecular and Cellular Biology core providing access to advanced instrumentation and technical expertise for biomedical research.</p>
+            </div>
+
+            <div class="infrastructure-card">
+                <div class="icon">💻</div>
+                <h4>Bioinformatics Support</h4>
+                <p>Computational resources and expertise for genomic, proteomic, and systems biology data analysis.</p>
+            </div>
+
+            <div class="infrastructure-card">
+                <div class="icon">📈</div>
+                <h4>Biostatistics Unit</h4>
+                <p>Statistical consultation and support for study design, data analysis, and manuscript preparation.</p>
+            </div>
+
+            <div class="infrastructure-card">
+                <div class="icon">✍️</div>
+                <h4>Grant Writing Support</h4>
+                <p>Comprehensive assistance with proposal development, writing, and submission to federal agencies.</p>
+            </div>
+
+            <div class="infrastructure-card">
+                <div class="icon">📚</div>
+                <h4>Research Resources</h4>
+                <p>Access to literature databases, reference management tools, and publication support services.</p>
+            </div>
+
+            <div class="infrastructure-card">
+                <div class="icon">🤝</div>
+                <h4>Collaborative Networks</h4>
+                <p>Connections to national RCMI consortium and research partners for enhanced collaboration opportunities.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Join Our Research Community</h2>
+            <p>
+                Whether you're an early-stage investigator seeking pilot funding, an established researcher looking to collaborate, or a student interested in health disparities research, we invite you to explore opportunities with RCMI IDC.
+            </p>
+            <a href="opportunities.html" class="btn">Explore Opportunities</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>RCMI IDC</h4>
+                <p>Center for Urban Health Disparities Research and Innovation</p>
+                <p>Morgan State University</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="about.html">About RCMI & IDC</a>
+                <a href="faculty.html">Faculty & Staff</a>
+                <a href="research.html">Research Projects</a>
+                <a href="opportunities.html">Opportunities</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Portage Avenue Campus, Room 113</p>
+                <p>1700 E Cold Spring Lane</p>
+                <p>Baltimore, MD 21251</p>
+                <p>Phone: 443-885-4534</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="mailto:diane.hughes@morgan.edu">Email Us</a>
+                <a href="https://www.morgan.edu/rcmi">RCMI Program</a>
+                <a href="#">Apply for Funding</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Morgan State University RCMI IDC. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

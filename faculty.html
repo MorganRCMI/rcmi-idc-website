@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty & Research - RCMI IDC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #FF6B35;
+            --accent: #F7931E;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #2c3e50;
+            --border: #e0e6ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-top: 80px;
+            padding: 6rem 5% 4rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #004080 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 30%, rgba(247, 147, 30, 0.1) 0%, transparent 50%);
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: white;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Filter Tabs */
+        .filter-section {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 5%;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .filter-tab {
+            padding: 0.8rem 2rem;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .filter-tab:hover,
+        .filter-tab.active {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        /* Faculty Grid */
+        .faculty-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+        }
+
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 3rem;
+        }
+
+        .faculty-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            border: 1px solid var(--border);
+        }
+
+        .faculty-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .faculty-image {
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faculty-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+        }
+
+        .faculty-info {
+            padding: 2.5rem;
+        }
+
+        .faculty-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .faculty-title {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .faculty-department {
+            color: var(--text);
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .faculty-education {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 10px;
+        }
+
+        .faculty-education h4 {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .faculty-education p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 0.3rem;
+        }
+
+        .research-interests {
+            margin-bottom: 1.5rem;
+        }
+
+        .research-interests h4 {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .research-interests p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        .research-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            padding: 0.4rem 1rem;
+            background: var(--light);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--primary);
+            border: 1px solid var(--border);
+        }
+
+        .faculty-contact {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+        }
+
+        /* Publications Section */
+        .publications-highlight {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .publications-highlight h4 {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .publications-highlight p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .faculty-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-tabs {
+                flex-direction: column;
+            }
+
+            .filter-tab {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">RCMI <span>IDC</span></div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faculty.html">Faculty</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="opportunities.html">Opportunities</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1>Faculty & Researchers</h1>
+        <p>Meet our distinguished team of scientists dedicated to advancing health disparities research</p>
+    </section>
+
+    <section class="filter-section">
+        <div class="filter-tabs">
+            <div class="filter-tab active">All Faculty</div>
+            <div class="filter-tab">Leadership</div>
+            <div class="filter-tab">Principal Investigators</div>
+            <div class="filter-tab">Research Staff</div>
+        </div>
+    </section>
+
+    <section class="faculty-container">
+        <div class="faculty-grid">
+            <!-- Faculty Card 1 -->
+            <div class="faculty-card">
+                <div class="faculty-image">👨‍🔬</div>
+                <div class="faculty-info">
+                    <h3>Dr. Christine Hohmann</h3>
+                    <div class="faculty-title">Lead, Investigator Development Core</div>
+                    <div class="faculty-department">Department of Psychology</div>
+                    
+                    <div class="faculty-education">
+                        <h4>Education</h4>
+                        <p>Ph.D. in Neuroscience</p>
+                        <p>M.S. in Biological Sciences</p>
+                        <p>B.S. in Psychology</p>
+                    </div>
+
+                    <div class="research-interests">
+                        <h4>Research Interests</h4>
+                        <p>Neuroscience, investigator development, mentorship programs, and capacity building for early-stage researchers in biomedical sciences.</p>
+                    </div>
+
+                    <div class="research-tags">
+                        <span class="tag">Neuroscience</span>
+                        <span class="tag">Mentorship</span>
+                        <span class="tag">Grant Writing</span>
+                    </div>
+
+                    <div class="faculty-contact">
+                        <a href="mailto:christine.hohmann@morgan.edu" class="contact-link">christine.hohmann@morgan.edu</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Faculty Card 2 -->
+            <div class="faculty-card">
+                <div class="faculty-image">👩‍🔬</div>
+                <div class="faculty-info">
+                    <h3>Dr. Shiva Mehravaran</h3>
+                    <div class="faculty-title">Co-Lead, Investigator Development Core</div>
+                    <div class="faculty-department">Research Methodology</div>
+                    
+                    <div class="faculty-education">
+                        <h4>Education</h4>
+                        <p>Ph.D. in Research Methodology</p>
+                        <p>M.S. in Statistics</p>
+                        <p>B.S. in Mathematics</p>
+                    </div>
+
+                    <div class="research-interests">
+                        <h4>Research Interests</h4>
+                        <p>Research design and methodology, biostatistics, program evaluation, and supporting investigators in developing competitive research proposals.</p>
+                    </div>
+
+                    <div class="research-tags">
+                        <span class="tag">Biostatistics</span>
+                        <span class="tag">Research Design</span>
+                        <span class="tag">Program Evaluation</span>
+                    </div>
+
+                    <div class="faculty-contact">
+                        <a href="mailto:shiva.mehravaran@morgan.edu" class="contact-link">shiva.mehravaran@morgan.edu</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Faculty Card 3 -->
+            <div class="faculty-card">
+                <div class="faculty-image">👩‍🔬</div>
+                <div class="faculty-info">
+                    <h3>Dr. Ingrid Tulloch</h3>
+                    <div class="faculty-title">Associate Professor of Psychology</div>
+                    <div class="faculty-department">Department of Psychology</div>
+                    
+                    <div class="faculty-education">
+                        <h4>Education</h4>
+                        <p>Ph.D. in Biological Psychology and Behavioral Neuroscience, CUNY Graduate Center</p>
+                        <p>M.Phil. in Biological Psychology and Behavioral Neuroscience, CUNY Graduate Center</p>
+                        <p>B.A. in Psychology, Hunter College</p>
+                    </div>
+
+                    <div class="research-interests">
+                        <h4>Research Interests</h4>
+                        <p>Dr. Tulloch's research utilizes human participants and animal models to study the developmental neurobiology of risky adult behaviors and cognitive aging. She completed post-doctoral research at the National Institute on Drug Abuse studying molecular mechanisms of methamphetamine toxicity.</p>
+                    </div>
+
+                    <div class="research-tags">
+                        <span class="tag">Neurobiology</span>
+                        <span class="tag">Behavioral Science</span>
+                        <span class="tag">Cognitive Aging</span>
+                        <span class="tag">Drug Abuse Research</span>
+                    </div>
+
+                    <div class="publications-highlight">
+                        <h4>Recent Focus</h4>
+                        <p>Developmental neurobiology, risky behaviors, methamphetamine toxicity mechanisms, and cognitive aging processes.</p>
+                    </div>
+
+                    <div class="faculty-contact">
+                        <a href="mailto:ingrid.tulloch@morgan.edu" class="contact-link">ingrid.tulloch@morgan.edu</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Faculty Card 4 -->
+            <div class="faculty-card">
+                <div class="faculty-image">👨‍🔬</div>
+                <div class="faculty-info">
+                    <h3>Dr. James Wachira</h3>
+                    <div class="faculty-title">Professor of Biology</div>
+                    <div class="faculty-department">Department of Biology</div>
+                    
+                    <div class="faculty-education">
+                        <h4>Education</h4>
+                        <p>Ph.D., University College London (1994)</p>
+                        <p>M.Sc., University of Nairobi (1990)</p>
+                        <p>B.Sc. (Hons), University of Nairobi (1986)</p>
+                    </div>
+
+                    <div class="research-interests">
+                        <h4>Research Interests</h4>
+                        <p>Cell signaling, RNA packaging, cell growth and proliferation, and gene expression. The laboratory delineates mechanisms of signaling through melanocortin receptors and investigates biophysical principles underlying RNA-protein interactions for insights into cellular RNA packaging and gene expression control.</p>
+                    </div>
+
+                    <div class="research-tags">
+                        <span class="tag">Cell Signaling</span>
+                        <span class="tag">RNA Biology</span>
+                        <span class="tag">Gene Expression</span>
+                        <span class="tag">Molecular Biology</span>
+                    </div>
+
+                    <div class="publications-highlight">
+                        <h4>Publications</h4>
+                        <p>Total: 29 publications | h-Index: 12 | Citations: 406+</p>
+                    </div>
+
+                    <div class="faculty-contact">
+                        <a href="mailto:james.wachira@morgan.edu" class="contact-link">james.wachira@morgan.edu</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Faculty Card 5 -->
+            <div class="faculty-card">
+                <div class="faculty-image">👨‍⚕️</div>
+                <div class="faculty-info">
+                    <h3>Dr. Payam Sheikhattari</h3>
+                    <div class="faculty-title">Professor of Public Health</div>
+                    <div class="faculty-department">School of Community Health and Policy</div>
+                    
+                    <div class="faculty-education">
+                        <h4>Education</h4>
+                        <p>Ph.D. in Public Health</p>
+                        <p>M.P.H. in Epidemiology</p>
+                    </div>
+
+                    <div class="research-interests">
+                        <h4>Research Interests</h4>
+                        <p>Community-based participatory research, health disparities, nicotine dependence, tobacco control, and biomedical research translation to community settings.</p>
+                    </div>
+
+                    <div class="research-tags">
+                        <span class="tag">Public Health</span>
+                        <span class="tag">CBPR</span>
+                        <span class="tag">Health Disparities</span>
+                        <span class="tag">Tobacco Control</span>
+                    </div>
+
+                    <div class="faculty-contact">
+                        <a href="mailto:payam.sheikhattari@morgan.edu" class="contact-link">payam.sheikhattari@morgan.edu</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Faculty Card 6 -->
+            <div class="faculty-card">
+                <div class="faculty-image">👩‍💼</div>
+                <div class="faculty-info">
+                    <h3>Diane Hughes</h3>
+                    <div class="faculty-title">Program Manager</div>
+                    <div class="faculty-department">RCMI Administrative Core</div>
+                    
+                    <div class="faculty-education">
+                        <h4>Education</h4>
+                        <p>M.Sc. (candidate) in Management, University of Maryland Global Campus</p>
+                        <p>B.A. in Speech Communication (Organizational & Interpersonal), Morgan State University</p>
+                    </div>
+
+                    <div class="research-interests">
+                        <h4>Role & Expertise</h4>
+                        <p>Ms. Hughes provides essential organizational support and program coordination for RCMI. With 10 years of experience as an Administrative Assistant in the Dean's office and extensive background in office management, she ensures smooth operations across all RCMI programs.</p>
+                    </div>
+
+                    <div class="research-tags">
+                        <span class="tag">Program Management</span>
+                        <span class="tag">Administration</span>
+                        <span class="tag">Coordination</span>
+                    </div>
+
+                    <div class="faculty-contact">
+                        <a href="mailto:diane.hughes@morgan.edu" class="contact-link">diane.hughes@morgan.edu</a>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Office: Portage 113 | Phone: (443) 885-4534</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Faculty Card 7 -->
+            <div class="faculty-card">
+                <div class="faculty-image">👩‍💻</div>
+                <div class="faculty-info">
+                    <h3>Kia L. Proctor</h3>
+                    <div class="faculty-title">Communications Specialist</div>
+                    <div class="faculty-department">RCMI & ASCEND Programs</div>
+                    
+                    <div class="faculty-education">
+                        <h4>Education</h4>
+                        <p>M.S. in Management (Marketing specialization), University of Maryland Global Campus</p>
+                        <p>B.S. in English (Digital Media Studies minor), University of Maryland Eastern Shore</p>
+                    </div>
+
+                    <div class="research-interests">
+                        <h4>Role & Expertise</h4>
+                        <p>Ms. Proctor oversees digital marketing projects and initiatives to increase awareness of RCMI and ASCEND programs. She brings expertise in communication campaigns, content development, and brand visibility from her previous role at UMES. Her passion for education drives her commitment to promoting research opportunities.</p>
+                    </div>
+
+                    <div class="research-tags">
+                        <span class="tag">Communications</span>
+                        <span class="tag">Digital Marketing</span>
+                        <span class="tag">Content Development</span>
+                    </div>
+
+                    <div class="faculty-contact">
+                        <a href="mailto:kia.proctor@morgan.edu" class="contact-link">kia.proctor@morgan.edu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>RCMI IDC</h4>
+                <p>Center for Urban Health Disparities Research and Innovation</p>
+                <p>Morgan State University</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="about.html">About RCMI & IDC</a>
+                <a href="faculty.html">Faculty & Staff</a>
+                <a href="research.html">Research Projects</a>
+                <a href="opportunities.html">Opportunities</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Portage Avenue Campus, Room 113</p>
+                <p>1700 E Cold Spring Lane</p>
+                <p>Baltimore, MD 21251</p>
+                <p>Phone: 443-885-4534</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="mailto:diane.hughes@morgan.edu">Email Us</a>
+                <a href="https://www.morgan.edu/rcmi">RCMI Program</a>
+                <a href="#">Apply for Funding</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Morgan State University RCMI IDC. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

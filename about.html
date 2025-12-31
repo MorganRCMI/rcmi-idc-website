@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About RCMI IDC - Morgan State University</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #FF6B35;
+            --accent: #F7931E;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #2c3e50;
+            --border: #e0e6ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-top: 80px;
+            padding: 6rem 5% 4rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #004080 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 30%, rgba(247, 147, 30, 0.1) 0%, transparent 50%);
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: white;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Content Sections */
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 5%;
+        }
+
+        .content-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .content-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin: 3rem 0 1.5rem;
+            font-weight: 700;
+        }
+
+        .content-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(247, 147, 30, 0.1));
+            padding: 3rem;
+            border-radius: 20px;
+            border-left: 5px solid var(--secondary);
+            margin: 3rem 0;
+        }
+
+        .highlight-box h3 {
+            margin-top: 0;
+            color: var(--secondary);
+        }
+
+        /* Mission Cards */
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .mission-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .mission-card .icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .mission-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .mission-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+
+        /* Core Activities List */
+        .activities-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .activities-list li {
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--accent);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .activities-list li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .activities-list li::before {
+            content: '✓';
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-right: 1rem;
+        }
+
+        /* Leadership Section */
+        .leadership-section {
+            background: var(--light);
+            padding: 6rem 5%;
+            margin: 4rem 0;
+        }
+
+        .leadership-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .leader-profile {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            align-items: start;
+        }
+
+        .leader-photo {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .leader-photo-img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center 10%;
+        }
+
+        .leader-details h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .leader-details .title {
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .leader-details p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .content-section h2 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .leader-profile {
+                grid-template-columns: 1fr;
+            }
+
+            .leader-photo {
+                width: 100%;
+                height: 300px;
+            }
+
+            .mission-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">RCMI <span>IDC</span></div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faculty.html">Faculty</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="opportunities.html">Opportunities</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1>About RCMI & IDC</h1>
+        <p>Understanding our mission, values, and commitment to advancing health disparities research</p>
+    </section>
+
+    <section class="content-section">
+        <h2>What is RCMI?</h2>
+        <p>
+            The Research Centers in Minority Institutions (RCMI) program develops and strengthens the infrastructure necessary to conduct state-of-the-art biomedical research and foster the next generation of researchers from underrepresented populations.
+        </p>
+        <p>
+            The RCMI program provides grants to institutions that award doctoral degrees in the health professions or health-related sciences and have a historical and current commitment to serving students from underrepresented populations. The RCMI program supports NIMHD's vision to advance the science of minority health and health disparities research by enabling all investigators within the program the opportunity to engage in rigorous, mentored research experiences focused on diseases that disproportionately affect minority and other health disparity populations.
+        </p>
+
+        <div class="highlight-box">
+            <h3>Center for Urban Health Disparities Research and Innovation</h3>
+            <p>
+                Morgan State University's RCMI program is housed within the Center for Urban Health Disparities Research and Innovation, which serves as a hub for cutting-edge research addressing health inequities in urban communities.
+            </p>
+        </div>
+
+        <h2>The Investigator Development Core (IDC)</h2>
+        <p>
+            The Investigator Development Core supports the development and enhances the competitiveness of diverse investigators in basic biomedical, behavioral and/or clinical sciences, with particular emphasis on early-stage investigators.
+        </p>
+
+        <h3>Core Activities</h3>
+        <ul class="activities-list">
+            <li>Administration of a competitive pilot grant program for innovative research</li>
+            <li>Provision of comprehensive writing and research support services</li>
+            <li>Community building through seminars, workshops, and networking events</li>
+            <li>Mentorship programs connecting early-stage and established investigators</li>
+            <li>Grant writing workshops and manuscript development assistance</li>
+            <li>Research methodology and statistical analysis support</li>
+        </ul>
+
+        <h3>Our Mission</h3>
+        <div class="mission-grid">
+            <div class="mission-card">
+                <div class="icon">🎓</div>
+                <h4>Develop Investigators</h4>
+                <p>Nurture the growth of diverse researchers through targeted training, mentorship, and resources that build research capacity and competitiveness.</p>
+            </div>
+
+            <div class="mission-card">
+                <div class="icon">🔬</div>
+                <h4>Advance Research</h4>
+                <p>Support innovative research that addresses health disparities and contributes to the biomedical knowledge base through pilot grants and infrastructure.</p>
+            </div>
+
+            <div class="mission-card">
+                <div class="icon">🌟</div>
+                <h4>Foster Excellence</h4>
+                <p>Create an environment where investigators can achieve their full potential through collaboration, support, and access to cutting-edge resources.</p>
+            </div>
+        </div>
+
+        <h3>Strategic Goals</h3>
+        <p>
+            The IDC operates with a clear vision to transform health disparities research by empowering a diverse community of investigators. Our strategic goals include:
+        </p>
+        <ul class="activities-list">
+            <li>Increasing the number of early-stage investigators successfully competing for external funding</li>
+            <li>Building a robust pipeline of diverse researchers in biomedical and behavioral sciences</li>
+            <li>Fostering interdisciplinary collaborations that address complex health challenges</li>
+            <li>Enhancing research infrastructure and support services for all investigators</li>
+            <li>Promoting publication of high-impact research in peer-reviewed journals</li>
+            <li>Creating sustainable pathways for career advancement in health disparities research</li>
+        </ul>
+    </section>
+
+    <section class="leadership-section">
+        <div class="leadership-container">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;">Leadership Team</h2>
+                <p style="font-size: 1.1rem; color: var(--text); max-width: 700px; margin: 0 auto;">
+                    Our dedicated leaders bring extensive expertise in biomedical research, education, and investigator development.
+                </p>
+            </div>
+
+            <div class="leader-profile">
+                <div class="leader-photo"><img src="img/Christine.jpg" alt="Dr. Christine Hohmann" class="leader-photo-img"></div>
+                <div class="leader-details">
+                    <h3>Dr. Christine Hohmann</h3>
+                    <div class="title">Lead, Investigator Development Core</div>
+                    <p>
+                        Dr. Christine Hohmann brings decades of experience in neuroscience research and investigator development. Her leadership has been instrumental in establishing the IDC as a premier program for developing diverse biomedical researchers. She is committed to creating opportunities for early-stage investigators and fostering an inclusive research environment that promotes excellence and innovation.
+                    </p>
+                </div>
+            </div>
+
+            <div class="leader-profile">
+                <div class="leader-photo"><img src="img/shiva.jpg" alt="Dr. Shiva Mehravaran" class="leader-photo-img"></div>
+                <div class="leader-details">
+                    <h3>Dr. Shiva Mehravaran</h3>
+                    <div class="title">Co-Lead, Investigator Development Core</div>
+                    <p>
+                        Dr. Shiva Mehravaran specializes in research methodology and mentorship programs. Her expertise in supporting early-stage investigators has helped numerous researchers successfully transition to independent careers. She is passionate about building research capacity and ensuring that all investigators have access to the tools and support they need to succeed.
+                    </p>
+                </div>
+            </div>
+
+            <div class="leader-profile">
+                <div class="leader-photo"><img src="img/placeholder.png" alt="Diane Hughes" class="leader-photo-img"></div>
+                <div class="leader-details">
+                    <h3>Diane Hughes</h3>
+                    <div class="title">Program Manager, RCMI Administrative Core</div>
+                    <p>
+                        Diane Hughes serves as the Program Manager for the RCMI Administrative Core, providing essential organizational support and program coordination. With extensive experience in academic administration and a Master's degree in Management from the University of Maryland Global Campus, she ensures smooth operations and effective communication across all RCMI programs. Ms. Hughes previously served as an Administrative Assistant in the Office of the Dean of the School of Computer, Mathematical & Natural Sciences for 10 years.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>Impact & Vision</h2>
+        <p>
+            The RCMI Investigator Development Core at Morgan State University is more than a program—it's a commitment to transforming the landscape of biomedical research by ensuring that diverse voices and perspectives are represented in the scientific community.
+        </p>
+        <p>
+            Through our comprehensive approach to investigator development, we are building a sustainable ecosystem that supports researchers from their earliest career stages through established independence. Our vision is to create a future where health disparities are eliminated through rigorous scientific inquiry led by a diverse community of investigators who reflect the populations they serve.
+        </p>
+
+        <div class="highlight-box">
+            <h3>Join Our Community</h3>
+            <p>
+                Whether you're an early-stage investigator seeking support, an established researcher looking to mentor, or an institution interested in collaboration, we invite you to connect with the RCMI IDC and be part of our mission to advance health equity through research excellence.
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>RCMI IDC</h4>
+                <p>Center for Urban Health Disparities Research and Innovation</p>
+                <p>Morgan State University</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="about.html">About RCMI & IDC</a>
+                <a href="faculty.html">Faculty & Staff</a>
+                <a href="research.html">Research Projects</a>
+                <a href="opportunities.html">Opportunities</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Portage Avenue Campus, Room 113</p>
+                <p>1700 E Cold Spring Lane</p>
+                <p>Baltimore, MD 21251</p>
+                <p>Phone: 443-885-4534</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="mailto:diane.hughes@morgan.edu">Email Us</a>
+                <a href="https://www.morgan.edu/rcmi">RCMI Program</a>
+                <a href="#">Apply for Funding</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Morgan State University RCMI IDC. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

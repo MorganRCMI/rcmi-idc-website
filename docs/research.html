@@ -29,7 +29,6 @@
             overflow-x: hidden;
         }
 
-        /* Header & Navigation */
         header {
             position: fixed;
             top: 0;
@@ -87,15 +86,16 @@
             transition: width 0.3s ease;
         }
 
-        nav a:hover {
+        nav a:hover,
+        nav a[aria-current="page"] {
             color: var(--secondary);
         }
 
-        nav a:hover::after {
+        nav a:hover::after,
+        nav a[aria-current="page"]::after {
             width: 100%;
         }
 
-        /* Page Header */
         .page-header {
             margin-top: 80px;
             padding: 6rem 5% 4rem;
@@ -112,7 +112,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
+            background:
                 radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 80% 30%, rgba(247, 147, 30, 0.1) 0%, transparent 50%);
         }
@@ -137,7 +137,6 @@
             z-index: 1;
         }
 
-        /* Research Areas */
         .research-areas {
             max-width: 1400px;
             margin: 6rem auto;
@@ -248,8 +247,7 @@
         }
 
         .area-card li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
+            padding: 0.5rem 0 0.5rem 1.5rem;
             position: relative;
             color: var(--text);
         }
@@ -262,7 +260,6 @@
             font-weight: bold;
         }
 
-        /* Featured Projects */
         .featured-projects {
             background: var(--light);
             padding: 6rem 5%;
@@ -340,7 +337,43 @@
             font-weight: 500;
         }
 
-        /* Infrastructure Section */
+        .project-publications {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .project-publications h4 {
+            color: var(--primary);
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-publications ul {
+            list-style: none;
+        }
+
+        .project-publications li {
+            margin-bottom: 0.75rem;
+        }
+
+        .project-publications a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .project-publications a:hover {
+            color: var(--accent);
+        }
+
+        .project-publications span {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
         .infrastructure {
             max-width: 1400px;
             margin: 6rem auto;
@@ -395,7 +428,6 @@
             line-height: 1.7;
         }
 
-        /* CTA Section */
         .cta-section {
             background: linear-gradient(135deg, var(--primary), #002244);
             padding: 6rem 5%;
@@ -411,7 +443,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
+            background:
                 radial-gradient(circle at 30% 50%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 70% 50%, rgba(247, 147, 30, 0.15) 0%, transparent 50%);
         }
@@ -457,7 +489,12 @@
             box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
         }
 
-        /* Footer */
+        .empty-message {
+            text-align: center;
+            font-size: 1.05rem;
+            color: var(--text);
+        }
+
         footer {
             background: var(--dark);
             color: white;
@@ -500,7 +537,6 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .page-header h1 {
                 font-size: 2.5rem;
@@ -524,6 +560,8 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="./styles/site-polish.css?v=1">
+    <link rel="stylesheet" href="./styles/hero-system.css?v=1">
 </head>
 <body>
     <header>
@@ -533,16 +571,17 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="faculty.html">Faculty</a></li>
-                <li><a href="research.html">Research</a></li>
+                <li><a href="research.html" aria-current="page">Research</a></li>
+                <li><a href="publications.html">Publications</a></li>
                 <li><a href="opportunities.html">Opportunities</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="page-header">
-        <h1>Research Excellence</h1>
-        <p>Advancing biomedical science and addressing health disparities through innovative research</p>
+    <section class="page-header page-hero">
+        <h1 id="page-title">Research Excellence</h1>
+        <p id="page-description">Advancing biomedical science and addressing health disparities through innovative research</p>
     </section>
 
     <section class="research-areas">
@@ -554,79 +593,7 @@
             </p>
         </div>
 
-        <div class="areas-grid">
-            <div class="area-card">
-                <div class="area-icon">🧬</div>
-                <h3>Molecular & Cellular Biology</h3>
-                <p>Investigating fundamental biological mechanisms at the molecular and cellular level to understand disease processes.</p>
-                <ul>
-                    <li>Cell signaling pathways</li>
-                    <li>Gene expression regulation</li>
-                    <li>RNA-protein interactions</li>
-                    <li>Melanocortin receptor mechanisms</li>
-                </ul>
-            </div>
-
-            <div class="area-card">
-                <div class="area-icon">🧠</div>
-                <h3>Neuroscience & Behavior</h3>
-                <p>Exploring the biological basis of behavior and cognitive function across the lifespan.</p>
-                <ul>
-                    <li>Developmental neurobiology</li>
-                    <li>Cognitive aging</li>
-                    <li>Risky behaviors</li>
-                    <li>Drug abuse mechanisms</li>
-                </ul>
-            </div>
-
-            <div class="area-card">
-                <div class="area-icon">🏥</div>
-                <h3>Public Health & Disparities</h3>
-                <p>Addressing health inequities through community-engaged research and evidence-based interventions.</p>
-                <ul>
-                    <li>Community-based participatory research</li>
-                    <li>Health disparities intervention</li>
-                    <li>Tobacco control</li>
-                    <li>Urban health challenges</li>
-                </ul>
-            </div>
-
-            <div class="area-card">
-                <div class="area-icon">📊</div>
-                <h3>Biostatistics & Methodology</h3>
-                <p>Developing and applying advanced statistical methods to strengthen research design and analysis.</p>
-                <ul>
-                    <li>Study design optimization</li>
-                    <li>Statistical modeling</li>
-                    <li>Data analysis methods</li>
-                    <li>Program evaluation</li>
-                </ul>
-            </div>
-
-            <div class="area-card">
-                <div class="area-icon">💊</div>
-                <h3>Chronic Disease Research</h3>
-                <p>Investigating mechanisms and interventions for diseases that disproportionately affect minority populations.</p>
-                <ul>
-                    <li>Cardiovascular health</li>
-                    <li>Metabolic disorders</li>
-                    <li>Cancer disparities</li>
-                    <li>Neurological conditions</li>
-                </ul>
-            </div>
-
-            <div class="area-card">
-                <div class="area-icon">🔬</div>
-                <h3>Translational Research</h3>
-                <p>Bridging basic science discoveries with clinical applications to improve health outcomes.</p>
-                <ul>
-                    <li>Bench to bedside translation</li>
-                    <li>Clinical trial development</li>
-                    <li>Intervention implementation</li>
-                    <li>Community health programs</li>
-                </ul>
-            </div>
-        </div>
+        <div id="areas-grid" class="areas-grid"></div>
     </section>
 
     <section class="featured-projects">
@@ -636,93 +603,7 @@
                 <h2 class="section-title">Featured Research Projects</h2>
             </div>
 
-            <div class="project-card">
-                <h3>Melanocortin Receptor Signaling in Health and Disease</h3>
-                <div class="project-meta">
-                    <div class="meta-item">
-                        <span class="meta-label">PI:</span>
-                        <span>Dr. James Wachira</span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label">Department:</span>
-                        <span>Biology</span>
-                    </div>
-                </div>
-                <p>
-                    This project delineates the mechanisms of signaling through melanocortin receptors, which play important roles in diverse physiological processes including energy homeostasis, pigmentation, and inflammation. Understanding these pathways has implications for treating obesity, metabolic disorders, and inflammatory diseases.
-                </p>
-                <div class="project-tags">
-                    <span class="project-tag">Cell Signaling</span>
-                    <span class="project-tag">Molecular Biology</span>
-                    <span class="project-tag">Metabolic Disease</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <h3>Developmental Neurobiology of Risky Behaviors</h3>
-                <div class="project-meta">
-                    <div class="meta-item">
-                        <span class="meta-label">PI:</span>
-                        <span>Dr. Ingrid Tulloch</span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label">Department:</span>
-                        <span>Psychology</span>
-                    </div>
-                </div>
-                <p>
-                    Using both human participants and animal models, this research investigates how early developmental experiences shape adult behavioral outcomes and cognitive aging. The work has important implications for understanding substance abuse vulnerability and developing prevention strategies.
-                </p>
-                <div class="project-tags">
-                    <span class="project-tag">Neuroscience</span>
-                    <span class="project-tag">Behavioral Research</span>
-                    <span class="project-tag">Drug Abuse</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <h3>Community-Based Health Interventions in Urban Settings</h3>
-                <div class="project-meta">
-                    <div class="meta-item">
-                        <span class="meta-label">PI:</span>
-                        <span>Dr. Payam Sheikhattari</span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label">Department:</span>
-                        <span>Public Health</span>
-                    </div>
-                </div>
-                <p>
-                    This research employs community-based participatory approaches to address health disparities in urban populations, with a focus on tobacco control and nicotine dependence. The project develops and tests culturally-appropriate interventions that can be sustained in community settings.
-                </p>
-                <div class="project-tags">
-                    <span class="project-tag">Public Health</span>
-                    <span class="project-tag">CBPR</span>
-                    <span class="project-tag">Health Disparities</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <h3>RNA Packaging and Gene Expression Control</h3>
-                <div class="project-meta">
-                    <div class="meta-item">
-                        <span class="meta-label">PI:</span>
-                        <span>Dr. James Wachira</span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label">Department:</span>
-                        <span>Biology</span>
-                    </div>
-                </div>
-                <p>
-                    Investigating the biophysical principles underlying RNA-protein interactions to gain insight into cellular RNA packaging pathways and the control of gene expression at the RNA level. This fundamental research has implications for understanding cancer, developmental disorders, and potential therapeutic targets.
-                </p>
-                <div class="project-tags">
-                    <span class="project-tag">RNA Biology</span>
-                    <span class="project-tag">Gene Expression</span>
-                    <span class="project-tag">Molecular Mechanisms</span>
-                </div>
-            </div>
+            <div id="projects-list"></div>
         </div>
     </section>
 
@@ -735,43 +616,7 @@
             </p>
         </div>
 
-        <div class="infrastructure-grid">
-            <div class="infrastructure-card">
-                <div class="icon">🔬</div>
-                <h4>MCB Core Laboratory</h4>
-                <p>Molecular and Cellular Biology core providing access to advanced instrumentation and technical expertise for biomedical research.</p>
-            </div>
-
-            <div class="infrastructure-card">
-                <div class="icon">💻</div>
-                <h4>Bioinformatics Support</h4>
-                <p>Computational resources and expertise for genomic, proteomic, and systems biology data analysis.</p>
-            </div>
-
-            <div class="infrastructure-card">
-                <div class="icon">📈</div>
-                <h4>Biostatistics Unit</h4>
-                <p>Statistical consultation and support for study design, data analysis, and manuscript preparation.</p>
-            </div>
-
-            <div class="infrastructure-card">
-                <div class="icon">✍️</div>
-                <h4>Grant Writing Support</h4>
-                <p>Comprehensive assistance with proposal development, writing, and submission to federal agencies.</p>
-            </div>
-
-            <div class="infrastructure-card">
-                <div class="icon">📚</div>
-                <h4>Research Resources</h4>
-                <p>Access to literature databases, reference management tools, and publication support services.</p>
-            </div>
-
-            <div class="infrastructure-card">
-                <div class="icon">🤝</div>
-                <h4>Collaborative Networks</h4>
-                <p>Connections to national RCMI consortium and research partners for enhanced collaboration opportunities.</p>
-            </div>
-        </div>
+        <div id="infrastructure-grid" class="infrastructure-grid"></div>
     </section>
 
     <section class="cta-section">
@@ -797,6 +642,7 @@
                 <a href="about.html">About RCMI & IDC</a>
                 <a href="faculty.html">Faculty & Staff</a>
                 <a href="research.html">Research Projects</a>
+                <a href="publications.html">Publications</a>
                 <a href="opportunities.html">Opportunities</a>
             </div>
 
@@ -812,13 +658,129 @@
                 <h4>Connect</h4>
                 <a href="mailto:diane.hughes@morgan.edu">Email Us</a>
                 <a href="https://www.morgan.edu/rcmi">RCMI Program</a>
-                <a href="#">Apply for Funding</a>
+                <a href="opportunities.html">Apply for Funding</a>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2024 Morgan State University RCMI IDC. All rights reserved.</p>
+            <p>&copy; <span id="current-year">2024</span> Morgan State University RCMI IDC. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        window.rcmiSiteConfig = {
+            dataBasePath: "./data"
+        };
+    </script>
+    <script src="./js/FIELD_MAP.js?v=1"></script>
+    <script src="./js/common.js?v=1"></script>
+    <script>
+        (() => {
+            const helpers = window.rcmiSandboxHelpers;
+
+            if (!helpers || typeof helpers.loadDataset !== "function") {
+                throw new Error("Shared CSV helper API is unavailable.");
+            }
+
+            function renderAreaCard(area) {
+                return `
+                    <div class="area-card">
+                        <div class="area-icon">${area.icon || "•"}</div>
+                        <h3>${area.title}</h3>
+                        <p>${area.summary}</p>
+                        <ul>${area.bullets.map((bullet) => `<li>${bullet}</li>`).join("")}</ul>
+                    </div>
+                `;
+            }
+
+            function renderPublicationLinks(project, publicationIndex) {
+                const linked = publicationIndex.get(project.id) || [];
+                if (!linked.length && !project.primaryPublicationUrl) {
+                    return "";
+                }
+
+                const fallback = project.primaryPublicationUrl ? [{
+                    title: project.primaryPublicationLabel || "Read full text",
+                    fullTextUrl: project.primaryPublicationUrl,
+                    year: "",
+                    publicationType: ""
+                }] : [];
+                const items = linked.length ? linked : fallback;
+
+                return `
+                    <div class="project-publications">
+                        <h4>Related Publications</h4>
+                        <ul>
+                            ${items.map((item) => `
+                                <li>
+                                    <a href="${item.fullTextUrl}" target="_blank" rel="noreferrer">${item.title}</a>
+                                    ${(item.year || item.publicationType) ? `<span>${[item.year, item.publicationType].filter(Boolean).join(" | ")}</span>` : ""}
+                                </li>
+                            `).join("")}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            function renderProjectCard(project, publicationIndex) {
+                return `
+                    <div class="project-card">
+                        <h3>${project.title}</h3>
+                        <div class="project-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">PI:</span>
+                                <span>${project.piName}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Department:</span>
+                                <span>${project.department}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Status:</span>
+                                <span>${project.projectStatus || "Current"}</span>
+                            </div>
+                        </div>
+                        <p>${project.description}</p>
+                        ${project.tags.length ? `<div class="project-tags">${project.tags.map((tag) => `<span class="project-tag">${tag}</span>`).join("")}</div>` : ""}
+                        ${renderPublicationLinks(project, publicationIndex)}
+                    </div>
+                `;
+            }
+
+            function renderInfrastructureCard(item) {
+                return `
+                    <div class="infrastructure-card">
+                        <div class="icon">${item.icon || "•"}</div>
+                        <h4>${item.name}</h4>
+                        <p>${item.description}</p>
+                    </div>
+                `;
+            }
+
+            async function init() {
+                const [researchRows, publicationRows] = await Promise.all([
+                    helpers.loadDataset("research"),
+                    helpers.loadDataset("publications")
+                ]);
+
+                const research = helpers.transformResearchRecords(researchRows);
+                const publications = helpers.transformPublicationRecords(publicationRows);
+                const publicationIndex = helpers.buildPublicationIndex(publications);
+                const page = window.workbookContract.pages.research;
+
+                document.getElementById("page-title").textContent = page.title;
+                document.getElementById("page-description").textContent = page.description;
+                document.getElementById("areas-grid").innerHTML = helpers.activeSorted(research.areas).map(renderAreaCard).join("");
+                document.getElementById("projects-list").innerHTML = helpers.activeSorted(research.projects).map((project) => renderProjectCard(project, publicationIndex)).join("") || '<p class="empty-message">No research projects are available.</p>';
+                document.getElementById("infrastructure-grid").innerHTML = helpers.activeSorted(research.infrastructure).map(renderInfrastructureCard).join("");
+                document.getElementById("current-year").textContent = new Date().getFullYear();
+            }
+
+            init().catch((error) => {
+                document.getElementById("projects-list").innerHTML = `<p class="empty-message">Failed to load research data: ${error.message}</p>`;
+                document.getElementById("current-year").textContent = new Date().getFullYear();
+            });
+        })();
+    </script>
 </body>
 </html>

@@ -111,29 +111,10 @@
         .hero {
             margin-top: 80px;
             height: 90vh;
-            background: linear-gradient(135deg, var(--primary) 0%, #004080 100%);
             position: relative;
             display: flex;
             align-items: center;
             overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 30%, rgba(247, 147, 30, 0.1) 0%, transparent 50%);
-            animation: pulse 8s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
         }
 
         .hero-content {
@@ -531,7 +512,9 @@
                 font-size: 3rem;
             }
         }
+
     </style>
+    <link rel="stylesheet" href="./styles/hero-system.css?v=1">
 </head>
 <body>
     <header>
@@ -542,13 +525,14 @@
                 <li><a href="about.html">About</a></li>
                 <li><a href="faculty.html">Faculty</a></li>
                 <li><a href="research.html">Research</a></li>
+                <li><a href="publications.html">Publications</a></li>
                 <li><a href="opportunities.html">Opportunities</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="hero">
+    <section class="hero hero-home">
         <div class="hero-content">
             <div class="tagline">Morgan State University</div>
             <h1>Investigator<br>Development Core</h1>
@@ -627,7 +611,7 @@
 
         <div class="leadership-grid">
             <div class="leader-card">
-                 <div class="leader-image"><img src="img/Christine.jpg" alt="Dr. Christine Hohmann" class="leader-image-img"></div>
+                 <div class="leader-image"><img src="./img/Christine.jpg" alt="Dr. Christine Hohmann" class="leader-image-img"></div>
                 <div class="leader-info">
                     <h3>Dr. Christine Hohmann</h3>
                     <div class="title">Lead, Investigator Development Core</div>
@@ -636,7 +620,7 @@
             </div>
 
             <div class="leader-card">
-                <div class="leader-image"><img src="img/shiva.jpg" alt="Dr. Shiva Mehravaran" class="leader-image-img"></div>
+                <div class="leader-image"><img src="./img/shiva.jpg" alt="Dr. Shiva Mehravaran" class="leader-image-img"></div>
                 <div class="leader-info">
                     <h3>Dr. Shiva Mehravaran</h3>
                     <div class="title">Co-Lead, Investigator Development Core</div>
@@ -645,7 +629,7 @@
             </div>
 
             <div class="leader-card">
-                <div class="leader-image"><img src="img/placeholder.png" alt="Diane Hughes" class="leader-image-img"></div>
+                <div class="leader-image"><img src="./img/placeholder.png" alt="Diane Hughes" class="leader-image-img"></div>
                 <div class="leader-info">
                     <h3>Diane Hughes</h3>
                     <div class="title">Program Manager</div>
@@ -668,6 +652,7 @@
                 <a href="about.html">About RCMI & IDC</a>
                 <a href="faculty.html">Faculty & Staff</a>
                 <a href="research.html">Research Projects</a>
+                <a href="publications.html">Publications</a>
                 <a href="opportunities.html">Opportunities</a>
             </div>
 
@@ -688,8 +673,11 @@
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2024 Morgan State University RCMI IDC. All rights reserved.</p>
+            <p>&copy; <span id="current-year">2024</span> Morgan State University RCMI IDC. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

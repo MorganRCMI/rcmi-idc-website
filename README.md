@@ -258,6 +258,10 @@ rcmi-idc-website/
 2. Integrate real research project data
 3. Implement working contact form backend
 4. Add news/blog section
+
+## Publications Search
+
+The live publications page now loads records from `docs/data/publications.csv` and applies client-side search and filtering after the CSV data is loaded. Users can filter by year, publication type, and department, and search across publication title, authors, department, and related project title.
 5. Include publication database
 6. Create student/trainee section
 7. Add event calendar

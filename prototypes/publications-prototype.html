@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications - RCMI IDC</title>
+    <link rel="stylesheet" href="../docs/styles/prototype.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="nav-inner">
+            <a class="brand" href="../docs/index.html">RCMI <span>IDC</span></a>
+            <nav class="nav-links" aria-label="Primary">
+                <a href="../docs/index.html">Home</a>
+                <a href="../docs/about.html">About</a>
+                <a href="./faculty-prototype.html">Faculty</a>
+                <a href="./research-prototype.html">Research</a>
+                <a href="./publications-prototype.html" aria-current="page">Publications</a>
+                <a href="../docs/opportunities.html">Opportunities</a>
+                <a href="../docs/contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="shell">
+            <h1 id="page-title">Publications</h1>
+            <p id="page-description"></p>
+        </div>
+    </section>
+
+    <main class="shell">
+        <section class="section-block">
+            <div class="section-header">
+                <div class="section-label">Research Output</div>
+                <h2>All Publications</h2>
+                <p>Browse scholarly work connected to RCMI-supported investigators, research projects, and collaborative initiatives.</p>
+            </div>
+            <div id="publications-list" class="projects-stack"></div>
+            <div id="publications-empty" class="empty-state" hidden>No publications are available.</div>
+        </section>
+
+        <section class="cta-panel">
+            <h2>Explore Related Research Projects</h2>
+            <p>Learn more about the research areas and investigator-led projects connected to these publication records.</p>
+            <a class="button" href="./research-prototype.html">View Research</a>
+        </section>
+    </main>
+
+    <div id="footer-slot"></div>
+
+    <script>
+        window.rcmiSiteConfig = {
+            dataBasePath: "../docs/data"
+        };
+    </script>
+    <script src="../docs/js/FIELD_MAP.js?v=1"></script>
+    <script src="../docs/js/common.js?v=1"></script>
+    <script>
+        (() => {
+            const helpers = window.rcmiSandboxHelpers;
+
+            if (!helpers || typeof helpers.loadDataset !== "function") {
+                throw new Error("Sandbox helper API is unavailable. Expected window.rcmiSandboxHelpers.loadDataset().");
+            }
+
+            function renderPublication(publication, projectLookup) {
+                const project = projectLookup.get(publication.projectId);
+                const projectName = publication.projectDisplayOverride || project?.title || publication.projectId || "";
+                const metaItems = [
+                    publication.authors ? `<div><strong>Authors:</strong> ${publication.authors}</div>` : "",
+                    publication.department ? `<div><strong>Department:</strong> ${publication.department}</div>` : "",
+                    publication.year ? `<div><strong>Year:</strong> ${publication.year}</div>` : "",
+                    publication.publicationType ? `<div><strong>Type:</strong> ${publication.publicationType}</div>` : "",
+                    projectName ? `<div><strong>Related Project:</strong> ${projectName}</div>` : ""
+                ].filter(Boolean).join("");
+
+                const actionLinks = [
+                    publication.fullTextUrl
+                        ? `<a class="button button-secondary" href="${publication.fullTextUrl}" target="_blank" rel="noreferrer">Read Full Text</a>`
+                        : "",
+                    publication.doi
+                        ? `<a class="text-link" href="${publication.doi.startsWith("http") ? publication.doi : `https://doi.org/${publication.doi}`}" target="_blank" rel="noreferrer">View DOI</a>`
+                        : ""
+                ].filter(Boolean).join("");
+
+                return `
+                    <article class="project-card publication-card">
+                        <h3>${publication.title}</h3>
+                        <div class="project-meta">${metaItems}</div>
+                        ${publication.journalOrSource ? `<p><strong>${publication.journalOrSource}</strong></p>` : ""}
+                        ${publication.citationText ? `<p>${publication.citationText}</p>` : ""}
+                        ${helpers.renderTagRow([publication.featuredLabel].filter(Boolean))}
+                        <div class="publication-actions">
+                            ${actionLinks}
+                        </div>
+                    </article>
+                `;
+            }
+
+            async function init() {
+                const [researchRows, publicationRows] = await Promise.all([
+                    helpers.loadDataset("research"),
+                    helpers.loadDataset("publications")
+                ]);
+
+                const researchData = helpers.transformResearchRecords(researchRows);
+                const publications = helpers.activeSorted(helpers.transformPublicationRecords(publicationRows));
+                helpers.warnMissingProjectLinks(researchData.projects, publications);
+                const projectLookup = new Map(researchData.projects.map((project) => [project.id, project]));
+                const page = window.workbookContract.pages.publications;
+
+                document.getElementById("page-title").textContent = page.title;
+                document.getElementById("page-description").textContent = page.description;
+                document.getElementById("publications-list").innerHTML = publications.map((publication) => renderPublication(publication, projectLookup)).join("");
+                document.getElementById("publications-empty").hidden = publications.length !== 0;
+                document.getElementById("footer-slot").innerHTML = helpers.renderFooter("publications");
+            }
+
+            init().catch((error) => {
+                document.getElementById("publications-list").innerHTML = `<p class="empty-state">Failed to load publications.csv: ${error.message}</p>`;
+            });
+        })();
+    </script>
+</body>
+</html>

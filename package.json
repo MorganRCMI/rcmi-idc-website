@@ -1,0 +1,31 @@
+{
+  "name": "rcmi_web",
+  "version": "1.0.0",
+  "description": "This is a comprehensive website design prototype for the **Research Centers in Minority Institutions (RCMI) Investigator Development Core (IDC)** at Morgan State University. The design features a modern, professional aesthetic appropriate for an academic research program.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "export-data": "python3 scripts/export_workbook_to_csv.py",
+    "watch-data": "python3 scripts/watch_workbook_and_export.py"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oluwagbogo/rcmi_web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Oluwagbogo/rcmi_web/issues"
+  },
+  "homepage": "https://github.com/Oluwagbogo/rcmi_web#readme"
+
+
+  
+}
+

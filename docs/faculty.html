@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty & Research - RCMI IDC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #FF6B35;
+            --accent: #F7931E;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #2c3e50;
+            --border: #e0e6ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover,
+        nav a[aria-current="page"] {
+            color: var(--secondary);
+        }
+
+        nav a:hover::after,
+        nav a[aria-current="page"]::after {
+            width: 100%;
+        }
+
+        .page-header {
+            margin-top: 80px;
+            padding: 6rem 5% 4rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #004080 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 30%, rgba(247, 147, 30, 0.1) 0%, transparent 50%);
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: white;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .filter-section {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 5%;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .filter-tab {
+            padding: 0.8rem 2rem;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .filter-tab:hover,
+        .filter-tab.active {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .faculty-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+        }
+
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 3rem;
+        }
+
+        .faculty-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            border: 1px solid var(--border);
+        }
+
+        .faculty-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .faculty-image {
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faculty-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
+        }
+
+        .faculty-info {
+            padding: 2.5rem;
+        }
+
+        .faculty-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .faculty-title {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .faculty-department {
+            color: var(--text);
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .faculty-education {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 10px;
+        }
+
+        .faculty-education h4,
+        .research-interests h4,
+        .publications-highlight h4 {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .faculty-education p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 0.3rem;
+        }
+
+        .research-interests {
+            margin-bottom: 1.5rem;
+        }
+
+        .research-interests p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        .research-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            padding: 0.4rem 1rem;
+            background: var(--light);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--primary);
+            border: 1px solid var(--border);
+        }
+
+        .faculty-contact {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+        }
+
+        .publications-highlight {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .publications-highlight p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        .empty-message {
+            text-align: center;
+            font-size: 1.05rem;
+            color: var(--text);
+            padding: 2rem 1rem;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .faculty-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-tabs {
+                flex-direction: column;
+            }
+
+            .filter-tab {
+                text-align: center;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="./styles/site-polish.css?v=1">
+    <link rel="stylesheet" href="./styles/hero-system.css?v=1">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">RCMI <span>IDC</span></div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faculty.html" aria-current="page">Faculty</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="opportunities.html">Opportunities</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header page-hero">
+        <h1 id="page-title">Faculty & Researchers</h1>
+        <p id="page-description">Meet our distinguished team of scientists dedicated to advancing health disparities research</p>
+    </section>
+
+    <section class="filter-section">
+        <div id="filter-tabs" class="filter-tabs"></div>
+    </section>
+
+    <section class="faculty-container">
+        <div id="faculty-grid" class="faculty-grid"></div>
+        <p id="faculty-empty" class="empty-message" hidden>No faculty match the selected filter.</p>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>RCMI IDC</h4>
+                <p>Center for Urban Health Disparities Research and Innovation</p>
+                <p>Morgan State University</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="about.html">About RCMI & IDC</a>
+                <a href="faculty.html">Faculty & Staff</a>
+                <a href="research.html">Research Projects</a>
+                <a href="publications.html">Publications</a>
+                <a href="opportunities.html">Opportunities</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Portage Avenue Campus, Room 113</p>
+                <p>1700 E Cold Spring Lane</p>
+                <p>Baltimore, MD 21251</p>
+                <p>Phone: 443-885-4534</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="mailto:diane.hughes@morgan.edu">Email Us</a>
+                <a href="https://www.morgan.edu/rcmi">RCMI Program</a>
+                <a href="opportunities.html">Apply for Funding</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year">2024</span> Morgan State University RCMI IDC. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        window.rcmiSiteConfig = {
+            dataBasePath: "./data"
+        };
+    </script>
+    <script src="./js/FIELD_MAP.js?v=1"></script>
+    <script src="./js/common.js?v=1"></script>
+    <script>
+        (() => {
+            const helpers = window.rcmiSandboxHelpers;
+
+            if (!helpers || typeof helpers.loadDataset !== "function") {
+                throw new Error("Shared CSV helper API is unavailable.");
+            }
+
+            const state = {
+                selectedFilter: "All Faculty",
+                faculty: [],
+                filters: ["All Faculty"]
+            };
+
+            function getVisibleFaculty() {
+                const active = helpers.activeSorted(state.faculty);
+                if (state.selectedFilter === "All Faculty") {
+                    return active;
+                }
+                return active.filter((person) => person.category === state.selectedFilter);
+            }
+
+            function renderFilters() {
+                const container = document.getElementById("filter-tabs");
+                container.innerHTML = state.filters.map((label) => {
+                    const className = label === state.selectedFilter ? "filter-tab active" : "filter-tab";
+                    return `<button type="button" class="${className}" data-filter="${label}">${label}</button>`;
+                }).join("");
+
+                Array.from(container.querySelectorAll(".filter-tab")).forEach((button) => {
+                    button.addEventListener("click", () => {
+                        state.selectedFilter = button.dataset.filter;
+                        renderFilters();
+                        renderFacultyCards();
+                    });
+                });
+            }
+
+            function renderEducation(person) {
+                if (!person.education.length) {
+                    return "";
+                }
+
+                return `
+                    <div class="faculty-education">
+                        <h4>Education</h4>
+                        ${person.education.map((item) => `<p>${item}</p>`).join("")}
+                    </div>
+                `;
+            }
+
+            function renderHighlight(person) {
+                if (!person.highlightHeading || !person.highlightText) {
+                    return "";
+                }
+
+                return `
+                    <div class="publications-highlight">
+                        <h4>${person.highlightHeading}</h4>
+                        <p>${person.highlightText}</p>
+                    </div>
+                `;
+            }
+
+            function renderContact(person) {
+                const details = [
+                    person.office ? `Office: ${person.office}` : "",
+                    person.phone ? `Phone: ${person.phone}` : ""
+                ].filter(Boolean).join(" | ");
+
+                return `
+                    <div class="faculty-contact">
+                        <a href="mailto:${person.email}" class="contact-link">${person.email}</a>
+                        ${details ? `<p style="margin-top: 0.5rem; font-size: 0.9rem;">${details}</p>` : ""}
+                    </div>
+                `;
+            }
+
+            function renderFacultyCard(person) {
+                return `
+                    <div class="faculty-card">
+                        <div class="faculty-image">${person.fallbackIcon || "ID"}</div>
+                        <div class="faculty-info">
+                            <h3>${person.name}</h3>
+                            <div class="faculty-title">${person.title}</div>
+                            <div class="faculty-department">${person.department}</div>
+                            ${renderEducation(person)}
+                            <div class="research-interests">
+                                <h4>${person.summaryLabel || "Research Interests"}</h4>
+                                <p>${person.summaryText}</p>
+                            </div>
+                            ${person.tags.length ? `<div class="research-tags">${person.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}</div>` : ""}
+                            ${renderHighlight(person)}
+                            ${renderContact(person)}
+                        </div>
+                    </div>
+                `;
+            }
+
+            function renderFacultyCards() {
+                const visible = getVisibleFaculty();
+                document.getElementById("faculty-grid").innerHTML = visible.map(renderFacultyCard).join("");
+                document.getElementById("faculty-empty").hidden = visible.length !== 0;
+            }
+
+            async function init() {
+                const rows = await helpers.loadDataset("faculty");
+                state.faculty = helpers.transformFacultyRecords(rows);
+                state.filters = ["All Faculty"].concat(window.workbookContract.lookups.facultyCategories || []);
+
+                const page = window.workbookContract.pages.faculty;
+                document.getElementById("page-title").textContent = page.title;
+                document.getElementById("page-description").textContent = page.description;
+                document.getElementById("current-year").textContent = new Date().getFullYear();
+
+                renderFilters();
+                renderFacultyCards();
+            }
+
+            init().catch((error) => {
+                document.getElementById("faculty-grid").innerHTML = `<p class="empty-message">Failed to load faculty data: ${error.message}</p>`;
+                document.getElementById("current-year").textContent = new Date().getFullYear();
+            });
+        })();
+    </script>
+</body>
+</html>

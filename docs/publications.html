@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications - RCMI IDC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #FF6B35;
+            --accent: #F7931E;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #2c3e50;
+            --border: #e0e6ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover,
+        nav a[aria-current="page"] {
+            color: var(--secondary);
+        }
+
+        nav a:hover::after,
+        nav a[aria-current="page"]::after {
+            width: 100%;
+        }
+
+        .page-header {
+            margin-top: 80px;
+            padding: 6rem 5% 4rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #004080 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 30%, rgba(247, 147, 30, 0.1) 0%, transparent 50%);
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: white;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .publications-section {
+            max-width: 1400px;
+            margin: 6rem auto;
+            padding: 0 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            color: var(--secondary);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--primary);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-description {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .filter-toolbar {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: minmax(240px, 2fr) repeat(3, minmax(160px, 1fr)) auto;
+            gap: 1rem;
+            align-items: end;
+            margin-bottom: 2.5rem;
+        }
+
+        .filter-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-field label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .filter-input,
+        .filter-select {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: white;
+            font: inherit;
+            color: var(--text);
+        }
+
+        .filter-input:focus,
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.12);
+        }
+
+        .filter-actions {
+            display: flex;
+            align-items: stretch;
+        }
+
+        .filter-actions .btn {
+            border: none;
+            cursor: pointer;
+            min-width: 150px;
+        }
+
+        .results-summary {
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            font-size: 0.98rem;
+        }
+
+        .publication-list {
+            display: grid;
+            gap: 2.5rem;
+        }
+
+        .publication-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        .publication-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .publication-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .publication-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .publication-meta div {
+            font-size: 0.95rem;
+        }
+
+        .publication-meta strong {
+            color: var(--secondary);
+        }
+
+        .publication-card p {
+            line-height: 1.8;
+            font-size: 1.02rem;
+            margin-bottom: 1rem;
+        }
+
+        .publication-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 1.25rem 0;
+        }
+
+        .publication-tag {
+            padding: 0.5rem 1.2rem;
+            background: var(--light);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            border: 1px solid var(--border);
+            font-weight: 500;
+        }
+
+        .publication-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.9rem 1.8rem;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            color: white;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), #002244);
+            padding: 6rem 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 4rem;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 30% 50%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(247, 147, 30, 0.15) 0%, transparent 50%);
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .cta-content p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .empty-message {
+            text-align: center;
+            font-size: 1.05rem;
+            color: var(--text);
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1,
+            .cta-content h2 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .filter-toolbar {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="./styles/site-polish.css?v=1">
+    <link rel="stylesheet" href="./styles/hero-system.css?v=1">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">RCMI <span>IDC</span></div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faculty.html">Faculty</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="publications.html" aria-current="page">Publications</a></li>
+                <li><a href="opportunities.html">Opportunities</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header page-hero">
+        <h1 id="page-title">Publications</h1>
+        <p id="page-description">Browse publications connected to RCMI-supported research projects and investigators.</p>
+    </section>
+
+    <section class="publications-section">
+        <div class="section-header">
+            <div class="section-label">Research Output</div>
+            <h2 class="section-title">All Publications</h2>
+            <p class="section-description">
+                Browse scholarly work connected to RCMI-supported investigators, research projects, and collaborative initiatives.
+            </p>
+        </div>
+
+        <div class="filter-toolbar" aria-label="Publication filters">
+            <div class="filter-field">
+                <label for="publication-search">Search Publications</label>
+                <input id="publication-search" class="filter-input" type="search" placeholder="Search by title, author, department, or related project">
+            </div>
+            <div class="filter-field">
+                <label for="year-filter">Year</label>
+                <select id="year-filter" class="filter-select">
+                    <option value="">All Years</option>
+                </select>
+            </div>
+            <div class="filter-field">
+                <label for="type-filter">Publication Type</label>
+                <select id="type-filter" class="filter-select">
+                    <option value="">All Types</option>
+                </select>
+            </div>
+            <div class="filter-field">
+                <label for="department-filter">Department</label>
+                <select id="department-filter" class="filter-select">
+                    <option value="">All Departments</option>
+                </select>
+            </div>
+            <div class="filter-actions">
+                <button id="clear-filters" type="button" class="btn btn-secondary">Clear Filters</button>
+            </div>
+        </div>
+
+        <div id="results-summary" class="results-summary" aria-live="polite"></div>
+        <div id="publication-list" class="publication-list"></div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Explore Related Research Projects</h2>
+            <p>Learn more about the research areas and investigator-led projects connected to these publication records.</p>
+            <a href="research.html" class="btn">View Research</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>RCMI IDC</h4>
+                <p>Center for Urban Health Disparities Research and Innovation</p>
+                <p>Morgan State University</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="about.html">About RCMI & IDC</a>
+                <a href="faculty.html">Faculty & Staff</a>
+                <a href="research.html">Research Projects</a>
+                <a href="publications.html">Publications</a>
+                <a href="opportunities.html">Opportunities</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Portage Avenue Campus, Room 113</p>
+                <p>1700 E Cold Spring Lane</p>
+                <p>Baltimore, MD 21251</p>
+                <p>Phone: 443-885-4534</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="mailto:diane.hughes@morgan.edu">Email Us</a>
+                <a href="https://www.morgan.edu/rcmi">RCMI Program</a>
+                <a href="opportunities.html">Apply for Funding</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year">2024</span> Morgan State University RCMI IDC. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        window.rcmiSiteConfig = {
+            dataBasePath: "./data"
+        };
+    </script>
+    <script src="./js/FIELD_MAP.js?v=1"></script>
+    <script src="./js/common.js?v=1"></script>
+    <script>
+        (() => {
+            const helpers = window.rcmiSandboxHelpers;
+            const dom = {
+                search: document.getElementById("publication-search"),
+                year: document.getElementById("year-filter"),
+                type: document.getElementById("type-filter"),
+                department: document.getElementById("department-filter"),
+                clear: document.getElementById("clear-filters"),
+                list: document.getElementById("publication-list"),
+                summary: document.getElementById("results-summary")
+            };
+
+            if (!helpers || typeof helpers.loadDataset !== "function") {
+                throw new Error("Shared CSV helper API is unavailable.");
+            }
+
+            function renderPublication(publication, projectLookup) {
+                const project = projectLookup.get(publication.projectId);
+                const relatedProject = publication.projectDisplayOverride || (project && project.title) || publication.projectId || "";
+                const tags = [publication.publicationType, publication.featuredLabel].filter(Boolean);
+
+                return `
+                    <div class="publication-card">
+                        <h3>${publication.title}</h3>
+                        <div class="publication-meta">
+                            <div><strong>Authors:</strong> ${publication.authors}</div>
+                            <div><strong>Department:</strong> ${publication.department || "N/A"}</div>
+                            <div><strong>Year:</strong> ${publication.year}</div>
+                            <div><strong>Publication Type:</strong> ${publication.publicationType}</div>
+                            ${relatedProject ? `<div><strong>Related Project:</strong> ${relatedProject}</div>` : ""}
+                            ${publication.journalOrSource ? `<div><strong>Source:</strong> ${publication.journalOrSource}</div>` : ""}
+                        </div>
+                        ${publication.citationText ? `<p>${publication.citationText}</p>` : ""}
+                        ${publication.abstract ? `<p>${publication.abstract}</p>` : ""}
+                        ${tags.length ? `<div class="publication-tags">${tags.map((tag) => `<span class="publication-tag">${tag}</span>`).join("")}</div>` : ""}
+                        <div class="publication-actions">
+                            ${publication.fullTextUrl ? `<a href="${publication.fullTextUrl}" class="btn" target="_blank" rel="noreferrer">Read Full Text</a>` : ""}
+                            ${publication.doi ? `<a href="${publication.doi.startsWith("http") ? publication.doi : `https://doi.org/${publication.doi}`}" class="btn btn-secondary" target="_blank" rel="noreferrer">View DOI</a>` : ""}
+                        </div>
+                    </div>
+                `;
+            }
+
+            function getRelatedProjectTitle(publication, projectLookup) {
+                const project = projectLookup.get(publication.projectId);
+                return publication.projectDisplayOverride || (project && project.title) || publication.projectId || "";
+            }
+
+            function escapeHtml(value) {
+                return String(value || "")
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#39;");
+            }
+
+            function buildOptions(publications, key, descending = false) {
+                const options = [...new Set(
+                    publications
+                        .map((publication) => String(publication[key] || "").trim())
+                        .filter(Boolean)
+                )];
+
+                return options.sort((left, right) => {
+                    const comparison = left.localeCompare(right, undefined, { numeric: true, sensitivity: "base" });
+                    return descending ? comparison * -1 : comparison;
+                });
+            }
+
+            function populateSelect(selectElement, options, defaultLabel) {
+                const currentValue = selectElement.value;
+                const optionMarkup = options
+                    .map((option) => `<option value="${escapeHtml(option)}">${escapeHtml(option)}</option>`)
+                    .join("");
+
+                selectElement.innerHTML = `<option value="">${defaultLabel}</option>${optionMarkup}`;
+                if (options.includes(currentValue)) {
+                    selectElement.value = currentValue;
+                }
+            }
+
+            function matchesSearch(publication, query, relatedProjectTitle) {
+                if (!query) {
+                    return true;
+                }
+
+                const haystack = [
+                    publication.title,
+                    publication.authors,
+                    publication.department,
+                    relatedProjectTitle
+                ].join(" ").toLowerCase();
+
+                return haystack.includes(query);
+            }
+
+            function filterPublications(publications, projectLookup, filters) {
+                const query = filters.search.trim().toLowerCase();
+
+                return publications.filter((publication) => {
+                    const relatedProjectTitle = getRelatedProjectTitle(publication, projectLookup);
+
+                    if (filters.year && publication.year !== filters.year) {
+                        return false;
+                    }
+                    if (filters.type && publication.publicationType !== filters.type) {
+                        return false;
+                    }
+                    if (filters.department && publication.department !== filters.department) {
+                        return false;
+                    }
+                    return matchesSearch(publication, query, relatedProjectTitle);
+                });
+            }
+
+            function renderPublicationList(publications, projectLookup) {
+                dom.list.innerHTML = publications.map((publication) => renderPublication(publication, projectLookup)).join("")
+                    || '<p class="empty-message">No publications found.</p>';
+            }
+
+            function renderSummary(visibleCount, totalCount) {
+                dom.summary.textContent = visibleCount === totalCount
+                    ? `Showing all ${totalCount} publications.`
+                    : `Showing ${visibleCount} of ${totalCount} publications.`;
+            }
+
+            async function init() {
+                const [researchRows, publicationRows] = await Promise.all([
+                    helpers.loadDataset("research"),
+                    helpers.loadDataset("publications")
+                ]);
+
+                const research = helpers.transformResearchRecords(researchRows);
+                const publications = helpers.activeSorted(helpers.transformPublicationRecords(publicationRows));
+                const page = window.workbookContract.pages.publications;
+                const projectLookup = new Map(research.projects.map((project) => [project.id, project]));
+
+                populateSelect(dom.year, buildOptions(publications, "year", true), "All Years");
+                populateSelect(dom.type, buildOptions(publications, "publicationType"), "All Types");
+                populateSelect(dom.department, buildOptions(publications, "department"), "All Departments");
+
+                function applyFilters() {
+                    const filteredPublications = filterPublications(publications, projectLookup, {
+                        search: dom.search.value,
+                        year: dom.year.value,
+                        type: dom.type.value,
+                        department: dom.department.value
+                    });
+
+                    renderPublicationList(filteredPublications, projectLookup);
+                    renderSummary(filteredPublications.length, publications.length);
+                }
+
+                document.getElementById("page-title").textContent = page.title;
+                document.getElementById("page-description").textContent = page.description;
+                dom.search.addEventListener("input", applyFilters);
+                dom.year.addEventListener("change", applyFilters);
+                dom.type.addEventListener("change", applyFilters);
+                dom.department.addEventListener("change", applyFilters);
+                dom.clear.addEventListener("click", () => {
+                    dom.search.value = "";
+                    dom.year.value = "";
+                    dom.type.value = "";
+                    dom.department.value = "";
+                    applyFilters();
+                });
+
+                applyFilters();
+                document.getElementById("current-year").textContent = new Date().getFullYear();
+            }
+
+            init().catch((error) => {
+                dom.summary.textContent = "";
+                dom.list.innerHTML = `<p class="empty-message">Failed to load publication data: ${error.message}</p>`;
+                document.getElementById("current-year").textContent = new Date().getFullYear();
+            });
+        })();
+    </script>
+</body>
+</html>

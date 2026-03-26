@@ -509,6 +509,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="./styles/hero-system.css?v=1">
 </head>
 <body>
     <header>
@@ -519,13 +520,14 @@
                 <li><a href="about.html">About</a></li>
                 <li><a href="faculty.html">Faculty</a></li>
                 <li><a href="research.html">Research</a></li>
+                <li><a href="publications.html">Publications</a></li>
                 <li><a href="opportunities.html">Opportunities</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="page-header">
+    <section class="page-header page-hero">
         <h1>Get in Touch</h1>
         <p>We're here to answer your questions and support your research journey</p>
     </section>
@@ -633,7 +635,7 @@
 
             <div class="team-grid">
                 <div class="team-card">
-                    <div class="team-photo"><img src="img/Christine.jpg" alt="Dr. Christine Hohmann" class="team-photo-img"></div>
+                    <div class="team-photo"><img src="./img/Christine.jpg" alt="Dr. Christine Hohmann" class="team-photo-img"></div>
                     <h3>Dr. Christine Hohmann</h3>
                     <div class="title">Lead, IDC</div>
                     <p>For inquiries about investigator development, mentorship programs, and research support.</p>
@@ -641,7 +643,7 @@
                 </div>
 
                 <div class="team-card">
-                    <div class="team-photo"><img src="img/shiva.jpg" alt="Dr. Shiva Mehravaran" class="team-photo-img"></div>
+                    <div class="team-photo"><img src="./img/shiva.jpg" alt="Dr. Shiva Mehravaran" class="team-photo-img"></div>
                     <h3>Dr. Shiva Mehravaran</h3>
                     <div class="title">Co-Lead, IDC</div>
                     <p>For questions about research methodology, statistical support, and program design.</p>
@@ -649,7 +651,7 @@
                 </div>
 
                 <div class="team-card">
-                    <div class="team-photo"><img src="img/placeholder.png" alt="Diane Hughes" class="team-photo-img"></div>
+                    <div class="team-photo"><img src="./img/placeholder.png" alt="Diane Hughes" class="team-photo-img"></div>
                     <h3>Diane Hughes</h3>
                     <div class="title">Program Manager</div>
                     <p>For administrative questions, program coordination, and general information.</p>
@@ -687,6 +689,7 @@
                 <a href="about.html">About RCMI & IDC</a>
                 <a href="faculty.html">Faculty & Staff</a>
                 <a href="research.html">Research Projects</a>
+                <a href="publications.html">Publications</a>
                 <a href="opportunities.html">Opportunities</a>
             </div>
 
@@ -707,8 +710,11 @@
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2024 Morgan State University RCMI IDC. All rights reserved.</p>
+            <p>&copy; <span id="current-year">2024</span> Morgan State University RCMI IDC. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

@@ -525,6 +525,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="./styles/hero-system.css?v=1">
 </head>
 <body>
     <header>
@@ -535,13 +536,14 @@
                 <li><a href="about.html">About</a></li>
                 <li><a href="faculty.html">Faculty</a></li>
                 <li><a href="research.html">Research</a></li>
+                <li><a href="publications.html">Publications</a></li>
                 <li><a href="opportunities.html">Opportunities</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="page-header">
+    <section class="page-header page-hero">
         <h1>Funding & Opportunities</h1>
         <p>Discover pathways to advance your research career and make an impact</p>
     </section>
@@ -870,6 +872,7 @@
                 <a href="about.html">About RCMI & IDC</a>
                 <a href="faculty.html">Faculty & Staff</a>
                 <a href="research.html">Research Projects</a>
+                <a href="publications.html">Publications</a>
                 <a href="opportunities.html">Opportunities</a>
             </div>
 
@@ -890,8 +893,11 @@
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2024 Morgan State University RCMI IDC. All rights reserved.</p>
+            <p>&copy; <span id="current-year">2024</span> Morgan State University RCMI IDC. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

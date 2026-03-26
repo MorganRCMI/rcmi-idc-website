@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research - RCMI IDC</title>
+    <link rel="stylesheet" href="../docs/styles/prototype.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="nav-inner">
+            <a class="brand" href="../docs/index.html">RCMI <span>IDC</span></a>
+            <nav class="nav-links" aria-label="Primary">
+                <a href="../docs/index.html">Home</a>
+                <a href="../docs/about.html">About</a>
+                <a href="./faculty-prototype.html">Faculty</a>
+                <a href="./research-prototype.html" aria-current="page">Research</a>
+                <a href="./publications-prototype.html">Publications</a>
+                <a href="../docs/opportunities.html">Opportunities</a>
+                <a href="../docs/contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="shell">
+            <h1 id="page-title">Research Excellence</h1>
+            <p id="page-description"></p>
+        </div>
+    </section>
+
+    <main class="shell">
+        <section class="section-block">
+            <div class="section-header">
+                <div class="section-label">Focus Areas</div>
+                <h2>Our Research Portfolio</h2>
+                <p>The RCMI IDC supports diverse research areas that address critical health challenges affecting minority and underserved populations.</p>
+            </div>
+            <div id="areas-grid" class="research-grid"></div>
+        </section>
+
+        <section class="section-block">
+            <div class="section-header">
+                <div class="section-label">Current Work</div>
+                <h2>Featured Research Projects</h2>
+            </div>
+            <div id="projects-grid" class="projects-stack"></div>
+        </section>
+
+        <section class="section-block">
+            <div class="section-header">
+                <div class="section-label">Resources</div>
+                <h2>Research Infrastructure</h2>
+                <p>State-of-the-art facilities and support services that enable cutting-edge research</p>
+            </div>
+            <div id="infrastructure-grid" class="infrastructure-grid"></div>
+        </section>
+
+        <section class="cta-panel">
+            <h2>Join Our Research Community</h2>
+            <p>Whether you're an early-stage investigator seeking pilot funding, an established researcher looking to collaborate, or a student interested in health disparities research, we invite you to explore opportunities with RCMI IDC.</p>
+            <a class="button" href="../docs/opportunities.html">Explore Opportunities</a>
+        </section>
+    </main>
+
+    <div id="footer-slot"></div>
+
+    <script>
+        window.rcmiSiteConfig = {
+            dataBasePath: "../docs/data"
+        };
+    </script>
+    <script src="../docs/js/FIELD_MAP.js?v=1"></script>
+    <script src="../docs/js/common.js?v=1"></script>
+    <script>
+        (() => {
+            const helpers = window.rcmiSandboxHelpers;
+
+            if (!helpers || typeof helpers.loadDataset !== "function") {
+                throw new Error("Sandbox helper API is unavailable. Expected window.rcmiSandboxHelpers.loadDataset().");
+            }
+
+            function renderAreaCard(area) {
+                return `
+                    <article class="area-card">
+                        <div class="area-badge" aria-hidden="true">${area.icon}</div>
+                        <h3>${area.title}</h3>
+                        <p>${area.summary}</p>
+                        <ul>${(area.bullets || []).map((bullet) => `<li>${bullet}</li>`).join("")}</ul>
+                    </article>
+                `;
+            }
+
+            function renderPublicationLinks(project, publicationIndex) {
+                const linkedPublications = publicationIndex.get(project.id) || [];
+                const convenienceLink = project.primaryPublicationUrl
+                    ? [{
+                        title: project.primaryPublicationLabel || "Read full text",
+                        fullTextUrl: project.primaryPublicationUrl,
+                        publicationType: "",
+                        year: ""
+                    }]
+                    : [];
+                const items = linkedPublications.length ? linkedPublications : convenienceLink;
+
+                if (!items.length) {
+                    return "";
+                }
+
+                return `
+                    <div class="publication-links">
+                        <h4>Related Publications</h4>
+                        <ul>
+                            ${items.map((item) => `
+                                <li>
+                                    <a href="${item.fullTextUrl}" target="_blank" rel="noreferrer">${item.title}</a>
+                                    ${item.year || item.publicationType ? `<span>${[item.year, item.publicationType].filter(Boolean).join(" | ")}</span>` : ""}
+                                </li>
+                            `).join("")}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            function renderProjectCard(project, publicationIndex) {
+                return `
+                    <article class="project-card">
+                        <h3>${project.title}</h3>
+                        <div class="project-meta">
+                            <div><strong>PI:</strong> ${project.piName}</div>
+                            <div><strong>Department:</strong> ${project.department}</div>
+                            <div><strong>Status:</strong> ${project.projectStatus || "Current"}</div>
+                        </div>
+                        <p>${project.description}</p>
+                        ${helpers.renderTagRow(project.tags)}
+                        ${renderPublicationLinks(project, publicationIndex)}
+                    </article>
+                `;
+            }
+
+            function renderInfrastructureCard(item) {
+                return `
+                    <article class="infrastructure-card">
+                        <div class="infra-badge" aria-hidden="true">${item.icon}</div>
+                        <h3>${item.name}</h3>
+                        <p>${item.description}</p>
+                    </article>
+                `;
+            }
+
+            async function init() {
+                const [researchRows, publicationRows] = await Promise.all([
+                    helpers.loadDataset("research"),
+                    helpers.loadDataset("publications")
+                ]);
+
+                const researchData = helpers.transformResearchRecords(researchRows);
+                const publications = helpers.transformPublicationRecords(publicationRows);
+                helpers.warnMissingProjectLinks(researchData.projects, publications);
+                const publicationIndex = helpers.buildPublicationIndex(publications);
+                const page = window.workbookContract.pages.research;
+
+                document.getElementById("page-title").textContent = page.title;
+                document.getElementById("page-description").textContent = page.description;
+                document.getElementById("areas-grid").innerHTML = helpers.activeSorted(researchData.areas).map(renderAreaCard).join("");
+                document.getElementById("projects-grid").innerHTML = helpers.activeSorted(researchData.projects).map((project) => renderProjectCard(project, publicationIndex)).join("");
+                document.getElementById("infrastructure-grid").innerHTML = helpers.activeSorted(researchData.infrastructure).map(renderInfrastructureCard).join("");
+                document.getElementById("footer-slot").innerHTML = helpers.renderFooter("research");
+            }
+
+            init().catch((error) => {
+                document.querySelector("main").innerHTML = `<p class="empty-state">Failed to load research.csv: ${error.message}</p>`;
+            });
+        })();
+    </script>
+</body>
+</html>

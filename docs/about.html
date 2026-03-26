@@ -391,6 +391,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="./styles/hero-system.css?v=1">
 </head>
 <body>
     <header>
@@ -401,13 +402,14 @@
                 <li><a href="about.html">About</a></li>
                 <li><a href="faculty.html">Faculty</a></li>
                 <li><a href="research.html">Research</a></li>
+                <li><a href="publications.html">Publications</a></li>
                 <li><a href="opportunities.html">Opportunities</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="page-header">
+    <section class="page-header page-hero">
         <h1>About RCMI & IDC</h1>
         <p>Understanding our mission, values, and commitment to advancing health disparities research</p>
     </section>
@@ -488,7 +490,7 @@
             </div>
 
             <div class="leader-profile">
-                <div class="leader-photo"><img src="img/Christine.jpg" alt="Dr. Christine Hohmann" class="leader-photo-img"></div>
+                <div class="leader-photo"><img src="./img/Christine.jpg" alt="Dr. Christine Hohmann" class="leader-photo-img"></div>
                 <div class="leader-details">
                     <h3>Dr. Christine Hohmann</h3>
                     <div class="title">Lead, Investigator Development Core</div>
@@ -499,7 +501,7 @@
             </div>
 
             <div class="leader-profile">
-                <div class="leader-photo"><img src="img/shiva.jpg" alt="Dr. Shiva Mehravaran" class="leader-photo-img"></div>
+                <div class="leader-photo"><img src="./img/shiva.jpg" alt="Dr. Shiva Mehravaran" class="leader-photo-img"></div>
                 <div class="leader-details">
                     <h3>Dr. Shiva Mehravaran</h3>
                     <div class="title">Co-Lead, Investigator Development Core</div>
@@ -510,7 +512,7 @@
             </div>
 
             <div class="leader-profile">
-                <div class="leader-photo"><img src="img/placeholder.png" alt="Diane Hughes" class="leader-photo-img"></div>
+                <div class="leader-photo"><img src="./img/placeholder.png" alt="Diane Hughes" class="leader-photo-img"></div>
                 <div class="leader-details">
                     <h3>Diane Hughes</h3>
                     <div class="title">Program Manager, RCMI Administrative Core</div>
@@ -552,6 +554,7 @@
                 <a href="about.html">About RCMI & IDC</a>
                 <a href="faculty.html">Faculty & Staff</a>
                 <a href="research.html">Research Projects</a>
+                <a href="publications.html">Publications</a>
                 <a href="opportunities.html">Opportunities</a>
             </div>
 
@@ -572,8 +575,11 @@
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2024 Morgan State University RCMI IDC. All rights reserved.</p>
+            <p>&copy; <span id="current-year">2024</span> Morgan State University RCMI IDC. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

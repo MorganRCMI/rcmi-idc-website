@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty & Research - RCMI IDC</title>
+    <link rel="stylesheet" href="../docs/styles/prototype.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="nav-inner">
+            <a class="brand" href="../docs/index.html">RCMI <span>IDC</span></a>
+            <nav class="nav-links" aria-label="Primary">
+                <a href="../docs/index.html">Home</a>
+                <a href="../docs/about.html">About</a>
+                <a href="./faculty-prototype.html" aria-current="page">Faculty</a>
+                <a href="./research-prototype.html">Research</a>
+                <a href="./publications-prototype.html">Publications</a>
+                <a href="../docs/opportunities.html">Opportunities</a>
+                <a href="../docs/contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="shell">
+            <h1 id="page-title">Faculty & Researchers</h1>
+            <p id="page-description"></p>
+        </div>
+    </section>
+
+    <main class="shell">
+        <section class="section-block">
+            <div id="filter-row" class="pill-row" aria-label="Faculty filters"></div>
+        </section>
+
+        <section class="section-block">
+            <div id="faculty-grid" class="faculty-grid" aria-live="polite"></div>
+            <div id="empty-state" class="empty-state" hidden>No faculty match the selected filter.</div>
+        </section>
+    </main>
+
+    <div id="footer-slot"></div>
+
+    <script>
+        window.rcmiSiteConfig = {
+            dataBasePath: "../docs/data"
+        };
+    </script>
+    <script src="../docs/js/FIELD_MAP.js?v=1"></script>
+    <script src="../docs/js/common.js?v=1"></script>
+    <script>
+        (() => {
+            const helpers = window.rcmiSandboxHelpers;
+
+            if (!helpers || typeof helpers.loadDataset !== "function") {
+                throw new Error("Sandbox helper API is unavailable. Expected window.rcmiSandboxHelpers.loadDataset().");
+            }
+
+            const state = {
+                selectedFilter: "All Faculty",
+                data: null
+            };
+
+            function getVisibleFaculty() {
+                const records = helpers.activeSorted(state.data?.faculty);
+                if (state.selectedFilter === "All Faculty") {
+                    return records;
+                }
+                return records.filter((person) => person.category === state.selectedFilter);
+            }
+
+            function renderFilters() {
+                const row = document.getElementById("filter-row");
+                row.innerHTML = "";
+
+                (state.data.filters || []).forEach((label) => {
+                    const button = document.createElement("button");
+                    button.type = "button";
+                    button.className = "pill" + (label === state.selectedFilter ? " active" : "");
+                    button.textContent = label;
+                    button.addEventListener("click", () => {
+                        state.selectedFilter = label;
+                        renderFacultyPage();
+                    });
+                    row.appendChild(button);
+                });
+            }
+
+            function renderEducation(education) {
+                const values = (education || []).filter(Boolean);
+                if (!values.length) {
+                    return "";
+                }
+
+                return `
+                    <div class="info-panel">
+                        <h4>Education</h4>
+                        <ul>${values.map((item) => `<li>${item}</li>`).join("")}</ul>
+                    </div>
+                `;
+            }
+
+            function renderHighlight(person) {
+                if (!person.highlightHeading || !person.highlightText) {
+                    return "";
+                }
+
+                return `
+                    <div class="info-panel">
+                        <h4>${person.highlightHeading}</h4>
+                        <p>${person.highlightText}</p>
+                    </div>
+                `;
+            }
+
+            function renderContact(person) {
+                const extras = [
+                    person.office ? `<p>Office: ${person.office}</p>` : "",
+                    person.phone ? `<p>Phone: ${person.phone}</p>` : ""
+                ].join("");
+
+                return `
+                    <div class="faculty-contact">
+                        <a href="mailto:${person.email}">${person.email}</a>
+                        ${extras}
+                    </div>
+                `;
+            }
+
+            function renderFacultyCard(person) {
+                return `
+                    <article class="faculty-card">
+                        <div class="faculty-visual">
+                            <div class="faculty-avatar" aria-hidden="true">${person.fallbackIcon || "ID"}</div>
+                        </div>
+                        <div class="faculty-body">
+                            <h3>${person.name}</h3>
+                            <div class="faculty-title">${person.title}</div>
+                            <div class="faculty-department">${person.department}</div>
+                            ${renderEducation(person.education)}
+                            <div class="info-panel">
+                                <h4>${person.summaryLabel}</h4>
+                                <p>${person.summaryText}</p>
+                            </div>
+                            ${helpers.renderTagRow(person.tags)}
+                            ${renderHighlight(person)}
+                            ${renderContact(person)}
+                        </div>
+                    </article>
+                `;
+            }
+
+            function renderFacultyPage() {
+                renderFilters();
+
+                const records = getVisibleFaculty();
+                const grid = document.getElementById("faculty-grid");
+                const emptyState = document.getElementById("empty-state");
+                grid.innerHTML = records.map(renderFacultyCard).join("");
+                emptyState.hidden = records.length !== 0;
+            }
+
+            async function init() {
+                const rawRows = await helpers.loadDataset("faculty");
+                state.data = {
+                    page: window.workbookContract.pages.faculty,
+                    filters: window.workbookContract.lookups.facultyCategories,
+                    faculty: helpers.transformFacultyRecords(rawRows)
+                };
+                document.getElementById("page-title").textContent = state.data.page.title;
+                document.getElementById("page-description").textContent = state.data.page.description;
+                document.getElementById("footer-slot").innerHTML = helpers.renderFooter("faculty");
+                renderFacultyPage();
+            }
+
+            init().catch((error) => {
+                document.getElementById("faculty-grid").innerHTML = `<p class="empty-state">Failed to load faculty.csv: ${error.message}</p>`;
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+List Name,Value,Sort Order
+yes_no,Yes,10
+yes_no,No,20
+faculty_category,Leadership,10
+faculty_category,Principal Investigators,20
+faculty_category,Research Staff,30
+summary_label,Research Interests,10
+summary_label,Role & Expertise,20
+research_row_type,area,10
+research_row_type,project,20
+research_row_type,infrastructure,30
+project_status,Current,10
+project_status,Archived,20
+project_status,Planned,30
+publication_type,Journal Article,10
+publication_type,Review Article,20
+publication_type,Conference Paper,30
+publication_type,Book Chapter,40
+publication_type,Report,50
+publication_type,Preprint,60
+publication_type,Other,70

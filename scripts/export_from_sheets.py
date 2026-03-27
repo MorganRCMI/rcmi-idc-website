@@ -10,7 +10,6 @@ from google.oauth2.service_account import Credentials
 
 
 ROOT = Path(__file__).resolve().parent.parent
-SHEET_NAME = "rcmi_content"
 WORKSHEETS = {
     "faculty": ROOT / "docs" / "data" / "faculty.csv",
     "research": ROOT / "docs" / "data" / "research.csv",
@@ -35,6 +34,13 @@ def credentials_from_env():
         fail(f"GOOGLE_SERVICE_ACCOUNT is not valid JSON: {exc}")
 
     return Credentials.from_service_account_info(service_account_info, scopes=SCOPES)
+
+
+def spreadsheet_id_from_env():
+    spreadsheet_id = os.environ.get("GOOGLE_SHEET_ID", "").strip()
+    if not spreadsheet_id:
+        fail("GOOGLE_SHEET_ID is not set.")
+    return spreadsheet_id
 
 
 def worksheet_to_dataframe(worksheet):
@@ -63,12 +69,13 @@ def worksheet_to_dataframe(worksheet):
 
 def export():
     credentials = credentials_from_env()
+    spreadsheet_id = spreadsheet_id_from_env()
     client = gspread.authorize(credentials)
 
     try:
-        workbook = client.open(SHEET_NAME)
+        workbook = client.open_by_key(spreadsheet_id)
     except Exception as exc:
-        fail(f"Unable to open Google Sheet '{SHEET_NAME}': {exc}")
+        fail(f"Unable to open Google Sheet with GOOGLE_SHEET_ID '{spreadsheet_id}': {exc}")
 
     summaries = []
 

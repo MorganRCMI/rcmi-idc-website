@@ -33,6 +33,7 @@ jobs:
       - name: Export CSV files from Google Sheets
         env:
           GOOGLE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
+          GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
         run: python scripts/export_from_sheets.py
 
       - name: Configure git

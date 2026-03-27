@@ -2,13 +2,14 @@
 
 ## How The Automation Works
 
-This project can now pull content directly from a private Google Sheet named `rcmi_content` using a service account.
+This project can now pull content directly from a private Google Sheet using a service account and a fixed spreadsheet ID.
 
 The GitHub Actions workflow:
 
 - reads the GitHub secret `GOOGLE_SERVICE_ACCOUNT`
+- reads the GitHub secret `GOOGLE_SHEET_ID`
 - authenticates to Google Sheets
-- opens the workbook `rcmi_content`
+- opens the spreadsheet by ID with `open_by_key(...)`
 - exports the worksheets:
   - `faculty`
   - `research`
@@ -34,16 +35,25 @@ You do not need to run local export scripts for the GitHub-based sync workflow. 
 Add this repository secret:
 
 - `GOOGLE_SERVICE_ACCOUNT`
+- `GOOGLE_SHEET_ID`
 
-Its value must be the full JSON for the service account key. The workflow passes that secret into the Python exporter as an environment variable.
+`GOOGLE_SERVICE_ACCOUNT` must be the full JSON for the service account key.
+
+`GOOGLE_SHEET_ID` must be the spreadsheet ID for the Google Sheet.
+
+The workflow passes both secrets into the Python exporter as environment variables.
+
+## Why Spreadsheet ID Is Used
+
+Spreadsheet ID is used instead of spreadsheet name because it is more reliable:
+
+- spreadsheet names can be changed
+- names can be duplicated
+- ID-based lookup directly targets the intended document
 
 ## Sheet Requirements
 
-The Google Sheet name must be:
-
-- `rcmi_content`
-
-It must contain these worksheet tabs exactly:
+The spreadsheet referenced by `GOOGLE_SHEET_ID` must contain these worksheet tabs exactly:
 
 - `faculty`
 - `research`
@@ -57,7 +67,7 @@ If sync fails, check:
 
 - the service account has been shared on the Google Sheet with at least view access
 - the GitHub secret `GOOGLE_SERVICE_ACCOUNT` contains valid JSON
-- the Google Sheet is still named `rcmi_content`
+- the GitHub secret `GOOGLE_SHEET_ID` contains the correct spreadsheet ID
 - the worksheet tabs still exist and are named exactly:
   - `faculty`
   - `research`

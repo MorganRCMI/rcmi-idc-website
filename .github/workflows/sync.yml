@@ -1,0 +1,54 @@
+name: Sync Google Sheets Data
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *"
+
+concurrency:
+  group: sync-google-sheets-main
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install gspread pandas google-auth
+
+      - name: Export CSV files from Google Sheets
+        env:
+          GOOGLE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
+          GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
+        run: python scripts/export_from_sheets.py
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+
+      - name: Commit and push CSV updates
+        run: |
+          if git diff --quiet -- docs/data/faculty.csv docs/data/research.csv docs/data/publications.csv; then
+            echo "No CSV changes to commit."
+            exit 0
+          fi
+
+          git add docs/data/faculty.csv docs/data/research.csv docs/data/publications.csv
+          git commit -m "chore: sync Google Sheets data"
+          git pull --rebase origin main
+          git push origin HEAD:main

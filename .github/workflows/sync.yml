@@ -51,4 +51,4 @@ jobs:
           git add docs/data/faculty.csv docs/data/research.csv docs/data/publications.csv
           git commit -m "chore: sync Google Sheets data"
           git pull --rebase origin main
-          git push
+          git push origin HEAD:main

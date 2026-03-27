@@ -19,6 +19,7 @@ The GitHub Actions workflow:
   - `docs/data/research.csv`
   - `docs/data/publications.csv`
 - commits and pushes updated CSV files only when changes exist
+- uses workflow concurrency plus `git pull --rebase origin main` before push to avoid non-fast-forward failures when remote updates happen during sync
 
 ## How To Update Data
 
@@ -26,9 +27,10 @@ Edit the Google Sheet only.
 
 You do not need to run local export scripts for the GitHub-based sync workflow. Once the sheet is updated, the workflow can refresh the CSV files automatically on:
 
-- push to `main`
 - manual run from GitHub Actions
 - scheduled hourly sync
+
+The workflow is intentionally driven by schedule and manual dispatch rather than `push` to `main`, so its own sync commits do not create unnecessary reruns.
 
 ## Required GitHub Secret
 
@@ -73,6 +75,7 @@ If sync fails, check:
   - `research`
   - `publications`
 - the workflow logs for authentication or worksheet lookup errors
+- if a sync run overlaps another run, concurrency should serialize them; if a push race still occurs, the workflow rebases onto the latest `main` before pushing
 
 If the workflow runs but no commit is created:
 

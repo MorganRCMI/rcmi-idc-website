@@ -184,7 +184,7 @@
             border-radius: 20px;
             padding: 1.5rem;
             display: grid;
-            grid-template-columns: minmax(240px, 2fr) repeat(3, minmax(160px, 1fr)) auto;
+            grid-template-columns: minmax(240px, 2fr) repeat(4, minmax(140px, 1fr)) auto;
             gap: 1rem;
             align-items: end;
             margin-bottom: 2.5rem;
@@ -232,9 +232,72 @@
         }
 
         .results-summary {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
             margin-bottom: 1.5rem;
             color: var(--text);
             font-size: 0.98rem;
+        }
+
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .page-btn {
+            min-width: 2.6rem;
+            padding: 0.6rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            background: white;
+            color: var(--text);
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .page-btn:hover:not(:disabled) {
+            border-color: var(--secondary);
+            color: var(--secondary);
+        }
+
+        .page-btn.page-active {
+            background: var(--secondary);
+            border-color: var(--secondary);
+            color: white;
+        }
+
+        .page-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        .page-ellipsis {
+            padding: 0 0.2rem;
+            color: var(--text);
+            opacity: 0.5;
+            font-weight: 600;
+            line-height: 2.6rem;
+        }
+
+        .pub-total-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 1rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            white-space: nowrap;
         }
 
         .publication-list {
@@ -440,7 +503,8 @@
                 grid-template-columns: 1fr;
             }
 
-            .filter-actions .btn {
+            .filter-actions .btn,
+            .filter-actions {
                 width: 100%;
             }
         }
@@ -502,6 +566,12 @@
                     <option value="">All Departments</option>
                 </select>
             </div>
+            <div class="filter-field">
+                <label for="program-filter">Program</label>
+                <select id="program-filter" class="filter-select">
+                    <option value="">All Programs</option>
+                </select>
+            </div>
             <div class="filter-actions">
                 <button id="clear-filters" type="button" class="btn btn-secondary">Clear Filters</button>
             </div>
@@ -509,6 +579,7 @@
 
         <div id="results-summary" class="results-summary" aria-live="polite"></div>
         <div id="publication-list" class="publication-list"></div>
+        <div id="pagination-controls" class="pagination"></div>
     </section>
 
     <section class="cta-section">
@@ -573,6 +644,7 @@
                 year: document.getElementById("year-filter"),
                 type: document.getElementById("type-filter"),
                 department: document.getElementById("department-filter"),
+                program: document.getElementById("program-filter"),
                 clear: document.getElementById("clear-filters"),
                 list: document.getElementById("publication-list"),
                 summary: document.getElementById("results-summary")
@@ -586,6 +658,9 @@
                 const project = projectLookup.get(publication.projectId);
                 const relatedProject = publication.projectDisplayOverride || (project && project.title) || publication.projectId || "";
                 const tags = [publication.publicationType, publication.featuredLabel].filter(Boolean);
+                const programTags = publication.programType
+                    ? publication.programType.split(",").map((p) => p.trim()).filter(Boolean)
+                    : [];
 
                 return `
                     <div class="publication-card">
@@ -600,7 +675,11 @@
                         </div>
                         ${publication.citationText ? `<p>${publication.citationText}</p>` : ""}
                         ${publication.abstract ? `<p>${publication.abstract}</p>` : ""}
-                        ${tags.length ? `<div class="publication-tags">${tags.map((tag) => `<span class="publication-tag">${tag}</span>`).join("")}</div>` : ""}
+                        ${tags.length || programTags.length ? `
+                        <div class="publication-tags">
+                            ${tags.map((tag) => `<span class="publication-tag">${tag}</span>`).join("")}
+                            ${programTags.map((p) => `<span class="publication-tag" style="background:var(--primary);color:white;border-color:var(--primary);">${p}</span>`).join("")}
+                        </div>` : ""}
                         <div class="publication-actions">
                             ${publication.fullTextUrl ? `<a href="${publication.fullTextUrl}" class="btn" target="_blank" rel="noreferrer">Read Full Text</a>` : ""}
                             ${publication.doi ? `<a href="${publication.doi.startsWith("http") ? publication.doi : `https://doi.org/${publication.doi}`}" class="btn btn-secondary" target="_blank" rel="noreferrer">View DOI</a>` : ""}
@@ -678,19 +757,82 @@
                     if (filters.department && publication.department !== filters.department) {
                         return false;
                     }
+                    if (filters.program) {
+                        const pubPrograms = (publication.programType || "")
+                            .split(",").map((p) => p.trim().toLowerCase());
+                        if (!pubPrograms.includes(filters.program.toLowerCase())) {
+                            return false;
+                        }
+                    }
                     return matchesSearch(publication, query, relatedProjectTitle);
                 });
             }
 
+            const PAGE_SIZE = 5;
+            let currentPage = 1;
+
+            function buildPageNumbers(current, total) {
+                if (total <= 7) {
+                    return Array.from({ length: total }, (_, i) => i + 1);
+                }
+                const pages = [1];
+                if (current > 3) pages.push("…");
+                for (let i = Math.max(2, current - 1); i <= Math.min(total - 1, current + 1); i++) {
+                    pages.push(i);
+                }
+                if (current < total - 2) pages.push("…");
+                pages.push(total);
+                return pages;
+            }
+
+            function renderPagination(totalItems, totalPages, onPageChange) {
+                const container = document.getElementById("pagination-controls");
+                if (!container) return;
+                if (totalPages <= 1) { container.innerHTML = ""; return; }
+
+                const current = currentPage;
+                const pageNums = buildPageNumbers(current, totalPages).map((p) => {
+                    if (p === "…") return `<span class="page-ellipsis">…</span>`;
+                    const cls = p === current ? " page-active" : "";
+                    return `<button type="button" class="page-btn${cls}" data-page="${p}">${p}</button>`;
+                }).join("");
+
+                container.innerHTML = `
+                    <button type="button" class="page-btn" data-page="${current - 1}" ${current === 1 ? "disabled" : ""}>← Prev</button>
+                    ${pageNums}
+                    <button type="button" class="page-btn" data-page="${current + 1}" ${current === totalPages ? "disabled" : ""}>Next →</button>
+                `;
+
+                container.querySelectorAll(".page-btn[data-page]").forEach((btn) => {
+                    btn.addEventListener("click", () => {
+                        const page = Number(btn.dataset.page);
+                        if (page >= 1 && page <= totalPages) {
+                            currentPage = page;
+                            onPageChange();
+                            document.querySelector(".publications-section").scrollIntoView({ behavior: "smooth" });
+                        }
+                    });
+                });
+            }
+
             function renderPublicationList(publications, projectLookup) {
-                dom.list.innerHTML = publications.map((publication) => renderPublication(publication, projectLookup)).join("")
+                const totalPages = Math.max(1, Math.ceil(publications.length / PAGE_SIZE));
+                currentPage = Math.min(currentPage, totalPages);
+                const start = (currentPage - 1) * PAGE_SIZE;
+                const page = publications.slice(start, start + PAGE_SIZE);
+
+                dom.list.innerHTML = page.map((pub) => renderPublication(pub, projectLookup)).join("")
                     || '<p class="empty-message">No publications found.</p>';
+
+                renderPagination(publications.length, totalPages, () => renderPublicationList(publications, projectLookup));
             }
 
             function renderSummary(visibleCount, totalCount) {
-                dom.summary.textContent = visibleCount === totalCount
-                    ? `Showing all ${totalCount} publications.`
-                    : `Showing ${visibleCount} of ${totalCount} publications.`;
+                const badge = `<span class="pub-total-badge">${totalCount} total</span>`;
+                const label = visibleCount === totalCount
+                    ? "Showing all publications"
+                    : `Showing ${visibleCount} of ${totalCount}`;
+                dom.summary.innerHTML = badge + `<span>${label}</span>`;
             }
 
             async function init() {
@@ -704,16 +846,26 @@
                 const page = window.workbookContract.pages.publications;
                 const projectLookup = new Map(research.projects.map((project) => [project.id, project]));
 
+                // Collect unique individual program labels (split "PPP, SS" → ["PPP","SS"])
+                const programOptions = [...new Set(
+                    publications.flatMap((pub) =>
+                        (pub.programType || "").split(",").map((p) => p.trim()).filter(Boolean)
+                    )
+                )].sort();
+
                 populateSelect(dom.year, buildOptions(publications, "year", true), "All Years");
                 populateSelect(dom.type, buildOptions(publications, "publicationType"), "All Types");
                 populateSelect(dom.department, buildOptions(publications, "department"), "All Departments");
+                populateSelect(dom.program, programOptions, "All Programs");
 
-                function applyFilters() {
+                function applyFilters(resetPage = true) {
+                    if (resetPage) currentPage = 1;
                     const filteredPublications = filterPublications(publications, projectLookup, {
                         search: dom.search.value,
                         year: dom.year.value,
                         type: dom.type.value,
-                        department: dom.department.value
+                        department: dom.department.value,
+                        program: dom.program.value
                     });
 
                     renderPublicationList(filteredPublications, projectLookup);
@@ -726,11 +878,13 @@
                 dom.year.addEventListener("change", applyFilters);
                 dom.type.addEventListener("change", applyFilters);
                 dom.department.addEventListener("change", applyFilters);
+                dom.program.addEventListener("change", applyFilters);
                 dom.clear.addEventListener("click", () => {
                     dom.search.value = "";
                     dom.year.value = "";
                     dom.type.value = "";
                     dom.department.value = "";
+                    dom.program.value = "";
                     applyFilters();
                 });
 

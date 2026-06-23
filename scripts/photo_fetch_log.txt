@@ -1,0 +1,241 @@
+
+=== fetch run ===
+FAIL (no profile) | Dr. Anne Marie O'Keefe | anne.okeefe@morgan.edu
+FAIL (no profile) | Dr. Gerald Rameau | gerald.rameau@morgan.edu
+FAIL (no profile) | Dr. Kesha Baptiste-Roberts | kesha.baptisteroberts@morgan.edu
+FAIL (no profile) | Dr. Kimberly Warren | kimberly.warren@morgan.edu
+FAIL (no profile) | Dr. Paul Archibald | paul.archibald@morgan.edu
+FAIL (no profile) | Dr. Pumtiwitt McCarthy | pumtiwitt.mccarthy@morgan.edu
+FAIL (no profile) | Dr. Terra Bowen-Reid | terra.bowenreid@morgan.edu
+FAIL (no profile) | Dr. Farzad Moazzami | farzad.moazzami@morgan.edu
+FAIL (no profile) | Dr. Mathumathi Rajavel | mathumathi.rajavel@morgan.edu
+FAIL (no profile) | Dr. Md Rahman | md.rahman@morgan.edu
+FAIL (no profile) | Dr. Minli Liao | minli.liao@morgan.edu
+FAIL (no profile) | Dr. Bahram Faraji | bahram.faraji@morgan.edu
+FAIL (no profile) | Dr. Birol Ozturk | birol.ozturk@morgan.edu
+FAIL (no profile) | Dr. Dawn Thurman | dawn.thurman@morgan.edu
+FAIL (no profile) | Dr. Fasil Abebe | fasil.abebe@morgan.edu
+FAIL (no profile) | Dr. Gabrielle McLemore | gabrielle.mclemore@morgan.edu
+FAIL (no profile) | Dr. Mohammad Gharipour | mohammad.gharipour@morgan.edu
+FAIL (no profile) | Dr. Yongchao Zhang | yongchao.zhang@morgan.edu
+FAIL (no profile) | Dr. Alexander Samokhvalov | alexandr.samokhvalov@morgan.edu
+FAIL (no profile) | Dr. Leah Hollis | leah.hollis@morgan.edu
+FAIL (no profile) | Dr. Marciea McMillian | marciea.mcmillian@morgan.edu
+FAIL (no profile) | Dr. Mingchao Cai | mingchao.cai@morgan.edu
+FAIL (no profile) | Dr. Robin Spaid | robin.spaid@morgan.edu
+FAIL (no profile) | Dr. Viji Sitther | viji.sitther@morgan.edu
+FAIL (no profile) | Dr. Xuming Xie | xuming.xie@morgan.edu
+FAIL (no profile) | Dr. YueJin Li | yuejin.li@morgan.edu
+FAIL (no profile) | Dr. Dina Elmahdy | dina.elmahdy@morgan.edu
+FAIL (no profile) | Dr. Elisabeth Kemajou-Brown | elisabeth.brown@morgan.edu
+FAIL (no profile) | Dr. Frank Denaro | frank.denaro@morgan.edu
+FAIL (no profile) | Dr. Ingrid K. Tulloch | ingrid.tulloch@morgan.edu
+FAIL (no profile) | Dr. Justin Bonny | justin.bonny@morgan.edu
+FAIL (no profile) | Dr. Maryam Ganjavi | maryam.ganjavi@morgan.edu
+FAIL (no profile) | Dr. Thomas Ihde | thomas.ihde@morgan.edu
+FAIL (no profile) | Dr. Chunlei Fan | chunlei.fan@morgan.edu
+FAIL (no profile) | Dr. Jiangnan Peng | jiangnan.peng@morgan.edu
+FAIL (no profile) | Dr. Pilhwa Lee | pilhwa.lee@morgan.edu
+FAIL (no profile) | Dr. Jemal Mohammed-Awel | jemal.mohammed-awel@morgan.edu
+FAIL (no profile) | Dr. Roshan Paudel | roshan.paudel@morgan.edu
+FAIL (no profile) | Dr. Zheng Li | zheng.li@morgan.edu
+FAIL (no profile) | Dr. Fahmi Khalifa | fahmi.khalifa@morgan.edu
+FAIL (no profile) | Dr. Kori Krueger | kori.krueger@morgan.edu
+FAIL (no profile) | Dr. Robin Butler | robin.butler@morgan.edu
+FAIL (no profile) | Dr. Simone Gibson | simone.gibson@morgan.edu
+FAIL (no profile) | Dr. Timothy Meeker | timothy.meeker@morgan.edu
+FAIL (no profile) | Dr. Yu Cong | yu.cong@morgan.edu
+FAIL (no profile) | Dr. Anna Dellomo | anna.dellomo@morgan.edu
+FAIL (no profile) | Dr. DaJaneil McCree | dajaneil.mccree@morgan.edu
+FAIL (no profile) | Dr. Edwin Cruz-Rivera | edwin.cruz-rivera@morgan.edu
+FAIL (no profile) | Dr. Joshua Burrow | joshua.burrow@morgan.edu
+FAIL (no profile) | Dr. Leslie Anderson | leslie.anderson@morgan.edu
+FAIL (no profile) | Dr. Monica Faulkner | monica.faulkner@morgan.edu
+FAIL (no profile) | Dr. Samendra Sherchan | samendra.sherchan@morgan.edu
+
+=== fetch run ===
+FAIL | Dr. Anne Marie O'Keefe | Community Health & Policy
+OK  | Dr. Gerald Rameau | ./img/faculty/pilot_gerald_rameau.jpg
+FAIL | Dr. Kesha Baptiste-Roberts | Community Health & Policy
+OK  | Dr. Kimberly Warren | ./img/faculty/pilot_kimberly_warren.jpg
+FAIL | Dr. Paul Archibald | Social Work
+OK  | Dr. Pumtiwitt McCarthy | ./img/faculty/pilot_pumtiwitt_mccarthy.jpg
+OK  | Dr. Terra Bowen-Reid | ./img/faculty/pilot_terra_bowenreid.jpg
+FAIL | Dr. Farzad Moazzami | Electrical and Computer Engineering
+FAIL | Dr. Mathumathi Rajavel | Medical Laboratory Science
+OK  | Dr. Md Rahman | ./img/faculty/pilot_md_rahman.jpg
+FAIL | Dr. Minli Liao | Social Work
+FAIL | Dr. Bahram Faraji | Community Health & Policy
+OK  | Dr. Birol Ozturk | ./img/faculty/pilot_birol_ozturk.jpg
+FAIL | Dr. Dawn Thurman | Social Work
+OK  | Dr. Fasil Abebe | ./img/faculty/pilot_fasil_abebe.jpeg
+OK  | Dr. Gabrielle McLemore | ./img/faculty/pilot_gabrielle_mclemore.jpg
+FAIL | Dr. Mohammad Gharipour | Architecture
+OK  | Dr. Yongchao Zhang | ./img/faculty/pilot_yongchao_zhang.jpg
+OK  | Dr. Alexander Samokhvalov | ./img/faculty/pilot_alexandr_samokhvalov.jpg
+FAIL | Dr. Leah Hollis | Advances Studies, Leadership, and Policy
+FAIL | Dr. Marciea McMillian | Education
+OK  | Dr. Mingchao Cai | ./img/faculty/pilot_mingchao_cai.jpg
+FAIL | Dr. Robin Spaid | Advances Studies, Leadership, and Policy
+OK  | Dr. Viji Sitther | ./img/faculty/pilot_viji_sitther.jpg
+OK  | Dr. Xuming Xie | ./img/faculty/pilot_xuming_xie.jpg
+OK  | Dr. YueJin Li | ./img/faculty/pilot_yuejin_li.jpg
+FAIL | Dr. Dina Elmahdy | Accounting and Finance
+FAIL | Dr. Elisabeth Kemajou-Brown | Mathematics
+OK  | Dr. Frank Denaro | ./img/faculty/pilot_frank_denaro.jpg
+FAIL | Dr. Ingrid K. Tulloch | Psychology
+OK  | Dr. Justin Bonny | ./img/faculty/pilot_justin_bonny.jpg
+FAIL | Dr. Maryam Ganjavi | Community Health & Policy
+FAIL | Dr. Thomas Ihde | Research and Economic Development
+FAIL | Dr. Chunlei Fan | Research and Economic Development
+OK  | Dr. Jiangnan Peng | ./img/faculty/pilot_jiangnan_peng.jpg
+OK  | Dr. Pilhwa Lee | ./img/faculty/pilot_pilhwa_lee.jpg
+OK  | Dr. Jemal Mohammed-Awel | ./img/faculty/pilot_jemal_mohammed_awel.jpg
+OK  | Dr. Roshan Paudel | ./img/faculty/pilot_roshan_paudel.jpg
+FAIL | Dr. Zheng Li | Mechatronics Engineering
+FAIL | Dr. Fahmi Khalifa | 
+FAIL | Dr. Kori Krueger | 
+FAIL | Dr. Robin Butler | 
+FAIL | Dr. Simone Gibson | 
+FAIL | Dr. Timothy Meeker | Biology
+FAIL | Dr. Yu Cong | 
+FAIL | Dr. Anna Dellomo | 
+FAIL | Dr. DaJaneil McCree | 
+FAIL | Dr. Edwin Cruz-Rivera | 
+FAIL | Dr. Joshua Burrow | 
+FAIL | Dr. Leslie Anderson | 
+FAIL | Dr. Monica Faulkner | 
+OK  | Dr. Samendra Sherchan | ./img/faculty/pilot_samendra_sherchan.jpg
+
+=== fetch run ===
+FAIL | Dr. Anne Marie O'Keefe | Community Health & Policy
+FAIL | Dr. Kesha Baptiste-Roberts | Community Health & Policy
+FAIL | Dr. Paul Archibald | Social Work
+FAIL | Dr. Farzad Moazzami | Electrical and Computer Engineering
+FAIL | Dr. Mathumathi Rajavel | Medical Laboratory Science
+FAIL | Dr. Minli Liao | Social Work
+FAIL | Dr. Bahram Faraji | Community Health & Policy
+FAIL | Dr. Dawn Thurman | Social Work
+FAIL | Dr. Mohammad Gharipour | Architecture
+FAIL | Dr. Leah Hollis | Advances Studies, Leadership, and Policy
+FAIL | Dr. Marciea McMillian | Education
+FAIL | Dr. Robin Spaid | Advances Studies, Leadership, and Policy
+FAIL | Dr. Dina Elmahdy | Accounting and Finance
+FAIL | Dr. Elisabeth Kemajou-Brown | Mathematics
+OK  | Dr. Ingrid K. Tulloch | ./img/faculty/pilot_ingrid_tulloch.jpg | direct
+FAIL | Dr. Maryam Ganjavi | Community Health & Policy
+FAIL | Dr. Thomas Ihde | Research and Economic Development
+OK  | Dr. Chunlei Fan | ./img/faculty/pilot_chunlei_fan.jpg | scan:/biology/faculty-and-staff/chunlei-fan
+FAIL | Dr. Zheng Li | Mechatronics Engineering
+FAIL | Dr. Fahmi Khalifa | 
+FAIL | Dr. Robin Butler | 
+FAIL | Dr. Simone Gibson | 
+FAIL | Dr. Timothy Meeker | Biology
+FAIL | Dr. Anna Dellomo | 
+FAIL | Dr. DaJaneil McCree | 
+FAIL | Dr. Joshua Burrow | 
+FAIL | Dr. Leslie Anderson | 
+FAIL | Dr. Monica Faulkner | 
+
+=== fetch run ===
+FAIL | Dr. Akanksha Anand | 
+FAIL | Dr. Lening Olivera Figueroa | 
+FAIL | Dr. Arif Mahmud | 
+FAIL | Dr. Sharde Theodore | 
+FAIL | Dr. Ballington Kinlock | 
+FAIL | Dr. Sharvani Mahadevaraju | 
+OK  | Dr. Christopher Amissah | ./img/faculty/pilot_christopher-amissah.jpg | scan:/psychology/faculty-and-staff/christopher-amissah
+FAIL | Dr. Tajma Cameron | 
+FAIL | Dr. DaJaneil McCree | 
+FAIL | Dr. Vishnu Kumar | 
+OK  | Dr. Kyle Nolla | ./img/faculty/pilot_kyle-nolla.jpg | scan:/psychology/faculty-and-staff/kyle-nolla
+FAIL | Dr. Samia Kirchner | 
+FAIL | Dr. Chibuike Ibebuchi | 
+FAIL | Dr. David Fakunle | 
+FAIL | Dr. Leslie Anderson | 
+FAIL | Dr. Joshua Burrow | 
+FAIL | Dr. Anna Dellomo | 
+FAIL | Dr. Monica Faulkner | 
+FAIL | Dr. Robin Butler | 
+OK  | Dr. Yu Cong | ./img/faculty/pilot_yu-cong.jpg | scan:/accounting-and-finance/faculty-and-staff/yu-cong
+FAIL | Dr. Simone Gibson | 
+FAIL | Dr. Marciea McMillian | Teacher Education and Professional Development
+OK  | Dr. Jemal Mohammed-Awel | ./img/faculty/pilot_jemal-mohammed-awel.jpg | direct
+OK  | Dr. Mingchao Cai | ./img/faculty/pilot_mingchao-cai.jpg | scan:/mathematics/faculty-and-staff/mingchao-cai
+OK  | Dr. YueJin Li | ./img/faculty/pilot_yuejin-li.jpg | direct
+OK  | Dr. Justin Bonny | ./img/faculty/pilot_justin-bonny.jpg | direct
+OK  | Dr. Chunlei Fan | ./img/faculty/pilot_chunlei-fan.jpg | scan:/biology/faculty-and-staff/chunlei-fan
+OK  | Dr. Shiva Mehravaran | ./img/faculty/pilot_shiva-mehravaran.jpg | scan:/biology/faculty-and-staff/shiva-mehravaran
+FAIL | Dr. Thomas Ihde | Environmental Health
+OK  | Dr. Ingrid K. Tulloch | ./img/faculty/pilot_ingrid-k-tulloch.jpg | direct
+FAIL | Dr. Leah Hollis | Behavioral Health
+FAIL | Dr. Robin Spaid | Health Policy & Education
+OK  | Dr. Alexander Samokhvalov | ./img/faculty/pilot_alexander-samokhvalov.jpg | scan:/chemistry/faculty-and-staff/alexander-samokhvalov
+
+=== fetch run ===
+FAIL | Dr. Akanksha Anand | 
+FAIL | Dr. Lening Olivera Figueroa | 
+FAIL | Dr. Arif Mahmud | 
+FAIL | Dr. Sharde Theodore | 
+FAIL | Dr. Ballington Kinlock | 
+FAIL | Dr. Sharvani Mahadevaraju | 
+OK  | Dr. Christopher Amissah | ./img/faculty/pilot_christopher-amissah.jpg | scan:/psychology/faculty-and-staff/christopher-amissah
+FAIL | Dr. Tajma Cameron | 
+FAIL | Dr. DaJaneil McCree | 
+FAIL | Dr. Vishnu Kumar | 
+OK  | Dr. Kyle Nolla | ./img/faculty/pilot_kyle-nolla.jpg | scan:/psychology/faculty-and-staff/kyle-nolla
+FAIL | Dr. Samia Kirchner | 
+FAIL | Dr. Chibuike Ibebuchi | 
+FAIL | Dr. David Fakunle | 
+FAIL | Dr. Leslie Anderson | 
+FAIL | Dr. Joshua Burrow | 
+FAIL | Dr. Anna Dellomo | 
+FAIL | Dr. Monica Faulkner | 
+FAIL | Dr. Robin Butler | 
+OK  | Dr. Yu Cong | ./img/faculty/pilot_yu-cong.jpg | scan:/accounting-and-finance/faculty-and-staff/yu-cong
+FAIL | Dr. Simone Gibson | 
+FAIL | Dr. Marciea McMillian | Teacher Education and Professional Development
+OK  | Dr. Jemal Mohammed-Awel | ./img/faculty/pilot_jemal-mohammed-awel.jpg | direct
+OK  | Dr. Mingchao Cai | ./img/faculty/pilot_mingchao-cai.jpg | scan:/mathematics/faculty-and-staff/mingchao-cai
+OK  | Dr. YueJin Li | ./img/faculty/pilot_yuejin-li.jpg | direct
+OK  | Dr. Justin Bonny | ./img/faculty/pilot_justin-bonny.jpg | direct
+OK  | Dr. Chunlei Fan | ./img/faculty/pilot_chunlei-fan.jpg | scan:/biology/faculty-and-staff/chunlei-fan
+OK  | Dr. Shiva Mehravaran | ./img/faculty/pilot_shiva-mehravaran.jpg | scan:/biology/faculty-and-staff/shiva-mehravaran
+FAIL | Dr. Thomas Ihde | Environmental Health
+OK  | Dr. Ingrid K. Tulloch | ./img/faculty/pilot_ingrid-k-tulloch.jpg | direct
+FAIL | Dr. Leah Hollis | Behavioral Health
+FAIL | Dr. Robin Spaid | Health Policy & Education
+OK  | Dr. Alexander Samokhvalov | ./img/faculty/pilot_alexander-samokhvalov.jpg | scan:/chemistry/faculty-and-staff/alexander-samokhvalov
+
+=== fetch run ===
+FAIL | Dr. Akanksha Anand | 
+FAIL | Dr. Lening Olivera Figueroa | 
+FAIL | Dr. Arif Mahmud | 
+FAIL | Dr. Sharde Theodore | 
+FAIL | Dr. Ballington Kinlock | 
+FAIL | Dr. Sharvani Mahadevaraju | 
+OK  | Dr. Christopher Amissah | ./img/faculty/pilot_christopher-amissah.jpg | scan:/psychology/faculty-and-staff/christopher-amissah
+FAIL | Dr. Tajma Cameron | 
+FAIL | Dr. DaJaneil McCree | 
+FAIL | Dr. Vishnu Kumar | 
+OK  | Dr. Kyle Nolla | ./img/faculty/pilot_kyle-nolla.jpg | scan:/psychology/faculty-and-staff/kyle-nolla
+FAIL | Dr. Samia Kirchner | 
+FAIL | Dr. Chibuike Ibebuchi | 
+FAIL | Dr. David Fakunle | 
+FAIL | Dr. Leslie Anderson | 
+FAIL | Dr. Joshua Burrow | 
+FAIL | Dr. Anna Dellomo | 
+FAIL | Dr. Monica Faulkner | 
+FAIL | Dr. Robin Butler | 
+OK  | Dr. Yu Cong | ./img/faculty/pilot_yu-cong.jpg | scan:/accounting-and-finance/faculty-and-staff/yu-cong
+FAIL | Dr. Simone Gibson | 
+FAIL | Dr. Marciea McMillian | Teacher Education and Professional Development
+OK  | Dr. Jemal Mohammed-Awel | ./img/faculty/pilot_jemal-mohammed-awel.jpg | direct
+OK  | Dr. Mingchao Cai | ./img/faculty/pilot_mingchao-cai.jpg | scan:/mathematics/faculty-and-staff/mingchao-cai
+OK  | Dr. YueJin Li | ./img/faculty/pilot_yuejin-li.jpg | direct
+OK  | Dr. Justin Bonny | ./img/faculty/pilot_justin-bonny.jpg | direct
+OK  | Dr. Chunlei Fan | ./img/faculty/pilot_chunlei-fan.jpg | scan:/biology/faculty-and-staff/chunlei-fan
+OK  | Dr. Shiva Mehravaran | ./img/faculty/pilot_shiva-mehravaran.jpg | scan:/biology/faculty-and-staff/shiva-mehravaran
+FAIL | Dr. Thomas Ihde | Environmental Health
+OK  | Dr. Ingrid K. Tulloch | ./img/faculty/pilot_ingrid-k-tulloch.jpg | direct
+FAIL | Dr. Leah Hollis | Behavioral Health

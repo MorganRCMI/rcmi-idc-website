@@ -155,7 +155,91 @@
             gap: 1rem;
             flex-wrap: wrap;
             justify-content: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-toolbar {
+            display: grid;
+            grid-template-columns: 2.5fr 1.2fr 1.2fr 1.2fr auto;
+            gap: 1.25rem;
+            align-items: end;
+            background: linear-gradient(135deg, #f8fafb 0%, #f0f3f8 100%);
+            border: 1.5px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .filter-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-field label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .filter-input,
+        .filter-select {
+            padding: 0.75rem 1rem;
+            border: 1.5px solid #d4dce6;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: var(--text);
+            background: white;
+            transition: all 0.2s ease;
+            height: 2.6rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .filter-input:hover,
+        .filter-select:hover {
+            border-color: var(--secondary);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .filter-input:focus,
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(var(--secondary-rgb), 0.1), 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .filter-actions {
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .filter-actions .btn {
+            height: 2.6rem;
+            white-space: nowrap;
+            font-weight: 600;
+            border-radius: 10px;
+        }
+
+        .filter-results-summary {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .faculty-total-badge {
+            background: var(--secondary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
         }
 
         .filter-tab {
@@ -207,7 +291,7 @@
 
         .faculty-image {
             width: 100%;
-            height: 350px;
+            height: 400px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             display: flex;
             align-items: center;
@@ -335,11 +419,87 @@
             color: var(--text);
         }
 
+        .faculty-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .badge-year {
+            display: inline-block;
+            padding: 0.3rem 0.9rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-program {
+            display: inline-block;
+            padding: 0.3rem 0.9rem;
+            background: var(--secondary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
         .empty-message {
             text-align: center;
             font-size: 1.05rem;
             color: var(--text);
             padding: 2rem 1rem;
+        }
+
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .page-btn {
+            min-width: 2.6rem;
+            padding: 0.6rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            background: white;
+            color: var(--text);
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .page-btn:hover:not(:disabled) {
+            border-color: var(--secondary);
+            color: var(--secondary);
+        }
+
+        .page-btn.page-active {
+            background: var(--secondary);
+            border-color: var(--secondary);
+            color: white;
+        }
+
+        .page-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        .page-ellipsis {
+            padding: 0 0.2rem;
+            color: var(--text);
+            opacity: 0.5;
+            font-weight: 600;
+            line-height: 2.6rem;
         }
 
         footer {
@@ -405,6 +565,16 @@
             .filter-tab {
                 text-align: center;
             }
+
+            .filter-toolbar {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1.25rem 1rem;
+            }
+
+            .filter-actions {
+                justify-content: flex-end;
+            }
         }
     </style>
     <link rel="stylesheet" href="./styles/site-polish.css?v=1">
@@ -434,11 +604,42 @@
 
     <section class="filter-section">
         <div id="filter-tabs" class="filter-tabs"></div>
+
+        <div class="filter-toolbar" aria-label="Faculty filters">
+            <div class="filter-field">
+                <label for="faculty-search">Search</label>
+                <input id="faculty-search" class="filter-input" type="search" placeholder="Search by name, department, or research interests">
+            </div>
+            <div class="filter-field">
+                <label for="dept-filter">Department</label>
+                <select id="dept-filter" class="filter-select">
+                    <option value="">All Departments</option>
+                </select>
+            </div>
+            <div class="filter-field">
+                <label for="year-filter-fac">Funded Year</label>
+                <select id="year-filter-fac" class="filter-select">
+                    <option value="">All Years</option>
+                </select>
+            </div>
+            <div class="filter-field">
+                <label for="program-filter-fac">Program</label>
+                <select id="program-filter-fac" class="filter-select">
+                    <option value="">All Programs</option>
+                </select>
+            </div>
+            <div class="filter-actions">
+                <button id="clear-faculty-filters" type="button" class="btn btn-secondary">Clear Filters</button>
+            </div>
+        </div>
+
+        <div id="faculty-summary" class="filter-results-summary"></div>
     </section>
 
     <section class="faculty-container">
         <div id="faculty-grid" class="faculty-grid"></div>
-        <p id="faculty-empty" class="empty-message" hidden>No faculty match the selected filter.</p>
+        <p id="faculty-empty" class="empty-message" hidden>No faculty match the selected filters.</p>
+        <div id="pagination-controls" class="pagination"></div>
     </section>
 
     <footer>
@@ -495,18 +696,108 @@
                 throw new Error("Shared CSV helper API is unavailable.");
             }
 
+            const PAGE_SIZE = 6;
+
             const state = {
-                selectedFilter: "All Faculty",
+                selectedFilter: "RCMI IDC leadership",
                 faculty: [],
-                filters: ["All Faculty"]
+                filters: [],
+                currentPage: 1,
+                search: "",
+                dept: "",
+                program: "",
+                year: "",
             };
+
+            const dom = {
+                search:  document.getElementById("faculty-search"),
+                dept:    document.getElementById("dept-filter"),
+                program: document.getElementById("program-filter-fac"),
+                year:    document.getElementById("year-filter-fac"),
+                clear:   document.getElementById("clear-faculty-filters"),
+                summary: document.getElementById("faculty-summary"),
+            };
+
+            function populateSelect(selectEl, options, defaultLabel) {
+                const current = selectEl.value;
+                selectEl.innerHTML = `<option value="">${defaultLabel}</option>` +
+                    options.map((o) => `<option value="${o}">${o}</option>`).join("");
+                if (options.includes(current)) selectEl.value = current;
+            }
 
             function getVisibleFaculty() {
                 const active = helpers.activeSorted(state.faculty);
-                if (state.selectedFilter === "All Faculty") {
-                    return active;
+
+                // Category tab filter
+                let filtered = state.selectedFilter === "All Faculty"
+                    ? active
+                    : active.filter((p) => p.category === state.selectedFilter);
+
+                // Text search
+                if (state.search) {
+                    const q = state.search.toLowerCase();
+                    filtered = filtered.filter((p) =>
+                        (p.name || "").toLowerCase().includes(q) ||
+                        (p.department || "").toLowerCase().includes(q) ||
+                        (p.summaryText || "").toLowerCase().includes(q) ||
+                        (p.tags || []).some((t) => t.toLowerCase().includes(q))
+                    );
                 }
-                return active.filter((person) => person.category === state.selectedFilter);
+
+                // Department dropdown
+                if (state.dept) {
+                    filtered = filtered.filter((p) => p.department === state.dept);
+                }
+
+                // Program dropdown
+                if (state.program) {
+                    filtered = filtered.filter((p) =>
+                        (p.programType || "").split(",").map((s) => s.trim()).includes(state.program)
+                    );
+                }
+
+                // Funded year dropdown
+                if (state.year) {
+                    filtered = filtered.filter((p) => p.yearFunded == state.year);
+                }
+
+                // Sort: Pilot Faculty by year funded, others by sortOrder
+                if (state.selectedFilter === "Pilot Faculty") {
+                    return filtered.slice().sort((a, b) => {
+                        if (a.yearFunded !== b.yearFunded) {
+                            return (a.yearFunded || 9999) - (b.yearFunded || 9999);
+                        }
+                        return (a.name || "").localeCompare(b.name || "");
+                    });
+                }
+                return filtered;
+            }
+
+            function updateSummary(count) {
+                const badge = `<span class="faculty-total-badge">${count} ${count === 1 ? "faculty" : "faculty"}</span>`;
+                const label = count === state.faculty.length ? "total" : "matching filters";
+                dom.summary.innerHTML = badge + `<span>${label}</span>`;
+            }
+
+            function refreshDropdowns() {
+                const active = helpers.activeSorted(state.faculty);
+                const inCategory = active.filter((p) => p.category === state.selectedFilter);
+                const isPilotFaculty = state.selectedFilter === "Pilot Faculty";
+
+                // Hide entire filter toolbar if not Pilot Faculty
+                document.querySelector(".filter-toolbar").style.display = isPilotFaculty ? "" : "none";
+
+                if (isPilotFaculty) {
+                    const depts = [...new Set(inCategory.map((p) => p.department).filter(Boolean))].sort();
+                    const years = [...new Set(inCategory.map((p) => p.yearFunded).filter(Boolean))].sort((a, b) => b - a);
+                    const programs = [...new Set(
+                        inCategory.flatMap((p) => (p.programType || "").split(",").map((s) => s.trim()).filter(Boolean))
+                    )].sort();
+
+                    populateSelect(dom.dept,    depts,    "All Departments");
+                    populateSelect(dom.year,    years,    "All Years");
+                    populateSelect(dom.program, programs, "All Programs");
+                }
             }
 
             function renderFilters() {
@@ -519,7 +810,15 @@
                 Array.from(container.querySelectorAll(".filter-tab")).forEach((button) => {
                     button.addEventListener("click", () => {
                         state.selectedFilter = button.dataset.filter;
+                        state.dept    = "";
+                        state.year    = "";
+                        state.program = "";
+                        dom.dept.value    = "";
+                        dom.year.value    = "";
+                        dom.program.value = "";
+                        state.currentPage = 1;
                         renderFilters();
+                        refreshDropdowns();
                         renderFacultyCards();
                     });
                 });
@@ -565,11 +864,43 @@
                 `;
             }
 
+            function renderFacultyImage(person) {
+                if (person.imagePath) {
+                    return `
+                        <div class="faculty-image">
+                            <img src="${person.imagePath}" alt="${person.imageAltText}" style="width:100%;height:100%;object-fit:contain;object-position:center;">
+                        </div>`;
+                }
+                // Extract initials from name, skipping titles like Dr., Prof., etc.
+                let name = (person.name || "").trim();
+                name = name.replace(/^(Dr\.|Prof\.|Mr\.|Ms\.|Mrs\.|Dr|Prof)\s+/i, "");
+                const nameParts = name.split(/\s+/).filter(Boolean);
+                const initials = nameParts.length >= 2
+                    ? (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase()
+                    : (nameParts[0] || "?").substring(0, 2).toUpperCase();
+                return `<div class="faculty-image" style="font-size: 3.5rem; font-weight: 700; letter-spacing: 0.1em;">${initials}</div>`;
+            }
+
+            function renderPilotBadges(person) {
+                if (person.category !== "Pilot Faculty") {
+                    return "";
+                }
+                const yearBadge    = person.yearFunded ? `<span class="badge-year">Funded ${person.yearFunded}</span>` : "";
+                const programBadges = person.programType
+                    ? person.programType.split(",").map((p) => `<span class="badge-program">${p.trim()}</span>`).join("")
+                    : "";
+                if (!yearBadge && !programBadges) {
+                    return "";
+                }
+                return `<div class="faculty-badges">${yearBadge}${programBadges}</div>`;
+            }
+
             function renderFacultyCard(person) {
                 return `
                     <div class="faculty-card">
-                        <div class="faculty-image">${person.fallbackIcon || "ID"}</div>
+                        ${renderFacultyImage(person)}
                         <div class="faculty-info">
+                            ${renderPilotBadges(person)}
                             <h3>${person.name}</h3>
                             <div class="faculty-title">${person.title}</div>
                             <div class="faculty-department">${person.department}</div>
@@ -586,24 +917,113 @@
                 `;
             }
 
+            function buildPageNumbers(current, total) {
+                if (total <= 7) {
+                    return Array.from({ length: total }, (_, i) => i + 1);
+                }
+                const pages = [1];
+                if (current > 3) pages.push("…");
+                for (let i = Math.max(2, current - 1); i <= Math.min(total - 1, current + 1); i++) {
+                    pages.push(i);
+                }
+                if (current < total - 2) pages.push("…");
+                pages.push(total);
+                return pages;
+            }
+
+            function renderPagination(totalItems, totalPages) {
+                const container = document.getElementById("pagination-controls");
+                if (!container) return;
+                if (totalPages <= 1) { container.innerHTML = ""; return; }
+
+                const current = state.currentPage;
+                const pageNums = buildPageNumbers(current, totalPages).map((p) => {
+                    if (p === "…") return `<span class="page-ellipsis">…</span>`;
+                    const cls = p === current ? " page-active" : "";
+                    return `<button type="button" class="page-btn${cls}" data-page="${p}">${p}</button>`;
+                }).join("");
+
+                container.innerHTML = `
+                    <button type="button" class="page-btn" data-page="${current - 1}" ${current === 1 ? "disabled" : ""}>← Prev</button>
+                    ${pageNums}
+                    <button type="button" class="page-btn" data-page="${current + 1}" ${current === totalPages ? "disabled" : ""}>Next →</button>
+                `;
+
+                container.querySelectorAll(".page-btn[data-page]").forEach((btn) => {
+                    btn.addEventListener("click", () => {
+                        const page = Number(btn.dataset.page);
+                        if (page >= 1 && page <= totalPages) {
+                            state.currentPage = page;
+                            renderFacultyCards();
+                            document.querySelector(".faculty-container").scrollIntoView({ behavior: "smooth" });
+                        }
+                    });
+                });
+            }
+
             function renderFacultyCards() {
                 const visible = getVisibleFaculty();
-                document.getElementById("faculty-grid").innerHTML = visible.map(renderFacultyCard).join("");
+                const totalPages = Math.max(1, Math.ceil(visible.length / PAGE_SIZE));
+                state.currentPage = Math.min(state.currentPage, totalPages);
+                const start = (state.currentPage - 1) * PAGE_SIZE;
+                const page = visible.slice(start, start + PAGE_SIZE);
+
+                document.getElementById("faculty-grid").innerHTML = page.map(renderFacultyCard).join("");
                 document.getElementById("faculty-empty").hidden = visible.length !== 0;
+                updateSummary(visible.length);
+                renderPagination(visible.length, totalPages);
             }
 
             async function init() {
                 const rows = await helpers.loadDataset("faculty");
                 state.faculty = helpers.transformFacultyRecords(rows);
-                state.filters = ["All Faculty"].concat(window.workbookContract.lookups.facultyCategories || []);
+                state.filters = window.workbookContract.lookups.facultyCategories || [];
 
                 const page = window.workbookContract.pages.faculty;
                 document.getElementById("page-title").textContent = page.title;
                 document.getElementById("page-description").textContent = page.description;
                 document.getElementById("current-year").textContent = new Date().getFullYear();
 
+                refreshDropdowns();
                 renderFilters();
                 renderFacultyCards();
+
+                dom.search.addEventListener("input", () => {
+                    state.search = dom.search.value;
+                    state.currentPage = 1;
+                    renderFacultyCards();
+                });
+
+                dom.dept.addEventListener("change", () => {
+                    state.dept = dom.dept.value;
+                    state.currentPage = 1;
+                    renderFacultyCards();
+                });
+
+                dom.year.addEventListener("change", () => {
+                    state.year = dom.year.value;
+                    state.currentPage = 1;
+                    renderFacultyCards();
+                });
+
+                dom.program.addEventListener("change", () => {
+                    state.program = dom.program.value;
+                    state.currentPage = 1;
+                    renderFacultyCards();
+                });
+
+                dom.clear.addEventListener("click", () => {
+                    state.search  = "";
+                    state.dept    = "";
+                    state.year    = "";
+                    state.program = "";
+                    dom.search.value  = "";
+                    dom.dept.value    = "";
+                    dom.year.value    = "";
+                    dom.program.value = "";
+                    state.currentPage = 1;
+                    renderFacultyCards();
+                });
             }
 
             init().catch((error) => {

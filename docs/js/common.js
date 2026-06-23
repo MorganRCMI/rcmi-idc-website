@@ -207,7 +207,9 @@
                 office: row.office || "",
                 phone: row.phone || "",
                 imagePath: row.imagePath || "",
-                imageAltText: row.imageAltText || row.name || ""
+                imageAltText: row.imageAltText || row.name || "",
+                yearFunded: Number(row.yearFunded) || 0,
+                programType: row.programType || ""
             };
         });
     }
@@ -298,7 +300,8 @@
                 abstract: row.abstract || "",
                 featuredLabel: row.featuredLabel || "",
                 fullTextUrl: row.fullTextUrl || "",
-                projectDisplayOverride: row.projectDisplayOverride || ""
+                projectDisplayOverride: row.projectDisplayOverride || "",
+                programType: row.programType || ""
             };
         });
     }

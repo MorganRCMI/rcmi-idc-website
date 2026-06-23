@@ -15,7 +15,7 @@
     window.workbookContract = {
         workbookFile: "rcmi_content.xlsx",
         lookups: {
-            facultyCategories: ["Leadership", "Principal Investigators", "Research Staff"],
+            facultyCategories: ["RCMI IDC leadership", "RCMI Leadership", "Research Staff", "Pilot Faculty"],
             summaryLabels: ["Research Interests", "Role & Expertise"],
             researchRowTypes: ["area", "project", "infrastructure"],
             projectStatuses: ["Current", "Archived", "Planned"],
@@ -79,7 +79,9 @@
                     "Phone": "phone",
                     "Image Path": "imagePath",
                     "Image Alt Text": "imageAltText",
-                    "Internal Notes": "internalNotes"
+                    "Internal Notes": "internalNotes",
+                    "Year Funded": "yearFunded",
+                    "Program Type": "programType"
                 }
             },
             research: {
@@ -159,7 +161,8 @@
                     "Featured Label": "featuredLabel",
                     "Full Text URL": "fullTextUrl",
                     "Project Display Override": "projectDisplayOverride",
-                    "Internal Notes": "internalNotes"
+                    "Internal Notes": "internalNotes",
+                    "Program Type": "programType"
                 }
             }
         }

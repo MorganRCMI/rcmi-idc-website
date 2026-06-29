@@ -42,7 +42,10 @@ def normalize_cell(value):
 def read_sheet_rows(worksheet):
     rows = []
 
-    for row in worksheet.iter_rows(values_only=True):
+    # Find the maximum column to ensure all columns are included (including trailing empty ones)
+    max_col = worksheet.max_column
+
+    for row in worksheet.iter_rows(min_col=1, max_col=max_col, values_only=True):
         values = [normalize_cell(value) for value in row]
         rows.append(values)
 
@@ -52,14 +55,17 @@ def read_sheet_rows(worksheet):
     if not rows:
         return rows
 
-    header_width = len(rows[0])
+    # Find the maximum width across all rows
+    header_width = max(len(row) for row in rows)
     normalized = []
 
     for row in rows:
-        trimmed = row[:header_width]
-        if len(trimmed) < header_width:
-            trimmed = trimmed + [""] * (header_width - len(trimmed))
-        normalized.append(trimmed)
+        # Ensure each row has exactly header_width columns
+        if len(row) < header_width:
+            row = row + [""] * (header_width - len(row))
+        elif len(row) > header_width:
+            row = row[:header_width]
+        normalized.append(row)
 
     return normalized
 
@@ -71,7 +77,7 @@ def write_csv_atomic(path, rows):
     os.close(fd)
     try:
         with open(temp_path, "w", newline="", encoding="utf-8") as handle:
-            writer = csv.writer(handle)
+            writer = csv.writer(handle, quoting=csv.QUOTE_MINIMAL, lineterminator='\n')
             writer.writerows(rows)
         os.replace(temp_path, path)
     finally:

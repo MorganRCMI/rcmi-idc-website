@@ -101,7 +101,8 @@
         if (typeof value === "boolean") {
             return value;
         }
-        return String(value || "").trim().toLowerCase() === "yes";
+        const str = String(value || "").trim().toLowerCase();
+        return str === "yes" || str === "1" || str === "true";
     }
 
     function bySortOrder(a, b) {
@@ -257,7 +258,8 @@
                     startDate: row.startDate || "",
                     endDate: row.endDate || "",
                     primaryPublicationLabel: row.primaryPublicationLabel || "",
-                    primaryPublicationUrl: row.primaryPublicationUrl || ""
+                    primaryPublicationUrl: row.primaryPublicationUrl || "",
+                    featuredResearch: Number(row.featuredResearch) || 0
                 });
                 return;
             }

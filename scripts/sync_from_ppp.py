@@ -166,18 +166,32 @@ for row in ppp_rows:
 
     # One project per unique title (de-duplicate if same project appears multiple times)
     if project_title not in research_records:
+        pi_fac_id = f"pilot_{name_to_slug(formal)}" if formal else ""
         research_records[project_title] = {
             "Title": project_title,
             "Summary": project_title,
             "Project ID": f"ppp_{slugify(project_title[:40])}",
-            "Row Type": "Project",
+            "Row Type": "project",
             "Is Active": 1,
             "Category": category if category else "Research",
+            "PI Faculty ID": pi_fac_id,
             "PI Name": formal,
             "Department": category,
         }
 
 print(f"  Extracted {len(research_records)} research projects")
+
+# ── Build faculty project map (email -> project_id) ────────────────────────────
+
+faculty_to_project = {}
+for row in ppp_rows:
+    email = clean(row[ppp_cols["email"]])
+    formal = clean(row[ppp_cols["formal"]])
+    project_title = clean(row[ppp_cols["project"]])
+
+    if email and project_title:
+        project_id = f"ppp_{slugify(project_title[:40])}"
+        faculty_to_project[email.lower()] = project_id
 
 # ── Parse publications from RCMI_publications ─────────────────────────────────
 
@@ -188,6 +202,7 @@ for row in pub_rows:
     title = clean(row[pub_cols["title"]])
     year = row[pub_cols["year"]]
     authors = clean(row[pub_cols["authors"]])
+    email = clean(row[pub_cols["email"]])
     dept = clean(row[pub_cols["department"]])
     category = clean(row[pub_cols["category"]])
 
@@ -197,6 +212,7 @@ for row in pub_rows:
     key = (title, year)
     pub_by_key[key].append({
         "author": authors,
+        "email": email,
         "department": dept,
         "category": category,
     })
@@ -209,17 +225,29 @@ for (title, year), authors_list in pub_by_key.items():
     dept = authors_list[0]["department"] if authors_list else ""
     cat = authors_list[0]["category"] if authors_list else ""
 
+    # Try to match to a project by email
+    project_id = None
+    for item in authors_list:
+        email = item.get("email", "").lower().strip()
+        if email in faculty_to_project:
+            project_id = faculty_to_project[email]
+            break
+
     publication_records.append({
         "Title": title,
         "Year": year,
         "Authors": author_str,
         "Department": dept,
         "Publication Type": cat if cat else "Journal Article",
-        "Is Active": 1,
+        "Is Active": "Yes",
         "Program Type": "PPP",  # All from this sheet are PPP
+        "Project ID": project_id,  # Will be None if no match found
     })
 
 print(f"  Extracted {len(publication_records)} publications")
+matched = sum(1 for p in publication_records if p.get("Project ID"))
+unmatched = len(publication_records) - matched
+print(f"  Matched to projects: {matched}  |  Unmatched: {unmatched}")
 
 # ── Load and update rcmi_content.xlsx ─────────────────────────────────────────
 
@@ -295,7 +323,7 @@ for row_num in reversed(ppp_rows_to_delete):
 print(f"  Deleted {len(ppp_rows_to_delete)} existing PPP project rows")
 
 # Add research records
-res_col = {k: col_idx(res_hdrs, k) for k in ["Row Type", "Project ID", "Title", "Summary", "Is Active", "Category", "PI Name", "Department"]}
+res_col = {k: col_idx(res_hdrs, k) for k in ["Row Type", "Project ID", "Title", "Summary", "Is Active", "Category", "PI Faculty ID", "PI Name", "Department"]}
 
 for rec in research_records.values():
     row_num = res_ws.max_row + 1
@@ -324,7 +352,7 @@ for row_num in reversed(ppp_pub_rows):
 print(f"  Deleted {len(ppp_pub_rows)} existing PPP publication rows")
 
 # Add publication records
-pub_col = {k: col_idx(pub_hdrs, k) for k in ["Title", "Year", "Authors", "Department", "Publication Type", "Program Type", "Is Active"]}
+pub_col = {k: col_idx(pub_hdrs, k) for k in ["Title", "Year", "Authors", "Department", "Publication Type", "Program Type", "Is Active", "Project ID"]}
 
 for rec in publication_records:
     row_num = pub_ws.max_row + 1

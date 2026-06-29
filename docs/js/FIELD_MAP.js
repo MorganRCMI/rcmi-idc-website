@@ -127,7 +127,8 @@
                     "Infrastructure Name": "infrastructureName",
                     "Primary Publication Label": "primaryPublicationLabel",
                     "Primary Publication URL": "primaryPublicationUrl",
-                    "Internal Notes": "internalNotes"
+                    "Internal Notes": "internalNotes",
+                    "Featured Research": "featuredResearch"
                 }
             },
             publications: {

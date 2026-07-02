@@ -522,13 +522,14 @@
 
     </style>
     <link rel="stylesheet" href="./styles/hero-system.css?v=1">
+    <link rel="stylesheet" href="./styles/nav.css">
 </head>
 <body>
     <header>
         <nav>
             <a href="index.html" class="logo">RCMI <span>IDC</span></a>
-            <ul>
-                <li><a href="index.html">Home</a></li>
+            <ul id="menu">
+                <li><a href="index.html" aria-current="page">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="faculty.html">Faculty</a></li>
                 <li><a href="research.html">Research</a></li>
@@ -537,8 +538,14 @@
                 <li><a href="opportunities.html">Opportunities</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
+
 
     <section class="hero hero-home">
         <div class="hero-content">
@@ -589,20 +596,20 @@
         <div class="stats-container">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label">Active Researchers</div>
+                    <div class="stat-number">38</div>
+                    <div class="stat-label">Faculty Members</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">$2M+</div>
+                    <div class="stat-number">33</div>
                     <div class="stat-label">Grants Awarded</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">30+</div>
+                    <div class="stat-number">100</div>
                     <div class="stat-label">Publications</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Commitment</div>
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">Academic Departments</div>
                 </div>
             </div>
         </div>
@@ -688,5 +695,134 @@
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
+    <script src="./js/nav.js"></script>
+
+    <!-- Counter Animation for Statistics -->
+    <script>
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const startTime = Date.now();
+
+            function update() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = Math.floor(start + (target - start) * progress);
+                element.textContent = current;
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+
+            update();
+        }
+
+        // Proper CSV parser that handles quoted fields
+        function parseCSV(csvText) {
+            const rows = [];
+            let currentRow = [];
+            let currentCell = '';
+            let insideQuotes = false;
+
+            for (let i = 0; i < csvText.length; i++) {
+                const char = csvText[i];
+                const nextChar = csvText[i + 1];
+
+                if (char === '"') {
+                    if (insideQuotes && nextChar === '"') {
+                        currentCell += '"';
+                        i++;
+                    } else {
+                        insideQuotes = !insideQuotes;
+                    }
+                } else if (char === ',' && !insideQuotes) {
+                    currentRow.push(currentCell.trim());
+                    currentCell = '';
+                } else if ((char === '\n' || char === '\r') && !insideQuotes) {
+                    if (currentCell || currentRow.length > 0) {
+                        currentRow.push(currentCell.trim());
+                        if (currentRow.some(cell => cell !== '')) {
+                            rows.push(currentRow);
+                        }
+                        currentRow = [];
+                        currentCell = '';
+                    }
+                    if (char === '\r' && nextChar === '\n') i++;
+                } else {
+                    currentCell += char;
+                }
+            }
+
+            if (currentCell || currentRow.length > 0) {
+                currentRow.push(currentCell.trim());
+                if (currentRow.some(cell => cell !== '')) {
+                    rows.push(currentRow);
+                }
+            }
+
+            return rows;
+        }
+
+        // Load active faculty count from CSV
+        async function loadActiveFacultyCount() {
+            try {
+                const response = await fetch('./data/faculty.csv');
+                const csvText = await response.text();
+                const rows = parseCSV(csvText);
+
+                if (rows.length < 2) return;
+
+                // Get headers from first row
+                const headers = rows[0];
+                const isActiveIndex = headers.indexOf('Is Active');
+
+                if (isActiveIndex === -1) {
+                    console.log('Is Active column not found');
+                    return;
+                }
+
+                // Count rows where "Is Active" equals "Yes"
+                let activeCount = 0;
+                for (let i = 1; i < rows.length; i++) {
+                    const row = rows[i];
+                    if (row[isActiveIndex] === 'Yes') {
+                        activeCount++;
+                    }
+                }
+
+                // Update Grants Awarded stat with dynamic count
+                const grantStats = document.querySelectorAll('.stat-number');
+                if (grantStats.length >= 2) {
+                    grantStats[1].textContent = activeCount;
+                }
+            } catch (error) {
+                console.log('Could not load faculty count:', error);
+            }
+        }
+
+        // Load faculty count before animating
+        loadActiveFacultyCount().then(() => {
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px'
+            };
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.dataset.animated) {
+                        const target = parseInt(entry.target.textContent);
+                        animateCounter(entry.target, target);
+                        entry.target.dataset.animated = 'true';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.stat-number').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+
 </body>
 </html>

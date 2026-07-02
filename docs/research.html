@@ -980,12 +980,13 @@
     </style>
     <link rel="stylesheet" href="./styles/site-polish.css?v=1">
     <link rel="stylesheet" href="./styles/hero-system.css?v=1">
+    <link rel="stylesheet" href="./styles/nav.css">
 </head>
 <body>
     <header>
         <nav>
             <a href="index.html" class="logo">RCMI <span>IDC</span></a>
-            <ul>
+            <ul id="menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="faculty.html">Faculty</a></li>
@@ -995,8 +996,14 @@
                 <li><a href="opportunities.html">Opportunities</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
+
 
     <section class="page-header page-hero">
         <h1 id="page-title">Research Excellence</h1>
@@ -1020,7 +1027,7 @@
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="stat-faculty">12</div>
-                <div class="stat-label">Faculty<br>Investigators</div>
+                <div class="stat-label">Principal<br>Investigators</div>
             </div>
         </div>
     </section>
@@ -1310,7 +1317,8 @@
                 const otherProjects = allProjects.filter(p => !p.featuredResearch).sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
 
                 // Populate stats
-                const pubCount = Object.keys(publicationIndex).reduce((sum, key) => sum + (publicationIndex[key] || []).length, 0);
+                const activePublications = publications.filter(p => p.isActive);
+                const pubCount = activePublications.length;
                 const deptSet = new Set(allProjects.map(p => p.department).filter(Boolean));
 
                 document.getElementById("stat-projects").textContent = allProjects.length;
@@ -1339,5 +1347,48 @@
             });
         })();
     </script>
+    <script src="./js/nav.js"></script>
+
+    <!-- Counter Animation for Statistics -->
+    <script>
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const startTime = Date.now();
+
+            function update() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = Math.floor(start + (target - start) * progress);
+                element.textContent = current;
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+
+            update();
+        }
+
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.dataset.animated) {
+                    const target = parseInt(entry.target.textContent);
+                    animateCounter(entry.target, target);
+                    entry.target.dataset.animated = 'true';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.stat-number').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
 </body>
 </html>

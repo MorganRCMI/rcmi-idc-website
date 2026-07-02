@@ -638,16 +638,13 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="./styles/nav.css">
 </head>
 <body>
-    <div class="urgency-banner" id="urgency-banner" role="alert" aria-live="polite">
-        Registration closes <strong>May 27, 2026</strong> — <strong id="days-left"></strong> — Seats are limited
-    </div>
-
     <header>
         <nav>
             <a href="index.html" class="logo">RCMI <span>IDC</span></a>
-            <ul>
+            <ul id="menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="faculty.html">Faculty</a></li>
@@ -657,8 +654,18 @@
                 <li><a href="opportunities.html">Opportunities</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
+
+    <div class="urgency-banner" id="urgency-banner" role="alert" aria-live="polite">
+        Registration closes <strong>May 27, 2026</strong> — <strong id="days-left"></strong> — Seats are limited
+    </div>
+
 
     <main>
         <section class="event-hero">
@@ -892,5 +899,6 @@
             }
         })();
     </script>
+    <script src="./js/nav.js"></script>
 </body>
 </html>

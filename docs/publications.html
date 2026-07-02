@@ -511,12 +511,13 @@
     </style>
     <link rel="stylesheet" href="./styles/site-polish.css?v=1">
     <link rel="stylesheet" href="./styles/hero-system.css?v=1">
+    <link rel="stylesheet" href="./styles/nav.css">
 </head>
 <body>
     <header>
         <nav>
             <a href="index.html" class="logo">RCMI <span>IDC</span></a>
-            <ul>
+            <ul id="menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="faculty.html">Faculty</a></li>
@@ -526,8 +527,14 @@
                 <li><a href="opportunities.html">Opportunities</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
+
 
     <section class="page-header page-hero">
         <h1 id="page-title">Publications</h1>
@@ -899,5 +906,6 @@
             });
         })();
     </script>
+    <script src="./js/nav.js"></script>
 </body>
 </html>

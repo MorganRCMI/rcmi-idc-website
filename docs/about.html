@@ -399,14 +399,15 @@
         }
     </style>
     <link rel="stylesheet" href="./styles/hero-system.css?v=1">
+    <link rel="stylesheet" href="./styles/nav.css">
 </head>
 <body>
     <header>
         <nav>
             <a href="index.html" class="logo">RCMI <span>IDC</span></a>
-            <ul>
+            <ul id="menu">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="about.html" aria-current="page">About</a></li>
                 <li><a href="faculty.html">Faculty</a></li>
                 <li><a href="research.html">Research</a></li>
                 <li><a href="publications.html">Publications</a></li>
@@ -414,8 +415,14 @@
                 <li><a href="opportunities.html">Opportunities</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
+
 
     <section class="page-header page-hero">
         <h1>About RCMI & IDC</h1>
@@ -498,7 +505,7 @@
             </div>
 
             <div class="leader-profile">
-                <div class="leader-photo"><img src="./img/Christine.jpg" alt="Dr. Christine Hohmann" class="leader-photo-img"></div>
+                <div class="leader-photo"><img src="./img/faculty/faculty_christine_hohmann.jpg" alt="Dr. Christine Hohmann" class="leader-photo-img"></div>
                 <div class="leader-details">
                     <h3>Dr. Christine Hohmann</h3>
                     <div class="title">Lead, Investigator Development Core</div>
@@ -590,5 +597,6 @@
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
+    <script src="./js/nav.js"></script>
 </body>
 </html>

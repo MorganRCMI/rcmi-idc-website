@@ -680,7 +680,7 @@
                             ${relatedProject ? `<div><strong>Related Project:</strong> ${relatedProject}</div>` : ""}
                             ${publication.journalOrSource ? `<div><strong>Source:</strong> ${publication.journalOrSource}</div>` : ""}
                         </div>
-                        ${publication.citationText ? `<p>${publication.citationText}</p>` : ""}
+                        ${publication.citationText ? `<p><cite>${publication.citationText}</cite></p>` : ""}
                         ${publication.abstract ? `<p>${publication.abstract}</p>` : ""}
                         ${tags.length || programTags.length ? `
                         <div class="publication-tags">

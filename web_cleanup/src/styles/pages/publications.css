@@ -1,0 +1,50 @@
+/* ====================================
+   PUBLICATIONS PAGE STYLES
+   ==================================== */
+
+.publications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.pub-card {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border-left: 4px solid var(--secondary);
+  transition: all var(--transition-base);
+}
+
+.pub-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.pub-card h3 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-family: var(--font-primary);
+  font-size: 1.2rem;
+}
+
+.pub-card .authors {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.pub-card .year {
+  font-size: 0.85rem;
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+.pub-card .pub-type {
+  font-size: 0.85rem;
+  color: var(--primary);
+  font-weight: 600;
+  margin-top: 0.5rem;
+}

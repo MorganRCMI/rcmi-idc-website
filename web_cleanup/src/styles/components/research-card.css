@@ -1,0 +1,98 @@
+/* ====================================
+   RESEARCH CARD COMPONENT
+   ==================================== */
+
+.research-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+}
+
+.research-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+.research-card__header {
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: var(--spacing-md);
+}
+
+.research-card__title {
+  font-size: 1.3rem;
+  color: var(--primary);
+  margin-bottom: var(--spacing-sm);
+  font-family: var(--font-primary);
+}
+
+.research-card__featured {
+  background: linear-gradient(135deg, var(--accent), var(--secondary));
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.research-card__content {
+  padding: var(--spacing-lg);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.research-card__summary {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: var(--spacing-md);
+  flex: 1;
+}
+
+.research-card__footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.research-card__pi {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--text);
+}
+
+.research-card__pi-label {
+  color: #999;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.research-card__pi-name {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.research-card__dept {
+  background: rgba(0, 51, 102, 0.1);
+  color: var(--primary);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+}

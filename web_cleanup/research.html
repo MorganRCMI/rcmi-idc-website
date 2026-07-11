@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Excellence - RCMI IDC</title>
+  <meta name="description" content="Browse our research projects and publications addressing health disparities in biomedical science.">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="src/styles/variables.css">
+  <link rel="stylesheet" href="src/styles/global.css">
+  <link rel="stylesheet" href="src/styles/components/header.css">
+  <link rel="stylesheet" href="src/styles/components/footer.css">
+  <link rel="stylesheet" href="src/styles/components/research-card.css">
+  <link rel="stylesheet" href="src/styles/components/stats-card.css">
+  <link rel="stylesheet" href="src/styles/pages/research.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar">
+      <a href="index.html" class="logo">RCMI <span>IDC</span></a>
+      <ul class="nav-menu" id="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="faculty.html">Faculty</a></li>
+        <li><a href="research.html" aria-current="page">Research</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="opportunities.html">Opportunities</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <h1>Research Excellence</h1>
+      <p>Advancing biomedical science and addressing health disparities through innovative research</p>
+    </section>
+
+    <section class="stats-banner">
+      <div class="stats-grid" id="research-stats">
+        <!-- Loaded dynamically -->
+      </div>
+    </section>
+
+    <section class="featured-section">
+      <h2>Featured Research</h2>
+      <div class="featured-grid" id="featured-grid">
+        <!-- Featured projects loaded dynamically -->
+      </div>
+    </section>
+
+    <section class="all-projects-section">
+      <h2>All Research Projects</h2>
+
+      <div class="loading" id="projects-loading">Loading research data...</div>
+      <div class="empty" id="projects-empty" hidden>
+        <p>No research projects found.</p>
+      </div>
+
+      <div class="projects-grid" id="projects-grid">
+        <!-- Projects loaded dynamically -->
+      </div>
+
+      <div class="pagination" id="pagination"></div>
+    </section>
+
+    <section class="departments-section">
+      <h2>Research by Department</h2>
+      <div class="dept-grid" id="dept-grid">
+        <!-- Departments loaded dynamically -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>RCMI IDC</h4>
+        <p>Center for Urban Health Disparities Research and Innovation</p>
+        <p>Morgan State University</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <a href="about.html">About RCMI & IDC</a>
+        <a href="faculty.html">Faculty & Staff</a>
+        <a href="research.html">Research Projects</a>
+        <a href="publications.html">Publications</a>
+        <a href="events.html">Events & Workshops</a>
+        <a href="opportunities.html">Opportunities</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <p>Portage Avenue Campus, Room 113</p>
+        <p>1700 E Cold Spring Lane</p>
+        <p>Baltimore, MD 21251</p>
+        <p>Phone: 443-885-4534</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <a href="mailto:diane.hughes@morgan.edu">Email Us</a>
+        <a href="https://www.morgan.edu/rcmi" target="_blank">RCMI Program</a>
+        <a href="opportunities.html">Apply for Funding</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; <span id="current-year">2024</span> Morgan State University RCMI IDC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="src/js/main.js"></script>
+  <script src="src/js/research.js"></script>
+</body>
+</html>

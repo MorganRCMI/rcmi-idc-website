@@ -123,6 +123,12 @@
         });
     }
 
+    function splitLines(value) {
+        return String(value || "").split("\n").map(function (line) {
+            return line.trim();
+        }).filter(Boolean);
+    }
+
     function validateHeaders(datasetKey, headers) {
         var contract = getDatasetContract(datasetKey);
         if (!contract) {
@@ -199,6 +205,14 @@
                 department: row.department || "",
                 summaryLabel: row.summaryLabel || "Research Interests",
                 summaryText: row.summaryText || "",
+                bio: row.bio || "",
+                achievements: splitLines(row.achievements),
+                fundingHighlights: splitLines(row.fundingHighlights),
+                spotlightTitle: row.spotlightTitle || "",
+                spotlightCitation: row.spotlightCitation || "",
+                spotlightAbstract: row.spotlightAbstract || "",
+                spotlightFunding: row.spotlightFunding || "",
+                spotlightUrl: row.spotlightUrl || "",
                 email: row.email || "",
                 fallbackIcon: row.fallbackIcon || "ID",
                 education: pickValues(row, ["education1", "education2", "education3", "education4"]),
@@ -253,6 +267,7 @@
                     tags: pickValues(row, ["tag1", "tag2", "tag3", "tag4"]),
                     projectStatus: row.projectStatus || "Current",
                     projectUrl: row.projectUrl || "",
+                    registryLabel: row.registryLabel || "",
                     fundingSource: row.fundingSource || "",
                     grantNumber: row.grantNumber || "",
                     startDate: row.startDate || "",
@@ -341,6 +356,12 @@
         });
     }
 
+    function getProjectsByFacultyId(projects, facultyId) {
+        return activeSorted((projects || []).filter(function (project) {
+            return project.piFacultyId === facultyId;
+        }));
+    }
+
     function renderTagRow(tags, className) {
         var values = (tags || []).filter(Boolean);
         var resolvedClassName = className || "tag-row";
@@ -381,6 +402,7 @@
     sandboxHelpers.transformFacultyRecords = transformFacultyRecords;
     sandboxHelpers.transformResearchRecords = transformResearchRecords;
     sandboxHelpers.transformPublicationRecords = transformPublicationRecords;
+    sandboxHelpers.getProjectsByFacultyId = getProjectsByFacultyId;
     sandboxHelpers.renderTagRow = renderTagRow;
     sandboxHelpers.renderFooter = renderFooter;
 

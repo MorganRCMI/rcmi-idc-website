@@ -849,10 +849,13 @@
                     return "";
                 }
 
+                const isPublication = /publication/i.test(person.highlightHeading);
+                const text = isPublication ? `<cite>${person.highlightText}</cite>` : person.highlightText;
+
                 return `
                     <div class="publications-highlight">
                         <h4>${person.highlightHeading}</h4>
-                        <p>${person.highlightText}</p>
+                        <p>${text}</p>
                     </div>
                 `;
             }
@@ -908,7 +911,7 @@
                         ${renderFacultyImage(person)}
                         <div class="faculty-info">
                             ${renderPilotBadges(person)}
-                            <h3>${person.name}</h3>
+                            <h3><a href="faculty-profile.html#${encodeURIComponent(person.id)}" style="color: inherit; text-decoration: none;">${person.name}</a></h3>
                             <div class="faculty-title">${person.title}</div>
                             <div class="faculty-department">${person.department}</div>
                             ${renderEducation(person)}
@@ -918,6 +921,7 @@
                             </div>
                             ${person.tags.length ? `<div class="research-tags">${person.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}</div>` : ""}
                             ${renderHighlight(person)}
+                            <p style="margin-top: 1rem;"><a href="faculty-profile.html#${encodeURIComponent(person.id)}" class="contact-link">View Full Profile &rarr;</a></p>
                             ${renderContact(person)}
                         </div>
                     </div>

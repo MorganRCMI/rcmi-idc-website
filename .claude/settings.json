@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd /Users/mind/Desktop/Projects/RCMI_web_prototype_o *)",
+      "Read(//Users/mind/Desktop/Projects/RCMI_web_prototype_o/**)",
+      "Bash(npm run *)",
+      "Bash(pkill -f \"npm run dev\")",
+      "Bash(curl -s http://localhost:5174/rcmi-web-vue/)",
+      "Bash(curl -s http://localhost:5173/rcmi-web-vue/data/faculty.csv)",
+      "Bash(npm list *)",
+      "Bash(pkill -f \"http.server\")",
+      "Bash(python -m http.server 8000)",
+      "Bash(curl -s http://localhost:8000/index.html)",
+      "Bash(python3 -c ' *)",
+      "Bash(PYTHONPATH=scripts/_vendor python3 -c ' *)"
+    ],
+    "additionalDirectories": [
+      "/Users/mind/Desktop/Projects/RCMI_web_prototype_o/rcmi-web-vue/src/pages",
+      "/Users/mind/Desktop/Projects/RCMI_web_prototype_o/rcmi-web-vue/src/utils"
+    ]
+  }
+}

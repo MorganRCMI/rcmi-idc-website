@@ -1,0 +1,112 @@
+/* ====================================
+   FACULTY CARD COMPONENT
+   ==================================== */
+
+.faculty-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.faculty-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+.faculty-card__image-wrapper {
+  width: 100%;
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, #f0f4ff 0%, #f8f9fa 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.faculty-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.faculty-card__initials {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--secondary);
+  letter-spacing: 0.1em;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(247, 147, 30, 0.05) 100%);
+}
+
+.faculty-card__info {
+  padding: var(--spacing-md);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.faculty-card__name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: var(--spacing-xs);
+  font-family: var(--font-primary);
+}
+
+.faculty-card__title {
+  font-size: 0.9rem;
+  color: var(--secondary);
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+}
+
+.faculty-card__dept {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: var(--spacing-md);
+}
+
+.faculty-card__summary {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.faculty-card__badges {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.faculty-card__badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.4rem 0.8rem;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.faculty-card__badge--year {
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(247, 147, 30, 0.1) 100%);
+  color: var(--secondary);
+  border: 1px solid rgba(255, 107, 53, 0.2);
+}
+
+.faculty-card__badge--program {
+  background: rgba(0, 51, 102, 0.1);
+  color: var(--primary);
+  border: 1px solid rgba(0, 51, 102, 0.2);
+}

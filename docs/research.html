@@ -1164,7 +1164,7 @@
                         <ul>
                             ${items.map((item) => `
                                 <li>
-                                    <a href="${item.fullTextUrl}" target="_blank" rel="noreferrer">${item.title}</a>
+                                    <a href="${item.fullTextUrl}" target="_blank" rel="noreferrer"><cite>${item.title}</cite></a>
                                     ${(item.year || item.publicationType) ? `<span>${[item.year, item.publicationType].filter(Boolean).join(" | ")}</span>` : ""}
                                 </li>
                             `).join("")}
@@ -1173,8 +1173,25 @@
                 `;
             }
 
+            function renderRegistryLink(project) {
+                if (!project.projectUrl) {
+                    return "";
+                }
+                return `
+                    <div class="project-publications">
+                        <h4>Registration</h4>
+                        <ul>
+                            <li>
+                                <a href="${project.projectUrl}" target="_blank" rel="noreferrer"><cite>${project.registryLabel || "View registration"}</cite></a>
+                            </li>
+                        </ul>
+                    </div>
+                `;
+            }
+
             function renderProjectCard(project, publicationIndex, showFeaturedBadge = false) {
                 const pubLinks = renderPublicationLinks(project, publicationIndex);
+                const registryLink = renderRegistryLink(project);
                 const pubCount = (publicationIndex[project.id] || []).length;
                 const featuredBadge = showFeaturedBadge && project.featuredResearch ? '<span class="featured-badge">★ Featured</span>' : '';
                 const impactIndicator = pubCount > 0 ? `<span class="pub-indicator">${pubCount} ${pubCount === 1 ? 'publication' : 'publications'}</span>` : '';
@@ -1204,6 +1221,7 @@
                         </div>
                         <p>${project.description}</p>
                         ${project.tags.length ? `<div class="project-tags">${project.tags.map((tag) => `<span class="project-tag">${tag}</span>`).join("")}</div>` : ""}
+                        ${registryLink}
                         ${pubLinks}
                     </div>
                 `;

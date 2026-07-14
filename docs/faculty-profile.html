@@ -317,6 +317,47 @@
             color: var(--text);
         }
 
+        .clamp-text {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .clamp-wrap.expanded .clamp-text {
+            display: block;
+            -webkit-line-clamp: unset;
+            overflow: visible;
+        }
+
+        .read-more-btn,
+        .list-toggle-btn {
+            align-items: center;
+            gap: 0.3rem;
+            margin-top: 0.85rem;
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--secondary);
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .read-more-btn {
+            display: none;
+        }
+
+        .list-toggle-btn {
+            display: inline-flex;
+        }
+
+        .read-more-btn:hover,
+        .list-toggle-btn:hover {
+            color: var(--accent);
+        }
+
         .profile-list {
             list-style: none;
             display: flex;
@@ -361,6 +402,14 @@
         .funding-list li::before {
             content: '$';
             background: var(--primary);
+        }
+
+        .profile-list .list-extra {
+            display: none;
+        }
+
+        .profile-list.expanded .list-extra {
+            display: flex;
         }
 
         .featured-section {
@@ -527,6 +576,33 @@
             color: var(--accent);
         }
 
+        .profile-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .profile-side .profile-link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.65rem 1rem;
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--primary);
+            transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .profile-side .profile-link-btn:hover {
+            background: white;
+            border-color: var(--secondary);
+            color: var(--secondary);
+            transform: translateX(2px);
+        }
+
         @media (min-width: 901px) {
             .profile-side {
                 position: sticky;
@@ -626,7 +702,7 @@
 <body>
     <header>
         <nav>
-            <a href="index.html" class="logo">RCMI <span>IDC</span></a>
+            <a href="index.html" class="logo">RCMI <span>@ Morgan</span></a>
             <ul id="menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -762,66 +838,31 @@
                 return `<span class="section-icon${modifier ? ` ${modifier}` : ""}">${emoji}</span>`;
             }
 
+            function clampBlock(innerHtml, clampLines) {
+                const lines = clampLines || 3;
+                return `
+                    <div class="clamp-wrap">
+                        <div class="clamp-text" style="-webkit-line-clamp: ${lines};">${innerHtml}</div>
+                        <button type="button" class="read-more-btn" data-action="toggle-clamp">Read more &#9662;</button>
+                    </div>
+                `;
+            }
+
+            function clampList(items, listClass, visibleCount) {
+                const visible = visibleCount || 2;
+                const lis = items.map((item, index) => `<li${index >= visible ? ' class="list-extra"' : ""}>${item}</li>`).join("");
+                const hiddenCount = items.length - visible;
+                const toggle = hiddenCount > 0
+                    ? `<button type="button" class="list-toggle-btn" data-action="toggle-list" data-more-label="Show ${hiddenCount} more &#9662;" data-less-label="Show less &#9652;">Show ${hiddenCount} more &#9662;</button>`
+                    : "";
+                return `<ul class="profile-list${listClass ? ` ${listClass}` : ""}">${lis}</ul>${toggle}`;
+            }
+
             function renderMain(person, projects) {
-                const bioSection = person.bio
-                    ? `<section><h2>${sectionIcon("\u{1F464}")}About</h2><p>${person.bio}</p></section>`
-                    : "";
-
-                const interestsSection = person.summaryText
-                    ? `
-                        <section>
-                            <h2>${sectionIcon("\u{1F52C}")}${person.summaryLabel || "Research Interests"}</h2>
-                            <p>${person.summaryText}</p>
-                            ${person.tags.length ? `<div class="profile-tags">${person.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}</div>` : ""}
-                        </section>
-                    `
-                    : "";
-
-                const isPublicationHighlight = /publication/i.test(person.highlightHeading || "");
-                const highlightBody = isPublicationHighlight ? `<cite>${person.highlightText}</cite>` : person.highlightText;
-                const highlightSection = (person.highlightHeading && person.highlightText)
-                    ? `<section><h2>${sectionIcon("✨", "icon-secondary")}${person.highlightHeading}</h2><p>${highlightBody}</p></section>`
-                    : "";
-
-                const achievementsSection = person.achievements.length
-                    ? `
-                        <section>
-                            <h2>${sectionIcon("\u{1F3C6}", "icon-secondary")}Scientific Achievements</h2>
-                            <ul class="profile-list">${person.achievements.map((item) => `<li>${item}</li>`).join("")}</ul>
-                        </section>
-                    `
-                    : "";
-
-                const fundingSection = person.fundingHighlights.length
-                    ? `
-                        <section>
-                            <h2>${sectionIcon("\u{1F4B0}")}Funding</h2>
-                            <ul class="profile-list funding-list">${person.fundingHighlights.map((item) => `<li>${item}</li>`).join("")}</ul>
-                        </section>
-                    `
-                    : "";
-
-                const spotlightTitleHtml = person.spotlightUrl
-                    ? `<a class="spotlight-title" href="${person.spotlightUrl}" target="_blank" rel="noreferrer">${person.spotlightTitle}</a>`
-                    : `<div class="spotlight-title">${person.spotlightTitle}</div>`;
-
-                const spotlightSection = person.spotlightTitle
-                    ? `
-                        <section class="featured-section">
-                            <span class="featured-ribbon">Featured Research</span>
-                            <h2>${sectionIcon("\u{2B50}", "icon-secondary")}Scientific Advance</h2>
-                            ${spotlightTitleHtml}
-                            ${person.spotlightCitation ? `<p class="spotlight-citation"><cite>${person.spotlightCitation}</cite></p>` : ""}
-                            ${person.spotlightAbstract ? `<p>${person.spotlightAbstract}</p>` : ""}
-                            ${person.spotlightFunding ? `<p class="spotlight-funding">${person.spotlightFunding}</p>` : ""}
-                        </section>
-                    `
-                    : "";
-
                 const projectsSection = projects.length
                     ? `
                         <section>
-                            <h2>${sectionIcon("\u{1F9EA}")}Research Projects</h2>
+                            <h2>${sectionIcon("\u{1F9EA}")}RCMI Research Project</h2>
                             ${projects.map((project) => `
                                 <div class="project-card">
                                     <span class="project-status">${project.projectStatus}</span>
@@ -837,12 +878,81 @@
                     `
                     : "";
 
-                document.getElementById("profile-main").innerHTML = bioSection + interestsSection + achievementsSection + fundingSection + spotlightSection + highlightSection + projectsSection;
+                const bioSection = person.bio
+                    ? `<section><h2>${sectionIcon("\u{1F464}")}About</h2>${clampBlock(`<p>${person.bio}</p>`)}</section>`
+                    : "";
+
+                const achievementsSection = person.achievements.length
+                    ? `
+                        <section>
+                            <h2>${sectionIcon("\u{1F3C6}", "icon-secondary")}Scientific Achievements</h2>
+                            ${clampList(person.achievements)}
+                        </section>
+                    `
+                    : "";
+
+                const fundingSection = person.fundingHighlights.length
+                    ? `
+                        <section>
+                            <h2>${sectionIcon("\u{1F4B0}")}Funding</h2>
+                            ${clampList(person.fundingHighlights, "funding-list")}
+                        </section>
+                    `
+                    : "";
+
+                const spotlightTitleHtml = person.spotlightUrl
+                    ? `<a class="spotlight-title" href="${person.spotlightUrl}" target="_blank" rel="noreferrer">${person.spotlightTitle}</a>`
+                    : `<div class="spotlight-title">${person.spotlightTitle}</div>`;
+
+                const spotlightSection = person.spotlightTitle
+                    ? `
+                        <section class="featured-section">
+                            <span class="featured-ribbon">Featured Research</span>
+                            <h2>${sectionIcon("\u{2B50}", "icon-secondary")}Scientific Advance</h2>
+                            ${spotlightTitleHtml}
+                            ${person.spotlightCitation ? `<p class="spotlight-citation"><cite>${person.spotlightCitation}</cite></p>` : ""}
+                            ${person.spotlightAbstract ? clampBlock(`<p>${person.spotlightAbstract}</p>`) : ""}
+                            ${person.spotlightFunding ? `<p class="spotlight-funding">${person.spotlightFunding}</p>` : ""}
+                        </section>
+                    `
+                    : "";
+
+                const isPublicationHighlight = /publication/i.test(person.highlightHeading || "");
+                const highlightBody = isPublicationHighlight ? `<cite>${person.highlightText}</cite>` : person.highlightText;
+                const highlightSection = (person.highlightHeading && person.highlightText)
+                    ? `<section><h2>${sectionIcon("✨", "icon-secondary")}${person.highlightHeading}</h2>${clampBlock(`<p>${highlightBody}</p>`)}</section>`
+                    : "";
+
+                document.getElementById("profile-main").innerHTML = projectsSection + bioSection + achievementsSection + fundingSection + spotlightSection + highlightSection;
+                updateClampVisibility(document.getElementById("profile-main"));
             }
 
             function renderSide(person) {
                 const educationBlock = person.education.length
                     ? `<h4>\u{1F393} Education</h4>${person.education.map((item) => `<p>${item}</p>`).join("")}`
+                    : "";
+
+                const interestsBlock = person.summaryText
+                    ? `
+                        <h4>\u{1F52C} ${person.summaryLabel || "Research Interests"}</h4>
+                        <p>${person.summaryText}</p>
+                        ${person.tags.length ? `<div class="profile-tags">${person.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}</div>` : ""}
+                    `
+                    : "";
+
+                const externalLinks = [
+                    person.orcidUrl ? { label: "ORCID", url: person.orcidUrl } : null,
+                    person.googleScholarUrl ? { label: "Google Scholar", url: person.googleScholarUrl } : null,
+                    person.ncbiUrl ? { label: "NCBI / PubMed", url: person.ncbiUrl } : null
+                ].filter(Boolean);
+
+                const linksBlock = externalLinks.length
+                    ? `
+                        <h4>\u{1F517} External Profiles</h4>
+                        <div class="profile-links">
+                            ${externalLinks.map((link) => `<a class="profile-link-btn" href="${link.url}" target="_blank" rel="noreferrer">${link.label} &#8599;</a>`).join("")}
+                        </div>
+                    `
                     : "";
 
                 const contactDetails = [
@@ -852,10 +962,48 @@
 
                 document.getElementById("profile-side").innerHTML = `
                     ${educationBlock}
+                    ${interestsBlock}
+                    ${linksBlock}
                     <h4>\u{2709}\u{FE0F} Contact</h4>
                     <p><a href="mailto:${person.email}">${person.email}</a></p>
                     ${contactDetails}
                 `;
+            }
+
+            function updateClampVisibility(root) {
+                const measure = () => {
+                    root.querySelectorAll(".clamp-wrap").forEach((wrap) => {
+                        const text = wrap.querySelector(".clamp-text");
+                        const btn = wrap.querySelector(".read-more-btn");
+                        if (!text || !btn || wrap.classList.contains("expanded")) {
+                            return;
+                        }
+                        btn.style.display = text.scrollHeight > text.clientHeight + 2 ? "inline-flex" : "none";
+                    });
+                };
+                requestAnimationFrame(measure);
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(measure);
+                }
+            }
+
+            function initInteractions(root) {
+                root.addEventListener("click", (event) => {
+                    const clampBtn = event.target.closest("[data-action='toggle-clamp']");
+                    if (clampBtn) {
+                        const wrap = clampBtn.closest(".clamp-wrap");
+                        const expanded = wrap.classList.toggle("expanded");
+                        clampBtn.innerHTML = expanded ? "Show less &#9652;" : "Read more &#9662;";
+                        return;
+                    }
+
+                    const listBtn = event.target.closest("[data-action='toggle-list']");
+                    if (listBtn) {
+                        const list = listBtn.previousElementSibling;
+                        const expanded = list.classList.toggle("expanded");
+                        listBtn.innerHTML = expanded ? listBtn.dataset.lessLabel : listBtn.dataset.moreLabel;
+                    }
+                });
             }
 
             function renderNotFound() {
@@ -894,6 +1042,7 @@
                 const projects = helpers.getProjectsByFacultyId(research.projects, person.id);
 
                 renderMain(person, projects);
+                initInteractions(document.getElementById("profile-main"));
             }
 
             init().catch((error) => {

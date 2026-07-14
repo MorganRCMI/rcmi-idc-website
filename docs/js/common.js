@@ -129,6 +129,17 @@
         }).filter(Boolean);
     }
 
+    function extractTrailingYear(value) {
+        var matches = String(value || "").match(/\d{4}/g);
+        return matches ? parseInt(matches[matches.length - 1], 10) : -Infinity;
+    }
+
+    function sortByTrailingYearDesc(values) {
+        return values.slice().sort(function (a, b) {
+            return extractTrailingYear(b) - extractTrailingYear(a);
+        });
+    }
+
     function validateHeaders(datasetKey, headers) {
         var contract = getDatasetContract(datasetKey);
         if (!contract) {
@@ -215,7 +226,7 @@
                 spotlightUrl: row.spotlightUrl || "",
                 email: row.email || "",
                 fallbackIcon: row.fallbackIcon || "ID",
-                education: pickValues(row, ["education1", "education2", "education3", "education4"]),
+                education: sortByTrailingYearDesc(pickValues(row, ["education1", "education2", "education3", "education4"])),
                 tags: pickValues(row, ["tag1", "tag2", "tag3", "tag4", "tag5", "tag6"]),
                 highlightHeading: row.highlightHeading || "",
                 highlightText: row.highlightText || "",
@@ -224,7 +235,10 @@
                 imagePath: row.imagePath || "",
                 imageAltText: row.imageAltText || row.name || "",
                 yearFunded: Number(row.yearFunded) || 0,
-                programType: row.programType || ""
+                programType: row.programType || "",
+                orcidUrl: row.orcidUrl || "",
+                googleScholarUrl: row.googleScholarUrl || "",
+                ncbiUrl: row.ncbiUrl || ""
             };
         });
     }

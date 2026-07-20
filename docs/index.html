@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RCMI IDC - Morgan State University</title>
+    <title>RCMI @ Morgan - Morgan State University</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -29,7 +29,6 @@
             overflow-x: hidden;
         }
 
-        /* Header & Navigation */
         header {
             position: fixed;
             top: 0;
@@ -42,14 +41,8 @@
         }
 
         @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         nav {
@@ -106,18 +99,20 @@
             transition: width 0.3s ease;
         }
 
-        nav a:hover {
+        nav a:hover,
+        nav a[aria-current="page"] {
             color: var(--secondary);
         }
 
-        nav a:hover::after {
+        nav a:hover::after,
+        nav a[aria-current="page"]::after {
             width: 100%;
         }
 
-        /* Hero Section */
+        /* Hero */
         .hero {
             margin-top: 80px;
-            height: 90vh;
+            min-height: 78vh;
             position: relative;
             display: flex;
             align-items: center;
@@ -127,21 +122,24 @@
         .hero-content {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 5%;
+            padding: 4rem 5%;
             position: relative;
             z-index: 1;
             animation: fadeInUp 1s ease 0.3s backwards;
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .hero h1 {
@@ -155,20 +153,11 @@
         }
 
         .hero .subtitle {
-            font-size: 1.4rem;
+            font-size: 1.25rem;
             color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
-            max-width: 650px;
+            margin-bottom: 2.5rem;
+            max-width: 720px;
             font-weight: 300;
-        }
-
-        .hero .tagline {
-            font-size: 1.1rem;
-            color: var(--accent);
-            margin-bottom: 3rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
         }
 
         .cta-buttons {
@@ -212,17 +201,12 @@
             transform: translateY(-3px);
         }
 
-        /* About Section */
-        .about {
-            padding: 8rem 5%;
-            max-width: 1400px;
+        /* Overview */
+        .overview {
+            padding: 5rem 5% 4rem;
+            max-width: 900px;
             margin: 0 auto;
-        }
-
-        .section-header {
             text-align: center;
-            margin-bottom: 5rem;
-            animation: fadeInUp 0.8s ease;
         }
 
         .section-label {
@@ -236,41 +220,60 @@
 
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem;
+            font-size: 2.6rem;
             color: var(--primary);
             font-weight: 800;
             letter-spacing: -1px;
             margin-bottom: 1.5rem;
         }
 
-        .section-description {
-            max-width: 700px;
-            margin: 0 auto;
+        .overview p {
+            max-width: 780px;
+            margin: 0 auto 1.25rem;
             color: var(--text);
             font-size: 1.1rem;
-            line-height: 1.8;
+            line-height: 1.85;
         }
 
-        /* Features Grid */
-        .features-grid {
+        .overview p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* Core structure */
+        .structure {
+            padding: 4rem 5% 5.5rem;
+            background:
+                radial-gradient(circle at 10% 15%, rgba(247, 147, 30, 0.05), transparent 24%),
+                radial-gradient(circle at 90% 85%, rgba(0, 51, 102, 0.05), transparent 24%),
+                var(--light);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .structure-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .core-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.75rem;
+            margin-top: 3rem;
         }
 
-        .feature-card {
+        .core-card {
             background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s ease;
+            padding: 2.25rem;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
             border: 1px solid var(--border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .feature-card::before {
+        .core-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -278,176 +281,246 @@
             width: 100%;
             height: 4px;
             background: linear-gradient(90deg, var(--secondary), var(--accent));
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        .core-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 44px rgba(0, 0, 0, 0.1);
         }
 
-        .feature-card:hover::before {
-            transform: scaleX(1);
+        .core-card {
+            animation: fadeInUp 0.6s ease both;
         }
 
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--secondary), var(--accent));
-            border-radius: 15px;
+        .core-grid .core-card:nth-child(1) { animation-delay: 0.03s; }
+        .core-grid .core-card:nth-child(2) { animation-delay: 0.07s; }
+        .core-grid .core-card:nth-child(3) { animation-delay: 0.11s; }
+        .core-grid .core-card:nth-child(4) { animation-delay: 0.15s; }
+        .core-grid .core-card:nth-child(5) { animation-delay: 0.19s; }
+        .core-grid .core-card:nth-child(6) { animation-delay: 0.23s; }
+
+        .core-card.is-idc {
+            border: 1.5px solid var(--secondary);
+            background: linear-gradient(155deg, #ffffff 0%, #fff6ef 100%);
+        }
+
+        .core-card-top {
             display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 1.1rem;
+        }
+
+        .core-icon {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: white;
+            width: 3rem;
+            height: 3rem;
+            flex-shrink: 0;
+            border-radius: 13px;
+            background: linear-gradient(135deg, var(--primary), #004d99);
+            font-size: 1.4rem;
         }
 
-        .feature-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-weight: 700;
+        .core-card.is-idc .core-icon {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
         }
 
-        .feature-card p {
-            color: var(--text);
-            line-height: 1.8;
-            font-size: 1rem;
-        }
-
-        .feature-card a {
+        .core-badge {
             display: inline-block;
-            margin-top: 1.5rem;
-            color: var(--secondary);
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .feature-card a:hover {
-            color: var(--accent);
-            transform: translateX(5px);
-        }
-
-        /* Stats Section */
-        .stats {
-            background: linear-gradient(135deg, var(--primary), #002244);
-            padding: 6rem 5%;
-            margin: 6rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stats::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 30% 50%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 70% 50%, rgba(247, 147, 30, 0.15) 0%, transparent 50%);
-        }
-
-        .stats-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 4rem;
-            text-align: center;
-        }
-
-        .stat-item {
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .stat-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 4rem;
-            color: var(--accent);
-            font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1;
-        }
-
-        .stat-label {
+            background: var(--secondary);
             color: white;
-            font-size: 1.1rem;
-            font-weight: 500;
-            opacity: 0.9;
-        }
-
-        /* Leadership Section */
-        .leadership {
-            padding: 8rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-            background: var(--light);
-        }
-
-        .leadership-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
-        }
-
-        .leader-card {
-            background: white;
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.85rem;
             border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s ease;
+            white-space: nowrap;
         }
 
-        .leader-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
-        }
-
-        .leader-image {
-            width: 100%;
-            height: 360px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            overflow: hidden;
-            position: relative;
-        }
-
-        .leader-image-img {
-            width: 100%;
-            height: 100%;
-            display: block;
-            object-fit: cover;
-            object-position: center 10%;
-        }
-
-        .leader-info {
-            padding: 2rem;
-        }
-
-        .leader-info h3 {
+        .core-card h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--primary);
             margin-bottom: 0.5rem;
             font-weight: 700;
         }
 
-        .leader-info .title {
+        .core-card .core-leads {
             color: var(--secondary);
             font-weight: 600;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
+            font-size: 0.88rem;
+            margin-bottom: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .core-card p.core-desc {
+            color: var(--text);
+            font-size: 0.94rem;
+            line-height: 1.7;
+        }
+
+        .core-card .core-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin-top: 1.1rem;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: gap 0.2s ease, color 0.2s ease;
+        }
+
+        .core-card .core-link:hover {
+            color: var(--accent);
+            gap: 0.55rem;
+        }
+
+        /* Research Projects card: one clean line per project */
+        .project-mini-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+            margin-top: 0.9rem;
+        }
+
+        .project-mini-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .project-mini-list li > span,
+        .project-mini-list li > a {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            width: 100%;
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .project-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.55rem;
+            height: 1.55rem;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: var(--light);
+            color: var(--primary);
+            font-size: 0.72rem;
+            font-weight: 800;
+        }
+
+        .project-mini-list li > a {
+            color: var(--secondary);
+            font-weight: 700;
+            transition: gap 0.2s ease, color 0.2s ease;
+        }
+
+        .project-mini-list li > a .project-num {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .project-mini-list li > a:hover {
+            gap: 0.9rem;
+            color: var(--accent);
+        }
+
+        .project-mini-list li > a .project-arrow {
+            margin-left: auto;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .project-mini-list li > a:hover .project-arrow {
+            opacity: 1;
+        }
+
+        /* Governance strip */
+        .governance {
+            padding: 5.5rem 5%;
+        }
+
+        .governance-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .governance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            text-align: left;
+        }
+
+        .gov-item {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .gov-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .gov-avatar {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 6px 16px rgba(0, 51, 102, 0.18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        .gov-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        .gov-item .gov-role {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--secondary);
+            margin-bottom: 0.35rem;
+        }
+
+        .gov-item .gov-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: 700;
         }
 
         /* Footer */
@@ -493,14 +566,13 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.6rem;
             }
 
             .hero .subtitle {
-                font-size: 1.1rem;
+                font-size: 1.05rem;
             }
 
             .section-title {
@@ -510,17 +582,9 @@
             nav ul {
                 display: none;
             }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stat-number {
-                font-size: 3rem;
-            }
         }
-
     </style>
+    <link rel="stylesheet" href="./styles/site-polish.css?v=1">
     <link rel="stylesheet" href="./styles/hero-system.css?v=1">
     <link rel="stylesheet" href="./styles/nav.css">
 </head>
@@ -546,109 +610,147 @@
         </nav>
     </header>
 
-
     <section class="hero hero-home">
         <div class="hero-content">
             <div class="tagline">Morgan State University</div>
-            <h1>Investigator<br>Development Core</h1>
-            <p class="subtitle">Empowering diverse researchers to advance biomedical science and reduce health disparities through mentorship, funding, and collaborative innovation.</p>
+            <h1>RCMI @ Morgan</h1>
+            <p class="subtitle">The Center for Urban Health Disparities Research and Innovation — an NIH/NIMHD-funded Research Center in Minority Institutions building the infrastructure, investigators, and community partnerships to advance health equity in Baltimore and beyond.</p>
             <div class="cta-buttons">
-                <a href="opportunities.html" class="btn btn-primary">Explore Opportunities</a>
-                <a href="about.html" class="btn btn-secondary">Learn More</a>
+                <a href="idc-home.html" class="btn btn-primary">Explore the Investigator Development Core &rarr;</a>
+                <a href="#structure" class="btn btn-secondary">See Our Center Structure</a>
             </div>
         </div>
     </section>
 
-    <section class="about">
-        <div class="section-header">
-            <div class="section-label">What We Do</div>
-            <h2 class="section-title">Building the Next Generation of Researchers</h2>
-            <p class="section-description">
-                The Investigator Development Core supports and enhances the competitiveness of diverse investigators in basic biomedical, behavioral, and clinical sciences, with particular emphasis on early-stage investigators.
-            </p>
-        </div>
+    <section class="overview">
+        <div class="section-label">About the Center</div>
+        <h2 class="section-title">One Center, Six Cores</h2>
+        <p>RCMI@Morgan is led by Principal Investigator Dr. Paul B. Tchounwou, Dean of the School of Computer, Mathematical and Natural Sciences, under the oversight of Morgan State University's Office of the President and the Office of Research and Economic Development.</p>
+        <p>The Center is organized into six Cores that together build research capacity, develop investigators, engage the community, and carry out funded research projects addressing urban health disparities.</p>
+    </section>
 
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h3>Pilot Grant Program</h3>
-                <p>Competitive funding opportunities for innovative research projects that address health disparities and advance biomedical knowledge.</p>
-                <a href="opportunities.html">View Programs →</a>
+    <section class="structure" id="structure">
+        <div class="structure-inner">
+            <div class="section-header" style="text-align:center;">
+                <div class="section-label">Center Structure</div>
+                <h2 class="section-title">Our Cores</h2>
             </div>
 
-            <div class="feature-card">
-                <div class="feature-icon">✍️</div>
-                <h3>Writing & Research Support</h3>
-                <p>Comprehensive support for grant writing, manuscript preparation, and research design to maximize success rates.</p>
-                <a href="about.html">Learn More →</a>
-            </div>
+            <div class="core-grid">
+                <div class="core-card">
+                    <div class="core-card-top">
+                        <span class="core-icon">🏛️</span>
+                    </div>
+                    <h3>Administrative Core</h3>
+                    <div class="core-leads">Dr. Paul B. Tchounwou, PI &middot; Dr. James Wachira, Executive Director</div>
+                    <p class="core-desc">Provides overall leadership and grant oversight for RCMI@Morgan. Senior/mid-career scientist: Dr. Samuel Campos.</p>
+                </div>
 
-            <div class="feature-card">
-                <div class="feature-icon">🤝</div>
-                <h3>Community Building</h3>
-                <p>Foster collaborative networks through seminars, workshops, and mentorship programs connecting researchers across disciplines.</p>
-                <a href="opportunities.html">Get Involved →</a>
+                <div class="core-card">
+                    <div class="core-card-top">
+                        <span class="core-icon">🔬</span>
+                    </div>
+                    <h3>Research Infrastructure Core</h3>
+                    <div class="core-leads">Dr. James Wachira (Lead) &middot; Dr. YueJin Li (Co-Lead)</div>
+                    <p class="core-desc">Builds shared research capacity through the Molecular and Cell Biology Core, Biostatistics and Bioinformatics Core, and Animal Facility Core.</p>
+                </div>
+
+                <div class="core-card is-idc">
+                    <div class="core-card-top">
+                        <span class="core-icon">🎓</span>
+                        <span class="core-badge">You Are Here</span>
+                    </div>
+                    <h3>Investigator Development Core</h3>
+                    <div class="core-leads">Dr. Christine Hohmann (Lead) &middot; Dr. Shiva Mehravaran (Co-Lead)</div>
+                    <p class="core-desc">Mentors and funds early-stage investigators through pilot grants, writing support, and community-building programs.</p>
+                    <a href="idc-home.html" class="core-link">Visit the IDC site &rarr;</a>
+                </div>
+
+                <div class="core-card">
+                    <div class="core-card-top">
+                        <span class="core-icon">🤝</span>
+                    </div>
+                    <h3>Community Engagement Core</h3>
+                    <div class="core-leads">Dr. Payam Sheikhattari, PI &middot; Dr. Kimberly Warren, Lead</div>
+                    <p class="core-desc">Connects the Center's research to the communities it serves through outreach and a Program Manager Steering Committee.</p>
+                </div>
+
+                <div class="core-card">
+                    <div class="core-card-top">
+                        <span class="core-icon">📋</span>
+                    </div>
+                    <h3>Recruitment Core</h3>
+                    <div class="core-leads">Dr. Paul B. Tchounwou</div>
+                    <p class="core-desc">Recruits and supports investigators and trainees across RCMI@Morgan's research programs.</p>
+                </div>
+
+                <div class="core-card">
+                    <div class="core-card-top">
+                        <span class="core-icon">🧪</span>
+                    </div>
+                    <h3>Research Projects</h3>
+                    <div class="core-leads">3 Funded Projects</div>
+                    <ul class="project-mini-list">
+                        <li><span><span class="project-num">1</span> Dr. Samendra Sherchan</span></li>
+                        <li><span><span class="project-num">2</span> Dr. Ingrid Tulloch</span></li>
+                        <li>
+                            <a href="faculty-profile.html#project_timothy_meeker">
+                                <span class="project-num">3</span> Dr. Timothy Meeker
+                                <span class="project-arrow">&rarr;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="stats">
-        <div class="stats-container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number">38</div>
-                    <div class="stat-label">Faculty Members</div>
+    <section class="governance">
+        <div class="governance-inner">
+            <div class="section-label">Governance</div>
+            <h2 class="section-title">RCMI Leadership</h2>
+            <div class="governance-grid">
+                <div class="gov-item">
+                    <div class="gov-avatar"><img src="./img/faculty/governance_david_wilson.jpg" alt="Dr. David Wilson"></div>
+                    <div>
+                        <div class="gov-role">President</div>
+                        <div class="gov-name">Dr. David Wilson</div>
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">33</div>
-                    <div class="stat-label">Grants Awarded</div>
+                <div class="gov-item">
+                    <div class="gov-avatar"><img src="./img/faculty/governance_hongtao_yu.jpg" alt="Dr. Hongtao Yu"></div>
+                    <div>
+                        <div class="gov-role">Provost &amp; Senior VP, Academic Affairs</div>
+                        <div class="gov-name">Dr. Hongtao Yu</div>
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">100</div>
-                    <div class="stat-label">Publications</div>
+                <div class="gov-item">
+                    <div class="gov-avatar"><img src="./img/faculty/governance_willie_may.jpg" alt="Dr. Willie May"></div>
+                    <div>
+                        <div class="gov-role">VP, Research &amp; Economic Development</div>
+                        <div class="gov-name">Dr. Willie May</div>
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">10</div>
-                    <div class="stat-label">Academic Departments</div>
+                <div class="gov-item">
+                    <div class="gov-avatar"><img src="./img/faculty/governance_paul_tchounwou.jpg" alt="Dr. Paul B. Tchounwou"></div>
+                    <div>
+                        <div class="gov-role">Dean, SCMNS &amp; PI</div>
+                        <div class="gov-name">Dr. Paul B. Tchounwou</div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="leadership">
-        <div class="section-header">
-            <div class="section-label">Leadership</div>
-            <h2 class="section-title">Meet Our Team</h2>
-            <p class="section-description">
-                Our dedicated leaders bring decades of research experience and a passion for developing the next generation of biomedical investigators.
-            </p>
-        </div>
-
-        <div class="leadership-grid">
-            <div class="leader-card">
-                 <div class="leader-image"><img src="./img/faculty/faculty_christine_hohmann.jpg" alt="Dr. Christine Hohmann" class="leader-image-img"></div>
-                <div class="leader-info">
-                    <h3>Dr. Christine Hohmann</h3>
-                    <div class="title">Lead, Investigator Development Core</div>
-                    <p>Expert in neuroscience and investigator development</p>
+                <div class="gov-item">
+                    <div class="gov-avatar"><img src="./img/faculty/faculty_James_Wachira.jpg" alt="James Wachira"></div>
+                    <div>
+                        <div class="gov-role">Executive Director</div>
+                        <div class="gov-name">Dr. James Wachira</div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="leader-card">
-                <div class="leader-image"><img src="./img/shiva.jpg" alt="Dr. Shiva Mehravaran" class="leader-image-img"></div>
-                <div class="leader-info">
-                    <h3>Dr. Shiva Mehravaran</h3>
-                    <div class="title">Co-Lead, Investigator Development Core</div>
-                    <p>Specialist in research methodology and mentorship</p>
-                </div>
-            </div>
-
-            <div class="leader-card">
-                <div class="leader-image"><img src="./img/placeholder.png" alt="Diane Hughes" class="leader-image-img"></div>
-                <div class="leader-info">
-                    <h3>Diane Hughes</h3>
-                    <div class="title">Program Manager</div>
-                    <p>Administrative leadership and program coordination</p>
+                <div class="gov-item">
+                    <div class="gov-avatar">DH</div>
+                    <div>
+                        <div class="gov-role">Program Manager</div>
+                        <div class="gov-name">Diane Hughes</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -692,137 +794,10 @@
             <p>&copy; <span id="current-year">2024</span> Morgan State University RCMI IDC. All rights reserved.</p>
         </div>
     </footer>
+
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
     <script src="./js/nav.js"></script>
-
-    <!-- Counter Animation for Statistics -->
-    <script>
-        function animateCounter(element, target, duration = 2000) {
-            const start = 0;
-            const startTime = Date.now();
-
-            function update() {
-                const elapsed = Date.now() - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const current = Math.floor(start + (target - start) * progress);
-                element.textContent = current;
-
-                if (progress < 1) {
-                    requestAnimationFrame(update);
-                }
-            }
-
-            update();
-        }
-
-        // Proper CSV parser that handles quoted fields
-        function parseCSV(csvText) {
-            const rows = [];
-            let currentRow = [];
-            let currentCell = '';
-            let insideQuotes = false;
-
-            for (let i = 0; i < csvText.length; i++) {
-                const char = csvText[i];
-                const nextChar = csvText[i + 1];
-
-                if (char === '"') {
-                    if (insideQuotes && nextChar === '"') {
-                        currentCell += '"';
-                        i++;
-                    } else {
-                        insideQuotes = !insideQuotes;
-                    }
-                } else if (char === ',' && !insideQuotes) {
-                    currentRow.push(currentCell.trim());
-                    currentCell = '';
-                } else if ((char === '\n' || char === '\r') && !insideQuotes) {
-                    if (currentCell || currentRow.length > 0) {
-                        currentRow.push(currentCell.trim());
-                        if (currentRow.some(cell => cell !== '')) {
-                            rows.push(currentRow);
-                        }
-                        currentRow = [];
-                        currentCell = '';
-                    }
-                    if (char === '\r' && nextChar === '\n') i++;
-                } else {
-                    currentCell += char;
-                }
-            }
-
-            if (currentCell || currentRow.length > 0) {
-                currentRow.push(currentCell.trim());
-                if (currentRow.some(cell => cell !== '')) {
-                    rows.push(currentRow);
-                }
-            }
-
-            return rows;
-        }
-
-        // Load active faculty count from CSV
-        async function loadActiveFacultyCount() {
-            try {
-                const response = await fetch('./data/faculty.csv');
-                const csvText = await response.text();
-                const rows = parseCSV(csvText);
-
-                if (rows.length < 2) return;
-
-                // Get headers from first row
-                const headers = rows[0];
-                const isActiveIndex = headers.indexOf('Is Active');
-
-                if (isActiveIndex === -1) {
-                    console.log('Is Active column not found');
-                    return;
-                }
-
-                // Count rows where "Is Active" equals "Yes"
-                let activeCount = 0;
-                for (let i = 1; i < rows.length; i++) {
-                    const row = rows[i];
-                    if (row[isActiveIndex] === 'Yes') {
-                        activeCount++;
-                    }
-                }
-
-                // Update Grants Awarded stat with dynamic count
-                const grantStats = document.querySelectorAll('.stat-number');
-                if (grantStats.length >= 2) {
-                    grantStats[1].textContent = activeCount;
-                }
-            } catch (error) {
-                console.log('Could not load faculty count:', error);
-            }
-        }
-
-        // Load faculty count before animating
-        loadActiveFacultyCount().then(() => {
-            const observerOptions = {
-                threshold: 0.5,
-                rootMargin: '0px'
-            };
-
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !entry.target.dataset.animated) {
-                        const target = parseInt(entry.target.textContent);
-                        animateCounter(entry.target, target);
-                        entry.target.dataset.animated = 'true';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.stat-number').forEach(el => {
-                observer.observe(el);
-            });
-        });
-    </script>
-
 </body>
 </html>

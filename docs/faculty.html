@@ -104,7 +104,7 @@
         }
 
         .page-header {
-            margin-top: 80px;
+            margin-top: 0;
             padding: 6rem 5% 4rem;
             background: linear-gradient(135deg, var(--primary) 0%, #004080 100%);
             text-align: center;
@@ -448,6 +448,17 @@
             letter-spacing: 0.3px;
         }
 
+        .badge-designation {
+            display: inline-block;
+            padding: 0.3rem 0.9rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
         .empty-message {
             text-align: center;
             font-size: 1.05rem;
@@ -584,9 +595,9 @@
 <body>
     <header>
         <nav>
-            <a href="index.html" class="logo">RCMI <span>@ Morgan</span></a>
+            <a href="idc-home.html" class="logo">RCMI <span>@ Morgan</span></a>
             <ul id="menu">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="idc-home.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="faculty.html" aria-current="page">Faculty</a></li>
                 <li><a href="research.html">Research</a></li>
@@ -602,6 +613,10 @@
             </button>
         </nav>
     </header>
+
+    <div class="breadcrumb-bar">
+        <div class="breadcrumb"><a href="index.html">&larr; RCMI @ Morgan</a></div>
+    </div>
 
 
     <section class="page-header page-hero">
@@ -769,7 +784,7 @@
                 }
 
                 // Sort: Pilot Faculty by year funded, others by sortOrder
-                if (state.selectedFilter === "Pilot Faculty") {
+                if (state.selectedFilter === "IDC Pilot Faculties") {
                     return filtered.slice().sort((a, b) => {
                         if (a.yearFunded !== b.yearFunded) {
                             return (a.yearFunded || 9999) - (b.yearFunded || 9999);
@@ -789,7 +804,7 @@
             function refreshDropdowns() {
                 const active = helpers.activeSorted(state.faculty);
                 const inCategory = active.filter((p) => p.category === state.selectedFilter);
-                const isPilotFaculty = state.selectedFilter === "Pilot Faculty";
+                const isPilotFaculty = state.selectedFilter === "IDC Pilot Faculties";
 
                 // Hide entire filter toolbar if not Pilot Faculty
                 document.querySelector(".filter-toolbar").style.display = isPilotFaculty ? "" : "none";
@@ -891,18 +906,17 @@
                 return `<div class="faculty-image" style="font-size: 3.5rem; font-weight: 700; letter-spacing: 0.1em;">${initials}</div>`;
             }
 
-            function renderPilotBadges(person) {
-                if (person.category !== "Pilot Faculty") {
-                    return "";
-                }
-                const yearBadge    = person.yearFunded ? `<span class="badge-year">Funded ${person.yearFunded}</span>` : "";
-                const programBadges = person.programType
+            function renderBadges(person) {
+                const designationBadge = person.designation ? `<span class="badge-designation">${person.designation}</span>` : "";
+                const isPilotFaculty = person.category === "IDC Pilot Faculties";
+                const yearBadge = (isPilotFaculty && person.yearFunded) ? `<span class="badge-year">Funded ${person.yearFunded}</span>` : "";
+                const programBadges = (isPilotFaculty && person.programType)
                     ? person.programType.split(",").map((p) => `<span class="badge-program">${p.trim()}</span>`).join("")
                     : "";
-                if (!yearBadge && !programBadges) {
+                if (!designationBadge && !yearBadge && !programBadges) {
                     return "";
                 }
-                return `<div class="faculty-badges">${yearBadge}${programBadges}</div>`;
+                return `<div class="faculty-badges">${designationBadge}${yearBadge}${programBadges}</div>`;
             }
 
             function renderFacultyCard(person) {
@@ -910,7 +924,7 @@
                     <div class="faculty-card">
                         ${renderFacultyImage(person)}
                         <div class="faculty-info">
-                            ${renderPilotBadges(person)}
+                            ${renderBadges(person)}
                             <h3><a href="faculty-profile.html#${encodeURIComponent(person.id)}" style="color: inherit; text-decoration: none;">${person.name}</a></h3>
                             <div class="faculty-title">${person.title}</div>
                             <div class="faculty-department">${person.department}</div>

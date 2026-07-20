@@ -104,7 +104,7 @@
         }
 
         .profile-hero {
-            margin-top: 80px;
+            margin-top: 0;
             padding: 4rem 5% 3rem;
             background: linear-gradient(135deg, var(--primary) 0%, #004080 100%);
             position: relative;
@@ -221,6 +221,17 @@
             padding: 0.3rem 0.9rem;
             background: var(--secondary);
             color: white;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-designation {
+            display: inline-block;
+            padding: 0.3rem 0.9rem;
+            background: white;
+            color: var(--primary);
             border-radius: 20px;
             font-size: 0.78rem;
             font-weight: 700;
@@ -702,9 +713,9 @@
 <body>
     <header>
         <nav>
-            <a href="index.html" class="logo">RCMI <span>@ Morgan</span></a>
+            <a href="idc-home.html" class="logo">RCMI <span>@ Morgan</span></a>
             <ul id="menu">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="idc-home.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="faculty.html" aria-current="page">Faculty</a></li>
                 <li><a href="research.html">Research</a></li>
@@ -720,6 +731,10 @@
             </button>
         </nav>
     </header>
+
+    <div class="breadcrumb-bar">
+        <div class="breadcrumb"><a href="index.html">&larr; RCMI @ Morgan</a></div>
+    </div>
 
     <div id="profile-root">
         <section class="profile-hero">
@@ -823,15 +838,13 @@
 
             function renderBadges(person) {
                 const el = document.getElementById("profile-badges");
-                if (person.category !== "Pilot Faculty") {
-                    el.innerHTML = "";
-                    return;
-                }
-                const yearBadge = person.yearFunded ? `<span class="badge-year">Funded ${person.yearFunded}</span>` : "";
-                const programBadges = person.programType
+                const designationBadge = person.designation ? `<span class="badge-designation">${person.designation}</span>` : "";
+                const isPilotFaculty = person.category === "IDC Pilot Faculties";
+                const yearBadge = (isPilotFaculty && person.yearFunded) ? `<span class="badge-year">Funded ${person.yearFunded}</span>` : "";
+                const programBadges = (isPilotFaculty && person.programType)
                     ? person.programType.split(",").map((p) => `<span class="badge-program">${p.trim()}</span>`).join("")
                     : "";
-                el.innerHTML = yearBadge + programBadges;
+                el.innerHTML = designationBadge + yearBadge + programBadges;
             }
 
             function sectionIcon(emoji, modifier) {

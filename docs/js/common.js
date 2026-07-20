@@ -212,6 +212,7 @@
                 sortOrder: Number(row.sortOrder) || 0,
                 name: row.name || "",
                 category: row.category || "",
+                designation: row.designation || "",
                 title: row.title || "",
                 department: row.department || "",
                 summaryLabel: row.summaryLabel || "Research Interests",

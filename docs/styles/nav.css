@@ -1,5 +1,29 @@
 /* Shared Navigation Styles */
 
+.breadcrumb-bar {
+    margin-top: 80px;
+    background: var(--light);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 5%;
+}
+
+.breadcrumb-bar .breadcrumb {
+    max-width: 1400px;
+    margin: 0 auto;
+    font-size: 0.85rem;
+    color: var(--text);
+}
+
+.breadcrumb-bar a {
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.breadcrumb-bar a:hover {
+    color: var(--accent);
+}
+
 :root {
     --primary: #002451;
     --secondary: #ff6b35;

@@ -1,5 +1,10 @@
 # RCMI IDC Website Design Prototype
 
+> **Note:** This file documents the original single-page design mockup and is out of
+> date on architecture, file structure, and the content pipeline. For how the site
+> actually works today (multi-core structure, Excel/CSV data pipeline, local dev),
+> see [`DEVELOPMENT.md`](./DEVELOPMENT.md).
+
 ## Overview
 This is a comprehensive website design prototype for the **Research Centers in Minority Institutions (RCMI) Investigator Development Core (IDC)** at Morgan State University. The design features a modern, professional aesthetic appropriate for an academic research program.
 

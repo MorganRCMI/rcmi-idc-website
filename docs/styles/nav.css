@@ -1,27 +1,91 @@
 /* Shared Navigation Styles */
 
-.breadcrumb-bar {
+/* Core Switcher */
+.core-switcher {
     margin-top: 80px;
-    background: var(--light);
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2f8 100%);
     border-bottom: 1px solid var(--border);
-    padding: 0.75rem 5%;
+    padding: 0.85rem 5%;
 }
 
-.breadcrumb-bar .breadcrumb {
+.core-switcher-inner {
     max-width: 1400px;
     margin: 0 auto;
-    font-size: 0.85rem;
-    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.85rem;
 }
 
-.breadcrumb-bar a {
+.core-switch-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 700;
     color: var(--secondary);
     text-decoration: none;
-    font-weight: 600;
+    transition: gap 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
 }
 
-.breadcrumb-bar a:hover {
+.core-switch-home:hover {
+    gap: 0.6rem;
     color: var(--accent);
+}
+
+.core-switch-pills {
+    display: flex;
+    gap: 0.3rem;
+    background: white;
+    padding: 0.3rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 12px rgba(10, 35, 67, 0.06);
+}
+
+.core-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.42rem 1.05rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--text);
+    transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+.core-pill:hover {
+    background: var(--light);
+    color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.core-pill.active {
+    background: linear-gradient(135deg, var(--primary), #004d99);
+    color: white;
+    box-shadow: 0 6px 16px rgba(0, 36, 81, 0.28);
+}
+
+.core-pill.active:hover {
+    background: linear-gradient(135deg, var(--primary), #004d99);
+    color: white;
+    transform: none;
+}
+
+@media (max-width: 560px) {
+    .core-switcher-inner {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .core-switch-pills {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 :root {

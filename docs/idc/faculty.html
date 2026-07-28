@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty & Research - RCMI IDC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #FF6B35;
+            --accent: #F7931E;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #2c3e50;
+            --border: #e0e6ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s ease;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .logo:hover {
+            opacity: 0.9;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: clamp(1rem, 2vw, 2rem);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover,
+        nav a[aria-current="page"] {
+            color: var(--secondary);
+        }
+
+        nav a:hover::after,
+        nav a[aria-current="page"]::after {
+            width: 100%;
+        }
+
+        .page-header {
+            margin-top: 0;
+            padding: 6rem 5% 4rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #004080 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 30%, rgba(247, 147, 30, 0.1) 0%, transparent 50%);
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: white;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .filter-section {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 5%;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .filter-toolbar {
+            display: grid;
+            grid-template-columns: 2.5fr 1.2fr 1.2fr 1.2fr auto;
+            gap: 1.25rem;
+            align-items: end;
+            background: linear-gradient(135deg, #f8fafb 0%, #f0f3f8 100%);
+            border: 1.5px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .filter-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-field label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .filter-input,
+        .filter-select {
+            padding: 0.75rem 1rem;
+            border: 1.5px solid #d4dce6;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: var(--text);
+            background: white;
+            transition: all 0.2s ease;
+            height: 2.6rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .filter-input:hover,
+        .filter-select:hover {
+            border-color: var(--secondary);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .filter-input:focus,
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(var(--secondary-rgb), 0.1), 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .filter-actions {
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .filter-actions .btn {
+            height: 2.6rem;
+            white-space: nowrap;
+            font-weight: 600;
+            border-radius: 10px;
+        }
+
+        .filter-results-summary {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .faculty-total-badge {
+            background: var(--secondary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .filter-tab {
+            padding: 0.8rem 2rem;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .filter-tab:hover,
+        .filter-tab.active {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .faculty-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+        }
+
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 3rem;
+        }
+
+        .faculty-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            border: 1px solid var(--border);
+        }
+
+        .faculty-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .faculty-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faculty-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
+        }
+
+        .faculty-info {
+            padding: 2.5rem;
+        }
+
+        .faculty-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .faculty-title {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .faculty-department {
+            color: var(--text);
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .faculty-education {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 10px;
+        }
+
+        .faculty-education h4,
+        .research-interests h4,
+        .publications-highlight h4 {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .faculty-education p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 0.3rem;
+        }
+
+        .research-interests {
+            margin-bottom: 1.5rem;
+        }
+
+        .research-interests p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        .research-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            padding: 0.4rem 1rem;
+            background: var(--light);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--primary);
+            border: 1px solid var(--border);
+        }
+
+        .faculty-contact {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+        }
+
+        .publications-highlight {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .publications-highlight p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        .faculty-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .badge-year {
+            display: inline-block;
+            padding: 0.3rem 0.9rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-program {
+            display: inline-block;
+            padding: 0.3rem 0.9rem;
+            background: var(--secondary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-designation {
+            display: inline-block;
+            padding: 0.3rem 0.9rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .empty-message {
+            text-align: center;
+            font-size: 1.05rem;
+            color: var(--text);
+            padding: 2rem 1rem;
+        }
+
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .page-btn {
+            min-width: 2.6rem;
+            padding: 0.6rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            background: white;
+            color: var(--text);
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .page-btn:hover:not(:disabled) {
+            border-color: var(--secondary);
+            color: var(--secondary);
+        }
+
+        .page-btn.page-active {
+            background: var(--secondary);
+            border-color: var(--secondary);
+            color: white;
+        }
+
+        .page-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        .page-ellipsis {
+            padding: 0 0.2rem;
+            color: var(--text);
+            opacity: 0.5;
+            font-weight: 600;
+            line-height: 2.6rem;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .faculty-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-tabs {
+                flex-direction: column;
+            }
+
+            .filter-tab {
+                text-align: center;
+            }
+
+            .filter-toolbar {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1.25rem 1rem;
+            }
+
+            .filter-actions {
+                justify-content: flex-end;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../styles/site-polish.css?v=1">
+    <link rel="stylesheet" href="../styles/hero-system.css?v=1">
+    <link rel="stylesheet" href="../styles/nav.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="./" class="logo">RCMI <span>@ Morgan</span></a>
+            <ul id="menu">
+                <li><a href="./">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faculty.html" aria-current="page">Faculty</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="opportunities.html">Opportunities</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <div class="core-switcher">
+        <div class="core-switcher-inner">
+            <a href="../" class="core-switch-home">&larr; RCMI @ Morgan</a>
+            <div class="core-switch-pills">
+                <a href="./" class="core-pill active">&#127891; IDC</a>
+                <a href="../cec/" class="core-pill">&#129309; CEC</a>
+                <a href="../ric/" class="core-pill">&#128300; RIC</a>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="page-header page-hero">
+        <h1 id="page-title">Faculty & Researchers</h1>
+        <p id="page-description">Meet our distinguished team of scientists dedicated to advancing health disparities research</p>
+    </section>
+
+    <section class="filter-section">
+        <div id="filter-tabs" class="filter-tabs"></div>
+
+        <div class="filter-toolbar" aria-label="Faculty filters">
+            <div class="filter-field">
+                <label for="faculty-search">Search</label>
+                <input id="faculty-search" class="filter-input" type="search" placeholder="Search by name, department, or research interests">
+            </div>
+            <div class="filter-field">
+                <label for="dept-filter">Department</label>
+                <select id="dept-filter" class="filter-select">
+                    <option value="">All Departments</option>
+                </select>
+            </div>
+            <div class="filter-field">
+                <label for="year-filter-fac">Funded Year</label>
+                <select id="year-filter-fac" class="filter-select">
+                    <option value="">All Years</option>
+                </select>
+            </div>
+            <div class="filter-field">
+                <label for="program-filter-fac">Program</label>
+                <select id="program-filter-fac" class="filter-select">
+                    <option value="">All Programs</option>
+                </select>
+            </div>
+            <div class="filter-actions">
+                <button id="clear-faculty-filters" type="button" class="btn btn-secondary">Clear Filters</button>
+            </div>
+        </div>
+
+        <div id="faculty-summary" class="filter-results-summary"></div>
+    </section>
+
+    <section class="faculty-container">
+        <div id="faculty-grid" class="faculty-grid"></div>
+        <p id="faculty-empty" class="empty-message" hidden>No faculty match the selected filters.</p>
+        <div id="pagination-controls" class="pagination"></div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>RCMI IDC</h4>
+                <p>Center for Urban Health Disparities Research and Innovation</p>
+                <p>Morgan State University</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="about.html">About RCMI & IDC</a>
+                <a href="faculty.html">Faculty & Staff</a>
+                <a href="research.html">Research Projects</a>
+                <a href="publications.html">Publications</a>
+                <a href="events.html">Events & Workshops</a>
+                <a href="opportunities.html">Opportunities</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Portage Avenue Campus, Room 113</p>
+                <p>1700 E Cold Spring Lane</p>
+                <p>Baltimore, MD 21251</p>
+                <p>Phone: 443-885-4534</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="mailto:diane.hughes@morgan.edu">Email Us</a>
+                <a href="https://www.morgan.edu/rcmi">RCMI Program</a>
+                <a href="opportunities.html">Apply for Funding</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year">2024</span> Morgan State University RCMI IDC. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        window.rcmiSiteConfig = {
+            dataBasePath: "../data"
+        };
+    </script>
+    <script src="../js/FIELD_MAP.js?v=1"></script>
+    <script src="../js/common.js?v=1"></script>
+    <script>
+        (() => {
+            const helpers = window.rcmiSandboxHelpers;
+
+            if (!helpers || typeof helpers.loadDataset !== "function") {
+                throw new Error("Shared CSV helper API is unavailable.");
+            }
+
+            const PAGE_SIZE = 6;
+
+            const state = {
+                selectedFilter: "RCMI IDC leadership",
+                faculty: [],
+                filters: [],
+                currentPage: 1,
+                search: "",
+                dept: "",
+                program: "",
+                year: "",
+            };
+
+            const dom = {
+                search:  document.getElementById("faculty-search"),
+                dept:    document.getElementById("dept-filter"),
+                program: document.getElementById("program-filter-fac"),
+                year:    document.getElementById("year-filter-fac"),
+                clear:   document.getElementById("clear-faculty-filters"),
+                summary: document.getElementById("faculty-summary"),
+            };
+
+            function populateSelect(selectEl, options, defaultLabel) {
+                const current = selectEl.value;
+                selectEl.innerHTML = `<option value="">${defaultLabel}</option>` +
+                    options.map((o) => `<option value="${o}">${o}</option>`).join("");
+                if (options.includes(current)) selectEl.value = current;
+            }
+
+            function getVisibleFaculty() {
+                const active = helpers.activeSorted(state.faculty);
+
+                // Category tab filter
+                let filtered = state.selectedFilter === "All Faculty"
+                    ? active
+                    : active.filter((p) => p.category === state.selectedFilter);
+
+                // Text search
+                if (state.search) {
+                    const q = state.search.toLowerCase();
+                    filtered = filtered.filter((p) =>
+                        (p.name || "").toLowerCase().includes(q) ||
+                        (p.department || "").toLowerCase().includes(q) ||
+                        (p.summaryText || "").toLowerCase().includes(q) ||
+                        (p.tags || []).some((t) => t.toLowerCase().includes(q))
+                    );
+                }
+
+                // Department dropdown
+                if (state.dept) {
+                    filtered = filtered.filter((p) => p.department === state.dept);
+                }
+
+                // Program dropdown
+                if (state.program) {
+                    filtered = filtered.filter((p) =>
+                        (p.programType || "").split(",").map((s) => s.trim()).includes(state.program)
+                    );
+                }
+
+                // Funded year dropdown
+                if (state.year) {
+                    filtered = filtered.filter((p) => p.yearFunded == state.year);
+                }
+
+                // Sort: Pilot Faculty by year funded, others by sortOrder
+                if (state.selectedFilter === "IDC Pilot Faculties") {
+                    return filtered.slice().sort((a, b) => {
+                        if (a.yearFunded !== b.yearFunded) {
+                            return (a.yearFunded || 9999) - (b.yearFunded || 9999);
+                        }
+                        return (a.name || "").localeCompare(b.name || "");
+                    });
+                }
+                return filtered;
+            }
+
+            function updateSummary(count) {
+                const badge = `<span class="faculty-total-badge">${count} ${count === 1 ? "faculty" : "faculty"}</span>`;
+                const label = count === state.faculty.length ? "total" : "matching filters";
+                dom.summary.innerHTML = badge + `<span>${label}</span>`;
+            }
+
+            function refreshDropdowns() {
+                const active = helpers.activeSorted(state.faculty);
+                const inCategory = active.filter((p) => p.category === state.selectedFilter);
+                const isPilotFaculty = state.selectedFilter === "IDC Pilot Faculties";
+
+                // Hide entire filter toolbar if not Pilot Faculty
+                document.querySelector(".filter-toolbar").style.display = isPilotFaculty ? "" : "none";
+
+                if (isPilotFaculty) {
+                    const depts = [...new Set(inCategory.map((p) => p.department).filter(Boolean))].sort();
+                    const years = [...new Set(inCategory.map((p) => p.yearFunded).filter(Boolean))].sort((a, b) => b - a);
+                    const programs = [...new Set(
+                        inCategory.flatMap((p) => (p.programType || "").split(",").map((s) => s.trim()).filter(Boolean))
+                    )].sort();
+
+                    populateSelect(dom.dept,    depts,    "All Departments");
+                    populateSelect(dom.year,    years,    "All Years");
+                    populateSelect(dom.program, programs, "All Programs");
+                }
+            }
+
+            function renderFilters() {
+                const container = document.getElementById("filter-tabs");
+                container.innerHTML = state.filters.map((label) => {
+                    const className = label === state.selectedFilter ? "filter-tab active" : "filter-tab";
+                    return `<button type="button" class="${className}" data-filter="${label}">${label}</button>`;
+                }).join("");
+
+                Array.from(container.querySelectorAll(".filter-tab")).forEach((button) => {
+                    button.addEventListener("click", () => {
+                        state.selectedFilter = button.dataset.filter;
+                        state.dept    = "";
+                        state.year    = "";
+                        state.program = "";
+                        dom.dept.value    = "";
+                        dom.year.value    = "";
+                        dom.program.value = "";
+                        state.currentPage = 1;
+                        renderFilters();
+                        refreshDropdowns();
+                        renderFacultyCards();
+                    });
+                });
+            }
+
+            function renderEducation(person) {
+                if (!person.education.length) {
+                    return "";
+                }
+
+                return `
+                    <div class="faculty-education">
+                        <h4>Education</h4>
+                        ${person.education.map((item) => `<p>${item}</p>`).join("")}
+                    </div>
+                `;
+            }
+
+            function renderHighlight(person) {
+                if (!person.highlightHeading || !person.highlightText) {
+                    return "";
+                }
+
+                const isPublication = /publication/i.test(person.highlightHeading);
+                const text = isPublication ? `<cite>${person.highlightText}</cite>` : person.highlightText;
+
+                return `
+                    <div class="publications-highlight">
+                        <h4>${person.highlightHeading}</h4>
+                        <p>${text}</p>
+                    </div>
+                `;
+            }
+
+            function renderContact(person) {
+                const details = [
+                    person.office ? `Office: ${person.office}` : "",
+                    person.phone ? `Phone: ${person.phone}` : ""
+                ].filter(Boolean).join(" | ");
+
+                return `
+                    <div class="faculty-contact">
+                        <a href="mailto:${person.email}" class="contact-link">${person.email}</a>
+                        ${details ? `<p style="margin-top: 0.5rem; font-size: 0.9rem;">${details}</p>` : ""}
+                    </div>
+                `;
+            }
+
+            function renderFacultyImage(person) {
+                if (person.imagePath) {
+                    return `
+                        <div class="faculty-image">
+                            <img src="${person.imagePath}" alt="${person.imageAltText}" style="width:100%;height:100%;object-fit:contain;object-position:center;">
+                        </div>`;
+                }
+                // Extract initials from name, skipping titles like Dr., Prof., etc.
+                let name = (person.name || "").trim();
+                name = name.replace(/^(Dr\.|Prof\.|Mr\.|Ms\.|Mrs\.|Dr|Prof)\s+/i, "");
+                const nameParts = name.split(/\s+/).filter(Boolean);
+                const initials = nameParts.length >= 2
+                    ? (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase()
+                    : (nameParts[0] || "?").substring(0, 2).toUpperCase();
+                return `<div class="faculty-image" style="font-size: 3.5rem; font-weight: 700; letter-spacing: 0.1em;">${initials}</div>`;
+            }
+
+            function renderBadges(person) {
+                const designationBadge = person.designation ? `<span class="badge-designation">${person.designation}</span>` : "";
+                const isPilotFaculty = person.category === "IDC Pilot Faculties";
+                const yearBadge = (isPilotFaculty && person.yearFunded) ? `<span class="badge-year">Funded ${person.yearFunded}</span>` : "";
+                const programBadges = (isPilotFaculty && person.programType)
+                    ? person.programType.split(",").map((p) => `<span class="badge-program">${p.trim()}</span>`).join("")
+                    : "";
+                if (!designationBadge && !yearBadge && !programBadges) {
+                    return "";
+                }
+                return `<div class="faculty-badges">${designationBadge}${yearBadge}${programBadges}</div>`;
+            }
+
+            function renderFacultyCard(person) {
+                return `
+                    <div class="faculty-card">
+                        ${renderFacultyImage(person)}
+                        <div class="faculty-info">
+                            ${renderBadges(person)}
+                            <h3><a href="faculty-profile.html#${encodeURIComponent(person.id)}" style="color: inherit; text-decoration: none;">${person.name}</a></h3>
+                            <div class="faculty-title">${person.title}</div>
+                            <div class="faculty-department">${person.department}</div>
+                            ${renderEducation(person)}
+                            <div class="research-interests">
+                                <h4>${person.summaryLabel || "Research Interests"}</h4>
+                                <p>${person.summaryText}</p>
+                            </div>
+                            ${person.tags.length ? `<div class="research-tags">${person.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}</div>` : ""}
+                            ${renderHighlight(person)}
+                            <p style="margin-top: 1rem;"><a href="faculty-profile.html#${encodeURIComponent(person.id)}" class="contact-link">View Full Profile &rarr;</a></p>
+                            ${renderContact(person)}
+                        </div>
+                    </div>
+                `;
+            }
+
+            function buildPageNumbers(current, total) {
+                if (total <= 7) {
+                    return Array.from({ length: total }, (_, i) => i + 1);
+                }
+                const pages = [1];
+                if (current > 3) pages.push("…");
+                for (let i = Math.max(2, current - 1); i <= Math.min(total - 1, current + 1); i++) {
+                    pages.push(i);
+                }
+                if (current < total - 2) pages.push("…");
+                pages.push(total);
+                return pages;
+            }
+
+            function renderPagination(totalItems, totalPages) {
+                const container = document.getElementById("pagination-controls");
+                if (!container) return;
+                if (totalPages <= 1) { container.innerHTML = ""; return; }
+
+                const current = state.currentPage;
+                const pageNums = buildPageNumbers(current, totalPages).map((p) => {
+                    if (p === "…") return `<span class="page-ellipsis">…</span>`;
+                    const cls = p === current ? " page-active" : "";
+                    return `<button type="button" class="page-btn${cls}" data-page="${p}">${p}</button>`;
+                }).join("");
+
+                container.innerHTML = `
+                    <button type="button" class="page-btn" data-page="${current - 1}" ${current === 1 ? "disabled" : ""}>← Prev</button>
+                    ${pageNums}
+                    <button type="button" class="page-btn" data-page="${current + 1}" ${current === totalPages ? "disabled" : ""}>Next →</button>
+                `;
+
+                container.querySelectorAll(".page-btn[data-page]").forEach((btn) => {
+                    btn.addEventListener("click", () => {
+                        const page = Number(btn.dataset.page);
+                        if (page >= 1 && page <= totalPages) {
+                            state.currentPage = page;
+                            renderFacultyCards();
+                            document.querySelector(".faculty-container").scrollIntoView({ behavior: "smooth" });
+                        }
+                    });
+                });
+            }
+
+            function renderFacultyCards() {
+                const visible = getVisibleFaculty();
+                const totalPages = Math.max(1, Math.ceil(visible.length / PAGE_SIZE));
+                state.currentPage = Math.min(state.currentPage, totalPages);
+                const start = (state.currentPage - 1) * PAGE_SIZE;
+                const page = visible.slice(start, start + PAGE_SIZE);
+
+                document.getElementById("faculty-grid").innerHTML = page.map(renderFacultyCard).join("");
+                document.getElementById("faculty-empty").hidden = visible.length !== 0;
+                updateSummary(visible.length);
+                renderPagination(visible.length, totalPages);
+            }
+
+            async function init() {
+                const rows = await helpers.loadDataset("faculty");
+                state.faculty = helpers.transformFacultyRecords(rows);
+                state.filters = window.workbookContract.lookups.facultyCategories || [];
+
+                const page = window.workbookContract.pages.faculty;
+                document.getElementById("page-title").textContent = page.title;
+                document.getElementById("page-description").textContent = page.description;
+                document.getElementById("current-year").textContent = new Date().getFullYear();
+
+                refreshDropdowns();
+                renderFilters();
+                renderFacultyCards();
+
+                dom.search.addEventListener("input", () => {
+                    state.search = dom.search.value;
+                    state.currentPage = 1;
+                    renderFacultyCards();
+                });
+
+                dom.dept.addEventListener("change", () => {
+                    state.dept = dom.dept.value;
+                    state.currentPage = 1;
+                    renderFacultyCards();
+                });
+
+                dom.year.addEventListener("change", () => {
+                    state.year = dom.year.value;
+                    state.currentPage = 1;
+                    renderFacultyCards();
+                });
+
+                dom.program.addEventListener("change", () => {
+                    state.program = dom.program.value;
+                    state.currentPage = 1;
+                    renderFacultyCards();
+                });
+
+                dom.clear.addEventListener("click", () => {
+                    state.search  = "";
+                    state.dept    = "";
+                    state.year    = "";
+                    state.program = "";
+                    dom.search.value  = "";
+                    dom.dept.value    = "";
+                    dom.year.value    = "";
+                    dom.program.value = "";
+                    state.currentPage = 1;
+                    renderFacultyCards();
+                });
+            }
+
+            init().catch((error) => {
+                document.getElementById("faculty-grid").innerHTML = `<p class="empty-message">Failed to load faculty data: ${error.message}</p>`;
+                document.getElementById("current-year").textContent = new Date().getFullYear();
+            });
+        })();
+    </script>
+    <script src="../js/nav.js"></script>
+</body>
+</html>

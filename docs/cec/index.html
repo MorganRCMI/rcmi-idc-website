@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Engagement Core - RCMI @ Morgan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #FF6B35;
+            --accent: #F7931E;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #2c3e50;
+            --border: #e0e6ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s ease;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .logo:hover {
+            opacity: 0.9;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: clamp(1rem, 2vw, 2rem);
+        }
+
+        nav li {
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover,
+        nav a[aria-current="page"] {
+            color: var(--secondary);
+        }
+
+        nav a:hover::after,
+        nav a[aria-current="page"]::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 60vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            perspective: 1200px;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+            position: relative;
+            z-index: 1;
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease-out;
+            will-change: transform;
+            animation: fadeInUp 1s ease 0.3s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content .tagline,
+        .hero-content h1,
+        .hero-content .subtitle {
+            transform: translateZ(0);
+            transition: transform 0.2s ease-out;
+        }
+
+        .hero-content .tagline {
+            transform: translateZ(25px);
+        }
+
+        .hero-content h1 {
+            transform: translateZ(55px);
+        }
+
+        .hero-content .subtitle {
+            transform: translateZ(15px);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-content,
+            .hero-content .tagline,
+            .hero-content h1,
+            .hero-content .subtitle {
+                transform: none !important;
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.75rem;
+            color: white;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            font-weight: 300;
+        }
+
+        .morgan-cares {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 5rem 5%;
+        }
+
+        .morgan-cares h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .morgan-cares h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 2.5rem 0 1rem;
+            font-weight: 700;
+        }
+
+        .morgan-cares p {
+            font-size: 1.05rem;
+            color: var(--text);
+            line-height: 1.85;
+            margin-bottom: 1rem;
+        }
+
+        .morgan-cares ul {
+            margin: 0 0 1.5rem 1.25rem;
+            padding: 0;
+        }
+
+        .morgan-cares ul li {
+            font-size: 1.05rem;
+            color: var(--text);
+            line-height: 1.85;
+        }
+
+        .info-card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .info-card {
+            display: block;
+            background: linear-gradient(135deg, var(--primary), #004d99);
+            border: 1px solid transparent;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-decoration: none !important;
+            box-shadow: 0 8px 24px rgba(0, 51, 102, 0.18);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px rgba(0, 51, 102, 0.14);
+            border-color: transparent;
+        }
+
+        .info-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .info-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white !important;
+            margin-bottom: 0.4rem;
+        }
+
+        .info-card p {
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.9);
+            opacity: 1;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 700px) {
+            .info-card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .info-card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .now-accepting {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white;
+            font-weight: 800;
+            font-size: 0.85rem;
+            letter-spacing: 0.04em;
+            padding: 0.5rem 1.1rem;
+            border-radius: 999px;
+            margin-bottom: 1rem;
+        }
+
+        .award-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin: 1.5rem 0 2rem;
+        }
+
+        .award-box {
+            display: block;
+            background: linear-gradient(135deg, var(--primary), #004d99);
+            border: 1px solid transparent;
+            border-radius: 16px;
+            padding: 1.75rem;
+            text-decoration: none !important;
+            box-shadow: 0 8px 24px rgba(0, 51, 102, 0.18);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        a.award-box:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 36px rgba(0, 51, 102, 0.3);
+        }
+
+        .award-box h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white !important;
+            margin-bottom: 0.6rem;
+        }
+
+        .award-box p {
+            font-size: 0.92rem;
+            color: rgba(255, 255, 255, 0.9);
+            opacity: 1;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .award-box .award-link {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        @media (max-width: 600px) {
+            .award-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .morgan-cares a {
+            color: var(--secondary);
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .morgan-cares a:hover {
+            color: var(--accent);
+        }
+
+        .model-wheel {
+            display: block;
+            width: 100%;
+            max-width: 380px;
+            margin: 2rem auto;
+        }
+
+        .cares-stages {
+            list-style: none;
+            margin: 1.5rem 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .cares-stages li {
+            flex: 0 1 210px;
+            background: linear-gradient(135deg, var(--primary), #004d99);
+            border: 1px solid transparent;
+            border-radius: 16px;
+            padding: 1.5rem 1.25rem;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0, 51, 102, 0.18);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .cares-stages li:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px rgba(0, 51, 102, 0.14);
+        }
+
+        .cares-stages .stage-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            margin: 0 auto 0.9rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cares-stages .stage-text {
+            line-height: 1.65;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.92rem;
+        }
+
+        .cares-stages li strong {
+            display: block;
+            color: white;
+            font-size: 1.05rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .video-embed {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin: 2rem 0;
+        }
+
+        .video-embed iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        .lead-strip {
+            max-width: 700px;
+            margin: 2rem 0 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 0.75rem;
+        }
+
+        .lead-pill {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 0.5rem 1.1rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+        }
+
+        .morgan-cares > * {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .morgan-cares > *.reveal-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .morgan-cares > * {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../styles/site-polish.css?v=1">
+    <link rel="stylesheet" href="../styles/hero-system.css?v=1">
+    <link rel="stylesheet" href="../styles/nav.css?v=2">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../" class="logo">RCMI <span>@ Morgan</span></a>
+            <ul id="menu">
+                <li><a href="./" aria-current="page">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="partnering.html">Partnering</a></li>
+                <li><a href="seed-funding.html">Seed Funding</a></li>
+                <li><a href="training.html">Training</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <div class="core-switcher">
+        <div class="core-switcher-inner">
+            <a href="../" class="core-switch-home">&larr; RCMI @ Morgan</a>
+            <div class="core-switch-pills">
+                <a href="../idc/" class="core-pill"><img src="../img/icons/idc-glasses-book.svg" alt="" width="16" height="16" class="core-pill-icon"> IDC</a>
+                <a href="./" class="core-pill active"><img src="../img/icons/community-cec.png" alt="" width="16" height="16" class="core-pill-icon"> CEC</a>
+                <a href="../ric/" class="core-pill">&#128300; RIC</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="hero hero-home">
+        <div class="hero-content">
+            <div class="tagline">Morgan State University</div>
+            <h1>Community<br>Engagement Core</h1>
+            <p class="subtitle">Connecting RCMI@Morgan's research to the communities it serves through outreach, partnership, and a Program Manager Steering Committee.</p>
+        </div>
+    </section>
+
+    <section class="morgan-cares">
+        <h2>Morgan CARES</h2>
+
+        <div class="video-embed">
+            <iframe
+                src="https://www.youtube.com/embed/B0naah83608"
+                title="Morgan CARES Introduction Video"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <p>Health inequalities exist across Baltimore City and disproportionately affect minority communities. One-sided approaches designed to address these challenges are often ineffective, and Morgan CARES is about community power and input. We invite you to join our network of diverse and innovative stakeholders, to work together on issues that directly impact our communities. By joining, you have the opportunity to access mentorship, technical assistance, capacity-building opportunities, and seed funding.</p>
+
+        <h3>The Morgan CARES Model</h3>
+        <p>The Morgan CARES Model has been designed as a framework for conducting Community-based Participatory Research (CBPR). It provides a structure for developing a well-aligned community engagement and partnership approach. This model follows a multi-stage process. It is a measurable tool to track achievements and to assess long-standing CBPR partnership success for any given project.</p>
+
+        <img class="model-wheel" src="../img/icons/morgan-cares-model-wheel.png" alt="The Morgan CARES Model: a five-stage cycle of Connection, Partnership Development, Innovation, Collaborative Action, and Outcome/Impact, surrounded by Communication, Peer &amp; Mentoring Support, and Monitoring &amp; Evaluation.">
+
+        <h3>Five Stages of The CARES Model</h3>
+
+        <ol class="cares-stages">
+            <li>
+                <div class="stage-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                    </svg>
+                </div>
+                <span class="stage-text"><strong>Connection</strong>Members gain foundational knowledge and skills, and enhance their interest in community research.</span>
+            </li>
+            <li>
+                <div class="stage-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+                <span class="stage-text"><strong>Partnership Development</strong>Occurs when members commit to increasing their engagement from "Membership" to "Partnership". At this time members connect with others who have complementary skills and interests, and engage in training, discussions, and networking opportunities together.</span>
+            </li>
+            <li>
+                <div class="stage-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                        <path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2.3h6c0-1.1.4-1.8 1-2.3A7 7 0 0 0 12 2z"></path>
+                    </svg>
+                </div>
+                <span class="stage-text"><strong>Innovation</strong>Once partners have formalized their commitment to work together, they collaboratively design a research project and secure funding with support from the Morgan CARES team.</span>
+            </li>
+            <li>
+                <div class="stage-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 15l6 -6l3 2"></path>
+                        <path d="M22 15l-6 -6l-3 2"></path>
+                        <rect x="9.5" y="9" width="5" height="4" rx="2"></rect>
+                    </svg>
+                </div>
+                <span class="stage-text"><strong>Collaborative Action</strong>At this stage, funding (or other resources) has been secured, and partnerships have initiated project activities. Partners have access to our Community Center to support project activities and logistical support to further sustain their collaborative activities.</span>
+            </li>
+            <li>
+                <div class="stage-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22v-7"></path>
+                        <path d="M9 22h6"></path>
+                        <path d="M8 15c0 -2 1.5 -3 4 -3s4 1 4 3"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                        <path d="M8 7h8"></path>
+                        <path d="M12 3c-1.5 1.5 -1.5 5.5 0 8"></path>
+                        <path d="M12 3c1.5 1.5 1.5 5.5 0 8"></path>
+                        <path d="M12 0.3v1.2"></path>
+                        <path d="M17.6 2.4l-0.85 0.85"></path>
+                        <path d="M20.5 7h-1.2"></path>
+                        <path d="M17.6 11.6l-0.85 -0.85"></path>
+                        <path d="M6.4 2.4l0.85 0.85"></path>
+                    </svg>
+                </div>
+                <span class="stage-text"><strong>Outcome and Impact</strong>Partnerships now share the results of their efforts to various stakeholders. They receive additional support to help sustain projects/partnerships for long-term health promotion and impact on health practice or policy.</span>
+            </li>
+        </ol>
+
+        <p>Read more about our model <a href="https://www.mdpi.com/1660-4601/19/19/12467" target="_blank" rel="noopener">here</a>.</p>
+
+        <h3>Who We Are</h3>
+        <p>Morgan CARES is a hub for community and academic leaders to connect and form long-lasting partnerships. We foster strong community-campus relationships, producing collaborative projects that promote health parity. Morgan CARES focuses on integrating community needs and perspectives into all stages of research. By working together to increase understanding and awareness of health disparities, the knowledge gained will lead to solutions that positively benefit community residents. This process is what drives our work, and it is known as Community-Based Participatory Research (CBPR).</p>
+
+        <h3>Network Membership</h3>
+        <p>Members are affiliated with the Morgan CARES Network and participate in an exchange of resources and information. They receive regular communications about training, funding opportunities, and events. To sign up, submit the <a href="https://morgan-cares.smartmatchapp.com/client/submissionform/18/default/" target="_blank" rel="noopener">Network Registration Form</a>.</p>
+
+        <h3>Partnership</h3>
+        <p>Are you an existing member of the network who wants to take your engagement to the next level? Consider becoming a Partner! Partnership means that you are committed to community-engaged health initiatives. A primary goal of the work of Morgan CARES is to facilitate new connections and support community-campus partnerships that promote health in Baltimore City. To accomplish this, we are launching a new program called <a href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">PartnerLink</a>!</p>
+        <p>After submitting the Network Registration Form, individuals who opt-in will create a profile and share information such as their affiliation, title/position, bio, headshot, and preferences for a new partner. The profiles will be viewable on the <a href="partnering.html">Partnering with Morgan CARES</a> page so that potential collaborators can find one another. With matching software, the Morgan CARES team can use the profile information provided to introduce individuals with complementary skills and interests.</p>
+
+        <h3>&ldquo;Happy to Help You&rdquo; Hours</h3>
+        <p>We host &ldquo;Happy to Help You&rdquo; Hours twice weekly, on Mondays 3:00&ndash;4:00pm and Thursdays 9:30&ndash;10:30am. You can <a href="https://calendly.com/emma-mitchell-morgan/morgan-cares-happy-to-help-hour?month=2025-10" target="_blank" rel="noopener">schedule a 20-minute session</a> if you would like to workshop a project idea, discuss Seed Funding application requirements, or think together about potential partners that would be a good fit.</p>
+
+        <h3>The Morgan CARES Seed Funding Program</h3>
+        <span class="now-accepting">NOW ACCEPTING APPLICATIONS!</span>
+        <p>The Morgan CARES Seed Funding Program includes two different funding opportunities:</p>
+
+        <div class="award-grid">
+            <a class="award-box" href="seed-funding.html#community-award">
+                <h4>Community Award</h4>
+                <p>Intended to support community-campus collaborations. The goal is to strengthen partnerships between community-based organizations or groups, and members of academia at Morgan State University.</p>
+                <span class="award-link">Learn more &rarr;</span>
+            </a>
+            <a class="award-box" href="seed-funding.html">
+                <h4>Practitioner Research Award</h4>
+                <p>Intended to support collaborative teams exploring a practice-related challenge (such as patient access to an existing service or cost-effectiveness of a program) and devising/testing a solution.</p>
+                <span class="award-link">Learn more &rarr;</span>
+            </a>
+        </div>
+
+        <p>It is the hope that these awards facilitate the emergence of responsive, community-led public health initiatives that promote health equity across Baltimore City communities. New partners may engage in supportive activities and training for as long as they wish to forge a strong partnership before submitting an application. Partners who have existing collaborations may also apply.</p>
+        <p>Applications are accepted on a rolling basis and are reviewed quarterly. See our <a href="seed-funding.html">Seed Funding Program</a> page for program descriptions, eligibility criteria, and more details.</p>
+
+        <h3>The Morgan CARES Community Center</h3>
+        <p>The Morgan CARES Community Center is housed at the <a href="https://www.hoen.co/" target="_blank" rel="noopener">Hoen &amp; Co.</a> Lithograph Campus located at 2101 E. Biddle Street, Stone Building, Suite 1204, Baltimore, Maryland 21213. Morgan CARES opened the doors of its Community Center in 2020 amid the COVID-19 pandemic, and since then it has been used by various Network members for meetings, training sessions, presentations, and so much more. We hosted over 200 sessions in the facility during the first two years of operation, and we have been able to collaborate with countless community and academic partners.</p>
+        <p>In addition to these programs and services, Morgan CARES also served as the Central Office for the <a href="http://www.icphr.org/" target="_blank" rel="noopener">International Collaboration for Participatory Health Research</a> until 2026. It currently houses the East Baltimore NAMI Metro Baltimore East Baltimore hub and is a site for <a href="https://www.hopewellcancersupport.org/" target="_blank" rel="noopener">HopeWell Cancer Support</a> programming.</p>
+        <p>Please feel free to send us an email to learn more about our facility. Members of the Network are eligible to reserve space in the Community Center to support community engaged programming and research activities. To request use of the space, complete the <a href="https://docs.google.com/forms/d/e/1FAIpQLScccTzHH8MT82HhtFsD1afnBunArEylGAi0JoTPFs7aWIN9KA/viewform" target="_blank" rel="noopener">Space Reservation Request Form</a>.</p>
+
+        <h3>Program Information</h3>
+        <p>Learn more about our work at Morgan CARES:</p>
+
+        <div class="info-card-grid">
+            <a class="info-card" href="about.html">
+                <div class="info-card-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+                <h4>About Us</h4>
+                <p>Learn about the Morgan CARES Steering Committee and team</p>
+            </a>
+
+            <a class="info-card" href="partnering.html">
+                <div class="info-card-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="8" cy="12" r="5"></circle>
+                        <circle cx="16" cy="12" r="5"></circle>
+                    </svg>
+                </div>
+                <h4>Partnering with Morgan CARES</h4>
+                <p>Discover the many ways you can collaborate with Morgan CARES, community members, and/or organizations</p>
+            </a>
+
+            <a class="info-card" href="seed-funding.html">
+                <div class="info-card-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="M12 7v10M15 9.5c0-1.4-1.34-2.5-3-2.5s-3 1.1-3 2.5 1.34 2.5 3 2.5 3 1.1 3 2.5-1.34 2.5-3 2.5-3-1.1-3-2.5"></path>
+                    </svg>
+                </div>
+                <h4>Seed Funding Programs</h4>
+                <p>Receive information about the Morgan CARES funding opportunities</p>
+            </a>
+
+            <a class="info-card" href="training.html">
+                <div class="info-card-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 10L12 5 2 10l10 5 10-5z"></path>
+                        <path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"></path>
+                    </svg>
+                </div>
+                <h4>Training</h4>
+                <p>Get involved with the many training opportunities hosted by Morgan CARES</p>
+            </a>
+
+            <a class="info-card" href="resources.html">
+                <div class="info-card-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 3v5h5"></path>
+                        <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <line x1="9" y1="13" x2="15" y2="13"></line>
+                        <line x1="9" y1="17" x2="15" y2="17"></line>
+                    </svg>
+                </div>
+                <h4>Other Resources</h4>
+                <p>Learn about existing resources for community and academic partners</p>
+            </a>
+
+            <a class="info-card" href="contact.html">
+                <div class="info-card-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                        <path d="M3 7l9 6 9-6"></path>
+                    </svg>
+                </div>
+                <h4>Contact Information</h4>
+                <p>Find the best ways to stay in touch with the Morgan CARES team</p>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>RCMI @ Morgan</h4>
+                <p>Center for Urban Health Disparities Research and Innovation</p>
+                <p>Morgan State University</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Our Cores</h4>
+                <a href="../idc/">Investigator Development Core</a>
+                <a href="./" aria-current="page">Community Engagement Core</a>
+                <a href="../ric/">Research Infrastructure Core</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Portage Avenue Campus, Room 113</p>
+                <p>1700 E Cold Spring Lane</p>
+                <p>Baltimore, MD 21251</p>
+                <p>Phone: 443-885-4534</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="mailto:diane.hughes@morgan.edu">Email Us</a>
+                <a href="https://www.morgan.edu/rcmi">RCMI Program</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year">2024</span> Morgan State University RCMI @ Morgan. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+            var revealTargets = document.querySelectorAll('.morgan-cares > *');
+            var revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    entry.target.classList.toggle('reveal-visible', entry.isIntersecting);
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+            revealTargets.forEach(function (el) { revealObserver.observe(el); });
+        } else {
+            document.querySelectorAll('.morgan-cares > *').forEach(function (el) {
+                el.classList.add('reveal-visible');
+            });
+        }
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            var heroEl = document.querySelector('.hero-home');
+            var heroContent = document.querySelector('.hero-home .hero-content');
+
+            if (heroEl && heroContent) {
+                var maxTilt = 7;
+
+                heroEl.addEventListener('mousemove', function (e) {
+                    var rect = heroEl.getBoundingClientRect();
+                    var x = (e.clientX - rect.left) / rect.width;
+                    var y = (e.clientY - rect.top) / rect.height;
+                    var rotateY = (x - 0.5) * (maxTilt * 2);
+                    var rotateX = (0.5 - y) * (maxTilt * 2);
+                    heroContent.style.transform = 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+                });
+
+                heroEl.addEventListener('mouseleave', function () {
+                    heroContent.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                });
+            }
+        }
+    </script>
+    <script src="../js/nav.js"></script>
+</body>
+</html>

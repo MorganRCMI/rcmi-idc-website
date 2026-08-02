@@ -160,10 +160,71 @@
             font-weight: 300;
         }
 
+        .hero-rotator {
+            position: relative;
+            height: 2.1rem;
+            margin-bottom: 1.75rem;
+            perspective: 600px;
+        }
+
+        .hero-rotator-word {
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -0.3px;
+            opacity: 0;
+            transform: rotateX(90deg);
+            transform-origin: center bottom;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .hero-rotator-word.is-active {
+            opacity: 1;
+            transform: rotateX(0deg);
+        }
+
+        .hero-rotator-word.is-exiting {
+            opacity: 0;
+            transform: rotateX(-90deg);
+            transform-origin: center top;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-rotator-word {
+                transition: opacity 0.3s ease;
+                transform: none !important;
+            }
+        }
+
         .cta-buttons {
             display: flex;
+            flex-direction: column;
             gap: 1.5rem;
-            flex-wrap: wrap;
+        }
+
+        .core-cta-row {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(max-content, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .core-cta-row .btn {
+            white-space: nowrap;
+            text-align: center;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        .structure-cta-row {
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            margin-top: 1rem;
         }
 
         .btn {
@@ -190,8 +251,8 @@
         }
 
         .btn-secondary {
-            background: transparent;
-            color: white;
+            background: white;
+            color: var(--primary);
             border: 2px solid white;
         }
 
@@ -199,6 +260,77 @@
             background: white;
             color: var(--primary);
             transform: translateY(-3px);
+        }
+
+        /* Brick-build title */
+        .brick-title .brick-char {
+            display: inline-grid;
+            line-height: 1.3;
+            padding-bottom: 0.15em;
+        }
+
+        .brick-title .brick-row {
+            grid-area: 1 / 1;
+            background-image: linear-gradient(160deg, #ffffff 0%, #ffcba3 45%, #FF6B35 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            clip-path: inset(var(--top) 0 var(--bottom) 0);
+            opacity: 0;
+            transform: translateY(-0.35em);
+            animation: brickDrop 0.4s cubic-bezier(0.3, 1.6, 0.5, 1) forwards;
+            animation-delay: calc(var(--i) * 0.3s + var(--r) * 0.11s + 0.2s);
+        }
+
+        .brick-title .brick-space {
+            display: inline-block;
+            width: 0.32em;
+        }
+
+        .brick-title .at-char {
+            display: inline-block;
+            color: var(--accent);
+            opacity: 0;
+            transform-origin: 50% 55%;
+            animation: atCurlIn 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation-delay: calc(var(--i) * 0.3s + 0.2s);
+        }
+
+        @keyframes brickDrop {
+            0% {
+                opacity: 0;
+                transform: translateY(-0.35em);
+            }
+            60% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes atCurlIn {
+            0% {
+                opacity: 0;
+                transform: rotate(-380deg) scale(0.15);
+            }
+            65% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 1;
+                transform: rotate(0deg) scale(1);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .brick-title .brick-row,
+            .brick-title .at-char {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
         }
 
         /* Overview */
@@ -343,10 +475,11 @@
 
         .core-card h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             color: var(--primary);
             margin-bottom: 0.5rem;
             font-weight: 700;
+            white-space: nowrap;
         }
 
         .core-card .core-leads {
@@ -355,6 +488,14 @@
             font-size: 0.88rem;
             margin-bottom: 0.9rem;
             line-height: 1.5;
+        }
+
+        .core-card .core-leads .role-text {
+            font-weight: 400;
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+            text-indent: 0;
         }
 
         .core-card p.core-desc {
@@ -459,14 +600,16 @@
         }
 
         .governance-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 2rem;
             margin-top: 3rem;
             text-align: left;
         }
 
         .gov-item {
+            flex: 0 0 340px;
             background: white;
             border: 1px solid var(--border);
             border-radius: 14px;
@@ -521,6 +664,7 @@
             font-size: 1.1rem;
             color: var(--primary);
             font-weight: 700;
+            white-space: nowrap;
         }
 
         /* Footer */
@@ -582,10 +726,14 @@
             nav ul {
                 display: none;
             }
+
+            .core-card h3 {
+                white-space: normal;
+            }
         }
     </style>
     <link rel="stylesheet" href="./styles/site-polish.css?v=1">
-    <link rel="stylesheet" href="./styles/hero-system.css?v=1">
+    <link rel="stylesheet" href="./styles/hero-system.css?v=2">
     <link rel="stylesheet" href="./styles/nav.css">
 </head>
 <body>
@@ -594,13 +742,9 @@
             <a href="index.html" class="logo">RCMI <span>@ Morgan</span></a>
             <ul id="menu">
                 <li><a href="index.html" aria-current="page">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="faculty.html">Faculty</a></li>
-                <li><a href="research.html">Research</a></li>
-                <li><a href="publications.html">Publications</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="opportunities.html">Opportunities</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="idc/">IDC</a></li>
+                <li><a href="cec/">CEC</a></li>
+                <li><a href="ric/">RIC</a></li>
             </ul>
             <button class="hamburger" id="hamburger">
                 <span></span>
@@ -613,11 +757,22 @@
     <section class="hero hero-home">
         <div class="hero-content">
             <div class="tagline">Morgan State University</div>
-            <h1>RCMI @ Morgan</h1>
+            <h1 class="brick-title" id="heroTitle">RCMI @ Morgan</h1>
+            <div class="hero-rotator" aria-live="polite">
+                <span class="hero-rotator-word is-active">One Center</span>
+                <span class="hero-rotator-word">Six Cores</span>
+                <span class="hero-rotator-word">One Centralized Leadership</span>
+            </div>
             <p class="subtitle">The Center for Urban Health Disparities Research and Innovation — an NIH/NIMHD-funded Research Center in Minority Institutions building the infrastructure, investigators, and community partnerships to advance health equity in Baltimore and beyond.</p>
             <div class="cta-buttons">
-                <a href="idc-home.html" class="btn btn-primary">Explore the Investigator Development Core &rarr;</a>
-                <a href="#structure" class="btn btn-secondary">See Our Center Structure</a>
+                <div class="core-cta-row">
+                    <a href="idc/" class="btn btn-primary">Explore the IDC Core &rarr;</a>
+                    <a href="cec/" class="btn btn-primary">Explore the CEC Core &rarr;</a>
+                    <a href="ric/" class="btn btn-primary">Explore the RIC Core &rarr;</a>
+                </div>
+                <div class="structure-cta-row">
+                    <a href="#structure" class="btn btn-secondary">See Our Center Structure</a>
+                </div>
             </div>
         </div>
     </section>
@@ -642,7 +797,7 @@
                         <span class="core-icon">🏛️</span>
                     </div>
                     <h3>Administrative Core</h3>
-                    <div class="core-leads">Dr. Paul B. Tchounwou, PI &middot; Dr. James Wachira, Executive Director</div>
+                    <div class="core-leads">Dr. Paul B. Tchounwou<br><span class="role-text">Principal Investigator</span><br>Dr. James Wachira<br><span class="role-text">Executive Director</span></div>
                     <p class="core-desc">Provides overall leadership and grant oversight for RCMI@Morgan. Senior/mid-career scientist: Dr. Samuel Campos.</p>
                 </div>
 
@@ -651,8 +806,9 @@
                         <span class="core-icon">🔬</span>
                     </div>
                     <h3>Research Infrastructure Core</h3>
-                    <div class="core-leads">Dr. James Wachira (Lead) &middot; Dr. YueJin Li (Co-Lead)</div>
+                    <div class="core-leads">Dr. James Wachira<br><span class="role-text">Lead</span><br>Dr. YueJin Li<br><span class="role-text">Co-Lead</span></div>
                     <p class="core-desc">Builds shared research capacity through the Molecular and Cell Biology Core, Biostatistics and Bioinformatics Core, and Animal Facility Core.</p>
+                    <a href="ric/" class="core-link">Visit the RIC site &rarr;</a>
                 </div>
 
                 <div class="core-card is-idc">
@@ -661,18 +817,19 @@
                         <span class="core-badge">You Are Here</span>
                     </div>
                     <h3>Investigator Development Core</h3>
-                    <div class="core-leads">Dr. Christine Hohmann (Lead) &middot; Dr. Shiva Mehravaran (Co-Lead)</div>
+                    <div class="core-leads">Dr. Christine Hohmann<br><span class="role-text">Lead</span><br>Dr. Shiva Mehravaran<br><span class="role-text">Co-Lead</span></div>
                     <p class="core-desc">Mentors and funds early-stage investigators through pilot grants, writing support, and community-building programs.</p>
-                    <a href="idc-home.html" class="core-link">Visit the IDC site &rarr;</a>
+                    <a href="idc/" class="core-link">Visit the IDC site &rarr;</a>
                 </div>
 
                 <div class="core-card">
                     <div class="core-card-top">
-                        <span class="core-icon">🤝</span>
+                        <span class="core-icon"><img src="img/icons/community-cec.png" alt="" width="26" height="26"></span>
                     </div>
                     <h3>Community Engagement Core</h3>
-                    <div class="core-leads">Dr. Payam Sheikhattari, PI &middot; Dr. Kimberly Warren, Lead</div>
+                    <div class="core-leads">Dr. Payam Sheikhattari<br><span class="role-text">Principal Investigator</span><br>Dr. Kimberly Warren<br><span class="role-text">Lead</span></div>
                     <p class="core-desc">Connects the Center's research to the communities it serves through outreach and a Program Manager Steering Committee.</p>
+                    <a href="cec/" class="core-link">Visit the CEC site &rarr;</a>
                 </div>
 
                 <div class="core-card">
@@ -694,7 +851,7 @@
                         <li><span><span class="project-num">1</span> Dr. Samendra Sherchan</span></li>
                         <li><span><span class="project-num">2</span> Dr. Ingrid Tulloch</span></li>
                         <li>
-                            <a href="faculty-profile.html#project_timothy_meeker">
+                            <a href="idc/faculty-profile.html#project_timothy_meeker">
                                 <span class="project-num">3</span> Dr. Timothy Meeker
                                 <span class="project-arrow">&rarr;</span>
                             </a>
@@ -734,7 +891,7 @@
                 <div class="gov-item">
                     <div class="gov-avatar"><img src="./img/faculty/governance_paul_tchounwou.jpg" alt="Dr. Paul B. Tchounwou"></div>
                     <div>
-                        <div class="gov-role">Dean, SCMNS &amp; PI</div>
+                        <div class="gov-role">Dean, SCMNS &amp; Principal Investigator</div>
                         <div class="gov-name">Dr. Paul B. Tchounwou</div>
                     </div>
                 </div>
@@ -765,13 +922,10 @@
             </div>
 
             <div class="footer-section">
-                <h4>Quick Links</h4>
-                <a href="about.html">About RCMI & IDC</a>
-                <a href="faculty.html">Faculty & Staff</a>
-                <a href="research.html">Research Projects</a>
-                <a href="publications.html">Publications</a>
-                <a href="events.html">Events & Workshops</a>
-                <a href="opportunities.html">Opportunities</a>
+                <h4>Our Cores</h4>
+                <a href="idc/">Investigator Development Core</a>
+                <a href="cec/">Community Engagement Core</a>
+                <a href="ric/">Research Infrastructure Core</a>
             </div>
 
             <div class="footer-section">
@@ -797,6 +951,69 @@
 
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        (function () {
+            var title = document.getElementById('heroTitle');
+            if (!title) return;
+            var text = title.textContent;
+            title.textContent = '';
+            var ROWS = 4;
+            var i = 0;
+            text.split('').forEach(function (ch) {
+                if (ch === ' ') {
+                    var space = document.createElement('span');
+                    space.className = 'brick-space';
+                    title.appendChild(space);
+                    return;
+                }
+                if (ch === '@') {
+                    var at = document.createElement('span');
+                    at.textContent = ch;
+                    at.className = 'at-char';
+                    at.style.setProperty('--i', i);
+                    title.appendChild(at);
+                    i++;
+                    return;
+                }
+                var wrap = document.createElement('span');
+                wrap.className = 'brick-char';
+                for (var r = 0; r < ROWS; r++) {
+                    var row = document.createElement('span');
+                    row.className = 'brick-row';
+                    row.textContent = ch;
+                    var bandHeight = 100 / ROWS;
+                    row.style.setProperty('--top', ((ROWS - 1 - r) * bandHeight) + '%');
+                    row.style.setProperty('--bottom', (r * bandHeight) + '%');
+                    row.style.setProperty('--i', i);
+                    row.style.setProperty('--r', r);
+                    wrap.appendChild(row);
+                }
+                title.appendChild(wrap);
+                i++;
+            });
+        })();
+
+        (function () {
+            var words = document.querySelectorAll('.hero-rotator-word');
+            if (words.length < 2) return;
+            var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var current = 0;
+
+            function advance() {
+                var next = (current + 1) % words.length;
+                words[current].classList.remove('is-active');
+                if (!reduced) {
+                    words[current].classList.add('is-exiting');
+                    setTimeout(function () {
+                        words[current].classList.remove('is-exiting');
+                    }, 500);
+                }
+                words[next].classList.add('is-active');
+                current = next;
+            }
+
+            setInterval(advance, 2500);
+        })();
     </script>
     <script src="./js/nav.js"></script>
 </body>

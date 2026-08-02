@@ -76,6 +76,13 @@
     transform: none;
 }
 
+.core-pill-icon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
 @media (max-width: 560px) {
     .core-switcher-inner {
         justify-content: center;
@@ -109,11 +116,14 @@ header {
 
 nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    gap: 3rem;
     padding: 1.2rem 5%;
-    max-width: 1400px;
-    margin: 0 auto;
+    max-width: none;
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 .logo {
@@ -147,6 +157,7 @@ nav a {
     font-weight: 500;
     font-size: 0.95rem;
     position: relative;
+    white-space: nowrap;
     transition: color 0.3s ease;
 }
 
@@ -180,6 +191,7 @@ nav a[aria-current="page"]::after {
     background: none;
     border: none;
     padding: 0;
+    margin-left: auto;
 }
 
 .hamburger span {

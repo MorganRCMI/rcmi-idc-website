@@ -107,9 +107,41 @@
             margin-top: 0;
             padding: 6rem 5% 4rem;
             background: linear-gradient(135deg, var(--primary) 0%, #004080 100%);
-            text-align: center;
+            text-align: left;
             position: relative;
             overflow: hidden;
+            perspective: 1200px;
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 1;
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease-out;
+            will-change: transform;
+        }
+
+        .page-hero-content h1,
+        .page-hero-content p {
+            transform: translateZ(0);
+            transition: transform 0.2s ease-out;
+        }
+
+        .page-hero-content h1 {
+            transform: translateZ(45px);
+        }
+
+        .page-hero-content p {
+            transform: translateZ(15px);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page-hero-content,
+            .page-hero-content h1,
+            .page-hero-content p {
+                transform: none !important;
+                transition: none !important;
+            }
         }
 
         .page-header::before {
@@ -139,7 +171,7 @@
             color: rgba(255, 255, 255, 0.9);
             font-size: 1.2rem;
             max-width: 700px;
-            margin: 0 auto;
+            margin: 0;
             position: relative;
             z-index: 1;
         }
@@ -516,12 +548,12 @@
         }
     </style>
     <link rel="stylesheet" href="../styles/hero-system.css?v=1">
-    <link rel="stylesheet" href="../styles/nav.css">
+    <link rel="stylesheet" href="../styles/nav.css?v=2">
 </head>
 <body>
     <header>
         <nav>
-            <a href="./" class="logo">RCMI <span>@ Morgan</span></a>
+            <a href="../" class="logo">RCMI <span>@ Morgan</span></a>
             <ul id="menu">
                 <li><a href="./">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -544,8 +576,8 @@
         <div class="core-switcher-inner">
             <a href="../" class="core-switch-home">&larr; RCMI @ Morgan</a>
             <div class="core-switch-pills">
-                <a href="./" class="core-pill active">&#127891; IDC</a>
-                <a href="../cec/" class="core-pill">&#129309; CEC</a>
+                <a href="./" class="core-pill active"><img src="../img/icons/idc-glasses-book.svg" alt="" width="16" height="16" class="core-pill-icon"> IDC</a>
+                <a href="../cec/" class="core-pill"><img src="../img/icons/community-cec.png" alt="" width="16" height="16" class="core-pill-icon"> CEC</a>
                 <a href="../ric/" class="core-pill">&#128300; RIC</a>
             </div>
         </div>
@@ -553,8 +585,10 @@
 
 
     <section class="page-header page-hero">
-        <h1>Get in Touch</h1>
-        <p>We're here to answer your questions and support your research journey</p>
+        <div class="page-hero-content">
+            <h1>Get in Touch</h1>
+            <p>We're here to answer your questions and support your research journey</p>
+        </div>
     </section>
 
     <section class="contact-container">
@@ -746,6 +780,28 @@
     </footer>
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            var pageHeroEl = document.querySelector('.page-header.page-hero');
+            var pageHeroContent = document.querySelector('.page-hero-content');
+
+            if (pageHeroEl && pageHeroContent) {
+                var maxTilt = 5;
+
+                pageHeroEl.addEventListener('mousemove', function (e) {
+                    var rect = pageHeroEl.getBoundingClientRect();
+                    var x = (e.clientX - rect.left) / rect.width;
+                    var y = (e.clientY - rect.top) / rect.height;
+                    var rotateY = (x - 0.5) * (maxTilt * 2);
+                    var rotateX = (0.5 - y) * (maxTilt * 2);
+                    pageHeroContent.style.transform = 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+                });
+
+                pageHeroEl.addEventListener('mouseleave', function () {
+                    pageHeroContent.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                });
+            }
+        }
     </script>
     <script src="../js/nav.js"></script>
 </body>

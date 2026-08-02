@@ -110,6 +110,14 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 10px 34px rgba(0, 51, 102, 0.18);
+            perspective: 1200px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .profile-hero-grid {
+                transform: none !important;
+                transition: none !important;
+            }
         }
 
         .profile-hero::before {
@@ -151,6 +159,8 @@
             grid-template-columns: 220px 1fr;
             gap: 2.5rem;
             align-items: center;
+            transition: transform 0.2s ease-out;
+            will-change: transform;
         }
 
         .profile-photo {
@@ -707,12 +717,12 @@
         }
     </style>
     <link rel="stylesheet" href="../styles/site-polish.css?v=1">
-    <link rel="stylesheet" href="../styles/nav.css">
+    <link rel="stylesheet" href="../styles/nav.css?v=2">
 </head>
 <body>
     <header>
         <nav>
-            <a href="./" class="logo">RCMI <span>@ Morgan</span></a>
+            <a href="../" class="logo">RCMI <span>@ Morgan</span></a>
             <ul id="menu">
                 <li><a href="./">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -735,8 +745,8 @@
         <div class="core-switcher-inner">
             <a href="../" class="core-switch-home">&larr; RCMI @ Morgan</a>
             <div class="core-switch-pills">
-                <a href="./" class="core-pill active">&#127891; IDC</a>
-                <a href="../cec/" class="core-pill">&#129309; CEC</a>
+                <a href="./" class="core-pill active"><img src="../img/icons/idc-glasses-book.svg" alt="" width="16" height="16" class="core-pill-icon"> IDC</a>
+                <a href="../cec/" class="core-pill"><img src="../img/icons/community-cec.png" alt="" width="16" height="16" class="core-pill-icon"> CEC</a>
                 <a href="../ric/" class="core-pill">&#128300; RIC</a>
             </div>
         </div>
@@ -939,7 +949,7 @@
                 const isPublicationHighlight = /publication/i.test(person.highlightHeading || "");
                 const highlightBody = isPublicationHighlight ? `<cite>${person.highlightText}</cite>` : person.highlightText;
                 const highlightSection = (person.highlightHeading && person.highlightText)
-                    ? `<section><h2>${sectionIcon("✨", "icon-secondary")}${person.highlightHeading}</h2>${clampBlock(`<p>${highlightBody}</p>`)}</section>`
+                    ? `<section><h2>${sectionIcon("âœ¨", "icon-secondary")}${person.highlightHeading}</h2>${clampBlock(`<p>${highlightBody}</p>`)}</section>`
                     : "";
 
                 document.getElementById("profile-main").innerHTML = projectsSection + bioSection + achievementsSection + fundingSection + spotlightSection + highlightSection;
@@ -1074,6 +1084,29 @@
                 `;
             });
         })();
+    </script>
+    <script>
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            var profileHeroEl = document.querySelector('.profile-hero');
+            var profileHeroGrid = document.querySelector('.profile-hero-grid');
+
+            if (profileHeroEl && profileHeroGrid) {
+                var maxTilt = 5;
+
+                profileHeroEl.addEventListener('mousemove', function (e) {
+                    var rect = profileHeroEl.getBoundingClientRect();
+                    var x = (e.clientX - rect.left) / rect.width;
+                    var y = (e.clientY - rect.top) / rect.height;
+                    var rotateY = (x - 0.5) * (maxTilt * 2);
+                    var rotateX = (0.5 - y) * (maxTilt * 2);
+                    profileHeroGrid.style.transform = 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+                });
+
+                profileHeroEl.addEventListener('mouseleave', function () {
+                    profileHeroGrid.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                });
+            }
+        }
     </script>
     <script src="../js/nav.js"></script>
 </body>

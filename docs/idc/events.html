@@ -118,6 +118,7 @@
             position: relative;
             overflow: hidden;
             isolation: isolate;
+            perspective: 1200px;
             background:
                 radial-gradient(circle at 18% 28%, rgba(255, 255, 255, 0.08), transparent 20%),
                 radial-gradient(circle at 78% 24%, rgba(247, 147, 30, 0.18), transparent 24%),
@@ -147,6 +148,15 @@
             align-items: center;
             position: relative;
             z-index: 1;
+            transition: transform 0.2s ease-out;
+            will-change: transform;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-shell {
+                transform: none !important;
+                transition: none !important;
+            }
         }
 
         .eyebrow {
@@ -638,12 +648,12 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="../styles/nav.css">
+    <link rel="stylesheet" href="../styles/nav.css?v=2">
 </head>
 <body>
     <header>
         <nav>
-            <a href="./" class="logo">RCMI <span>@ Morgan</span></a>
+            <a href="../" class="logo">RCMI <span>@ Morgan</span></a>
             <ul id="menu">
                 <li><a href="./">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -666,15 +676,15 @@
         <div class="core-switcher-inner">
             <a href="../" class="core-switch-home">&larr; RCMI @ Morgan</a>
             <div class="core-switch-pills">
-                <a href="./" class="core-pill active">&#127891; IDC</a>
-                <a href="../cec/" class="core-pill">&#129309; CEC</a>
+                <a href="./" class="core-pill active"><img src="../img/icons/idc-glasses-book.svg" alt="" width="16" height="16" class="core-pill-icon"> IDC</a>
+                <a href="../cec/" class="core-pill"><img src="../img/icons/community-cec.png" alt="" width="16" height="16" class="core-pill-icon"> CEC</a>
                 <a href="../ric/" class="core-pill">&#128300; RIC</a>
             </div>
         </div>
     </div>
 
     <div class="urgency-banner" id="urgency-banner" role="alert" aria-live="polite">
-        Registration closes <strong>May 27, 2026</strong> — <strong id="days-left"></strong> — Seats are limited
+        Registration closes <strong>May 27, 2026</strong> â€” <strong id="days-left"></strong> â€” Seats are limited
     </div>
 
 
@@ -685,7 +695,7 @@
                     <div class="eyebrow">Grant Writing Workshop Series</div>
                     <h1>Getting Started on Your First Research Proposal</h1>
                     <p class="hero-copy">
-                        A four-week online summer workshop from RCMI@Morgan Investigator Development Core — designed for early-stage investigators and community partners with <strong style="color:rgba(255,255,255,0.95)">no prior NIH funding or grant experience</strong> — focused on developing NIH-style biomedical and health disparities research proposals.
+                        A four-week online summer workshop from RCMI@Morgan Investigator Development Core â€” designed for early-stage investigators and community partners with <strong style="color:rgba(255,255,255,0.95)">no prior NIH funding or grant experience</strong> â€” focused on developing NIH-style biomedical and health disparities research proposals.
                     </p>
                     <div class="hero-actions">
                         <a class="btn btn-primary" href="https://forms.gle/EtmSAFj5vaayXuWR7" target="_blank" rel="noreferrer">Register Now</a>
@@ -807,7 +817,7 @@
                     <div class="eligibility-item new-this-year">
                         <span class="new-badge">New This Year</span>
                         <h3>Community Partners Welcome</h3>
-                        <p>We are now inviting community members who plan to partner with MSU faculty on Community Based Participatory Research (CBPR) grant applications. This is a new pathway — apply alongside early-stage MSU investigators.</p>
+                        <p>We are now inviting community members who plan to partner with MSU faculty on Community Based Participatory Research (CBPR) grant applications. This is a new pathway â€” apply alongside early-stage MSU investigators.</p>
                     </div>
                     <div class="eligibility-item">
                         <h3>Early-Stage MSU Investigators</h3>
@@ -892,6 +902,28 @@
 
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            var eventHeroEl = document.querySelector('.event-hero');
+            var heroShell = document.querySelector('.hero-shell');
+
+            if (eventHeroEl && heroShell) {
+                var maxTilt = 5;
+
+                eventHeroEl.addEventListener('mousemove', function (e) {
+                    var rect = eventHeroEl.getBoundingClientRect();
+                    var x = (e.clientX - rect.left) / rect.width;
+                    var y = (e.clientY - rect.top) / rect.height;
+                    var rotateY = (x - 0.5) * (maxTilt * 2);
+                    var rotateX = (0.5 - y) * (maxTilt * 2);
+                    heroShell.style.transform = 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+                });
+
+                eventHeroEl.addEventListener('mouseleave', function () {
+                    heroShell.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                });
+            }
+        }
 
         (function () {
             var deadline = new Date('2026-05-27T23:59:59');

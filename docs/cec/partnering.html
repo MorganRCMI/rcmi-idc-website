@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partnering with Morgan CARES - Community Engagement Core - RCMI @ Morgan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #FF6B35;
+            --accent: #F7931E;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #2c3e50;
+            --border: #e0e6ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s ease;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .logo:hover {
+            opacity: 0.9;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: clamp(1rem, 2vw, 2rem);
+        }
+
+        nav li {
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover,
+        nav a[aria-current="page"] {
+            color: var(--secondary);
+        }
+
+        nav a:hover::after,
+        nav a[aria-current="page"]::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 45vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            perspective: 1200px;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+            position: relative;
+            z-index: 1;
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease-out;
+            will-change: transform;
+        }
+
+        .hero-content .tagline,
+        .hero-content h1,
+        .hero-content .subtitle {
+            transform: translateZ(0);
+            transition: transform 0.2s ease-out;
+        }
+
+        .hero-content .tagline {
+            transform: translateZ(25px);
+        }
+
+        .hero-content h1 {
+            transform: translateZ(55px);
+        }
+
+        .hero-content .subtitle {
+            transform: translateZ(15px);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-content,
+            .hero-content .tagline,
+            .hero-content h1,
+            .hero-content .subtitle {
+                transform: none !important;
+                transition: none !important;
+            }
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.75rem;
+            color: white;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            font-weight: 300;
+        }
+
+        .page-content {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 5rem 5% 2rem;
+        }
+
+        .page-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .page-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin: 2.5rem 0 1rem;
+        }
+
+        .page-content p {
+            font-size: 1.05rem;
+            color: var(--text);
+            line-height: 1.85;
+            margin-bottom: 1rem;
+        }
+
+        .page-content a {
+            color: var(--secondary);
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .page-content a:hover {
+            color: var(--accent);
+        }
+
+        .video-thumb {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 1.5rem 0 2rem;
+            background: linear-gradient(135deg, var(--primary), #004d99);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-thumb .play-btn {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-thumb .play-btn::after {
+            content: '';
+            border-style: solid;
+            border-width: 12px 0 12px 20px;
+            border-color: transparent transparent transparent white;
+            margin-left: 4px;
+        }
+
+        .video-thumb .video-label {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+        }
+
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem 1.5rem;
+            margin: 1.5rem 0 2rem;
+        }
+
+        .partner-grid.flow {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .partner-grid.flow .partner-card {
+            flex: 0 1 170px;
+        }
+
+        .partner-showcase-wrap {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dots-row {
+            order: 2;
+            display: flex;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-top: 0.75rem;
+        }
+
+        .dots-row .dot {
+            width: 11px;
+            height: 11px;
+            box-sizing: content-box;
+            padding: 16px;
+            margin: -16px -8px;
+            background-color: var(--border);
+            background-clip: content-box;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .dots-row .dot:hover {
+            background-color: #c9d2dc;
+        }
+
+        .dots-row .dot.is-active {
+            background-color: var(--secondary);
+            transform: scale(1.3);
+        }
+
+        .partner-showcase {
+            order: 1;
+            position: relative;
+        }
+
+        .partner-showcase .showcase-spacer {
+            visibility: hidden;
+        }
+
+        .partner-showcase .set-base,
+        .partner-showcase .set-overlay {
+            position: absolute;
+            inset: 0;
+            top: 0;
+            background: white;
+        }
+
+        .partner-showcase .set-base {
+            opacity: 1;
+            z-index: 0;
+        }
+
+        .partner-showcase .set-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease-in-out;
+            z-index: 1;
+        }
+
+        .partner-showcase .set-overlay.is-active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 2;
+        }
+
+        .partner-card {
+            text-align: center;
+            text-decoration: none !important;
+            display: block;
+        }
+
+        .partner-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            margin: 0 auto 0.75rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: transform 0.2s ease;
+        }
+
+        .partner-name {
+            font-weight: 600;
+            color: var(--primary) !important;
+            font-size: 0.92rem;
+            text-decoration: underline !important;
+            text-decoration-color: var(--border) !important;
+            text-underline-offset: 3px;
+            transition: color 0.2s ease, text-decoration-color 0.2s ease;
+        }
+
+        .partner-card:hover .partner-name {
+            color: var(--secondary) !important;
+            text-decoration-color: var(--secondary) !important;
+        }
+
+        .partner-card:hover .partner-avatar {
+            transform: scale(1.06);
+        }
+
+        @media (max-width: 900px) {
+            .partner-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 520px) {
+            .partner-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .help-hour {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), #004d99);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .help-hour .timer-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.25rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .help-hour h3 {
+            margin-top: 0;
+            color: white !important;
+        }
+
+        .help-hour p {
+            color: rgba(255, 255, 255, 0.9) !important;
+        }
+
+        .help-hour .btn-schedule {
+            display: inline-block;
+            margin-top: 1rem;
+            background: white;
+            color: var(--primary) !important;
+            padding: 0.85rem 2rem;
+            border-radius: 999px;
+            font-weight: 700;
+            text-decoration: none !important;
+            font-size: 0.95rem;
+        }
+
+        .help-hour .btn-schedule:hover {
+            opacity: 0.9;
+        }
+
+        .coming-soon {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 5rem 5%;
+            text-align: center;
+        }
+
+        .coming-soon-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.75rem;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .coming-soon h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .coming-soon p {
+            font-size: 1.05rem;
+            color: var(--text);
+            line-height: 1.85;
+            margin-bottom: 0.5rem;
+        }
+
+        .lead-strip {
+            max-width: 700px;
+            margin: 2rem auto 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .lead-pill {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 0.5rem 1.1rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+        }
+
+        .page-content > * {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .page-content > *.reveal-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page-content > * {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../styles/site-polish.css?v=1">
+    <link rel="stylesheet" href="../styles/hero-system.css?v=1">
+    <link rel="stylesheet" href="../styles/nav.css?v=2">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../" class="logo">RCMI <span>@ Morgan</span></a>
+            <ul id="menu">
+                <li><a href="./">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="partnering.html" aria-current="page">Partnering</a></li>
+                <li><a href="seed-funding.html">Seed Funding</a></li>
+                <li><a href="training.html">Training</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <div class="core-switcher">
+        <div class="core-switcher-inner">
+            <a href="../" class="core-switch-home">&larr; RCMI @ Morgan</a>
+            <div class="core-switch-pills">
+                <a href="../idc/" class="core-pill"><img src="../img/icons/idc-glasses-book.svg" alt="" width="16" height="16" class="core-pill-icon"> IDC</a>
+                <a href="./" class="core-pill active"><img src="../img/icons/community-cec.png" alt="" width="16" height="16" class="core-pill-icon"> CEC</a>
+                <a href="../ric/" class="core-pill">&#128300; RIC</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="hero hero-home">
+        <div class="hero-content">
+            <div class="tagline">Community Engagement Core</div>
+            <h1>Partnering with<br>Morgan CARES</h1>
+            <p class="subtitle">How to join our network of community and academic stakeholders working together on issues that directly impact our communities.</p>
+        </div>
+    </section>
+
+    <section class="page-content">
+        <h2>Join the Morgan CARES Network</h2>
+        <p>The Morgan CARES Network includes close to 500 community members, organizations, faculty members, students, and leaders. This is a vibrant ecosystem of individuals interested in community health and committed to collaboration. If you would like to join the network, fill out the <a href="https://morgan-cares.smartmatchapp.com/client/submissionform/18/default/" target="_blank" rel="noopener">Network Registration Form</a>. Once you receive the confirmation message, follow the instructions listed to complete a profile.</p>
+
+        <h3>PartnerLink</h3>
+        <p>As a Network member, you can also opt into PartnerLink. A primary goal of our work at Morgan CARES is to facilitate new connections and support community-campus partnerships that promote health in Baltimore City. Morgan CARES provides linkage support to help potential collaborators connect with one another. With matching software, the team can use the profile information provided to introduce individuals with complementary skills and interests.</p>
+
+        <p>If you are looking to develop a new partnership, join PartnerLink. Want to get started? Check out the instructional video to learn more.</p>
+
+        <div class="video-thumb">
+            <div class="play-btn"></div>
+            <span class="video-label">Video Coming Soon</span>
+        </div>
+
+        <h3>Our PartnerLink profiles</h3>
+
+        <div class="partner-showcase-wrap">
+            <div class="dots-row">
+                <button type="button" class="dot" data-target="2" aria-label="Show more PartnerLink members, group 1"></button>
+                <button type="button" class="dot" data-target="3" aria-label="Show more PartnerLink members, group 2"></button>
+                <button type="button" class="dot" data-target="4" aria-label="Show more PartnerLink members, group 3"></button>
+            </div>
+
+            <div class="partner-showcase">
+                <div class="partner-grid flow showcase-spacer" aria-hidden="true">
+                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
+                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
+                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
+                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
+                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
+                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
+                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
+                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
+                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
+                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
+                </div>
+
+                <div class="partner-grid flow set-base">
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">AF</div>
+                        <div class="partner-name">Adriana Foster</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">KW</div>
+                        <div class="partner-name">Kimberly Warren</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">KE</div>
+                        <div class="partner-name">Kathy Evans</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">JB</div>
+                        <div class="partner-name">Justin Bonny</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">TG</div>
+                        <div class="partner-name">Tasha Gooden</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">BT</div>
+                        <div class="partner-name">Beta Tau Alumni Chapter</div>
+                    </a>
+                </div>
+
+                <div class="partner-grid flow set-overlay" data-set="2">
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">VK</div>
+                        <div class="partner-name">Vishnu Kumar</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">LF</div>
+                        <div class="partner-name">Lening Olivera Figueroa</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">SC</div>
+                        <div class="partner-name">Sereta Collington</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">JB</div>
+                        <div class="partner-name">James Butler III</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">EM</div>
+                        <div class="partner-name">Ellen Molino</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">TR</div>
+                        <div class="partner-name">Tiaira Robinson</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">DL</div>
+                        <div class="partner-name">Dea Lott</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">TR</div>
+                        <div class="partner-name">Timothy Rich</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">SK</div>
+                        <div class="partner-name">Samia Kirchner</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">SL</div>
+                        <div class="partner-name">Stephanie Slowly Little</div>
+                    </a>
+                </div>
+
+                <div class="partner-grid flow set-overlay" data-set="3">
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">DS</div>
+                        <div class="partner-name">Desdemona Smith</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">AM</div>
+                        <div class="partner-name">Alphonso Mayo</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">EM</div>
+                        <div class="partner-name">Emma Mitchell</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">BL</div>
+                        <div class="partner-name">Brandon Logan</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">TK</div>
+                        <div class="partner-name">Tawanna Kane</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">RW</div>
+                        <div class="partner-name">Raven Willoughby</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">BC</div>
+                        <div class="partner-name">Brandon Clayton</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">AD</div>
+                        <div class="partner-name">Akasha Dotson</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">BB</div>
+                        <div class="partner-name">Bonita Bordley</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">MM</div>
+                        <div class="partner-name">Marlyn Massey</div>
+                    </a>
+                </div>
+
+                <div class="partner-grid flow set-overlay" data-set="4">
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">MM</div>
+                        <div class="partner-name">Mark Mittelman</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">OA</div>
+                        <div class="partner-name">Oluwagbenga Alo</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">AK</div>
+                        <div class="partner-name">Antony Kinyua</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">SJ</div>
+                        <div class="partner-name">Shawna Jones</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">ZJ</div>
+                        <div class="partner-name">Zenobia Judd-Williams</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">RT</div>
+                        <div class="partner-name">Dr. Renee Tengella</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">MO</div>
+                        <div class="partner-name">Michelle Ogunwole</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">NP</div>
+                        <div class="partner-name">Nia Pettiford</div>
+                    </a>
+                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
+                        <div class="partner-avatar">EJ</div>
+                        <div class="partner-name">Elisha Johnson</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <p>Got questions? Reach out to <a href="mailto:morgancares@morgan.edu">morgancares@morgan.edu</a>.</p>
+
+        <div class="help-hour">
+            <div class="timer-icon">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <polyline points="12 7 12 12 15 14"></polyline>
+                </svg>
+            </div>
+            <h3>"Happy to Help You" Hour</h3>
+            <p>Schedule a "Happy to Help You" Hour consultation session to discuss your interests or needs regarding linkage support.</p>
+            <a class="btn-schedule" href="https://calendly.com/emma-mitchell-morgan/morgan-cares-happy-to-help-hour?month=2025-10" target="_blank" rel="noopener">Schedule a Session</a>
+        </div>
+
+        <h3>Network Membership vs. Being a Partner of Morgan CARES vs. Joining a Collaborative Partnership</h3>
+        <p>Network Membership means that you will be affiliated with Morgan CARES and participate in the exchange of information and resources. Members receive announcements, newsletters, and opportunities for training and capacity-building. Some organizations are Partners of Morgan CARES. That involves a long-term collaboration with an established Memorandum of Understanding. Organizational staff and Morgan CARES staff work together on toward agreed upon goals and on shared activities. Joining a Collaborative Partnership refers to instances where individuals or organizations work with one another. Morgan CARES has seed funding programs that provide resources to support these kinds of partnerships. Collaborators that would like to propose a health-initiative that would positively impact Baltimore communities can apply to either the <a href="https://www.morgan.edu/morgan-cares/community-award-program" target="_blank" rel="noopener">Community Award Program</a> or <a href="https://www.morgan.edu/morgan-cares/practitioner-research-award" target="_blank" rel="noopener">Practitioner Research Award</a>. Check out at our <a href="seed-funding.html">Seed Funding Programs</a> page to learn more. At any level you choose, Morgan CARES offers programming to facilitate relationship-building, bi-directional learning, and community-based participatory research.</p>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>RCMI @ Morgan</h4>
+                <p>Center for Urban Health Disparities Research and Innovation</p>
+                <p>Morgan State University</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Our Cores</h4>
+                <a href="../idc/">Investigator Development Core</a>
+                <a href="./">Community Engagement Core</a>
+                <a href="../ric/">Research Infrastructure Core</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Portage Avenue Campus, Room 113</p>
+                <p>1700 E Cold Spring Lane</p>
+                <p>Baltimore, MD 21251</p>
+                <p>Phone: 443-885-4534</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="mailto:diane.hughes@morgan.edu">Email Us</a>
+                <a href="https://www.morgan.edu/rcmi">RCMI Program</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year">2024</span> Morgan State University RCMI @ Morgan. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            var heroEl = document.querySelector('.hero-home');
+            var heroContent = document.querySelector('.hero-home .hero-content');
+
+            if (heroEl && heroContent) {
+                var maxTilt = 7;
+
+                heroEl.addEventListener('mousemove', function (e) {
+                    var rect = heroEl.getBoundingClientRect();
+                    var x = (e.clientX - rect.left) / rect.width;
+                    var y = (e.clientY - rect.top) / rect.height;
+                    var rotateY = (x - 0.5) * (maxTilt * 2);
+                    var rotateX = (0.5 - y) * (maxTilt * 2);
+                    heroContent.style.transform = 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+                });
+
+                heroEl.addEventListener('mouseleave', function () {
+                    heroContent.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                });
+            }
+        }
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+            var revealTargets = document.querySelectorAll('.page-content > *');
+            var revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    entry.target.classList.toggle('reveal-visible', entry.isIntersecting);
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+            revealTargets.forEach(function (el) { revealObserver.observe(el); });
+        } else {
+            document.querySelectorAll('.page-content > *').forEach(function (el) {
+                el.classList.add('reveal-visible');
+            });
+        }
+
+        var partnerDots = document.querySelectorAll('.dots-row .dot');
+        partnerDots.forEach(function (dot) {
+            dot.addEventListener('click', function () {
+                var wasActive = dot.classList.contains('is-active');
+                partnerDots.forEach(function (d) { d.classList.remove('is-active'); });
+                document.querySelectorAll('.partner-showcase .set-overlay').forEach(function (el) {
+                    el.classList.remove('is-active');
+                });
+                if (!wasActive) {
+                    dot.classList.add('is-active');
+                    var target = document.querySelector('.partner-showcase .set-overlay[data-set="' + dot.dataset.target + '"]');
+                    if (target) target.classList.add('is-active');
+                }
+            });
+        });
+    </script>
+    <script src="../js/nav.js"></script>
+</body>
+</html>

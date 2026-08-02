@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research Infrastructure Core - RCMI @ Morgan</title>
+    <title>Training - Community Engagement Core - RCMI @ Morgan</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -73,6 +73,10 @@
             gap: clamp(1rem, 2vw, 2rem);
         }
 
+        nav li {
+            text-align: center;
+        }
+
         nav a {
             text-decoration: none;
             color: var(--text);
@@ -104,7 +108,7 @@
         }
 
         .hero {
-            min-height: 60vh;
+            min-height: 45vh;
             position: relative;
             display: flex;
             align-items: center;
@@ -121,18 +125,6 @@
             transform-style: preserve-3d;
             transition: transform 0.2s ease-out;
             will-change: transform;
-            animation: fadeInUp 1s ease 0.3s backwards;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .hero-content .tagline,
@@ -161,7 +153,6 @@
             .hero-content .subtitle {
                 transform: none !important;
                 transition: none !important;
-                animation: none !important;
             }
         }
 
@@ -189,6 +180,146 @@
             color: rgba(255, 255, 255, 0.9);
             max-width: 700px;
             font-weight: 300;
+        }
+
+        .page-content {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 5rem 5% 2rem;
+        }
+
+        .page-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-weight: 800;
+            margin: 3rem 0 1.5rem;
+        }
+
+        .page-content h2:first-child {
+            margin-top: 0;
+        }
+
+        .page-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin: 2.5rem 0 1rem;
+        }
+
+        .page-content p {
+            font-size: 1.05rem;
+            color: var(--text);
+            line-height: 1.85;
+            margin-bottom: 1rem;
+        }
+
+        .page-content ul {
+            margin: 0 0 1.5rem 1.25rem;
+            padding: 0;
+        }
+
+        .page-content ul li {
+            font-size: 1.05rem;
+            color: var(--text);
+            line-height: 1.85;
+        }
+
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin: 0.5rem 0 1.5rem;
+        }
+
+        .topic-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: linear-gradient(135deg, var(--primary), #004d99);
+            border: 1px solid transparent;
+            border-radius: 12px;
+            padding: 0.85rem 1.2rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+        }
+
+        .topic-tag::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--secondary);
+            flex-shrink: 0;
+        }
+
+        .page-content a {
+            color: var(--secondary);
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .page-content a:hover {
+            color: var(--accent);
+        }
+
+        .funding-note {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--text);
+            opacity: 0.65;
+            line-height: 1.5;
+            margin-top: 0.5rem;
+        }
+
+        .video-thumb {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 1.5rem 0 2rem;
+            background: linear-gradient(135deg, var(--primary), #004d99);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-thumb .play-btn {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-thumb .play-btn::after {
+            content: '';
+            border-style: solid;
+            border-width: 12px 0 12px 20px;
+            border-color: transparent transparent transparent white;
+            margin-left: 4px;
+        }
+
+        .video-thumb .video-label {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
         }
 
         .coming-soon {
@@ -295,6 +426,25 @@
                 display: none;
             }
         }
+
+        .page-content > * {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .page-content > *.reveal-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page-content > * {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
     </style>
     <link rel="stylesheet" href="../styles/site-polish.css?v=1">
     <link rel="stylesheet" href="../styles/hero-system.css?v=1">
@@ -305,10 +455,13 @@
         <nav>
             <a href="../" class="logo">RCMI <span>@ Morgan</span></a>
             <ul id="menu">
-                <li><a href="../">Home</a></li>
-                <li><a href="../idc/">IDC</a></li>
-                <li><a href="../cec/">CEC</a></li>
-                <li><a href="./" aria-current="page">RIC</a></li>
+                <li><a href="./">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="partnering.html">Partnering</a></li>
+                <li><a href="seed-funding.html">Seed Funding</a></li>
+                <li><a href="training.html" aria-current="page">Training</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
             <button class="hamburger" id="hamburger">
                 <span></span>
@@ -323,28 +476,50 @@
             <a href="../" class="core-switch-home">&larr; RCMI @ Morgan</a>
             <div class="core-switch-pills">
                 <a href="../idc/" class="core-pill"><img src="../img/icons/idc-glasses-book.svg" alt="" width="16" height="16" class="core-pill-icon"> IDC</a>
-                <a href="../cec/" class="core-pill"><img src="../img/icons/community-cec.png" alt="" width="16" height="16" class="core-pill-icon"> CEC</a>
-                <a href="./" class="core-pill active">&#128300; RIC</a>
+                <a href="./" class="core-pill active"><img src="../img/icons/community-cec.png" alt="" width="16" height="16" class="core-pill-icon"> CEC</a>
+                <a href="../ric/" class="core-pill">&#128300; RIC</a>
             </div>
         </div>
     </div>
 
     <section class="hero hero-home">
         <div class="hero-content">
-            <div class="tagline">Morgan State University</div>
-            <h1>Research<br>Infrastructure Core</h1>
-            <p class="subtitle">Building shared research capacity through the Molecular and Cell Biology Core, Biostatistics and Bioinformatics Core, and Animal Facility Core.</p>
+            <div class="tagline">Community Engagement Core</div>
+            <h1>Training</h1>
+            <p class="subtitle">Building skills and capacity for community and academic partners engaged in Community-Based Participatory Research.</p>
         </div>
     </section>
 
-    <section class="coming-soon">
-        <div class="coming-soon-icon">🔬</div>
-        <h2>Content Coming Soon</h2>
-        <p>This site is being built out for the Research Infrastructure Core. Check back soon for faculty, shared facilities, and infrastructure resources.</p>
-        <div class="lead-strip">
-            <span class="lead-pill">Dr. James Wachira, Lead</span>
-            <span class="lead-pill">Dr. YueJin Li, Co-Lead</span>
+    <section class="page-content">
+        <h2>Morgan CARES Training Initiatives</h2>
+        <p>Community-engaged research prioritizes capacity-building, co-learning, skill sharing, and dialogue. Morgan CARES hosts trainings, workshops, and other learning opportunities. This helps enhance the ability of community members and academics to collaborate and generate community-driven solutions to pressing community health needs.</p>
+
+        <p>To achieve this, Morgan CARES offers structured workshops and specialized training programs designed to bridge the gap between academic research and grassroots initiatives. By tying mandatory capacity-building directly to financial awards, Morgan CARES training programs ensure that collaborative teams possess the strong management and research literacy needed to co-lead public health research projects. Ultimately, these training opportunities help partners to translate shared knowledge into sustainable, community-driven solutions that directly improve health outcomes in Baltimore.</p>
+
+        <div class="video-thumb">
+            <div class="play-btn"></div>
+            <span class="video-label">Morgan CARES Workshop Video &mdash; Coming Soon</span>
         </div>
+
+        <h2>Monthly Training Series</h2>
+        <p>The Morgan CARES Monthly Training Series is designed to support essential skill development and resource sharing for individuals interested in community-engaged research. The series includes a wide range of topics and provides opportunities for collaboration, networking, partnership development, and sharing lessons.</p>
+
+        <p>Session topics include:</p>
+        <div class="topic-tags">
+            <span class="topic-tag">Participatory Research Design</span>
+            <span class="topic-tag">Research Methods</span>
+            <span class="topic-tag">Budget</span>
+            <span class="topic-tag">Partnership and Proposal Development</span>
+        </div>
+
+        <h2>Partners in Research: A CBPR Training for Academic and Community Partners</h2>
+        <p>Morgan CARES is developing an online, self-paced training program entitled &ldquo;Partners in Research: A CBPR Training for Academic and Community Partners&rdquo;.</p>
+
+        <p>It presents material about community-based participatory research principles, ethics, practices for developing equitable partnerships, and much more! Utilizing real-world examples and engaging activities, participants will gain valuable skills and knowledge. It is designed for a diverse audience, including community members and community-based organizations, faculty, students, researchers, and professionals working in health-related and practice-based disciplines.</p>
+
+        <p>Whether you are new to CBPR or have engaged in research partnerships for many years, you can build the confidence and capacity to meaningfully engage in community-campus collaborations and to embed community engagement principles throughout your work. If you are interested, <a href="https://morgan-cares.smartmatchapp.com/client/submissionform/18/default/" target="_blank" rel="noopener">join the Morgan CARES network</a> to receive updates. The program will launch in Fall 2026!</p>
+
+        <p class="funding-note">Funding Acknowledgement: This training was developed with support from the Institute for Clinical and Translational Research (ICTR) through Clinical and Translational Science Award (CTSA) funding from the National Institutes of Health (NIH), as well as the Center for Urban Health Disparities Research and Innovation at Morgan State University, funded through the NIMHD, and the Center for Urban Health Equity at Morgan State University. We are grateful for our institutional collaborators at Johns Hopkins University and the University of Maryland, Baltimore. We also extend our sincerest thanks to the many members of the Morgan CARES Network, and the broader Morgan State University community whose insights, experiences, and ongoing commitment to community-engaged research made this work possible.</p>
     </section>
 
     <footer>
@@ -358,8 +533,8 @@
             <div class="footer-section">
                 <h4>Our Cores</h4>
                 <a href="../idc/">Investigator Development Core</a>
-                <a href="../cec/">Community Engagement Core</a>
-                <a href="./" aria-current="page">Research Infrastructure Core</a>
+                <a href="./">Community Engagement Core</a>
+                <a href="../ric/">Research Infrastructure Core</a>
             </div>
 
             <div class="footer-section">
@@ -405,6 +580,20 @@
                     heroContent.style.transform = 'rotateX(0deg) rotateY(0deg)';
                 });
             }
+        }
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+            var revealTargets = document.querySelectorAll('.page-content > *');
+            var revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    entry.target.classList.toggle('reveal-visible', entry.isIntersecting);
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+            revealTargets.forEach(function (el) { revealObserver.observe(el); });
+        } else {
+            document.querySelectorAll('.page-content > *').forEach(function (el) {
+                el.classList.add('reveal-visible');
+            });
         }
     </script>
     <script src="../js/nav.js"></script>

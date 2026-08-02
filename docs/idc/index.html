@@ -121,6 +121,7 @@
             display: flex;
             align-items: center;
             overflow: hidden;
+            perspective: 1200px;
         }
 
         .hero-content {
@@ -129,7 +130,53 @@
             padding: 0 5%;
             position: relative;
             z-index: 1;
+            transform-style: preserve-3d;
             animation: fadeInUp 1s ease 0.3s backwards;
+        }
+
+        .hero-tilt {
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease-out;
+            will-change: transform;
+        }
+
+        .hero-tilt .tagline,
+        .hero-tilt h1,
+        .hero-tilt .subtitle,
+        .hero-tilt .cta-buttons {
+            transform: translateZ(0);
+            transition: transform 0.2s ease-out;
+        }
+
+        .hero-tilt .tagline {
+            transform: translateZ(25px);
+        }
+
+        .hero-tilt h1 {
+            transform: translateZ(55px);
+        }
+
+        .hero-tilt .subtitle {
+            transform: translateZ(15px);
+        }
+
+        .hero-tilt .cta-buttons {
+            transform: translateZ(35px);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-tilt,
+            .hero-tilt .tagline,
+            .hero-tilt h1,
+            .hero-tilt .subtitle,
+            .hero-tilt .cta-buttons {
+                transform: none !important;
+                transition: none !important;
+            }
+
+            .hero-content {
+                animation: none !important;
+            }
         }
 
         @keyframes fadeInUp {
@@ -154,7 +201,7 @@
         }
 
         .hero .subtitle {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             color: rgba(255, 255, 255, 0.9);
             margin-bottom: 2rem;
             max-width: 650px;
@@ -519,12 +566,12 @@
 
     </style>
     <link rel="stylesheet" href="../styles/hero-system.css?v=1">
-    <link rel="stylesheet" href="../styles/nav.css">
+    <link rel="stylesheet" href="../styles/nav.css?v=2">
 </head>
 <body>
     <header>
         <nav>
-            <a href="./" class="logo">RCMI <span>@ Morgan</span></a>
+            <a href="../" class="logo">RCMI <span>@ Morgan</span></a>
             <ul id="menu">
                 <li><a href="./" aria-current="page">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -547,8 +594,8 @@
         <div class="core-switcher-inner">
             <a href="../" class="core-switch-home">&larr; RCMI @ Morgan</a>
             <div class="core-switch-pills">
-                <a href="./" class="core-pill active">&#127891; IDC</a>
-                <a href="../cec/" class="core-pill">&#129309; CEC</a>
+                <a href="./" class="core-pill active"><img src="../img/icons/idc-glasses-book.svg" alt="" width="16" height="16" class="core-pill-icon"> IDC</a>
+                <a href="../cec/" class="core-pill"><img src="../img/icons/community-cec.png" alt="" width="16" height="16" class="core-pill-icon"> CEC</a>
                 <a href="../ric/" class="core-pill">&#128300; RIC</a>
             </div>
         </div>
@@ -556,12 +603,14 @@
 
     <section class="hero hero-home">
         <div class="hero-content">
-            <div class="tagline">Morgan State University</div>
-            <h1>Investigator<br>Development Core</h1>
-            <p class="subtitle">Empowering diverse researchers to advance biomedical science and reduce health disparities through mentorship, funding, and collaborative innovation.</p>
-            <div class="cta-buttons">
-                <a href="opportunities.html" class="btn btn-primary">Explore Opportunities</a>
-                <a href="about.html" class="btn btn-secondary">Learn More</a>
+            <div class="hero-tilt">
+                <div class="tagline">Morgan State University</div>
+                <h1>Investigator<br>Development Core</h1>
+                <p class="subtitle">Empowering diverse researchers to advance biomedical science and reduce health disparities through mentorship, funding, and collaborative innovation.</p>
+                <div class="cta-buttons">
+                    <a href="opportunities.html" class="btn btn-primary">Explore Opportunities</a>
+                    <a href="about.html" class="btn btn-secondary">Learn More</a>
+                </div>
             </div>
         </div>
     </section>
@@ -591,7 +640,7 @@
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">🤝</div>
+                <div class="feature-icon"><img src="../img/icons/community-cec.png" alt="" width="38" height="38"></div>
                 <h3>Community Building</h3>
                 <p>Foster collaborative networks through seminars, workshops, and mentorship programs connecting researchers across disciplines.</p>
                 <a href="opportunities.html">Get Involved →</a>
@@ -692,6 +741,28 @@
     </footer>
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            var heroEl = document.querySelector('.hero-home');
+            var heroContent = document.querySelector('.hero-home .hero-tilt');
+
+            if (heroEl && heroContent) {
+                var maxTilt = 7;
+
+                heroEl.addEventListener('mousemove', function (e) {
+                    var rect = heroEl.getBoundingClientRect();
+                    var x = (e.clientX - rect.left) / rect.width;
+                    var y = (e.clientY - rect.top) / rect.height;
+                    var rotateY = (x - 0.5) * (maxTilt * 2);
+                    var rotateX = (0.5 - y) * (maxTilt * 2);
+                    heroContent.style.transform = 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+                });
+
+                heroEl.addEventListener('mouseleave', function () {
+                    heroContent.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                });
+            }
+        }
     </script>
     <script src="../js/nav.js"></script>
 

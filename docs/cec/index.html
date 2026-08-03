@@ -246,7 +246,7 @@
             display: block;
             background: linear-gradient(135deg, var(--primary), #004d99);
             border: 1px solid transparent;
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 1.5rem;
             text-decoration: none !important;
             box-shadow: 0 8px 24px rgba(0, 51, 102, 0.18);
@@ -321,7 +321,7 @@
             display: block;
             background: linear-gradient(135deg, var(--primary), #004d99);
             border: 1px solid transparent;
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 1.75rem;
             text-decoration: none !important;
             box-shadow: 0 8px 24px rgba(0, 51, 102, 0.18);
@@ -379,22 +379,29 @@
             margin: 2rem auto;
         }
 
+        .stages-wrap {
+            width: calc(100% + 180px);
+            margin-left: -90px;
+            margin-right: -90px;
+        }
+
         .cares-stages {
             list-style: none;
             margin: 1.5rem 0;
             padding: 0;
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 0.85rem;
         }
 
         .cares-stages li {
-            flex: 0 1 210px;
+            flex: 1 1 0;
+            min-width: 0;
             background: linear-gradient(135deg, var(--primary), #004d99);
             border: 1px solid transparent;
             border-radius: 16px;
-            padding: 1.5rem 1.25rem;
+            padding: 1.1rem 0.85rem;
             text-align: center;
             box-shadow: 0 8px 24px rgba(0, 51, 102, 0.18);
             transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -406,27 +413,63 @@
         }
 
         .cares-stages .stage-icon {
-            width: 52px;
-            height: 52px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            margin: 0 auto 0.9rem;
+            margin: 0 auto 0.6rem;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
+        .cares-stages .stage-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
         .cares-stages .stage-text {
-            line-height: 1.65;
+            line-height: 1.5;
             color: rgba(255, 255, 255, 0.9);
-            font-size: 0.92rem;
+            font-size: 0.78rem;
         }
 
         .cares-stages li strong {
             display: block;
             color: white;
-            font-size: 1.05rem;
-            margin-bottom: 0.4rem;
+            font-size: 0.88rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .cares-stages .stage-desc {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .cares-stages li.expanded .stage-desc {
+            -webkit-line-clamp: unset;
+            overflow: visible;
+        }
+
+        .cares-stages .stage-toggle {
+            display: block;
+            margin: 0.6rem auto 0;
+            background: none;
+            border: none;
+            padding: 0;
+            color: white;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .cares-stages .stage-toggle:hover {
+            color: var(--accent);
         }
 
         .video-embed {
@@ -507,6 +550,29 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
+        @media (max-width: 1100px) and (min-width: 769px) {
+            .cares-stages {
+                gap: 0.75rem;
+            }
+
+            .cares-stages li {
+                padding: 1.1rem 0.75rem;
+            }
+
+            .cares-stages .stage-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .cares-stages li strong {
+                font-size: 0.92rem;
+            }
+
+            .cares-stages .stage-text {
+                font-size: 0.8rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.4rem;
@@ -514,6 +580,28 @@
 
             nav ul {
                 display: none;
+            }
+
+            .cares-stages {
+                flex-wrap: wrap;
+            }
+
+            .cares-stages li {
+                flex: 0 1 210px;
+                padding: 1.5rem 1.25rem;
+            }
+
+            .cares-stages .stage-icon {
+                width: 52px;
+                height: 52px;
+            }
+
+            .cares-stages li strong {
+                font-size: 1.05rem;
+            }
+
+            .cares-stages .stage-text {
+                font-size: 0.92rem;
             }
         }
 
@@ -602,6 +690,7 @@
 
         <h3>Five Stages of The CARES Model</h3>
 
+        <div class="stages-wrap">
         <ol class="cares-stages">
             <li>
                 <div class="stage-icon">
@@ -610,7 +699,7 @@
                         <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
                     </svg>
                 </div>
-                <span class="stage-text"><strong>Connection</strong>Members gain foundational knowledge and skills, and enhance their interest in community research.</span>
+                <span class="stage-text"><strong>Connection</strong><span class="stage-desc">Members gain foundational knowledge and skills, and enhance their interest in community research.</span><button class="stage-toggle" onclick="toggleStage(this)" type="button">Read more</button></span>
             </li>
             <li>
                 <div class="stage-icon">
@@ -621,7 +710,7 @@
                         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                     </svg>
                 </div>
-                <span class="stage-text"><strong>Partnership Development</strong>Occurs when members commit to increasing their engagement from "Membership" to "Partnership". At this time members connect with others who have complementary skills and interests, and engage in training, discussions, and networking opportunities together.</span>
+                <span class="stage-text"><strong>Partnership Development</strong><span class="stage-desc">Occurs when members commit to increasing their engagement from "Membership" to "Partnership". At this time members connect with others who have complementary skills and interests, and engage in training, discussions, and networking opportunities together.</span><button class="stage-toggle" onclick="toggleStage(this)" type="button">Read more</button></span>
             </li>
             <li>
                 <div class="stage-icon">
@@ -631,7 +720,7 @@
                         <path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2.3h6c0-1.1.4-1.8 1-2.3A7 7 0 0 0 12 2z"></path>
                     </svg>
                 </div>
-                <span class="stage-text"><strong>Innovation</strong>Once partners have formalized their commitment to work together, they collaboratively design a research project and secure funding with support from the Morgan CARES team.</span>
+                <span class="stage-text"><strong>Innovation</strong><span class="stage-desc">Once partners have formalized their commitment to work together, they collaboratively design a research project and secure funding with support from the Morgan CARES team.</span><button class="stage-toggle" onclick="toggleStage(this)" type="button">Read more</button></span>
             </li>
             <li>
                 <div class="stage-icon">
@@ -641,7 +730,7 @@
                         <rect x="9.5" y="9" width="5" height="4" rx="2"></rect>
                     </svg>
                 </div>
-                <span class="stage-text"><strong>Collaborative Action</strong>At this stage, funding (or other resources) has been secured, and partnerships have initiated project activities. Partners have access to our Community Center to support project activities and logistical support to further sustain their collaborative activities.</span>
+                <span class="stage-text"><strong>Collaborative Action</strong><span class="stage-desc">At this stage, funding (or other resources) has been secured, and partnerships have initiated project activities. Partners have access to our Community Center to support project activities and logistical support to further sustain their collaborative activities.</span><button class="stage-toggle" onclick="toggleStage(this)" type="button">Read more</button></span>
             </li>
             <li>
                 <div class="stage-icon">
@@ -660,9 +749,10 @@
                         <path d="M6.4 2.4l0.85 0.85"></path>
                     </svg>
                 </div>
-                <span class="stage-text"><strong>Outcome and Impact</strong>Partnerships now share the results of their efforts to various stakeholders. They receive additional support to help sustain projects/partnerships for long-term health promotion and impact on health practice or policy.</span>
+                <span class="stage-text"><strong>Outcome and Impact</strong><span class="stage-desc">Partnerships now share the results of their efforts to various stakeholders. They receive additional support to help sustain projects/partnerships for long-term health promotion and impact on health practice or policy.</span><button class="stage-toggle" onclick="toggleStage(this)" type="button">Read more</button></span>
             </li>
         </ol>
+        </div>
 
         <p>Read more about our model <a href="https://www.mdpi.com/1660-4601/19/19/12467" target="_blank" rel="noopener">here</a>.</p>
 
@@ -689,11 +779,10 @@
                 <p>Intended to support community-campus collaborations. The goal is to strengthen partnerships between community-based organizations or groups, and members of academia at Morgan State University.</p>
                 <span class="award-link">Learn more &rarr;</span>
             </a>
-            <a class="award-box" href="seed-funding.html">
+            <div class="award-box">
                 <h4>Practitioner Research Award</h4>
                 <p>Intended to support collaborative teams exploring a practice-related challenge (such as patient access to an existing service or cost-effectiveness of a program) and devising/testing a solution.</p>
-                <span class="award-link">Learn more &rarr;</span>
-            </a>
+            </div>
         </div>
 
         <p>It is the hope that these awards facilitate the emergence of responsive, community-led public health initiatives that promote health equity across Baltimore City communities. New partners may engage in supportive activities and training for as long as they wish to forge a strong partnership before submitting an application. Partners who have existing collaborations may also apply.</p>
@@ -817,6 +906,12 @@
 
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        function toggleStage(btn) {
+            var li = btn.closest('li');
+            var expanded = li.classList.toggle('expanded');
+            btn.textContent = expanded ? 'Read less' : 'Read more';
+        }
 
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
             var revealTargets = document.querySelectorAll('.morgan-cares > *');

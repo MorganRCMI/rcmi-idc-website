@@ -15,7 +15,7 @@
     window.workbookContract = {
         workbookFile: "rcmi_content.xlsx",
         lookups: {
-            facultyCategories: ["RCMI Leadership", "RCMI Research Project Faculty", "RCMI IDC leadership", "IDC Pilot Faculties"],
+            facultyCategories: ["RCMI Leadership", "RCMI IDC leadership", "IDC Pilot Faculties"],
             summaryLabels: ["Research Interests", "Role & Expertise"],
             researchRowTypes: ["area", "project", "infrastructure"],
             projectStatuses: ["Current", "Archived", "Planned"],

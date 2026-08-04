@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research Infrastructure Core - RCMI @ Morgan</title>
+    <title>RCMI Research Project - RCMI @ Morgan</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -191,57 +191,115 @@
             font-weight: 300;
         }
 
-        .coming-soon {
-            max-width: 900px;
+        .section-wrap {
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 5rem 5%;
-            text-align: center;
+            padding: 5rem 5% 2rem;
         }
 
-        .coming-soon-icon {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 1.75rem;
-            border-radius: 16px;
-            background: linear-gradient(135deg, var(--secondary), var(--accent));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
+        .section-wrap + .section-wrap {
+            padding-top: 0;
         }
 
-        .coming-soon h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-weight: 800;
+        .section-header {
+            margin-bottom: 2.5rem;
         }
 
-        .coming-soon p {
-            font-size: 1.05rem;
-            color: var(--text);
-            line-height: 1.85;
-            margin-bottom: 0.5rem;
-        }
-
-        .lead-strip {
-            max-width: 700px;
-            margin: 2rem auto 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.75rem;
-        }
-
-        .lead-pill {
-            background: var(--light);
-            border: 1px solid var(--border);
-            border-radius: 999px;
-            padding: 0.5rem 1.1rem;
-            font-size: 0.88rem;
+        .section-label {
+            color: var(--secondary);
             font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
             color: var(--primary);
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .rp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .rp-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid var(--secondary);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .rp-card-photo {
+            width: 72px;
+            height: 72px;
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 1.1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .rp-card-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-status {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(247, 147, 30, 0.1) 100%);
+            color: var(--secondary);
+            padding: 0.35rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            letter-spacing: 0.3px;
+            margin-bottom: 0.9rem;
+            align-self: flex-start;
+        }
+
+        .rp-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .rp-card-summary {
+            font-size: 0.95rem;
+            line-height: 1.75;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .rp-card-pi {
+            font-size: 0.88rem;
+            color: var(--ink-muted, #617284);
+            margin-bottom: 1.25rem;
+        }
+
+        .rp-card-link {
+            margin-top: auto;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.92rem;
+        }
+
+        .rp-card-link:hover {
+            color: var(--accent);
         }
 
         footer {
@@ -308,7 +366,8 @@
                 <li><a href="../">Home</a></li>
                 <li><a href="../idc/">IDC</a></li>
                 <li><a href="../cec/">CEC</a></li>
-                <li><a href="./" aria-current="page">RIC</a></li>
+                <li><a href="../ric/">RIC</a></li>
+                <li><a href="./" aria-current="page">Research Project</a></li>
             </ul>
             <button class="hamburger" id="hamburger">
                 <span></span>
@@ -324,8 +383,8 @@
             <div class="core-switch-pills">
                 <a href="../idc/" class="core-pill"><img src="../img/icons/idc-glasses-book.svg" alt="" width="16" height="16" class="core-pill-icon"> IDC</a>
                 <a href="../cec/" class="core-pill"><img src="../img/icons/community-cec.png" alt="" width="16" height="16" class="core-pill-icon"> CEC</a>
-                <a href="./" class="core-pill active">&#128300; RIC</a>
-                <a href="../research-project/" class="core-pill">&#129516; Research Project</a>
+                <a href="../ric/" class="core-pill">&#128300; RIC</a>
+                <a href="./" class="core-pill active">&#129516; Research Project</a>
             </div>
         </div>
     </div>
@@ -333,18 +392,26 @@
     <section class="hero hero-home">
         <div class="hero-content">
             <div class="tagline">Morgan State University</div>
-            <h1>Research<br>Infrastructure Core</h1>
-            <p class="subtitle">Building shared research capacity through the Molecular and Cell Biology Core, Biostatistics and Bioinformatics Core, and Animal Facility Core.</p>
+            <h1>RCMI Research<br>Project</h1>
+            <p class="subtitle">NIH/NIMHD-funded research led by RCMI@Morgan investigators, advancing science to address urban health disparities in Baltimore.</p>
         </div>
     </section>
 
-    <section class="coming-soon">
-        <div class="coming-soon-icon">🔬</div>
-        <h2>Content Coming Soon</h2>
-        <p>This site is being built out for the Research Infrastructure Core. Check back soon for faculty, shared facilities, and infrastructure resources.</p>
-        <div class="lead-strip">
-            <span class="lead-pill">Dr. James Wachira, Lead</span>
-            <span class="lead-pill">Dr. YueJin Li, Co-Lead</span>
+    <section class="section-wrap">
+        <div class="section-header">
+            <div class="section-label">Funded Research</div>
+            <h2 class="section-title">RCMI Research Projects</h2>
+        </div>
+
+        <div class="rp-grid">
+            <div class="rp-card">
+                <div class="rp-card-photo"><img src="../img/faculty/project_timothy_meeker.jpg" alt="Dr. Timothy Meeker"></div>
+                <span class="project-status">Current</span>
+                <h3>Project 3: Chemotherapy-Induced Neuropathy &amp; Non-Invasive Brain Stimulation</h3>
+                <p class="rp-card-summary">A randomized controlled trial testing transcranial direct current stimulation (tDCS) as a treatment for painful chemotherapy-induced neuropathy.</p>
+                <div class="rp-card-pi">Dr. Timothy Meeker &middot; Department of Biology</div>
+                <a class="rp-card-link" href="project-timothy-meeker.html">View Project &rarr;</a>
+            </div>
         </div>
     </section>
 
@@ -360,7 +427,8 @@
                 <h4>Our Cores</h4>
                 <a href="../idc/">Investigator Development Core</a>
                 <a href="../cec/">Community Engagement Core</a>
-                <a href="./" aria-current="page">Research Infrastructure Core</a>
+                <a href="../ric/">Research Infrastructure Core</a>
+                <a href="./" aria-current="page">RCMI Research Project</a>
             </div>
 
             <div class="footer-section">

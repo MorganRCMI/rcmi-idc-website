@@ -23,6 +23,7 @@ TARGETS = {
     "faculty": os.path.join(ROOT, "docs", "data", "faculty.csv"),
     "research": os.path.join(ROOT, "docs", "data", "research.csv"),
     "publications": os.path.join(ROOT, "docs", "data", "publications.csv"),
+    "events": os.path.join(ROOT, "docs", "data", "events.csv"),
 }
 
 

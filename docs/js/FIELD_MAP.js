@@ -15,7 +15,7 @@
     window.workbookContract = {
         workbookFile: "rcmi_content.xlsx",
         lookups: {
-            facultyCategories: ["RCMI Leadership", "RCMI Research Project Faculty", "RCMI IDC leadership", "IDC Pilot Faculties"],
+            facultyCategories: ["RCMI Leadership", "RCMI IDC leadership", "IDC Pilot Faculties"],
             summaryLabels: ["Research Interests", "Role & Expertise"],
             researchRowTypes: ["area", "project", "infrastructure"],
             projectStatuses: ["Current", "Archived", "Planned"],
@@ -177,6 +177,31 @@
                     "Project Display Override": "projectDisplayOverride",
                     "Internal Notes": "internalNotes",
                     "Program Type": "programType"
+                }
+            },
+            events: {
+                file: resolveDataFile("events.csv"),
+                requiredHeaders: [
+                    "Event ID",
+                    "Is Active",
+                    "Sort Order",
+                    "Title",
+                    "Event Date",
+                    "Flyer URL"
+                ],
+                headerMap: {
+                    "Event ID": "id",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Title": "title",
+                    "Series": "series",
+                    "Event Date": "eventDate",
+                    "End Date": "endDate",
+                    "Format": "format",
+                    "Description": "description",
+                    "Flyer URL": "flyerUrl",
+                    "Registration Link": "registrationLink",
+                    "Contact": "contact"
                 }
             }
         }

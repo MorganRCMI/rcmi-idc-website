@@ -338,6 +338,53 @@
         });
     }
 
+    function transformEventsRecords(rows) {
+        return rows.map(function (row) {
+            return {
+                id: row.id || "",
+                isActive: isActiveCell(row.isActive),
+                sortOrder: Number(row.sortOrder) || 0,
+                title: row.title || "",
+                series: row.series || "",
+                eventDate: row.eventDate || "",
+                endDate: row.endDate || "",
+                format: row.format || "",
+                description: row.description || "",
+                flyerUrl: row.flyerUrl || "",
+                registrationLink: row.registrationLink || "",
+                contact: row.contact || ""
+            };
+        });
+    }
+
+    function splitPastUpcoming(events) {
+        var today = new Date();
+        today.setHours(0, 0, 0, 0);
+        var upcoming = [];
+        var past = [];
+
+        (events || []).filter(function (ev) {
+            return ev.isActive;
+        }).forEach(function (ev) {
+            var compareDateStr = ev.endDate || ev.eventDate;
+            var compareDate = compareDateStr ? new Date(compareDateStr) : null;
+            if (compareDate && !isNaN(compareDate.getTime()) && compareDate >= today) {
+                upcoming.push(ev);
+            } else {
+                past.push(ev);
+            }
+        });
+
+        upcoming.sort(function (a, b) {
+            return new Date(a.eventDate) - new Date(b.eventDate);
+        });
+        past.sort(function (a, b) {
+            return new Date(b.eventDate) - new Date(a.eventDate);
+        });
+
+        return { upcoming: upcoming, past: past };
+    }
+
     function buildPublicationIndex(publications) {
         var index = new Map();
 
@@ -417,6 +464,8 @@
     sandboxHelpers.transformFacultyRecords = transformFacultyRecords;
     sandboxHelpers.transformResearchRecords = transformResearchRecords;
     sandboxHelpers.transformPublicationRecords = transformPublicationRecords;
+    sandboxHelpers.transformEventsRecords = transformEventsRecords;
+    sandboxHelpers.splitPastUpcoming = splitPastUpcoming;
     sandboxHelpers.getProjectsByFacultyId = getProjectsByFacultyId;
     sandboxHelpers.renderTagRow = renderTagRow;
     sandboxHelpers.renderFooter = renderFooter;

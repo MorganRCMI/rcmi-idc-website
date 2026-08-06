@@ -239,6 +239,60 @@
             line-height: 1.75;
         }
 
+        .upcoming-events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .upcoming-event-card {
+            background: var(--surface);
+            border: 1px solid var(--line-soft);
+            border-radius: 20px;
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-thumb-wrap {
+            position: relative;
+            height: 210px;
+            overflow: hidden;
+            background: var(--surface-soft);
+            pointer-events: none;
+        }
+
+        .event-thumb-wrap iframe {
+            width: 100%;
+            height: 650px;
+            border: none;
+            display: block;
+        }
+
+        .event-card-body {
+            padding: 1.25rem 1.5rem 1.5rem;
+        }
+
+        .event-subheading {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.05rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .event-view-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.92rem;
+        }
+
+        .event-view-link:hover {
+            color: var(--accent);
+        }
+
         .btn {
             display: inline-flex;
             align-items: center;
@@ -489,12 +543,14 @@
                 <p class="section-description">New workshops and training sessions are in the works.</p>
             </div>
 
-            <div class="empty-state">
+            <div class="empty-state" id="upcoming-empty-state">
                 <div class="empty-state-icon">&#128197;</div>
                 <h3>No upcoming events right now</h3>
                 <p>We're planning our next round of workshops and training sessions. Check back soon, or email us to be notified when registration opens.</p>
                 <a class="btn btn-secondary" href="mailto:rcmi_idc@morgan.edu">Get Notified</a>
             </div>
+
+            <div class="upcoming-events-grid" id="upcoming-events-grid" style="display:none;"></div>
         </section>
 
         <section class="section" aria-label="Past events">
@@ -592,6 +648,109 @@
                 });
             }
         }
+    </script>
+    <script>
+        (function () {
+            var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1JmnM8ACdfN0ROJ-3m9VEHWwEFf_bKDkRqKpIlGhz9To/export?format=csv&gid=749395700';
+
+            function parseCSV(text) {
+                var rows = [];
+                var row = [];
+                var field = '';
+                var inQuotes = false;
+                for (var i = 0; i < text.length; i++) {
+                    var c = text[i];
+                    if (inQuotes) {
+                        if (c === '"') {
+                            if (text[i + 1] === '"') { field += '"'; i++; }
+                            else { inQuotes = false; }
+                        } else {
+                            field += c;
+                        }
+                    } else if (c === '"') {
+                        inQuotes = true;
+                    } else if (c === ',') {
+                        row.push(field);
+                        field = '';
+                    } else if (c === '\r') {
+                        // skip
+                    } else if (c === '\n') {
+                        row.push(field);
+                        rows.push(row);
+                        row = [];
+                        field = '';
+                    } else {
+                        field += c;
+                    }
+                }
+                if (field.length || row.length) {
+                    row.push(field);
+                    rows.push(row);
+                }
+                return rows;
+            }
+
+            function drivePreviewUrl(url) {
+                if (!url) return '';
+                var match = url.match(/[-\w]{25,}/);
+                if (!match) return url;
+                return 'https://drive.google.com/file/d/' + match[0] + '/preview';
+            }
+
+            function cleanLink(url) {
+                if (!url) return '';
+                // Unwrap Proofpoint/urldefense-style redirect links to get the real URL
+                var m = url.match(/urldefense\.com\/v3\/__(.*?)__;/);
+                if (m && m[1]) return m[1];
+                return url;
+            }
+
+            function renderEvents(events) {
+                var emptyState = document.getElementById('upcoming-empty-state');
+                var grid = document.getElementById('upcoming-events-grid');
+                if (!grid || !events.length) return;
+
+                grid.innerHTML = events.map(function (ev, index) {
+                    return '<div class="upcoming-event-card">' +
+                        '<div class="event-thumb-wrap"><iframe src="' + drivePreviewUrl(ev.flyer) + '" loading="lazy" title="Event flyer preview" tabindex="-1"></iframe></div>' +
+                        '<div class="event-card-body">' +
+                        '<div class="event-subheading">Upcoming Event</div>' +
+                        '<a class="event-view-link" href="event-detail.html?event=' + index + '">View Event &rarr;</a>' +
+                        '</div>' +
+                        '</div>';
+                }).join('');
+
+                grid.style.display = 'grid';
+                if (emptyState) emptyState.style.display = 'none';
+            }
+
+            fetch(SHEET_CSV_URL)
+                .then(function (res) {
+                    if (!res.ok) throw new Error('Could not load events sheet');
+                    return res.text();
+                })
+                .then(function (text) {
+                    var rows = parseCSV(text);
+                    var header = rows.shift() || [];
+                    var flyerIdx = header.indexOf('Flyer');
+                    var linkIdx = header.indexOf('Registration Link');
+                    if (flyerIdx === -1) return;
+
+                    var events = rows
+                        .filter(function (r) { return r[flyerIdx]; })
+                        .map(function (r) {
+                            return {
+                                flyer: r[flyerIdx],
+                                link: cleanLink(r[linkIdx])
+                            };
+                        });
+
+                    renderEvents(events);
+                })
+                .catch(function (err) {
+                    console.error('Upcoming events could not be loaded:', err);
+                });
+        })();
     </script>
     <script src="../js/nav.js"></script>
 </body>

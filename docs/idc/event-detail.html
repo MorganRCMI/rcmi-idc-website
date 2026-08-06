@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details - RCMI IDC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #FF6B35;
+            --accent: #F7931E;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #2c3e50;
+            --border: #e0e6ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: clamp(1rem, 2vw, 2rem);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover,
+        nav a[aria-current="page"] {
+            color: var(--secondary);
+        }
+
+        nav a:hover::after,
+        nav a[aria-current="page"]::after {
+            width: 100%;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 2rem 5% 0;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .section-wrap {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 5% 4rem;
+        }
+
+        .section-header {
+            margin-bottom: 1.75rem;
+        }
+
+        .section-label {
+            color: var(--secondary);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .event-detail-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .event-detail-card iframe {
+            width: 100%;
+            height: 80vh;
+            min-height: 500px;
+            border: none;
+            display: block;
+            background: var(--light);
+        }
+
+        .event-detail-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 1.75rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0.9rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white;
+            box-shadow: 0 10px 24px rgba(255, 107, 53, 0.28);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--secondary);
+            border: 1.5px solid rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+        }
+
+        .event-not-found {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text);
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../styles/site-polish.css?v=1">
+    <link rel="stylesheet" href="../styles/hero-system.css?v=1">
+    <link rel="stylesheet" href="../styles/nav.css?v=2">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../" class="logo">RCMI <span>@ Morgan</span></a>
+            <ul id="menu">
+                <li><a href="./">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faculty.html">Faculty</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="events.html" aria-current="page">Events</a></li>
+                <li><a href="opportunities.html">Opportunities</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <div class="core-switcher">
+        <div class="core-switcher-inner">
+            <a href="../" class="core-switch-home">&larr; RCMI @ Morgan</a>
+            <div class="core-switch-pills">
+                <a href="./" class="core-pill active"><img src="../img/icons/idc-glasses-book.svg" alt="" width="16" height="16" class="core-pill-icon"> IDC</a>
+                <a href="../cec/" class="core-pill"><img src="../img/icons/community-cec.png" alt="" width="16" height="16" class="core-pill-icon"> CEC</a>
+                <a href="../ric/" class="core-pill">&#128300; RIC</a>
+                <a href="../research-project/" class="core-pill">&#129516; Research Project</a>
+            </div>
+        </div>
+    </div>
+
+    <a href="events.html" class="back-link">&larr; Back to Events</a>
+
+    <section class="section-wrap">
+        <div class="section-header">
+            <div class="section-label">Upcoming Event</div>
+            <h2 class="section-title">Event Details</h2>
+        </div>
+
+        <div id="event-detail-root">
+            <p class="event-not-found">Loading event&hellip;</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>RCMI IDC</h4>
+                <p>Center for Urban Health Disparities Research and Innovation</p>
+                <p>Morgan State University</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="about.html">About RCMI & IDC</a>
+                <a href="faculty.html">Faculty & Staff</a>
+                <a href="research.html">Research Projects</a>
+                <a href="publications.html">Publications</a>
+                <a href="events.html">Events & Workshops</a>
+                <a href="opportunities.html">Opportunities</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Portage Avenue Campus, Room 113</p>
+                <p>1700 E Cold Spring Lane</p>
+                <p>Baltimore, MD 21251</p>
+                <p>Phone: 443-885-4534</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="mailto:rcmi_idc@morgan.edu">Email RCMI IDC</a>
+                <a href="https://www.morgan.edu/rcmi">RCMI Program</a>
+                <a href="opportunities.html">Apply for Funding</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year">2024</span> Morgan State University RCMI IDC. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        (function () {
+            var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1JmnM8ACdfN0ROJ-3m9VEHWwEFf_bKDkRqKpIlGhz9To/export?format=csv&gid=749395700';
+
+            function parseCSV(text) {
+                var rows = [];
+                var row = [];
+                var field = '';
+                var inQuotes = false;
+                for (var i = 0; i < text.length; i++) {
+                    var c = text[i];
+                    if (inQuotes) {
+                        if (c === '"') {
+                            if (text[i + 1] === '"') { field += '"'; i++; }
+                            else { inQuotes = false; }
+                        } else {
+                            field += c;
+                        }
+                    } else if (c === '"') {
+                        inQuotes = true;
+                    } else if (c === ',') {
+                        row.push(field);
+                        field = '';
+                    } else if (c === '\r') {
+                        // skip
+                    } else if (c === '\n') {
+                        row.push(field);
+                        rows.push(row);
+                        row = [];
+                        field = '';
+                    } else {
+                        field += c;
+                    }
+                }
+                if (field.length || row.length) {
+                    row.push(field);
+                    rows.push(row);
+                }
+                return rows;
+            }
+
+            function drivePreviewUrl(url) {
+                if (!url) return '';
+                var match = url.match(/[-\w]{25,}/);
+                if (!match) return url;
+                return 'https://drive.google.com/file/d/' + match[0] + '/preview';
+            }
+
+            function driveViewUrl(url) {
+                if (!url) return '';
+                var match = url.match(/[-\w]{25,}/);
+                if (!match) return url;
+                return 'https://drive.google.com/file/d/' + match[0] + '/view';
+            }
+
+            function cleanLink(url) {
+                if (!url) return '';
+                var m = url.match(/urldefense\.com\/v3\/__(.*?)__;/);
+                if (m && m[1]) return m[1];
+                return url;
+            }
+
+            var params = new URLSearchParams(window.location.search);
+            var index = parseInt(params.get('event'), 10);
+            var root = document.getElementById('event-detail-root');
+
+            fetch(SHEET_CSV_URL)
+                .then(function (res) {
+                    if (!res.ok) throw new Error('Could not load events sheet');
+                    return res.text();
+                })
+                .then(function (text) {
+                    var rows = parseCSV(text);
+                    var header = rows.shift() || [];
+                    var flyerIdx = header.indexOf('Flyer');
+                    var linkIdx = header.indexOf('Registration Link');
+                    if (flyerIdx === -1) throw new Error('Flyer column not found');
+
+                    var events = rows
+                        .filter(function (r) { return r[flyerIdx]; })
+                        .map(function (r) {
+                            return {
+                                flyer: r[flyerIdx],
+                                link: cleanLink(r[linkIdx])
+                            };
+                        });
+
+                    var ev = events[index];
+                    if (!ev) {
+                        root.innerHTML = '<p class="event-not-found">We couldn&rsquo;t find that event. <a href="events.html">Back to Events</a></p>';
+                        return;
+                    }
+
+                    var registerButton = ev.link
+                        ? '<a class="btn btn-primary" href="' + ev.link + '" target="_blank" rel="noopener">Register Now</a>'
+                        : '';
+
+                    root.innerHTML =
+                        '<div class="event-detail-card">' +
+                        '<iframe src="' + drivePreviewUrl(ev.flyer) + '" title="Event flyer"></iframe>' +
+                        '<div class="event-detail-actions">' +
+                        registerButton +
+                        '<a class="btn btn-secondary" href="' + driveViewUrl(ev.flyer) + '" target="_blank" rel="noopener">View &amp; Download Flyer</a>' +
+                        '</div>' +
+                        '</div>';
+                })
+                .catch(function (err) {
+                    console.error('Could not load event details:', err);
+                    root.innerHTML = '<p class="event-not-found">Sorry, we couldn&rsquo;t load this event right now. <a href="events.html">Back to Events</a></p>';
+                });
+        })();
+    </script>
+    <script src="../js/nav.js"></script>
+</body>
+</html>

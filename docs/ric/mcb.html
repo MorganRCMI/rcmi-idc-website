@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Molecular &amp; Cellular Biology Core - RCMI RCC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #FF6B35;
+            --accent: #F7931E;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #2c3e50;
+            --border: #e0e6ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s ease;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .logo:hover {
+            opacity: 0.9;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: clamp(1rem, 2vw, 2rem);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover,
+        nav a[aria-current="page"] {
+            color: var(--secondary);
+        }
+
+        nav a:hover::after,
+        nav a[aria-current="page"]::after {
+            width: 100%;
+        }
+
+        .page-header {
+            margin-top: 0;
+            padding: 6rem 5% 4rem;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            perspective: 1200px;
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 1;
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease-out;
+            will-change: transform;
+        }
+
+        .page-hero-content h1,
+        .page-hero-content p {
+            transform: translateZ(0);
+            transition: transform 0.2s ease-out;
+        }
+
+        .page-hero-content h1 {
+            transform: translateZ(45px);
+        }
+
+        .page-hero-content p {
+            transform: translateZ(15px);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page-hero-content,
+            .page-hero-content h1,
+            .page-hero-content p {
+                transform: none !important;
+                transition: none !important;
+            }
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: white;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.15rem;
+            max-width: 700px;
+        }
+
+        .page-content {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 4.5rem 5%;
+        }
+
+        .page-content > * {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .page-content > *.reveal-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page-content > * {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        .page-content > p {
+            max-width: 760px;
+        }
+
+        .page-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            color: var(--primary);
+            margin: 3.5rem 0 1.25rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+            font-weight: 800;
+        }
+
+        .page-content h2:first-child {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .field-link-heading {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            color: var(--primary);
+            font-weight: 800;
+            text-decoration: none;
+            margin: 3.5rem 0 1.25rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+            transition: color 0.2s ease;
+        }
+
+        .field-link-heading:hover {
+            color: var(--secondary);
+        }
+
+        .field-link-heading svg {
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .field-link-heading:hover svg {
+            transform: translate(2px, -2px);
+        }
+
+        .page-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin: 2rem 0 0.75rem;
+            font-weight: 700;
+        }
+
+        .page-content h3:first-of-type {
+            margin-top: 0.5rem;
+        }
+
+        .page-content p {
+            font-size: 1.05rem;
+            color: var(--text);
+            line-height: 1.85;
+            margin-bottom: 1.25rem;
+        }
+
+        .placeholder-note {
+            color: var(--secondary);
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        .workflow-image-wrap {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.75rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+            margin: 1.25rem 0 2rem;
+            overflow-x: auto;
+        }
+
+        .workflow-svg {
+            display: block;
+            width: 100%;
+            min-width: 640px;
+            max-width: 920px;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .workflow-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.25rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .workflow-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.82rem;
+            color: var(--text);
+        }
+
+        .workflow-legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .equipment-intro {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), #004d99);
+            border-radius: 20px;
+            padding: 1.75rem 2rem;
+            margin: 1.5rem 0 2rem;
+            box-shadow: 0 12px 30px rgba(0, 51, 102, 0.18);
+        }
+
+        .equipment-intro-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+
+        .equipment-intro p {
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 0.98rem;
+            line-height: 1.75;
+            margin: 0;
+        }
+
+        .equipment-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .equipment-category {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .equipment-category[open] {
+            box-shadow: 0 14px 36px rgba(0, 51, 102, 0.12);
+            border-color: rgba(255, 107, 53, 0.25);
+        }
+
+        .equipment-category summary {
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+            padding: 1.15rem 1.5rem;
+            cursor: pointer;
+            list-style: none;
+            user-select: none;
+        }
+
+        .equipment-category summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .equipment-cat-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            flex-shrink: 0;
+        }
+
+        .equipment-cat-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.08rem;
+            color: var(--primary);
+            font-weight: 700;
+            flex: 1;
+        }
+
+        .equipment-cat-count {
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: var(--secondary);
+            background: rgba(255, 107, 53, 0.08);
+            border: 1px solid rgba(255, 107, 53, 0.16);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .equipment-chevron {
+            width: 18px;
+            height: 18px;
+            color: var(--text);
+            opacity: 0.5;
+            flex-shrink: 0;
+            transition: transform 0.25s ease;
+        }
+
+        .equipment-category[open] .equipment-chevron {
+            transform: rotate(180deg);
+        }
+
+        .equipment-list {
+            margin: 0;
+            padding: 0 1.5rem 1.5rem;
+            list-style: none;
+            counter-reset: eq-counter;
+        }
+
+        .equipment-list.count-from-4 {
+            counter-reset: eq-counter 3;
+        }
+
+        .equipment-list > li {
+            counter-increment: eq-counter;
+            position: relative;
+            padding: 0.9rem 0 0.9rem 3rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.95rem;
+            line-height: 1.75;
+            color: var(--text);
+        }
+
+        .equipment-list > li::before {
+            content: counter(eq-counter);
+            position: absolute;
+            left: 0;
+            top: 0.75rem;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--light);
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 0.76rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .equipment-list ul {
+            margin: 0.6rem 0 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .equipment-list ul li {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 0.35rem 0.9rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* Service Subscription */
+        .subscription-banner {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            background: linear-gradient(135deg, #fff7f4, #ffffff);
+            border: 1.5px solid rgba(255, 107, 53, 0.22);
+            border-radius: 18px;
+            padding: 1.5rem 1.75rem;
+            margin: 0 0 2rem;
+        }
+
+        .subscription-banner-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .subscription-banner p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin: 0 0 0.6rem;
+        }
+
+        .subscription-banner p:last-child {
+            margin-bottom: 0;
+        }
+
+        .subscription-banner strong {
+            color: var(--primary);
+        }
+
+        .pricing-tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin: 0 0 2rem;
+        }
+
+        .pricing-tier {
+            background: white;
+            border: 1.5px solid var(--border);
+            border-radius: 18px;
+            padding: 1.85rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .pricing-tier:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 36px rgba(0, 51, 102, 0.14);
+            border-color: rgba(255, 107, 53, 0.3);
+        }
+
+        .pricing-tier.featured {
+            border-color: var(--secondary);
+            background: linear-gradient(160deg, #ffffff 0%, #fff6ef 100%);
+        }
+
+        .pricing-tier-label {
+            font-size: 0.76rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .pricing-tier-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 0.6rem;
+        }
+
+        .pricing-tier-price span {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text);
+            opacity: 0.7;
+        }
+
+        .pricing-tier-desc {
+            font-size: 0.86rem;
+            color: var(--text);
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .pricing-note {
+            font-size: 0.92rem;
+            color: var(--text);
+            opacity: 0.85;
+            line-height: 1.75;
+            margin: -0.75rem 0 2rem;
+        }
+
+        .service-categories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0 2rem;
+        }
+
+        .service-category-card.center-last {
+            grid-column: 2;
+        }
+
+        .service-category-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem 1.4rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .service-category-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 36px rgba(0, 51, 102, 0.12);
+            border-color: rgba(255, 107, 53, 0.25);
+        }
+
+        .service-category-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.88rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.65rem;
+            border-bottom: 2px solid rgba(255, 107, 53, 0.15);
+        }
+
+        .service-category-icon {
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.78rem;
+            flex-shrink: 0;
+        }
+
+        .service-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 0.6rem;
+            padding: 0.45rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.74rem;
+            line-height: 1.35;
+        }
+
+        .service-row:last-child {
+            border-bottom: none;
+        }
+
+        .service-row-name {
+            color: var(--text);
+        }
+
+        .service-row-price {
+            font-weight: 700;
+            color: var(--secondary);
+            white-space: nowrap;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        .service-row-price.na {
+            color: var(--text);
+            opacity: 0.4;
+            font-weight: 500;
+        }
+
+        .other-services-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .other-service-item {
+            position: relative;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.75rem 1.6rem 1.6rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .other-service-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 36px rgba(0, 51, 102, 0.12);
+            border-color: rgba(255, 107, 53, 0.25);
+        }
+
+        .other-service-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 13px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1.1rem;
+        }
+
+        .other-service-item h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .other-service-item p {
+            font-size: 0.92rem;
+            color: var(--text);
+            line-height: 1.75;
+            margin: 0;
+        }
+
+        .team-grid {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .team-card {
+            flex: 1 1 0;
+            min-width: 0;
+            text-align: center;
+        }
+
+        @media (max-width: 480px) {
+            .team-grid {
+                flex-wrap: wrap;
+            }
+
+            .team-card {
+                flex: 0 1 140px;
+            }
+        }
+
+        .team-avatar {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            transition: transform 0.2s ease;
+        }
+
+        .team-card:hover .team-avatar {
+            transform: scale(1.06);
+        }
+
+        .team-name {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.02rem;
+            line-height: 1.4;
+            margin-bottom: 0.35rem;
+        }
+
+        .team-designation {
+            font-size: 0.88rem;
+            color: var(--text);
+            opacity: 0.85;
+            line-height: 1.5;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover,
+        .footer-section a[aria-current="page"] {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .subscription-banner {
+                flex-direction: column;
+            }
+
+            .service-categories {
+                grid-template-columns: 1fr;
+            }
+
+            .service-category-card.center-last {
+                grid-column: 1;
+            }
+
+            .service-category-card h4 {
+                font-size: 1rem;
+            }
+
+            .service-row {
+                font-size: 0.88rem;
+            }
+
+            .service-row-price {
+                font-size: 0.82rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../styles/site-polish.css?v=1">
+    <link rel="stylesheet" href="../styles/hero-system.css?v=1">
+    <link rel="stylesheet" href="../styles/nav.css?v=2">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../" class="logo">RCMI <span>@ Morgan</span></a>
+            <ul id="menu">
+                <li><a href="./">Home</a></li>
+                <li><a href="mcb.html" aria-current="page">MCB</a></li>
+                <li><a href="arf.html">ARF</a></li>
+                <li><a href="bbsu.html">BBSU</a></li>
+                <li><a href="services.html">Services</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <div class="core-switcher">
+        <div class="core-switcher-inner">
+            <a href="../" class="core-switch-home">&larr; RCMI @ Morgan</a>
+            <div class="core-switch-pills">
+                <a href="../idc/" class="core-pill"><img src="../img/icons/idc-glasses-book.svg" alt="" width="16" height="16" class="core-pill-icon"> IDC</a>
+                <a href="../cec/" class="core-pill"><img src="../img/icons/community-cec.png" alt="" width="16" height="16" class="core-pill-icon"> CEC</a>
+                <a href="./" class="core-pill active">&#128300; RCC</a>
+                <a href="../research-project/" class="core-pill">&#129516; Research Project</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="page-header page-hero">
+        <div class="page-hero-content">
+            <h1>Molecular &amp; Cellular Biology Core</h1>
+            <p>Part of the Research Capacity Core (RCC), providing shared instrumentation, expertise, and support for molecular and cellular biology research.</p>
+        </div>
+    </section>
+
+    <section class="page-content">
+        <p>The Morgan State University Molecular &amp; Cellular Biology Core Laboratory (MCB) is a shared instrumentation laboratory that provides a comprehensive range of services to support modern experimental biomedical research. These include advanced equipment, technical assistance, training, and supplies to initiate research in the early years of implementation. The MCB is a state-of-the-art facility powered by a diverse team of qualified professionals focused on sequencing technology, flow cytometry, confocal microscopy, and molecular characterization, backed by a thorough array of laboratory support equipment. The facility covers several floors of the Richard N. Dixon Science Research Center to provide space for dedicated rooms, supplies, and specialized equipment to accommodate the needs of our users.</p>
+
+        <h2>Workflow</h2>
+        <div class="workflow-image-wrap">
+            <svg class="workflow-svg" viewBox="0 0 900 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MCB service workflow: Initial Consultation leads to either a self-guided booking and reservation, or to Core Support, which flows through Sample Receipt and Storage, Protocol Review, an optional Data Analysis by the Core Facility, and finally Data and Extra Samples returned to the client.">
+                <defs>
+                    <marker id="wfArrow" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                        <path d="M0,0 L0,6 L8,3 z" fill="#003366"></path>
+                    </marker>
+                    <linearGradient id="wfTerminalFill" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#003366"></stop>
+                        <stop offset="100%" stop-color="#004d99"></stop>
+                    </linearGradient>
+                </defs>
+
+                <!-- Row 1 -->
+                <polygon points="130,35 225,90 130,145 35,90" fill="white" stroke="#FF6B35" stroke-width="2.5"></polygon>
+                <text x="130" y="85" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Initial</text>
+                <text x="130" y="101" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Consultation</text>
+
+                <rect x="368" y="55" width="124" height="70" rx="10" fill="white" stroke="#003366" stroke-width="2"></rect>
+                <text x="430" y="86" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Self</text>
+                <text x="430" y="102" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Guided</text>
+
+                <rect x="608" y="55" width="164" height="70" rx="35" fill="url(#wfTerminalFill)"></rect>
+                <text x="690" y="86" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="white">Booking/</text>
+                <text x="690" y="102" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="white">Reservation</text>
+
+                <line x1="225" y1="90" x2="360" y2="90" stroke="#003366" stroke-width="2" marker-end="url(#wfArrow)"></line>
+                <line x1="492" y1="90" x2="600" y2="90" stroke="#003366" stroke-width="2" marker-end="url(#wfArrow)"></line>
+                <line x1="130" y1="145" x2="130" y2="262" stroke="#003366" stroke-width="2" marker-end="url(#wfArrow)"></line>
+
+                <!-- Row 2 -->
+                <rect x="58" y="270" width="144" height="70" rx="10" fill="white" stroke="#003366" stroke-width="2"></rect>
+                <text x="130" y="301" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Core</text>
+                <text x="130" y="317" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Support</text>
+
+                <rect x="298" y="263" width="150" height="84" rx="10" fill="white" stroke="#003366" stroke-width="2"></rect>
+                <text x="373" y="293" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Sample</text>
+                <text x="373" y="309" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Receipt &amp;</text>
+                <text x="373" y="325" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Storage</text>
+
+                <polygon points="592,250 685,305 592,360 499,305" fill="white" stroke="#FF6B35" stroke-width="2.5"></polygon>
+                <text x="592" y="300" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Protocol</text>
+                <text x="592" y="316" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Review</text>
+
+                <rect x="742" y="253" width="152" height="104" rx="12" fill="url(#wfTerminalFill)"></rect>
+                <text x="818" y="288" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="12.5" font-weight="700" fill="white">Data &amp; Extra</text>
+                <text x="818" y="304" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="12.5" font-weight="700" fill="white">Samples</text>
+                <text x="818" y="320" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="12.5" font-weight="700" fill="white">Returned to</text>
+                <text x="818" y="336" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="12.5" font-weight="700" fill="white">Client</text>
+
+                <line x1="202" y1="305" x2="290" y2="305" stroke="#003366" stroke-width="2" marker-end="url(#wfArrow)"></line>
+                <line x1="448" y1="305" x2="491" y2="305" stroke="#003366" stroke-width="2" marker-end="url(#wfArrow)"></line>
+                <line x1="685" y1="305" x2="734" y2="305" stroke="#003366" stroke-width="2" marker-end="url(#wfArrow)"></line>
+
+                <!-- Row 3 -->
+                <rect x="500" y="392" width="184" height="70" rx="10" fill="white" stroke="#003366" stroke-width="2"></rect>
+                <text x="592" y="418" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="12.5" font-weight="700" fill="#003366">Optional Data</text>
+                <text x="592" y="434" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="12.5" font-weight="700" fill="#003366">Analysis by Core</text>
+                <text x="592" y="450" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="12.5" font-weight="700" fill="#003366">Facility</text>
+
+                <line x1="592" y1="360" x2="592" y2="384" stroke="#003366" stroke-width="2" marker-end="url(#wfArrow)"></line>
+                <polyline points="684,427 818,427 818,365" fill="none" stroke="#003366" stroke-width="2" marker-end="url(#wfArrow)"></polyline>
+            </svg>
+
+            <div class="workflow-legend">
+                <div class="workflow-legend-item">
+                    <span class="workflow-legend-swatch" style="background: white; border: 2px solid #FF6B35; transform: rotate(45deg);"></span>
+                    Decision point
+                </div>
+                <div class="workflow-legend-item">
+                    <span class="workflow-legend-swatch" style="background: white; border: 2px solid #003366;"></span>
+                    Process step
+                </div>
+                <div class="workflow-legend-item">
+                    <span class="workflow-legend-swatch" style="background: linear-gradient(135deg, #003366, #004d99);"></span>
+                    Start/end point
+                </div>
+            </div>
+        </div>
+
+        <h2>MCB Staff</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-avatar">JW</div>
+                <div class="team-name">James Wachira</div>
+                <div class="team-designation">Director</div>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">YL</div>
+                <div class="team-name">YueJin Li</div>
+                <div class="team-designation">Co-Director</div>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">RM</div>
+                <div class="team-name">Roger Mullins</div>
+                <div class="team-designation">Core Laboratory Manager</div>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">KM</div>
+                <div class="team-name">Kelley Murphy</div>
+                <div class="team-designation">Core Laboratory Specialist</div>
+            </div>
+        </div>
+
+        <a href="#" class="field-link-heading">
+            Equipment
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M7 7h10v10"></path></svg>
+        </a>
+
+        <div class="equipment-intro">
+            <div class="equipment-intro-icon">&#128300;</div>
+            <p>The MCB provides access to a wide array of equipment for biomedical research, focused on flow cytometry, genomic analysis, biological assays, biomedical imaging, nanomaterials research, molecular separation and identification, and histology. Tap a category below to see what's available.</p>
+        </div>
+
+        <div class="equipment-accordion">
+            <details class="equipment-category" open>
+                <summary>
+                    <span class="equipment-cat-icon">&#129516;</span>
+                    <span class="equipment-cat-title">Flow Cytometry</span>
+                    <span class="equipment-cat-count">2 items</span>
+                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </summary>
+                <ol class="equipment-list">
+                    <li>SONY SH800 cell sorter with the capacity to sort different cell sizes using microfluidics sorting chips. The sorter is equipped with 488nm/638nm/408nm lasers.</li>
+                    <li>Cytek Aurora Spectral analyzer equipped with 405nm, 488nm, and 640nm lasers. The spectral unmixing technology allows for the efficient separation of spectra from different fluorochromes. As set up, 38 color phenotyping can be accomplished from a single experiment. This system provides high sensitivity, flexible multicolor panel design, and robust resolution of complex and overlapping fluorochromes, supporting advanced applications such as deep immunophenotyping, rare-cell detection, and high-parameter flow cytometry experiments.</li>
+                </ol>
+            </details>
+
+            <details class="equipment-category">
+                <summary>
+                    <span class="equipment-cat-icon">&#129514;</span>
+                    <span class="equipment-cat-title">Genomics/Genetics Analysis</span>
+                    <span class="equipment-cat-count">5 items</span>
+                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </summary>
+                <ol class="equipment-list">
+                    <li>MiSeq&reg; System integrated DNA and RNA sequencing system.</li>
+                    <li>QIAcuity Digital PCR System: quantification for mutation detection, copy number variation (CNV), gene expression studies, and gene-editing analysis</li>
+                    <li>Bio-Rad CFX96 Touch Real-Time PCR Detection System: quantitative real-time PCR machine with direct-to-paper data output.</li>
+                    <li>QuantStudio&trade; 6 Flex: Real-Time PCR System, 96 or 384-well, with laptop.</li>
+                    <li>Nanovue Plus &amp; Nanodrop spectrophotometers, 16-well Take3 plate for spectrophotometry on the H1 Synergy microplate reader, and a Qubit 4 Fluorometer.</li>
+                </ol>
+            </details>
+
+            <details class="equipment-category">
+                <summary>
+                    <span class="equipment-cat-icon">&#9879;&#65039;</span>
+                    <span class="equipment-cat-title">Biological Assay Technologies</span>
+                    <span class="equipment-cat-count">7 items</span>
+                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </summary>
+                <ol class="equipment-list">
+                    <li>Bio-Tek Synergy H1MF hybrid multimode microplate reader with top and bottom fluorescence intensity, UV-visible absorbance, luminescence, fluorescence polarization, TRF &amp; TR-FRET detection. Take3 plate available for spectrophotometry.</li>
+                    <li>Luminex MAGPIX&reg; System: A multiplexing unit with magnetic bead technology runs 50 different tests in a single reaction volume and reads 96-well-plate in 60 minutes.</li>
+                    <li>GE Amersham 680R gel imaging system for DNA and protein gels capable of chemiluminescence and fluorescence in Western blots.</li>
+                    <li>Bio-Rad NGC Quest 10 System. An FPLC (fast protein liquid chromatography) system for protein purification to homogeneity.</li>
+                    <li>One (1) Invitrogen iBind Automated Western Systems that automate the western blot processing (immunodetection) steps.</li>
+                    <li>Two (2) Invitrogen iBlot Gel Transfer Devices to perform Western blotting transfer within several minutes without the need for buffers.</li>
+                    <li>Three (2) Invitrogen Mini Gel Tanks that allow electrophoresis of 1 or 2 mini gels, with power supplies and mini-blot transfer modules.</li>
+                </ol>
+            </details>
+
+            <details class="equipment-category">
+                <summary>
+                    <span class="equipment-cat-icon">&#128300;</span>
+                    <span class="equipment-cat-title">Biomedical Imaging</span>
+                    <span class="equipment-cat-count">7 items</span>
+                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </summary>
+                <ol class="equipment-list">
+                    <li>Nikon Eclipse TE2000-S: fluorescence microscope that includes new optics, digital cameras and software.</li>
+                    <li>Nikon Eclipse 90i upright microscope equipped with BF, FL, and DIC optics, motorized focus and Nikon 100W mercury power supply, a Lumenera 3 digital camera, Image-Pro Plus image analysis software, and Dell Optiplex 5040 workstation.</li>
+                    <li>JEOL JEM-1400 transmission electron microscope with 120 kV accelerating voltage; electron gun assembly with Cool Beam Illumination System - LaB6 filament standard with a comprehensive Energy Dispersive X-ray Microanalysis system, including all the tools required to perform qualitative and quantitative analysis, image capture, image centric analysis, and X-ray spectral analysis. Accessories include a NanoSprint43L-Mark II AMT 43-megapixel bottom-mount camera, double-tilt beryllium specimen holder, high-tilt specimen retainer, and hard x-ray aperture for HR PP, Aztec Energy standard EDS, and Xplore Detector standard microanalysis system with Xplore Large Area Analytical Drift Detector.</li>
+                    <li>JCM-7000 NeoScope&trade; Benchtop Scanning Electron Microscope offers high-resolution imaging capabilities, allowing for detailed visualization of sample surfaces. It can achieve magnifications up to 100,000x, with a resolution of 8 nm.</li>
+                    <li>Leica STELLARIS 5 Confocal Microscope with integrated White Light Laser, Acousto-Optical Beam Splitter, Power HyD S detectors, and ImageCompass smart user interface; capable of multicolor FL, DIC, 3D, and stage-top incubation for live-cell imaging at 10x, 20x, and 63x (oil) objectives.</li>
+                    <li>Tokai Hit Stage Top Incubator maintains precise control of temperature, humidity, and CO2 for live-cell imaging on the Leica Stellaris 5.</li>
+                    <li>Leica S9i digital stereo microscope with a zoom range of .61x - 5.5x for a total magnification of 6.1x - 55x with 10x eyepieces. Integrated 10 M.P. camera with 1080P HD video display and capture via HDMI cable.</li>
+                </ol>
+            </details>
+
+            <details class="equipment-category">
+                <summary>
+                    <span class="equipment-cat-icon">&#9883;&#65039;</span>
+                    <span class="equipment-cat-title">Nanomaterials Research</span>
+                    <span class="equipment-cat-count">1 item</span>
+                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </summary>
+                <ol class="equipment-list">
+                    <li>Zetasizer Nano: for characterization of nanomaterials such as size, aggregation and charge.</li>
+                </ol>
+            </details>
+
+            <details class="equipment-category">
+                <summary>
+                    <span class="equipment-cat-icon">&#129502;</span>
+                    <span class="equipment-cat-title">Molecular Separations and Identification</span>
+                    <span class="equipment-cat-count">7 items</span>
+                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </summary>
+                <ol class="equipment-list">
+                    <li>Xevo TQ-XS Triple Quadrupole Mass Spectrometer is a tandem quadrupole, atmospheric pressure ionization (API) mass spectrometer. It is designed for routine HPLC-MS/MS and UPLC-MS/MS analyses in quantitative and qualitative applications, and can operate at fast acquisition speeds compatible with UltraPerformance LC.</li>
+                    <li>Xevo TQ-GC Mass Spectrometry System is a robust Electron Ionization (EI) and Chemical Ionization (CI) Gas Chromatography (GC)-MS/MS platform that allows routine quantification of multiple contaminants in complex matrices.</li>
+                    <li>Flashsmart Elemental Analyzer for quantitative determination of nitrogen, carbon, hydrogen, sulfur and oxygen. Flexible handling of any sample type: solids, liquid, viscous, volatile and gas.</li>
+                    <li>NGC Quest 10 Chromatography System has automated 10 ml/min pumps that provide accurate gradients for high-resolution separation of proteins and biomolecules and supports automated sample injection using fixed or dynamic loops.</li>
+                    <li>Agilent 6546 Q-TOF LC/MS System with Agilent Jet Stream source, oil foreline pump, bundled PC, monitor, MassHunter software suite &ndash; at the low and high concentrations with simultaneous delivery of five orders of in-spectrum dynamic range and mass resolution over 60k (for high masses) and over 30k (for low masses).</li>
+                    <li>Agilent 7800 ICP-MS enables analysis of major and trace analytes in a single run &ndash; the wide dynamic range orthogonal detector system (ODS) enables direct analysis of major elements (100s or 1000s of ppm) and trace level analytes (single or sub-ppt) in a single run.</li>
+                    <li>Fluorolog-QM: enables steady-state and time-resolved luminescence measurements, including time-correlated single photon counting (TCSPC) and photoluminescence quantum yield (PLQY) measurements. All-reflective optics, resulting in exceptional focus across its entire wavelength range (180 nm to 5500 nm).</li>
+                </ol>
+            </details>
+
+            <details class="equipment-category">
+                <summary>
+                    <span class="equipment-cat-icon">&#129502;</span>
+                    <span class="equipment-cat-title">Tissue Preparation/Histology</span>
+                    <span class="equipment-cat-count">8 items</span>
+                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </summary>
+                <ol class="equipment-list">
+                    <li>PELCO Pella BioWavePro+ Microwave System: rapid processing of thin tissue sections for histological analysis (allows two to three assays per day).</li>
+                    <li>PELCO SteadyTemp&trade; Pro+ Solid State Chiller with Digital Control.</li>
+                    <li>Leica CM1860 cryostat for immunohistochemistry and histology applications.</li>
+                    <li>Leica paraffin embedding station.</li>
+                    <li>Leica rotary microtome for paraffin-embedded tissues.</li>
+                    <li>Ultramicrotome Station with a LEICA EM UC7 Ultramicrotome for consistent high quality Electron Microscopy (EM) sections at room temperature and a LEICA EM KMR3 Glass Knife Maker and Paraffin Embedding station.</li>
+                    <li>Covaris S2 Ultrasonicator: single-tube system for high-performance sample preparation using adaptive focused acoustic energy. GE Multitemp III water bath included for constant temperature.</li>
+                    <li>LABCONCO Freezone 2.5L Lyophilizer with vacuum pump, freeze drying glassware, and 8-port manifold.</li>
+                </ol>
+            </details>
+
+            <details class="equipment-category">
+                <summary>
+                    <span class="equipment-cat-icon">&#128187;</span>
+                    <span class="equipment-cat-title">Data Analysis</span>
+                    <span class="equipment-cat-count">3 items</span>
+                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </summary>
+                <ol class="equipment-list">
+                    <li>Two (2) Dell Precision 7920 Towers, Intel Xeon Silver 4214 2.2GHz, 3.2GHz Turbo, 12C, 9.6GT/s 2UPI, 16.5MB Cache, HT (85W) DDR4-2400 1st, NVIDIA Quadro P5000, 16GB, 4 DP, DL-DVI-D (7X20T), 256GB 4x64GB DDR4 2666MHz LRDIMM ECC Memory, 2.5" 1TB SATA Class 20 SSD.</li>
+                    <li>HP 2023 Pavilion 2-in-1 14" FHD Touch Screen Business Laptop, Intel Quad-Core i5-1135G7 2.4 GHz, 32GB DDR4, 1TB SSD, Fingerprint Reader, 8.5 Hours Battery, Bluetooth, Wifi, Windows 11 Pro, Gold, MarsPC.</li>
+                    <li>Software packages:
+                        <ul>
+                            <li>Graphpad Prism</li>
+                            <li>STATA statistical software</li>
+                            <li>FLOWJO flow cytometry software</li>
+                            <li>LipidSearch Lipid Identification software</li>
+                            <li>ImageQuantTL for gel/blot and image analysis</li>
+                            <li>DNASTAR Lasergene</li>
+                            <li>Spartan computational chemistry software</li>
+                            <li>Schrodinger/maestro for molecular modeling</li>
+                            <li>FIJI/ImageJ</li>
+                            <li>Cellprofiler</li>
+                        </ul>
+                    </li>
+                </ol>
+            </details>
+
+            <details class="equipment-category">
+                <summary>
+                    <span class="equipment-cat-icon">&#129440;</span>
+                    <span class="equipment-cat-title">Cell Culture</span>
+                    <span class="equipment-cat-count">2 items</span>
+                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </summary>
+                <ol class="equipment-list">
+                    <li>Dixon Room 218D is equipped with a Class II/Type B2 laminar flow hood suitable for microbiological studies involving BSL-2 agents.</li>
+                    <li>Dixon Room 207 is a multi-user cell culture facility equipped with CO2 incubators, a Zeiss Axiovert 200 inverted microscope, a microplate centrifuge, and a TC-20 automated cell counter.</li>
+                </ol>
+            </details>
+
+            <details class="equipment-category">
+                <summary>
+                    <span class="equipment-cat-icon">&#127744;</span>
+                    <span class="equipment-cat-title">Centrifugation</span>
+                    <span class="equipment-cat-count">3 items</span>
+                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </summary>
+                <ol class="equipment-list">
+                    <li>Beckman-Coulter Avanti J25I high speed centrifuge (max. 25000xg)</li>
+                    <li>Optima L-100XP ultracentrifuge (max. 802,400xg)</li>
+                    <li>Optima MAX-TL tabletop ultracentrifuge (max. 657,000xg)</li>
+                </ol>
+            </details>
+
+            <details class="equipment-category">
+                <summary>
+                    <span class="equipment-cat-icon">&#128736;&#65039;</span>
+                    <span class="equipment-cat-title">Other Multi-User Equipment</span>
+                    <span class="equipment-cat-count">9 items</span>
+                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </summary>
+                <p style="margin: -0.25rem 1.5rem 0.75rem; font-size: 0.88rem; color: var(--secondary); font-style: italic;">Located in or near the Dixon Research Building</p>
+                <ol class="equipment-list count-from-4">
+                    <li>Real-Time PCR: MX3000P Real-Time PCR System. Multiplexing capabilities of 4 dyes using a photomultiplier tube (PMT) detector. The dynamic range of 7 orders of magnitude. The excitation range of 350mm&ndash;750mm and the emission range is 350mm&ndash;700mm.</li>
+                    <li>Eppendorf Thermal Cycler: Accepts multiple 0.2ml and 0.5ml tubes and it can perform gradient amplifications. It is ideal for routine PCR and cloning experiments.</li>
+                    <li>Allegra X-22R Centrifuge: Cooled bench-top centrifuge with rotors for microcentrifuge tubes, 15ml, and 50ml tubes.</li>
+                    <li>Electrophoresis: Various gel electrophoresis apparatus for nucleic acids and proteins including Ettan IPGphor II IEF System. A fully programmable integrated isoelectric focusing equipment capable of running up to 12 IPG strips (7, 11, 13, 18, or 24 cm) simultaneously. The system is cooled by a Peltier platform and has an integral 8000V power supply.</li>
+                    <li>Shaking Incubators ideal for cell culture studies, cell aeration, bacterial aeration, and metabolism studies. Accommodates multiple volumes of culture flasks and includes a static shelf for culture plates.</li>
+                    <li>Sample concentrator: Vacufuge Concentrator for concentrating DNA/RNA, nucleotides, proteins, and other samples in 96 x 1.5-2.0ml sample format. Automatic vacuum release prevents sample loss due to bumping and foaming.</li>
+                    <li>Nuclear Magnetic Resonance Spectrophotometer (NMR) (DI108): 400 MHz Ultrashield NMR BRUKER Bio Spin.</li>
+                    <li>Gas Chromatogram-Mass Spectrophotometers (GCMS) (Spencer Hall (SP) RMs 206 and 313 and DI113): HP 6890 GCMS system, which includes: HP 6890 series GC system, HP 5973 Mass Selective Detector (MSD), and Agilent 7683 Series injector. Agilent 6890N network GCMS system, which includes: Agilent 6890N Network GC system, Agilent 5973 inert Mass Selective Detector (MSD), Agilent G188 Network Head Space Sampler, Agilent 7683 Series Autosampler, and Agilent 7683B Series injector. Saturn 2200 GCMS system from Agilent Technologies (Varian) GCMS Qp50/50A system Shimadzu Scientific.</li>
+                    <li>Liquid Chromatogram-Mass Spectrophotometer (LCMS) (SP206): Agilent 1100 LC/MSD System, which includes: Agilent 1100 LC/MSD, G1322A Online Vacuum Degasser, G1311A Quaternary Pump G1313A, Automatic Liquid Sampler G1316A Column Compartment, and G1315B Diode Array Detector.</li>
+                </ol>
+            </details>
+        </div>
+
+        <h2>Service Subscription</h2>
+
+        <div class="subscription-banner">
+            <div class="subscription-banner-icon">&#128241;</div>
+            <div>
+                <p>Researchers schedule and reserve MCB services using <strong>iLab</strong> (my.ilabsolutions.com) via Quick Response (QR) codes conveniently located on-site by each room or instrument. Access is granted after an initial consultation for each service, to ensure that your specific needs and objectives are addressed effectively.</p>
+                <p>Internal (Morgan State) users are billed through the tiered Subscription plan below, based on how much they plan to use the suite of resources available at the core lab &mdash; this makes it easy for grant applicants to simply fill out a line item to declare their projected costs for institutional core support. <strong>Labs with no current active or eligible grant are subsidized at no cost.</strong> External or Industry researchers are charged &agrave; la carte per service, as detailed below. Prices are subject to change in line with current needs, availability, and consensus with other institutional cores.</p>
+            </div>
+        </div>
+
+        <h3>Subscription Costs Schedule</h3>
+        <div class="pricing-tiers">
+            <div class="pricing-tier featured">
+                <div class="pricing-tier-label">Most Frequent User</div>
+                <div class="pricing-tier-price">$6,000<span>/year</span></div>
+                <div class="pricing-tier-desc">Over 100 bookings per year</div>
+            </div>
+            <div class="pricing-tier">
+                <div class="pricing-tier-label">Frequent User</div>
+                <div class="pricing-tier-price">$4,000<span>/year</span></div>
+                <div class="pricing-tier-desc">40&ndash;100 bookings per year</div>
+            </div>
+            <div class="pricing-tier">
+                <div class="pricing-tier-label">Occasional User</div>
+                <div class="pricing-tier-price">$2,000<span>/year</span></div>
+                <div class="pricing-tier-desc">20&ndash;40 bookings per year</div>
+            </div>
+        </div>
+        <p class="pricing-note">General services associated ad hoc with specific services, like freezers and purified water, have no associated cost (marked N/A below).</p>
+
+        <h3>Main Services</h3>
+        <div class="service-categories">
+            <div class="service-category-card">
+                <h4><span class="service-category-icon">&#128300;</span>Microscopy</h4>
+                <div class="service-row"><span class="service-row-name">Fluorescence/Brightfield</span><span class="service-row-price">$20/hr</span></div>
+                <div class="service-row"><span class="service-row-name">Confocal</span><span class="service-row-price">$100/hr</span></div>
+                <div class="service-row"><span class="service-row-name">Scanner</span><span class="service-row-price">$100/hr</span></div>
+                <div class="service-row"><span class="service-row-name">EM</span><span class="service-row-price">$75/hr</span></div>
+            </div>
+
+            <div class="service-category-card">
+                <h4><span class="service-category-icon">&#129474;</span>Tissue Processing</h4>
+                <div class="service-row"><span class="service-row-name">EM Sample Prep, Thin</span><span class="service-row-price">$75/hr</span></div>
+                <div class="service-row"><span class="service-row-name">EM Sample Prep, Regular</span><span class="service-row-price">$50/hr</span></div>
+                <div class="service-row"><span class="service-row-name">Cryostat</span><span class="service-row-price">$30/hr</span></div>
+                <div class="service-row"><span class="service-row-name">Microtome</span><span class="service-row-price">$20/hr</span></div>
+            </div>
+
+            <div class="service-category-card">
+                <h4><span class="service-category-icon">&#129440;</span>Cellular</h4>
+                <div class="service-row"><span class="service-row-name">Cell Culture Room (Hood, Incubators, CO2)</span><span class="service-row-price">$20/hr</span></div>
+                <div class="service-row"><span class="service-row-name">Cell Analyzer</span><span class="service-row-price">$60/hr</span></div>
+                <div class="service-row"><span class="service-row-name">Cell Sorter</span><span class="service-row-price">$75/hr</span></div>
+            </div>
+
+            <div class="service-category-card">
+                <h4><span class="service-category-icon">&#129516;</span>Molecular</h4>
+                <div class="service-row"><span class="service-row-name">Gel Imager</span><span class="service-row-price">$20/hr</span></div>
+                <div class="service-row"><span class="service-row-name">Electrophoresis</span><span class="service-row-price">$20/hr</span></div>
+                <div class="service-row"><span class="service-row-name">Microplate Reader</span><span class="service-row-price">$20/hr</span></div>
+                <div class="service-row"><span class="service-row-name">MagPix (ELISA Multiplex)</span><span class="service-row-price">$200/hr</span></div>
+            </div>
+
+            <div class="service-category-card">
+                <h4><span class="service-category-icon">&#129504;</span>Genomics</h4>
+                <div class="service-row"><span class="service-row-name">MiSeq</span><span class="service-row-price">$275/sample</span></div>
+                <div class="service-row"><span class="service-row-name">TapeStation</span><span class="service-row-price">$50/tape</span></div>
+                <div class="service-row"><span class="service-row-name">RT-qPCR</span><span class="service-row-price">$30/hr</span></div>
+                <div class="service-row"><span class="service-row-name">Nanovue/Nanodrop</span><span class="service-row-price">$20/hr</span></div>
+            </div>
+
+            <div class="service-category-card">
+                <h4><span class="service-category-icon">&#9879;&#65039;</span>Proteomics</h4>
+                <div class="service-row"><span class="service-row-name">FPLC</span><span class="service-row-price">$80/hr</span></div>
+                <div class="service-row"><span class="service-row-name">LC-QTOF</span><span class="service-row-price">$650/hr</span></div>
+                <div class="service-row"><span class="service-row-name">ICP-MS</span><span class="service-row-price">$125/hr</span></div>
+                <div class="service-row"><span class="service-row-name">Fluorolog-QM</span><span class="service-row-price">$200/hr</span></div>
+            </div>
+
+            <div class="service-category-card">
+                <h4><span class="service-category-icon">&#127744;</span>Centrifugation</h4>
+                <div class="service-row"><span class="service-row-name">Avanti J-25i</span><span class="service-row-price na">N/A</span></div>
+                <div class="service-row"><span class="service-row-name">Optima L100XP Ultracentrifuge</span><span class="service-row-price na">N/A</span></div>
+                <div class="service-row"><span class="service-row-name">Optima MAX-TL TableTop</span><span class="service-row-price na">N/A</span></div>
+                <div class="service-row"><span class="service-row-name">Allegra X-30R</span><span class="service-row-price na">N/A</span></div>
+            </div>
+
+            <div class="service-category-card">
+                <h4><span class="service-category-icon">&#129522;</span>Refrigeration &amp; UltraFreeze</h4>
+                <div class="service-row"><span class="service-row-name">&minus;80&deg;C (4 units)</span><span class="service-row-price na">N/A</span></div>
+                <div class="service-row"><span class="service-row-name">&minus;20&deg;C (1 unit)</span><span class="service-row-price na">N/A</span></div>
+                <div class="service-row"><span class="service-row-name">Fridge (218 + Cell Culture Room)</span><span class="service-row-price na">N/A</span></div>
+                <div class="service-row"><span class="service-row-name">Sample Locator (Liquid Nitrogen)</span><span class="service-row-price na">N/A</span></div>
+            </div>
+
+            <div class="service-category-card">
+                <h4><span class="service-category-icon">&#128187;</span>Workstations</h4>
+                <div class="service-row"><span class="service-row-name">Windows (WS1)</span><span class="service-row-price na">N/A</span></div>
+                <div class="service-row"><span class="service-row-name">Linux (WS2)</span><span class="service-row-price na">N/A</span></div>
+                <div class="service-row"><span class="service-row-name">Imaging Laptop</span><span class="service-row-price na">N/A</span></div>
+            </div>
+
+            <div class="service-category-card center-last">
+                <h4><span class="service-category-icon">&#128736;&#65039;</span>Miscellaneous</h4>
+                <div class="service-row"><span class="service-row-name">Water Purification</span><span class="service-row-price na">N/A</span></div>
+                <div class="service-row"><span class="service-row-name">Autoclaves</span><span class="service-row-price na">N/A</span></div>
+                <div class="service-row"><span class="service-row-name">Lyophilizer</span><span class="service-row-price na">N/A</span></div>
+            </div>
+        </div>
+
+        <h3>Other Services</h3>
+        <div class="other-services-list">
+            <div class="other-service-item">
+                <div class="other-service-icon">&#128172;</div>
+                <h4>Initial Consultation</h4>
+                <p>We provide a free initial consultation to discuss the specific needs of the researchers. This allows us to provide tailored recommendations for the effective use of our laboratory resources. This consultation is initiated and tracked in iLab.</p>
+            </div>
+            <div class="other-service-item">
+                <div class="other-service-icon">&#127891;</div>
+                <h4>Methods Training</h4>
+                <p>We provide training in the equipment offered by the core laboratory, to the extent of current faculty staff expertise. Training is scheduled and tracked in iLab and guided by training workflows to ensure a standard and acceptable level of proficiency.</p>
+            </div>
+            <div class="other-service-item">
+                <div class="other-service-icon">&#129514;</div>
+                <h4>Sample Pooling</h4>
+                <p>Equipment that may efficiently run samples from multiple researchers at once, such as the MiSeq and Lyophilizer, are scheduled and allotted in iLab.</p>
+            </div>
+            <div class="other-service-item">
+                <div class="other-service-icon">&#128220;</div>
+                <h4>Protocol Development</h4>
+                <p>We provide assistance in developing new protocols for investigators planning to use our resources. This service includes specific and detailed methods for equipment and services as well as advice on budgeting. Protocol development is initiated and tracked in iLab.</p>
+            </div>
+            <div class="other-service-item">
+                <div class="other-service-icon">&#128202;</div>
+                <h4>Statistical Consulting</h4>
+                <p>We provide advice and assistance in statistical analysis of data, including bioinformatics analysis and figure formatting. Statistical software such as R, SPSS, MATLAB, and Graphpad Prism are available for use and training.</p>
+            </div>
+            <div class="other-service-item">
+                <div class="other-service-icon">&#128443;&#65039;</div>
+                <h4>Image Analysis</h4>
+                <p>We provide advice and assistance for imaging analysis of biological images, including ImageQuant TL, ImageJ/FIJI, MATLAB, CellProfiler, and more.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>RCMI @ Morgan</h4>
+                <p>Center for Urban Health Disparities Research and Innovation</p>
+                <p>Morgan State University</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="./">Home</a>
+                <a href="mcb.html" aria-current="page">Molecular &amp; Cellular Biology Core</a>
+                <a href="arf.html">Animal Research Facility</a>
+                <a href="bbsu.html">Biostatistics and Bioinformatics Support Unit</a>
+                <a href="services.html">Services</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Portage Avenue Campus, Room 113</p>
+                <p>1700 E Cold Spring Lane</p>
+                <p>Baltimore, MD 21251</p>
+                <p>Phone: 443-885-4534</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="mailto:diane.hughes@morgan.edu">Email Us</a>
+                <a href="https://www.morgan.edu/rcmi">RCMI Program</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year">2024</span> Morgan State University RCMI @ Morgan. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+            var revealTargets = document.querySelectorAll('.page-content > *');
+            var revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    entry.target.classList.toggle('reveal-visible', entry.isIntersecting);
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+            revealTargets.forEach(function (el) { revealObserver.observe(el); });
+        } else {
+            document.querySelectorAll('.page-content > *').forEach(function (el) {
+                el.classList.add('reveal-visible');
+            });
+        }
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            var pageHeroEl = document.querySelector('.page-header.page-hero');
+            var pageHeroContent = document.querySelector('.page-hero-content');
+
+            if (pageHeroEl && pageHeroContent) {
+                var maxTilt = 5;
+
+                pageHeroEl.addEventListener('mousemove', function (e) {
+                    var rect = pageHeroEl.getBoundingClientRect();
+                    var x = (e.clientX - rect.left) / rect.width;
+                    var y = (e.clientY - rect.top) / rect.height;
+                    var rotateY = (x - 0.5) * (maxTilt * 2);
+                    var rotateX = (0.5 - y) * (maxTilt * 2);
+                    pageHeroContent.style.transform = 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+                });
+
+                pageHeroEl.addEventListener('mouseleave', function () {
+                    pageHeroContent.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                });
+            }
+        }
+    </script>
+    <script src="../js/nav.js"></script>
+</body>
+</html>

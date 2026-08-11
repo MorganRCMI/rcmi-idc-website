@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RCMI Research Project - RCMI @ Morgan</title>
+    <title>Services - RCMI RCC</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -103,203 +103,178 @@
             width: 100%;
         }
 
-        .hero {
-            min-height: 60vh;
+        .page-header {
+            margin-top: 0;
+            padding: 6rem 5% 4rem;
+            text-align: left;
             position: relative;
-            display: flex;
-            align-items: center;
             overflow: hidden;
             perspective: 1200px;
         }
 
-        .hero-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 4rem 5%;
+        .page-hero-content {
             position: relative;
             z-index: 1;
             transform-style: preserve-3d;
             transition: transform 0.2s ease-out;
             will-change: transform;
-            animation: fadeInUp 1s ease 0.3s backwards;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-content .tagline,
-        .hero-content h1,
-        .hero-content .subtitle {
+        .page-hero-content h1,
+        .page-hero-content p {
             transform: translateZ(0);
             transition: transform 0.2s ease-out;
         }
 
-        .hero-content .tagline {
-            transform: translateZ(25px);
+        .page-hero-content h1 {
+            transform: translateZ(45px);
         }
 
-        .hero-content h1 {
-            transform: translateZ(55px);
-        }
-
-        .hero-content .subtitle {
+        .page-hero-content p {
             transform: translateZ(15px);
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .hero-content,
-            .hero-content .tagline,
-            .hero-content h1,
-            .hero-content .subtitle {
+            .page-hero-content,
+            .page-hero-content h1,
+            .page-hero-content p {
                 transform: none !important;
                 transition: none !important;
-                animation: none !important;
             }
         }
 
-        .hero .tagline {
-            font-size: 1.1rem;
-            color: var(--accent);
-            margin-bottom: 1.25rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .hero h1 {
+        .page-header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3.75rem;
+            font-size: 3rem;
             color: white;
             font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            letter-spacing: -2px;
-        }
-
-        .hero .subtitle {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 700px;
-            font-weight: 300;
-        }
-
-        .section-wrap {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 5rem 5% 2rem;
-        }
-
-        .section-wrap + .section-wrap {
-            padding-top: 0;
-        }
-
-        .section-header {
-            margin-bottom: 2.5rem;
-        }
-
-        .section-label {
-            color: var(--secondary);
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            color: var(--primary);
-            font-weight: 800;
             letter-spacing: -1px;
-        }
-
-        .rp-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.75rem;
-            margin-bottom: 2rem;
-        }
-
-        .rp-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            border-left: 6px solid var(--secondary);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .rp-card-photo {
-            width: 72px;
-            height: 72px;
-            border-radius: 14px;
-            overflow: hidden;
-            margin-bottom: 1.1rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-        }
-
-        .rp-card-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .project-status {
-            display: inline-block;
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(247, 147, 30, 0.1) 100%);
-            color: var(--secondary);
-            padding: 0.35rem 0.9rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            border: 1px solid rgba(255, 107, 53, 0.2);
-            letter-spacing: 0.3px;
-            margin-bottom: 0.9rem;
-            align-self: flex-start;
-        }
-
-        .rp-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-
-        .rp-card-summary {
-            font-size: 0.95rem;
-            line-height: 1.75;
-            color: var(--text);
             margin-bottom: 1rem;
         }
 
-        .rp-card-pi {
-            font-size: 0.88rem;
-            color: var(--ink-muted, #617284);
-            margin-bottom: 1.25rem;
+        .page-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.15rem;
+            max-width: 700px;
         }
 
-        .rp-card-link {
-            margin-top: auto;
+        .page-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4.5rem 5%;
+        }
+
+        .page-section > * {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .page-section > *.reveal-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page-section > * {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        .page-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            color: var(--primary);
+            margin: 3.5rem 0 1.25rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+            font-weight: 800;
+        }
+
+        .page-section h2:first-child {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .page-section > p {
+            font-size: 1.05rem;
+            color: var(--text);
+            line-height: 1.85;
+            margin-bottom: 1.25rem;
+            max-width: 780px;
+        }
+
+        .service-source-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.75rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-source-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 32px rgba(0, 51, 102, 0.1);
+            border-color: rgba(255, 107, 53, 0.25);
+        }
+
+        .service-source-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .services-checklist {
+            list-style: none;
+            margin: 0.75rem 0 1.25rem;
+            padding: 0;
+        }
+
+        .services-checklist li {
+            padding: 0.65rem 0 0.65rem 2rem;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.96rem;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        .services-checklist li:last-child {
+            border-bottom: none;
+        }
+
+        .services-checklist li::before {
+            content: '\2713';
+            position: absolute;
+            left: 0;
             color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white;
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.92rem;
+            font-size: 0.95rem;
+            padding: 0.85rem 1.6rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 24px rgba(255, 107, 53, 0.28);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .rp-card-link:hover {
-            color: var(--accent);
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 32px rgba(255, 107, 53, 0.34);
         }
 
         footer {
@@ -333,7 +308,8 @@
             transition: color 0.3s ease;
         }
 
-        .footer-section a:hover {
+        .footer-section a:hover,
+        .footer-section a[aria-current="page"] {
             color: var(--secondary);
         }
 
@@ -345,10 +321,6 @@
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.4rem;
-            }
-
             nav ul {
                 display: none;
             }
@@ -363,11 +335,11 @@
         <nav>
             <a href="../" class="logo">RCMI <span>@ Morgan</span></a>
             <ul id="menu">
-                <li><a href="../">Home</a></li>
-                <li><a href="../idc/">IDC</a></li>
-                <li><a href="../cec/">CEC</a></li>
-                <li><a href="../ric/">RCC</a></li>
-                <li><a href="./" aria-current="page">Research Project</a></li>
+                <li><a href="./">Home</a></li>
+                <li><a href="mcb.html">MCB</a></li>
+                <li><a href="arf.html">ARF</a></li>
+                <li><a href="bbsu.html">BBSU</a></li>
+                <li><a href="services.html" aria-current="page">Services</a></li>
             </ul>
             <button class="hamburger" id="hamburger">
                 <span></span>
@@ -383,36 +355,22 @@
             <div class="core-switch-pills">
                 <a href="../idc/" class="core-pill"><img src="../img/icons/idc-glasses-book.svg" alt="" width="16" height="16" class="core-pill-icon"> IDC</a>
                 <a href="../cec/" class="core-pill"><img src="../img/icons/community-cec.png" alt="" width="16" height="16" class="core-pill-icon"> CEC</a>
-                <a href="../ric/" class="core-pill">&#128300; RCC</a>
-                <a href="./" class="core-pill active">&#129516; Research Project</a>
+                <a href="./" class="core-pill active">&#128300; RCC</a>
+                <a href="../research-project/" class="core-pill">&#129516; Research Project</a>
             </div>
         </div>
     </div>
 
-    <section class="hero hero-home">
-        <div class="hero-content">
-            <div class="tagline">Morgan State University</div>
-            <h1>RCMI Research<br>Project</h1>
-            <p class="subtitle">NIH/NIMHD-funded research led by RCMI@Morgan investigators, advancing science to address urban health disparities in Baltimore.</p>
+    <section class="page-header page-hero">
+        <div class="page-hero-content">
+            <h1>Services</h1>
+            <p>Request and schedule services across the Research Capacity Core &mdash; MCB, ARF, and BBSU &mdash; all through iLab.</p>
         </div>
     </section>
 
-    <section class="section-wrap">
-        <div class="section-header">
-            <div class="section-label">Funded Research</div>
-            <h2 class="section-title">RCMI Research Projects</h2>
-        </div>
-
-        <div class="rp-grid">
-            <div class="rp-card">
-                <div class="rp-card-photo"><img src="../img/faculty/project_timothy_meeker.jpg" alt="Dr. Timothy Meeker"></div>
-                <span class="project-status">Current</span>
-                <h3>Project 3: Chemotherapy-Induced Neuropathy &amp; Non-Invasive Brain Stimulation</h3>
-                <p class="rp-card-summary">A randomized controlled trial testing transcranial direct current stimulation (tDCS) as a treatment for painful chemotherapy-induced neuropathy.</p>
-                <div class="rp-card-pi">Dr. Timothy Meeker &middot; Department of Biology</div>
-                <a class="rp-card-link" href="project-timothy-meeker.html">View Project &rarr;</a>
-            </div>
-        </div>
+    <section class="page-section">
+        <h2>Requesting Services</h2>
+        <a class="btn-secondary" href="https://my.ilabsolutions.com" target="_blank" rel="noopener">Request Services on iLab &rarr;</a>
     </section>
 
     <footer>
@@ -424,11 +382,12 @@
             </div>
 
             <div class="footer-section">
-                <h4>Our Cores</h4>
-                <a href="../idc/">Investigator Development Core</a>
-                <a href="../cec/">Community Engagement Core</a>
-                <a href="../ric/">Research Capacity Core</a>
-                <a href="./" aria-current="page">RCMI Research Project</a>
+                <h4>Quick Links</h4>
+                <a href="./">Home</a>
+                <a href="mcb.html">Molecular &amp; Cellular Biology Core</a>
+                <a href="arf.html">Animal Research Facility</a>
+                <a href="bbsu.html">Biostatistics and Bioinformatics Support Unit</a>
+                <a href="services.html" aria-current="page">Services</a>
             </div>
 
             <div class="footer-section">
@@ -454,24 +413,38 @@
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+            var revealTargets = document.querySelectorAll('.page-section > *');
+            var revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    entry.target.classList.toggle('reveal-visible', entry.isIntersecting);
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+            revealTargets.forEach(function (el) { revealObserver.observe(el); });
+        } else {
+            document.querySelectorAll('.page-section > *').forEach(function (el) {
+                el.classList.add('reveal-visible');
+            });
+        }
+
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            var heroEl = document.querySelector('.hero-home');
-            var heroContent = document.querySelector('.hero-home .hero-content');
+            var pageHeroEl = document.querySelector('.page-header.page-hero');
+            var pageHeroContent = document.querySelector('.page-hero-content');
 
-            if (heroEl && heroContent) {
-                var maxTilt = 7;
+            if (pageHeroEl && pageHeroContent) {
+                var maxTilt = 5;
 
-                heroEl.addEventListener('mousemove', function (e) {
-                    var rect = heroEl.getBoundingClientRect();
+                pageHeroEl.addEventListener('mousemove', function (e) {
+                    var rect = pageHeroEl.getBoundingClientRect();
                     var x = (e.clientX - rect.left) / rect.width;
                     var y = (e.clientY - rect.top) / rect.height;
                     var rotateY = (x - 0.5) * (maxTilt * 2);
                     var rotateX = (0.5 - y) * (maxTilt * 2);
-                    heroContent.style.transform = 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+                    pageHeroContent.style.transform = 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
                 });
 
-                heroEl.addEventListener('mouseleave', function () {
-                    heroContent.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                pageHeroEl.addEventListener('mouseleave', function () {
+                    pageHeroContent.style.transform = 'rotateX(0deg) rotateY(0deg)';
                 });
             }
         }

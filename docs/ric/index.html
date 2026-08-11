@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research Infrastructure Core - RCMI @ Morgan</title>
+    <title>Research Capacity Core - RCMI @ Morgan</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -191,57 +191,278 @@
             font-weight: 300;
         }
 
-        .coming-soon {
-            max-width: 900px;
+        .page-content {
+            max-width: 820px;
             margin: 0 auto;
             padding: 5rem 5%;
-            text-align: center;
         }
 
-        .coming-soon-icon {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 1.75rem;
-            border-radius: 16px;
-            background: linear-gradient(135deg, var(--secondary), var(--accent));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
+        .page-content > * {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
         }
 
-        .coming-soon h2 {
+        .page-content > *.reveal-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page-content > * {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        .page-content h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             font-weight: 800;
         }
 
-        .coming-soon p {
+        .page-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 2.5rem 0 1rem;
+            font-weight: 700;
+        }
+
+        .page-content p {
             font-size: 1.05rem;
             color: var(--text);
             line-height: 1.85;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1.25rem;
         }
 
-        .lead-strip {
-            max-width: 700px;
-            margin: 2rem auto 0;
+        .rcc-links {
+            list-style: none;
+            margin: 0 0 1.5rem;
+            padding: 0;
+        }
+
+        .rcc-links li {
+            padding: 0.9rem 0 0.9rem 2rem;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .rcc-links li:last-child {
+            border-bottom: none;
+        }
+
+        .rcc-links li::before {
+            content: '\2192';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .rcc-links a {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+        }
+
+        .rcc-links a:hover {
+            color: var(--secondary);
+        }
+
+        .leadership-grid {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.75rem;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
         }
 
-        .lead-pill {
+        .leader-profile {
+            flex: 1 1 0;
+            min-width: 260px;
+            text-align: center;
             background: var(--light);
+            padding: 1.85rem 1.6rem;
+            border-radius: 20px;
             border: 1px solid var(--border);
-            border-radius: 999px;
-            padding: 0.5rem 1.1rem;
-            font-size: 0.88rem;
-            font-weight: 600;
+        }
+
+        .leader-photo {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 1.1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .leader-photo-img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center 10%;
+        }
+
+        .leader-details h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
             color: var(--primary);
+            margin-bottom: 0.4rem;
+        }
+
+        .leader-details .leader-role {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 0.74rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.6rem;
+        }
+
+        .leader-details .leader-title {
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .leader-details p {
+            font-size: 0.9rem;
+            line-height: 1.75;
+            color: var(--text);
+            text-align: left;
+        }
+
+        @media (max-width: 640px) {
+            .leadership-grid {
+                flex-direction: column;
+            }
+        }
+
+        .field-link-heading {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 800;
+            text-decoration: none;
+            margin: 3rem 0 1.25rem;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .field-link-heading:hover {
+            color: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        .field-link-heading svg {
+            flex-shrink: 0;
+        }
+
+        .data-table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .data-table th {
+            background: linear-gradient(135deg, var(--primary), #004d99);
+            color: white;
+            text-align: left;
+            padding: 0.95rem 1.15rem;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            white-space: nowrap;
+        }
+
+        .data-table td {
+            padding: 0.95rem 1.15rem;
+            border-top: 1px solid var(--border);
+            color: var(--text);
+            vertical-align: top;
+        }
+
+        .data-table td:first-child {
+            font-weight: 700;
+            color: var(--primary);
+            white-space: nowrap;
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background: var(--light);
+        }
+
+        .data-table tbody tr {
+            transition: background-color 0.15s ease;
+        }
+
+        .data-table tbody tr:hover {
+            background: rgba(255, 107, 53, 0.07);
+        }
+
+        .data-table tbody tr.is-chair {
+            background: rgba(0, 51, 102, 0.05);
+        }
+
+        .data-table tbody tr.is-chair:hover {
+            background: rgba(255, 107, 53, 0.08);
+        }
+
+        .data-table tbody tr.is-chair td:first-child::after {
+            content: 'Chair';
+            display: inline-block;
+            margin-left: 0.6rem;
+            font-size: 0.66rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: white;
+            background: var(--secondary);
+            padding: 0.18rem 0.55rem;
+            border-radius: 20px;
+            vertical-align: middle;
+        }
+
+        .rank-badge {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.3rem 0.75rem;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .rank-badge.rank-professor {
+            background: rgba(0, 51, 102, 0.1);
+            color: var(--primary);
+        }
+
+        .rank-badge.rank-associate {
+            background: rgba(247, 147, 30, 0.12);
+            color: #a15d00;
+        }
+
+        .rank-badge.rank-assistant {
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--secondary);
         }
 
         footer {
@@ -305,10 +526,11 @@
         <nav>
             <a href="../" class="logo">RCMI <span>@ Morgan</span></a>
             <ul id="menu">
-                <li><a href="../">Home</a></li>
-                <li><a href="../idc/">IDC</a></li>
-                <li><a href="../cec/">CEC</a></li>
-                <li><a href="./" aria-current="page">RIC</a></li>
+                <li><a href="./" aria-current="page">Home</a></li>
+                <li><a href="mcb.html">MCB</a></li>
+                <li><a href="arf.html">ARF</a></li>
+                <li><a href="bbsu.html">BBSU</a></li>
+                <li><a href="services.html">Services</a></li>
             </ul>
             <button class="hamburger" id="hamburger">
                 <span></span>
@@ -324,7 +546,7 @@
             <div class="core-switch-pills">
                 <a href="../idc/" class="core-pill"><img src="../img/icons/idc-glasses-book.svg" alt="" width="16" height="16" class="core-pill-icon"> IDC</a>
                 <a href="../cec/" class="core-pill"><img src="../img/icons/community-cec.png" alt="" width="16" height="16" class="core-pill-icon"> CEC</a>
-                <a href="./" class="core-pill active">&#128300; RIC</a>
+                <a href="./" class="core-pill active">&#128300; RCC</a>
                 <a href="../research-project/" class="core-pill">&#129516; Research Project</a>
             </div>
         </div>
@@ -333,18 +555,122 @@
     <section class="hero hero-home">
         <div class="hero-content">
             <div class="tagline">Morgan State University</div>
-            <h1>Research<br>Infrastructure Core</h1>
+            <h1>Research<br>Capacity Core</h1>
             <p class="subtitle">Building shared research capacity through the Molecular and Cell Biology Core, Biostatistics and Bioinformatics Core, and Animal Facility Core.</p>
         </div>
     </section>
 
-    <section class="coming-soon">
-        <div class="coming-soon-icon">🔬</div>
-        <h2>Content Coming Soon</h2>
-        <p>This site is being built out for the Research Infrastructure Core. Check back soon for faculty, shared facilities, and infrastructure resources.</p>
-        <div class="lead-strip">
-            <span class="lead-pill">Dr. James Wachira, Lead</span>
-            <span class="lead-pill">Dr. YueJin Li, Co-Lead</span>
+    <section class="page-content">
+        <h2>Research Capacity Core</h2>
+        <p>The Research Capacity Core (RCC) coordinates three critical components of ongoing MSU research activity:</p>
+
+        <ul class="rcc-links">
+            <li><a href="mcb.html">Molecular &amp; Cellular Biology Core (MCB)</a></li>
+            <li><a href="arf.html">Animal Research Facility (ARF)</a></li>
+            <li><a href="bbsu.html">Biostatistics and Bioinformatics Support Unit (BBSU)</a></li>
+        </ul>
+
+        <p>The Goal of the RCC is to provide researchers with vital support, expertise, and instrumentation to ensure the success of their research projects.</p>
+
+        <p>Each component of the RCC is managed by its own Director to ensure that services are tailored specifically to the needs of the users.</p>
+
+        <p>Scheduling of instruments, software, training, and billing is handled by a central booking system (iLab) and well-integrated with a suite of other institutions using the same system.</p>
+
+        <p>As part of a wider scientific community, the RCC welcomes collaboration with industry and other academic institutions.</p>
+
+        <h3>Leadership</h3>
+        <div class="leadership-grid">
+            <div class="leader-profile">
+                <div class="leader-photo"><img src="../img/faculty/faculty_James_Wachira.jpg" alt="Dr. James Wachira" class="leader-photo-img"></div>
+                <div class="leader-details">
+                    <h4>James Wachira, PhD</h4>
+                    <div class="leader-role">Lead</div>
+                    <div class="leader-title">Professor, Department of Biology &middot; Associate Director, RCMI@Morgan</div>
+                    <p>Dr. James Wachira leads the Research Capacity Core, overseeing the Molecular &amp; Cellular Biology Core, Animal Research Facility, and Biostatistics and Bioinformatics Support Unit that together provide shared research capacity across RCMI@Morgan.</p>
+                </div>
+            </div>
+            <div class="leader-profile">
+                <div class="leader-photo"><img src="../img/faculty/pilot_yuejin_li.jpg" alt="Dr. YueJin Li" class="leader-photo-img"></div>
+                <div class="leader-details">
+                    <h4>YueJin Li, MD, PhD</h4>
+                    <div class="leader-role">Co-Lead</div>
+                    <div class="leader-title">Associate Professor, Department of Biology</div>
+                    <p>Dr. YueJin Li serves as Co-Lead of the Research Capacity Core, supporting the shared facilities and services that help RCMI@Morgan investigators carry out their research.</p>
+                </div>
+            </div>
+        </div>
+
+        <a href="#" class="field-link-heading">
+            FAC Committee Roster 2024&ndash;2025
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M7 7h10v10"></path></svg>
+        </a>
+        <div class="data-table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Rank</th>
+                        <th>Expertise</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="is-chair">
+                        <td>Najat Ziyadi</td>
+                        <td>Mathematics</td>
+                        <td><span class="rank-badge rank-associate">Associate Professor</span></td>
+                        <td>Statistics</td>
+                    </tr>
+                    <tr>
+                        <td>Yucheng Lan</td>
+                        <td>Physics</td>
+                        <td><span class="rank-badge rank-professor">Professor</span></td>
+                        <td>Electron Microscopy, nanomaterials</td>
+                    </tr>
+                    <tr>
+                        <td>Bahram Faraji</td>
+                        <td>Nutritional Sciences</td>
+                        <td><span class="rank-badge rank-associate">Associate Professor</span></td>
+                        <td>Sequencing/microbiomes</td>
+                    </tr>
+                    <tr>
+                        <td>Alexander Samokhvalov</td>
+                        <td>Chemistry</td>
+                        <td><span class="rank-badge rank-associate">Associate Professor</span></td>
+                        <td>Analytical Chemistry</td>
+                    </tr>
+                    <tr>
+                        <td>Zheng Li</td>
+                        <td>Engineering</td>
+                        <td><span class="rank-badge rank-assistant">Assistant Professor</span></td>
+                        <td>Computational modeling of biological processes</td>
+                    </tr>
+                    <tr>
+                        <td>Chunlei Fan</td>
+                        <td>Biology</td>
+                        <td><span class="rank-badge rank-professor">Professor</span></td>
+                        <td>PhD program director, ecology and genomics</td>
+                    </tr>
+                    <tr>
+                        <td>Shiva Mehravaran</td>
+                        <td>Biology</td>
+                        <td><span class="rank-badge rank-associate">Associate Professor</span></td>
+                        <td>Co-Director RCMI@Morgan IDC; Interim Director MS Program in Biomedical Sciences</td>
+                    </tr>
+                    <tr>
+                        <td>Kimberly Warren</td>
+                        <td>Psychology</td>
+                        <td><span class="rank-badge rank-professor">Professor</span></td>
+                        <td>Director RCMI@Morgan CEC</td>
+                    </tr>
+                    <tr>
+                        <td>Naja Mack</td>
+                        <td>Computer Science</td>
+                        <td><span class="rank-badge rank-assistant">Assistant Professor</span></td>
+                        <td>Human-centered computing, AI, machine learning</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </section>
 
@@ -357,10 +683,12 @@
             </div>
 
             <div class="footer-section">
-                <h4>Our Cores</h4>
-                <a href="../idc/">Investigator Development Core</a>
-                <a href="../cec/">Community Engagement Core</a>
-                <a href="./" aria-current="page">Research Infrastructure Core</a>
+                <h4>Quick Links</h4>
+                <a href="./" aria-current="page">Home</a>
+                <a href="mcb.html">Molecular &amp; Cellular Biology Core</a>
+                <a href="arf.html">Animal Research Facility</a>
+                <a href="bbsu.html">Biostatistics and Bioinformatics Support Unit</a>
+                <a href="services.html">Services</a>
             </div>
 
             <div class="footer-section">
@@ -385,6 +713,20 @@
 
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+            var revealTargets = document.querySelectorAll('.page-content > *');
+            var revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    entry.target.classList.toggle('reveal-visible', entry.isIntersecting);
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+            revealTargets.forEach(function (el) { revealObserver.observe(el); });
+        } else {
+            document.querySelectorAll('.page-content > *').forEach(function (el) {
+                el.classList.add('reveal-visible');
+            });
+        }
 
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             var heroEl = document.querySelector('.hero-home');

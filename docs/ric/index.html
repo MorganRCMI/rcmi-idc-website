@@ -430,9 +430,9 @@
             background: rgba(255, 107, 53, 0.08);
         }
 
-        .data-table tbody tr.is-chair td:first-child::after {
-            content: 'Chair';
+        .chair-badge {
             display: inline-block;
+            flex-shrink: 0;
             margin-left: 0.6rem;
             font-size: 0.66rem;
             font-weight: 800;
@@ -715,8 +715,9 @@
                     var avatar = member.photoPath
                         ? '<img src="' + helpers.escapeHtml(member.photoPath) + '" alt="' + helpers.escapeHtml(member.name) + '">'
                         : helpers.escapeHtml(member.initials);
+                    var chairBadge = member.isChair ? '<span class="chair-badge">Chair</span>' : '';
                     return '<tr' + (member.isChair ? ' class="is-chair"' : '') + '>' +
-                        '<td><div class="roster-name-cell"><div class="roster-avatar">' + avatar + '</div><span>' + helpers.escapeHtml(member.name) + '</span></div></td>' +
+                        '<td><div class="roster-name-cell"><div class="roster-avatar">' + avatar + '</div><span>' + helpers.escapeHtml(member.name) + '</span>' + chairBadge + '</div></td>' +
                         '<td>' + helpers.escapeHtml(member.department) + '</td>' +
                         '<td><span class="rank-badge rank-' + helpers.escapeHtml(member.rankLevel) + '">' + helpers.escapeHtml(member.rank) + '</span></td>' +
                         '<td>' + helpers.escapeHtml(member.expertise) + '</td>' +

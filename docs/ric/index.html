@@ -192,9 +192,13 @@
         }
 
         .page-content {
-            max-width: 820px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 5rem 5%;
+        }
+
+        .page-content > p {
+            max-width: 780px;
         }
 
         .page-content > * {
@@ -465,6 +469,36 @@
             color: var(--secondary);
         }
 
+        .roster-name-cell {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .roster-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 0.72rem;
+            overflow: hidden;
+        }
+
+        .roster-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 15%;
+            display: block;
+        }
+
         footer {
             background: var(--dark);
             color: white;
@@ -530,7 +564,7 @@
                 <li><a href="mcb.html">MCB</a></li>
                 <li><a href="arf.html">ARF</a></li>
                 <li><a href="bbsu.html">BBSU</a></li>
-                <li><a href="services.html">Services</a></li>
+                <li><a href="services.html">Request Services</a></li>
             </ul>
             <button class="hamburger" id="hamburger">
                 <span></span>
@@ -579,26 +613,7 @@
         <p>As part of a wider scientific community, the RCC welcomes collaboration with industry and other academic institutions.</p>
 
         <h3>Leadership</h3>
-        <div class="leadership-grid">
-            <div class="leader-profile">
-                <div class="leader-photo"><img src="../img/faculty/faculty_James_Wachira.jpg" alt="Dr. James Wachira" class="leader-photo-img"></div>
-                <div class="leader-details">
-                    <h4>James Wachira, PhD</h4>
-                    <div class="leader-role">Lead</div>
-                    <div class="leader-title">Professor, Department of Biology &middot; Associate Director, RCMI@Morgan</div>
-                    <p>Dr. James Wachira leads the Research Capacity Core, overseeing the Molecular &amp; Cellular Biology Core, Animal Research Facility, and Biostatistics and Bioinformatics Support Unit that together provide shared research capacity across RCMI@Morgan.</p>
-                </div>
-            </div>
-            <div class="leader-profile">
-                <div class="leader-photo"><img src="../img/faculty/pilot_yuejin_li.jpg" alt="Dr. YueJin Li" class="leader-photo-img"></div>
-                <div class="leader-details">
-                    <h4>YueJin Li, MD, PhD</h4>
-                    <div class="leader-role">Co-Lead</div>
-                    <div class="leader-title">Associate Professor, Department of Biology</div>
-                    <p>Dr. YueJin Li serves as Co-Lead of the Research Capacity Core, supporting the shared facilities and services that help RCMI@Morgan investigators carry out their research.</p>
-                </div>
-            </div>
-        </div>
+        <div class="leadership-grid" id="leadership-grid"></div>
 
         <a href="#" class="field-link-heading">
             FAC Committee Roster 2024&ndash;2025
@@ -614,62 +629,7 @@
                         <th>Expertise</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="is-chair">
-                        <td>Najat Ziyadi</td>
-                        <td>Mathematics</td>
-                        <td><span class="rank-badge rank-associate">Associate Professor</span></td>
-                        <td>Statistics</td>
-                    </tr>
-                    <tr>
-                        <td>Yucheng Lan</td>
-                        <td>Physics</td>
-                        <td><span class="rank-badge rank-professor">Professor</span></td>
-                        <td>Electron Microscopy, nanomaterials</td>
-                    </tr>
-                    <tr>
-                        <td>Bahram Faraji</td>
-                        <td>Nutritional Sciences</td>
-                        <td><span class="rank-badge rank-associate">Associate Professor</span></td>
-                        <td>Sequencing/microbiomes</td>
-                    </tr>
-                    <tr>
-                        <td>Alexander Samokhvalov</td>
-                        <td>Chemistry</td>
-                        <td><span class="rank-badge rank-associate">Associate Professor</span></td>
-                        <td>Analytical Chemistry</td>
-                    </tr>
-                    <tr>
-                        <td>Zheng Li</td>
-                        <td>Engineering</td>
-                        <td><span class="rank-badge rank-assistant">Assistant Professor</span></td>
-                        <td>Computational modeling of biological processes</td>
-                    </tr>
-                    <tr>
-                        <td>Chunlei Fan</td>
-                        <td>Biology</td>
-                        <td><span class="rank-badge rank-professor">Professor</span></td>
-                        <td>PhD program director, ecology and genomics</td>
-                    </tr>
-                    <tr>
-                        <td>Shiva Mehravaran</td>
-                        <td>Biology</td>
-                        <td><span class="rank-badge rank-associate">Associate Professor</span></td>
-                        <td>Co-Director RCMI@Morgan IDC; Interim Director MS Program in Biomedical Sciences</td>
-                    </tr>
-                    <tr>
-                        <td>Kimberly Warren</td>
-                        <td>Psychology</td>
-                        <td><span class="rank-badge rank-professor">Professor</span></td>
-                        <td>Director RCMI@Morgan CEC</td>
-                    </tr>
-                    <tr>
-                        <td>Naja Mack</td>
-                        <td>Computer Science</td>
-                        <td><span class="rank-badge rank-assistant">Assistant Professor</span></td>
-                        <td>Human-centered computing, AI, machine learning</td>
-                    </tr>
-                </tbody>
+                <tbody id="roster-table-body"></tbody>
             </table>
         </div>
     </section>
@@ -688,7 +648,7 @@
                 <a href="mcb.html">Molecular &amp; Cellular Biology Core</a>
                 <a href="arf.html">Animal Research Facility</a>
                 <a href="bbsu.html">Biostatistics and Bioinformatics Support Unit</a>
-                <a href="services.html">Services</a>
+                <a href="services.html">Request Services</a>
             </div>
 
             <div class="footer-section">
@@ -711,6 +671,70 @@
         </div>
     </footer>
 
+    <script>
+        window.rcmiSiteConfig = {
+            dataBasePath: "../data"
+        };
+    </script>
+    <script src="../js/FIELD_MAP.js?v=1"></script>
+    <script src="../js/common.js?v=1"></script>
+    <script>
+        (function () {
+            var helpers = window.rcmiSandboxHelpers;
+
+            if (!helpers || typeof helpers.loadDataset !== "function") {
+                throw new Error("Shared CSV helper API is unavailable.");
+            }
+
+            function renderLeadership(leaders) {
+                var grid = document.getElementById("leadership-grid");
+                if (!grid) return;
+
+                grid.innerHTML = leaders.map(function (leader) {
+                    var photo = leader.photoPath
+                        ? '<img src="' + helpers.escapeHtml(leader.photoPath) + '" alt="' + helpers.escapeHtml(leader.photoAlt) + '" class="leader-photo-img">'
+                        : "";
+
+                    return '<div class="leader-profile">' +
+                        '<div class="leader-photo">' + photo + '</div>' +
+                        '<div class="leader-details">' +
+                        '<h4>' + helpers.escapeHtml(leader.name) + '</h4>' +
+                        '<div class="leader-role">' + helpers.escapeHtml(leader.role) + '</div>' +
+                        '<div class="leader-title">' + helpers.escapeHtml(leader.title) + '</div>' +
+                        '<p>' + helpers.escapeHtml(leader.bio) + '</p>' +
+                        '</div>' +
+                        '</div>';
+                }).join("");
+            }
+
+            function renderRoster(members) {
+                var body = document.getElementById("roster-table-body");
+                if (!body) return;
+
+                body.innerHTML = members.map(function (member) {
+                    var avatar = member.photoPath
+                        ? '<img src="' + helpers.escapeHtml(member.photoPath) + '" alt="' + helpers.escapeHtml(member.name) + '">'
+                        : helpers.escapeHtml(member.initials);
+                    return '<tr' + (member.isChair ? ' class="is-chair"' : '') + '>' +
+                        '<td><div class="roster-name-cell"><div class="roster-avatar">' + avatar + '</div><span>' + helpers.escapeHtml(member.name) + '</span></div></td>' +
+                        '<td>' + helpers.escapeHtml(member.department) + '</td>' +
+                        '<td><span class="rank-badge rank-' + helpers.escapeHtml(member.rankLevel) + '">' + helpers.escapeHtml(member.rank) + '</span></td>' +
+                        '<td>' + helpers.escapeHtml(member.expertise) + '</td>' +
+                        '</tr>';
+                }).join("");
+            }
+
+            Promise.all([
+                helpers.loadDataset("rccLeadership").then(helpers.transformRccLeadershipRecords),
+                helpers.loadDataset("rccRoster").then(helpers.transformRccRosterRecords)
+            ]).then(function (results) {
+                renderLeadership(results[0]);
+                renderRoster(results[1]);
+            }).catch(function (err) {
+                console.error("RCC leadership/roster could not be loaded:", err);
+            });
+        })();
+    </script>
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
 

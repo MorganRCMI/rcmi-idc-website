@@ -1,0 +1,5 @@
+Item ID,Is Active,Sort Order,Icon,Title,Description,Sub Items
+workstations,Yes,10,💻,Workstations,"Dell Precision 7920 Towers, Intel Xeon Silver 4214 2.2GHz, 3.2GHz Turbo, 12C, 9.6GT/s 2UPI, 16.5MB Cache, HT (85W) DDR4-2400 1st, NVIDIA Quadro P5000, 16GB, 4 DP, DL-DVI-D (7X20T), 256GB 4x64GB DDR4 2666MHz LRDIMM ECC Memory, 2.5"" 1TB SATA Class 20 Solid State Drive.",
+stata,Yes,20,📊,STATA,STATA statistical software for data science.,
+qiagen-ipa,Yes,30,🧬,QIAGEN IPA,QIAGEN Ingenuity Pathway Analysis (IPA).,
+computer-lab,Yes,40,🖥️,Computer Lab,The Portage building has a computer lab with 22 Dell desktop computers. Installed statistical packages include:,SAS 9.4|STATA 14.2|SPSS 24.0|ATLAS.ti 8.0 (qualitative data analysis software)

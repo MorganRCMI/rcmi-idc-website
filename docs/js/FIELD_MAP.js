@@ -203,6 +203,261 @@
                     "Registration Link": "registrationLink",
                     "Contact": "contact"
                 }
+            },
+            rccLeadership: {
+                file: resolveDataFile("rcc/rcc_leadership.csv"),
+                requiredHeaders: [
+                    "Leader ID",
+                    "Is Active",
+                    "Sort Order",
+                    "Name",
+                    "Role",
+                    "Title",
+                    "Bio"
+                ],
+                headerMap: {
+                    "Leader ID": "id",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Name": "name",
+                    "Role": "role",
+                    "Title": "title",
+                    "Bio": "bio",
+                    "Photo Path": "photoPath",
+                    "Photo Alt": "photoAlt"
+                }
+            },
+            rccRoster: {
+                file: resolveDataFile("rcc/rcc_roster.csv"),
+                requiredHeaders: [
+                    "Member ID",
+                    "Is Active",
+                    "Sort Order",
+                    "Name",
+                    "Department",
+                    "Rank",
+                    "Rank Level",
+                    "Expertise"
+                ],
+                headerMap: {
+                    "Member ID": "id",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Name": "name",
+                    "Department": "department",
+                    "Rank": "rank",
+                    "Rank Level": "rankLevel",
+                    "Expertise": "expertise",
+                    "Is Chair": "isChair",
+                    "Initials": "initials",
+                    "Photo Path": "photoPath"
+                }
+            },
+            rccStaff: {
+                file: resolveDataFile("rcc/rcc_staff.csv"),
+                requiredHeaders: [
+                    "Staff ID",
+                    "Is Active",
+                    "Sort Order",
+                    "Core",
+                    "Name",
+                    "Role"
+                ],
+                headerMap: {
+                    "Staff ID": "id",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Core": "core",
+                    "Name": "name",
+                    "Role": "role",
+                    "Initials": "initials",
+                    "Photo Path": "photoPath"
+                }
+            },
+            rccMcbPricingTiers: {
+                file: resolveDataFile("rcc/rcc_mcb_pricing_tiers.csv"),
+                requiredHeaders: [
+                    "Tier ID",
+                    "Is Active",
+                    "Sort Order",
+                    "Label",
+                    "Price"
+                ],
+                headerMap: {
+                    "Tier ID": "id",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Label": "label",
+                    "Price": "price",
+                    "Period": "period",
+                    "Description": "description",
+                    "Featured": "featured"
+                }
+            },
+            rccMcbServices: {
+                file: resolveDataFile("rcc/rcc_mcb_services.csv"),
+                requiredHeaders: [
+                    "Row Type",
+                    "Category ID",
+                    "Is Active",
+                    "Sort Order"
+                ],
+                conditionalRequired: {
+                    category: ["Icon", "Title"],
+                    item: ["Item ID", "Service Name"]
+                },
+                headerMap: {
+                    "Row Type": "rowType",
+                    "Category ID": "categoryId",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Icon": "icon",
+                    "Title": "title",
+                    "Item ID": "itemId",
+                    "Service Name": "serviceName",
+                    "Price": "price"
+                }
+            },
+            rccMcbOtherServices: {
+                file: resolveDataFile("rcc/rcc_mcb_other_services.csv"),
+                requiredHeaders: [
+                    "Item ID",
+                    "Is Active",
+                    "Sort Order",
+                    "Icon",
+                    "Title",
+                    "Description"
+                ],
+                headerMap: {
+                    "Item ID": "id",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Icon": "icon",
+                    "Title": "title",
+                    "Description": "description"
+                }
+            },
+            rccArfAnimalHousing: {
+                file: resolveDataFile("rcc/rcc_arf_animal_housing.csv"),
+                requiredHeaders: [
+                    "Row ID",
+                    "Is Active",
+                    "Sort Order",
+                    "Species",
+                    "Animal Count"
+                ],
+                headerMap: {
+                    "Row ID": "id",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Species": "species",
+                    "Animals Per Cage": "animalsPerCage",
+                    "Cages Per Rack": "cagesPerRack",
+                    "Racks": "racks",
+                    "Animal Count": "animalCount"
+                }
+            },
+            rccArfEquipment: {
+                file: resolveDataFile("rcc/rcc_arf_equipment.csv"),
+                requiredHeaders: [
+                    "Item ID",
+                    "Is Active",
+                    "Sort Order",
+                    "Icon",
+                    "Title",
+                    "Description"
+                ],
+                headerMap: {
+                    "Item ID": "id",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Icon": "icon",
+                    "Title": "title",
+                    "Description": "description"
+                }
+            },
+            rccArfTraining: {
+                file: resolveDataFile("rcc/rcc_arf_training.csv"),
+                requiredHeaders: [
+                    "Item ID",
+                    "Is Active",
+                    "Sort Order",
+                    "Icon",
+                    "Title",
+                    "Description",
+                    "Frequency"
+                ],
+                headerMap: {
+                    "Item ID": "id",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Icon": "icon",
+                    "Title": "title",
+                    "Description": "description",
+                    "Frequency": "frequency"
+                }
+            },
+            rccBbsuResources: {
+                file: resolveDataFile("rcc/rcc_bbsu_resources.csv"),
+                requiredHeaders: [
+                    "Item ID",
+                    "Is Active",
+                    "Sort Order",
+                    "Icon",
+                    "Title",
+                    "Description"
+                ],
+                headerMap: {
+                    "Item ID": "id",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Icon": "icon",
+                    "Title": "title",
+                    "Description": "description",
+                    "Sub Items": "subItems"
+                }
+            },
+            rccBbsuServices: {
+                file: resolveDataFile("rcc/rcc_bbsu_services.csv"),
+                requiredHeaders: [
+                    "Item ID",
+                    "Is Active",
+                    "Sort Order",
+                    "Text"
+                ],
+                headerMap: {
+                    "Item ID": "id",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Text": "text"
+                }
+            },
+            rccMcbEquipment: {
+                file: resolveDataFile("rcc/rcc_mcb_equipment.csv"),
+                requiredHeaders: [
+                    "Row Type",
+                    "Category ID",
+                    "Is Active",
+                    "Sort Order"
+                ],
+                conditionalRequired: {
+                    category: ["Icon", "Title"],
+                    item: ["Item ID", "Description"]
+                },
+                headerMap: {
+                    "Row Type": "rowType",
+                    "Category ID": "categoryId",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Icon": "icon",
+                    "Title": "title",
+                    "Note": "note",
+                    "Open By Default": "openByDefault",
+                    "Start Number": "startNumber",
+                    "Item ID": "itemId",
+                    "Description": "description",
+                    "Sub Items": "subItems"
+                }
             }
         }
     };

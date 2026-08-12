@@ -184,7 +184,16 @@
             font-family: 'Playfair Display', serif;
             font-weight: 700;
             font-size: 1.35rem;
+            overflow: hidden;
             transition: transform 0.2s ease;
+        }
+
+        .bbsu-staff-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 15%;
+            display: block;
         }
 
         .bbsu-staff-item:hover .bbsu-staff-avatar {
@@ -491,7 +500,7 @@
                 <li><a href="mcb.html">MCB</a></li>
                 <li><a href="arf.html">ARF</a></li>
                 <li><a href="bbsu.html" aria-current="page">BBSU</a></li>
-                <li><a href="services.html">Services</a></li>
+                <li><a href="services.html">Request Services</a></li>
             </ul>
             <button class="hamburger" id="hamburger">
                 <span></span>
@@ -524,69 +533,16 @@
         <p>Located in the Portage Building on Cold Spring Lane, the BBSU provides space, software, computers, and research statistical analysis services to Morgan students and faculty.</p>
 
         <h3>BBSU Staff</h3>
-        <div class="bbsu-team-grid">
-            <div class="bbsu-staff-item">
-                <div class="bbsu-staff-avatar">MH</div>
-                <div class="bbsu-staff-name">Mian Hossain</div>
-                <div class="bbsu-staff-role">Director</div>
-            </div>
-            <div class="bbsu-staff-item">
-                <div class="bbsu-staff-avatar">RP</div>
-                <div class="bbsu-staff-name">Roshan Paudel</div>
-                <div class="bbsu-staff-role">Faculty Expert, Bioinformatics</div>
-            </div>
-        </div>
+        <div class="bbsu-team-grid" id="bbsu-staff-grid"></div>
 
         <a href="#" class="field-link-heading">
             Computational Resources
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M7 7h10v10"></path></svg>
         </a>
-        <div class="bbsu-timeline">
-            <div class="bbsu-timeline-item">
-                <div class="bbsu-timeline-icon">&#128187;</div>
-                <div class="bbsu-timeline-content">
-                    <h4>Workstations</h4>
-                    <p>Dell Precision 7920 Towers, Intel Xeon Silver 4214 2.2GHz, 3.2GHz Turbo, 12C, 9.6GT/s 2UPI, 16.5MB Cache, HT (85W) DDR4-2400 1st, NVIDIA Quadro P5000, 16GB, 4 DP, DL-DVI-D (7X20T), 256GB 4x64GB DDR4 2666MHz LRDIMM ECC Memory, 2.5" 1TB SATA Class 20 Solid State Drive.</p>
-                </div>
-            </div>
-            <div class="bbsu-timeline-item">
-                <div class="bbsu-timeline-icon">&#128202;</div>
-                <div class="bbsu-timeline-content">
-                    <h4>STATA</h4>
-                    <p>STATA statistical software for data science.</p>
-                </div>
-            </div>
-            <div class="bbsu-timeline-item">
-                <div class="bbsu-timeline-icon">&#129516;</div>
-                <div class="bbsu-timeline-content">
-                    <h4>QIAGEN IPA</h4>
-                    <p>QIAGEN Ingenuity Pathway Analysis (IPA).</p>
-                </div>
-            </div>
-            <div class="bbsu-timeline-item">
-                <div class="bbsu-timeline-icon">&#128421;&#65039;</div>
-                <div class="bbsu-timeline-content">
-                    <h4>Computer Lab</h4>
-                    <p>The Portage building has a computer lab with 22 Dell desktop computers. Installed statistical packages include:</p>
-                    <ul>
-                        <li>SAS 9.4</li>
-                        <li>STATA 14.2</li>
-                        <li>SPSS 24.0</li>
-                        <li>ATLAS.ti 8.0 (qualitative data analysis software)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <div class="bbsu-timeline" id="bbsu-resources-timeline"></div>
 
         <h3>Services</h3>
-        <ul class="bbsu-checklist">
-            <li>Provide assistance in designing the analytical portion of studies.</li>
-            <li>Provide assistance with data analysis.</li>
-            <li>Provide assistance with sample size determination of studies.</li>
-            <li>Conduct Summer Institute on biostatistical methods, data analyses, and bioinformatics.</li>
-            <li>Conduct training on R statistical software.</li>
-            <li>Conduct training on STATA statistical software.</li>
-        </ul>
+        <ul class="bbsu-checklist" id="bbsu-services-list"></ul>
 
     </section>
 
@@ -604,7 +560,7 @@
                 <a href="mcb.html">Molecular &amp; Cellular Biology Core</a>
                 <a href="arf.html">Animal Research Facility</a>
                 <a href="bbsu.html" aria-current="page">Biostatistics and Bioinformatics Support Unit</a>
-                <a href="services.html">Services</a>
+                <a href="services.html">Request Services</a>
             </div>
 
             <div class="footer-section">
@@ -627,6 +583,83 @@
         </div>
     </footer>
 
+    <script>
+        window.rcmiSiteConfig = {
+            dataBasePath: "../data"
+        };
+    </script>
+    <script src="../js/FIELD_MAP.js?v=1"></script>
+    <script src="../js/common.js?v=1"></script>
+    <script>
+        (function () {
+            var helpers = window.rcmiSandboxHelpers;
+
+            if (!helpers || typeof helpers.loadDataset !== "function") {
+                throw new Error("Shared CSV helper API is unavailable.");
+            }
+
+            function renderStaff(staff) {
+                var grid = document.getElementById("bbsu-staff-grid");
+                if (!grid) return;
+
+                grid.innerHTML = staff.filter(function (member) {
+                    return member.core === "bbsu";
+                }).map(function (member) {
+                    var avatar = member.photoPath
+                        ? '<img src="' + helpers.escapeHtml(member.photoPath) + '" alt="' + helpers.escapeHtml(member.name) + '">'
+                        : helpers.escapeHtml(member.initials);
+                    return '<div class="bbsu-staff-item">' +
+                        '<div class="bbsu-staff-avatar">' + avatar + '</div>' +
+                        '<div class="bbsu-staff-name">' + helpers.escapeHtml(member.name) + '</div>' +
+                        '<div class="bbsu-staff-role">' + helpers.escapeHtml(member.role) + '</div>' +
+                        '</div>';
+                }).join("");
+            }
+
+            function renderResources(items) {
+                var timeline = document.getElementById("bbsu-resources-timeline");
+                if (!timeline) return;
+
+                timeline.innerHTML = items.map(function (item) {
+                    var subList = item.subItems.length
+                        ? '<ul>' + item.subItems.map(function (sub) {
+                            return '<li>' + helpers.escapeHtml(sub) + '</li>';
+                        }).join("") + '</ul>'
+                        : "";
+
+                    return '<div class="bbsu-timeline-item">' +
+                        '<div class="bbsu-timeline-icon">' + helpers.escapeHtml(item.icon) + '</div>' +
+                        '<div class="bbsu-timeline-content">' +
+                        '<h4>' + helpers.escapeHtml(item.title) + '</h4>' +
+                        '<p>' + helpers.escapeHtml(item.description) + '</p>' +
+                        subList +
+                        '</div>' +
+                        '</div>';
+                }).join("");
+            }
+
+            function renderServices(items) {
+                var list = document.getElementById("bbsu-services-list");
+                if (!list) return;
+
+                list.innerHTML = items.map(function (item) {
+                    return '<li>' + helpers.escapeHtml(item.text) + '</li>';
+                }).join("");
+            }
+
+            Promise.all([
+                helpers.loadDataset("rccStaff").then(helpers.transformRccStaffRecords),
+                helpers.loadDataset("rccBbsuResources").then(helpers.transformRccBbsuResourcesRecords),
+                helpers.loadDataset("rccBbsuServices").then(helpers.transformRccBbsuServicesRecords)
+            ]).then(function (results) {
+                renderStaff(results[0]);
+                renderResources(results[1]);
+                renderServices(results[2]);
+            }).catch(function (err) {
+                console.error("BBSU page data could not be loaded:", err);
+            });
+        })();
+    </script>
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
 

@@ -209,7 +209,16 @@
             font-family: 'Playfair Display', serif;
             font-weight: 700;
             font-size: 1.35rem;
+            overflow: hidden;
             transition: transform 0.2s ease;
+        }
+
+        .arf-staff-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 15%;
+            display: block;
         }
 
         .arf-staff-item:hover .arf-staff-avatar {
@@ -610,7 +619,7 @@
                 <li><a href="mcb.html">MCB</a></li>
                 <li><a href="arf.html" aria-current="page">ARF</a></li>
                 <li><a href="bbsu.html">BBSU</a></li>
-                <li><a href="services.html">Services</a></li>
+                <li><a href="services.html">Request Services</a></li>
             </ul>
             <button class="hamburger" id="hamburger">
                 <span></span>
@@ -645,18 +654,7 @@
         <p>The ARF maintains compliance at all times with federal Animal Welfare Act requirements for laboratory animal care and use.</p>
 
         <h3>ARF Staff</h3>
-        <div class="arf-team-grid">
-            <div class="arf-staff-item">
-                <div class="arf-staff-avatar">IT</div>
-                <div class="arf-staff-name">Ingrid Tulloch</div>
-                <div class="arf-staff-role">Director</div>
-            </div>
-            <div class="arf-staff-item">
-                <div class="arf-staff-avatar">PM</div>
-                <div class="arf-staff-name">Peyton Mitchell</div>
-                <div class="arf-staff-role">Manager</div>
-            </div>
-        </div>
+        <div class="arf-team-grid" id="arf-staff-grid"></div>
 
         <a href="#" class="field-link-heading">
             Animal Housing Capacity
@@ -673,40 +671,11 @@
                         <th># Animals</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Rat individual ventilated housing in 2 rooms</td>
-                        <td>2</td>
-                        <td>30</td>
-                        <td>3</td>
-                        <td>720</td>
-                    </tr>
-                    <tr>
-                        <td>Mouse individual ventilated housing in 2 rooms</td>
-                        <td>4</td>
-                        <td>30</td>
-                        <td>4</td>
-                        <td>960</td>
-                    </tr>
-                    <tr>
-                        <td>Mouse individual biometric housing with 24-hour activity monitoring in 1 room</td>
-                        <td>1</td>
-                        <td>60</td>
-                        <td>1</td>
-                        <td>60</td>
-                    </tr>
-                    <tr>
-                        <td>Aquaria for housing fish in one room</td>
-                        <td>4</td>
-                        <td>12</td>
-                        <td>2</td>
-                        <td>96</td>
-                    </tr>
-                </tbody>
+                <tbody id="arf-housing-table-body"></tbody>
                 <tfoot>
                     <tr>
                         <td colspan="4">Total Capacity</td>
-                        <td>1,836</td>
+                        <td id="arf-housing-total"></td>
                     </tr>
                 </tfoot>
             </table>
@@ -717,110 +686,14 @@
             <div class="intro-banner-icon">&#128007;</div>
             <p>The ARF houses dedicated surgical, histology, molecular, and behavioral testing spaces, backed by a full suite of husbandry and environmental support equipment.</p>
         </div>
-        <div class="arf-timeline">
-            <div class="arf-timeline-item">
-                <div class="arf-timeline-icon">&#129502;</div>
-                <div class="arf-timeline-content">
-                    <h4>Surgery Room</h4>
-                    <p>State-of-the-art surgery room with two surgery tables (one backdraft and one downdraft), digitized stereotaxic instruments, gas and chemical anesthesia system, animal physiological monitoring (Kent Scientific), and autoclave system for surgical sterilization.</p>
-                </div>
-            </div>
-            <div class="arf-timeline-item">
-                <div class="arf-timeline-icon">&#128300;</div>
-                <div class="arf-timeline-content">
-                    <h4>Histology Laboratory</h4>
-                    <p>Biosafety level II cabinet, chemical fume hood for perfusions, HistoCore Arcadia tissue processing and embedding apparatus, and a Leica RM2255 fully automated rotary microtome.</p>
-                </div>
-            </div>
-            <div class="arf-timeline-item">
-                <div class="arf-timeline-icon">&#129516;</div>
-                <div class="arf-timeline-content">
-                    <h4>Molecular Laboratory</h4>
-                    <p>Hacker Bright cryostat, a Keyence BZ-XB fluorescence microscope with live-cell imaging and automated cell counting, refrigerated centrifuge, digital temperature shaking incubator, Wes&trade; Simple Western blot protein analysis apparatus, a microplate reader, and various small laboratory equipment items.</p>
-                </div>
-            </div>
-            <div class="arf-timeline-item">
-                <div class="arf-timeline-icon">&#127919;</div>
-                <div class="arf-timeline-content">
-                    <h4>Behavior Testing Rooms</h4>
-                    <p>Three rooms with automated operant conditioning chambers for fear conditioning and drug self-administration; light-dark boxes; modular mazes; a Rotarod for mice and rats with video recording; manual open-field, Elevated Plus, and T-Maze for mice and rats; and a T-maze for small aquatic species.</p>
-                </div>
-            </div>
-            <div class="arf-timeline-item">
-                <div class="arf-timeline-icon">&#128167;</div>
-                <div class="arf-timeline-content">
-                    <h4>Bedding &amp; Water Station</h4>
-                    <p>Automated bedding dispenser and water filling station.</p>
-                </div>
-            </div>
-            <div class="arf-timeline-item">
-                <div class="arf-timeline-icon">&#129701;</div>
-                <div class="arf-timeline-content">
-                    <h4>Cage Washer</h4>
-                    <p>Cabinet cage washer with separate clean and dirty sides.</p>
-                </div>
-            </div>
-            <div class="arf-timeline-item">
-                <div class="arf-timeline-icon">&#128703;</div>
-                <div class="arf-timeline-content">
-                    <h4>Water Purification</h4>
-                    <p>Reverse osmosis purification water system.</p>
-                </div>
-            </div>
-            <div class="arf-timeline-item">
-                <div class="arf-timeline-icon">&#10052;&#65039;</div>
-                <div class="arf-timeline-content">
-                    <h4>Dry Ice Maker</h4>
-                    <p>On-site dry ice production for sample handling and transport.</p>
-                </div>
-            </div>
-            <div class="arf-timeline-item">
-                <div class="arf-timeline-icon">&#127777;&#65039;</div>
-                <div class="arf-timeline-content">
-                    <h4>Environmental Monitoring</h4>
-                    <p>Automated environmental monitoring system with 24-hour monitoring for rodent circadian rhythm studies, with environmental temperature and humidity controls.</p>
-                </div>
-            </div>
-            <div class="arf-timeline-item">
-                <div class="arf-timeline-icon">&#129703;</div>
-                <div class="arf-timeline-content">
-                    <h4>Cold Storage</h4>
-                    <p>Three freezers (including an ultra-low temperature freezer) and 2 refrigerators for sample storage.</p>
-                </div>
-            </div>
-        </div>
+        <div class="arf-timeline" id="arf-equipment-timeline"></div>
 
         <h3>Training and Consultation Services</h3>
         <div class="intro-banner">
             <div class="intro-banner-icon">&#127891;</div>
             <p>The Facility Director, Manager, and Veterinarian bring over fifteen years of combined experience in laboratory animal research, teaching, and facility operations, and are all AALAS certified in various animal care and use operations.</p>
         </div>
-        <div class="arf-training-grid">
-            <div class="arf-card">
-                <div class="arf-card-icon">&#128737;&#65039;</div>
-                <h4>Health &amp; Safety Training</h4>
-                <p>Covers required safety practices for working in the facility.</p>
-                <span class="training-frequency">4&times; per year</span>
-            </div>
-            <div class="arf-card">
-                <div class="arf-card-icon">&#128045;</div>
-                <h4>Rodent Handling &amp; Care</h4>
-                <p>Basic rodent handling, animal care, and health monitoring training.</p>
-                <span class="training-frequency">4&times; per year, or by appointment</span>
-            </div>
-            <div class="arf-card">
-                <div class="arf-card-icon">&#128203;</div>
-                <h4>Research Design &amp; IACUC Consultation</h4>
-                <p>Consultations for laboratory animal research design and IACUC protocol writing.</p>
-                <span class="training-frequency">By appointment</span>
-            </div>
-            <div class="arf-card">
-                <div class="arf-card-icon">&#127919;</div>
-                <h4>Specialized Technique Training</h4>
-                <p>Individualized training for specialized surgical and behavioral techniques or other technical procedures.</p>
-                <span class="training-frequency">By appointment</span>
-            </div>
-        </div>
+        <div class="arf-training-grid" id="arf-training-grid"></div>
     </section>
 
     <footer>
@@ -837,7 +710,7 @@
                 <a href="mcb.html">Molecular &amp; Cellular Biology Core</a>
                 <a href="arf.html" aria-current="page">Animal Research Facility</a>
                 <a href="bbsu.html">Biostatistics and Bioinformatics Support Unit</a>
-                <a href="services.html">Services</a>
+                <a href="services.html">Request Services</a>
             </div>
 
             <div class="footer-section">
@@ -860,6 +733,102 @@
         </div>
     </footer>
 
+    <script>
+        window.rcmiSiteConfig = {
+            dataBasePath: "../data"
+        };
+    </script>
+    <script src="../js/FIELD_MAP.js?v=1"></script>
+    <script src="../js/common.js?v=1"></script>
+    <script>
+        (function () {
+            var helpers = window.rcmiSandboxHelpers;
+
+            if (!helpers || typeof helpers.loadDataset !== "function") {
+                throw new Error("Shared CSV helper API is unavailable.");
+            }
+
+            function renderStaff(staff) {
+                var grid = document.getElementById("arf-staff-grid");
+                if (!grid) return;
+
+                grid.innerHTML = staff.filter(function (member) {
+                    return member.core === "arf";
+                }).map(function (member) {
+                    var avatar = member.photoPath
+                        ? '<img src="' + helpers.escapeHtml(member.photoPath) + '" alt="' + helpers.escapeHtml(member.name) + '">'
+                        : helpers.escapeHtml(member.initials);
+                    return '<div class="arf-staff-item">' +
+                        '<div class="arf-staff-avatar">' + avatar + '</div>' +
+                        '<div class="arf-staff-name">' + helpers.escapeHtml(member.name) + '</div>' +
+                        '<div class="arf-staff-role">' + helpers.escapeHtml(member.role) + '</div>' +
+                        '</div>';
+                }).join("");
+            }
+
+            function renderHousing(rows) {
+                var body = document.getElementById("arf-housing-table-body");
+                var totalCell = document.getElementById("arf-housing-total");
+                if (!body || !totalCell) return;
+
+                body.innerHTML = rows.map(function (row) {
+                    return '<tr>' +
+                        '<td>' + helpers.escapeHtml(row.species) + '</td>' +
+                        '<td>' + row.animalsPerCage + '</td>' +
+                        '<td>' + row.cagesPerRack + '</td>' +
+                        '<td>' + row.racks + '</td>' +
+                        '<td>' + row.animalCount.toLocaleString() + '</td>' +
+                        '</tr>';
+                }).join("");
+
+                var total = rows.reduce(function (sum, row) { return sum + row.animalCount; }, 0);
+                totalCell.textContent = total.toLocaleString();
+            }
+
+            function renderEquipmentTimeline(items) {
+                var timeline = document.getElementById("arf-equipment-timeline");
+                if (!timeline) return;
+
+                timeline.innerHTML = items.map(function (item) {
+                    return '<div class="arf-timeline-item">' +
+                        '<div class="arf-timeline-icon">' + helpers.escapeHtml(item.icon) + '</div>' +
+                        '<div class="arf-timeline-content">' +
+                        '<h4>' + helpers.escapeHtml(item.title) + '</h4>' +
+                        '<p>' + helpers.escapeHtml(item.description) + '</p>' +
+                        '</div>' +
+                        '</div>';
+                }).join("");
+            }
+
+            function renderTraining(items) {
+                var grid = document.getElementById("arf-training-grid");
+                if (!grid) return;
+
+                grid.innerHTML = items.map(function (item) {
+                    return '<div class="arf-card">' +
+                        '<div class="arf-card-icon">' + helpers.escapeHtml(item.icon) + '</div>' +
+                        '<h4>' + helpers.escapeHtml(item.title) + '</h4>' +
+                        '<p>' + helpers.escapeHtml(item.description) + '</p>' +
+                        '<span class="training-frequency">' + helpers.escapeHtml(item.frequency) + '</span>' +
+                        '</div>';
+                }).join("");
+            }
+
+            Promise.all([
+                helpers.loadDataset("rccStaff").then(helpers.transformRccStaffRecords),
+                helpers.loadDataset("rccArfAnimalHousing").then(helpers.transformRccArfAnimalHousingRecords),
+                helpers.loadDataset("rccArfEquipment").then(helpers.transformRccArfEquipmentRecords),
+                helpers.loadDataset("rccArfTraining").then(helpers.transformRccArfTrainingRecords)
+            ]).then(function (results) {
+                renderStaff(results[0]);
+                renderHousing(results[1]);
+                renderEquipmentTimeline(results[2]);
+                renderTraining(results[3]);
+            }).catch(function (err) {
+                console.error("ARF page data could not be loaded:", err);
+            });
+        })();
+    </script>
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
 

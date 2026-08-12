@@ -1,0 +1,7 @@
+Item ID,Is Active,Sort Order,Text
+design-assistance,Yes,10,Provide assistance in designing the analytical portion of studies.
+data-analysis-assistance,Yes,20,Provide assistance with data analysis.
+sample-size,Yes,30,Provide assistance with sample size determination of studies.
+summer-institute,Yes,40,"Conduct Summer Institute on biostatistical methods, data analyses, and bioinformatics."
+r-training,Yes,50,Conduct training on R statistical software.
+stata-training,Yes,60,Conduct training on STATA statistical software.

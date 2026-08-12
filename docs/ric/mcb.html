@@ -745,7 +745,16 @@
             font-family: 'Playfair Display', serif;
             font-weight: 700;
             font-size: 1.6rem;
+            overflow: hidden;
             transition: transform 0.2s ease;
+        }
+
+        .team-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 15%;
+            display: block;
         }
 
         .team-card:hover .team-avatar {
@@ -853,7 +862,7 @@
                 <li><a href="mcb.html" aria-current="page">MCB</a></li>
                 <li><a href="arf.html">ARF</a></li>
                 <li><a href="bbsu.html">BBSU</a></li>
-                <li><a href="services.html">Services</a></li>
+                <li><a href="services.html">Request Services</a></li>
             </ul>
             <button class="hamburger" id="hamburger">
                 <span></span>
@@ -966,28 +975,7 @@
         </div>
 
         <h2>MCB Staff</h2>
-        <div class="team-grid">
-            <div class="team-card">
-                <div class="team-avatar">JW</div>
-                <div class="team-name">James Wachira</div>
-                <div class="team-designation">Director</div>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar">YL</div>
-                <div class="team-name">YueJin Li</div>
-                <div class="team-designation">Co-Director</div>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar">RM</div>
-                <div class="team-name">Roger Mullins</div>
-                <div class="team-designation">Core Laboratory Manager</div>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar">KM</div>
-                <div class="team-name">Kelley Murphy</div>
-                <div class="team-designation">Core Laboratory Specialist</div>
-            </div>
-        </div>
+        <div class="team-grid" id="mcb-staff-grid"></div>
 
         <a href="#" class="field-link-heading">
             Equipment
@@ -999,196 +987,7 @@
             <p>The MCB provides access to a wide array of equipment for biomedical research, focused on flow cytometry, genomic analysis, biological assays, biomedical imaging, nanomaterials research, molecular separation and identification, and histology. Tap a category below to see what's available.</p>
         </div>
 
-        <div class="equipment-accordion">
-            <details class="equipment-category" open>
-                <summary>
-                    <span class="equipment-cat-icon">&#129516;</span>
-                    <span class="equipment-cat-title">Flow Cytometry</span>
-                    <span class="equipment-cat-count">2 items</span>
-                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </summary>
-                <ol class="equipment-list">
-                    <li>SONY SH800 cell sorter with the capacity to sort different cell sizes using microfluidics sorting chips. The sorter is equipped with 488nm/638nm/408nm lasers.</li>
-                    <li>Cytek Aurora Spectral analyzer equipped with 405nm, 488nm, and 640nm lasers. The spectral unmixing technology allows for the efficient separation of spectra from different fluorochromes. As set up, 38 color phenotyping can be accomplished from a single experiment. This system provides high sensitivity, flexible multicolor panel design, and robust resolution of complex and overlapping fluorochromes, supporting advanced applications such as deep immunophenotyping, rare-cell detection, and high-parameter flow cytometry experiments.</li>
-                </ol>
-            </details>
-
-            <details class="equipment-category">
-                <summary>
-                    <span class="equipment-cat-icon">&#129514;</span>
-                    <span class="equipment-cat-title">Genomics/Genetics Analysis</span>
-                    <span class="equipment-cat-count">5 items</span>
-                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </summary>
-                <ol class="equipment-list">
-                    <li>MiSeq&reg; System integrated DNA and RNA sequencing system.</li>
-                    <li>QIAcuity Digital PCR System: quantification for mutation detection, copy number variation (CNV), gene expression studies, and gene-editing analysis</li>
-                    <li>Bio-Rad CFX96 Touch Real-Time PCR Detection System: quantitative real-time PCR machine with direct-to-paper data output.</li>
-                    <li>QuantStudio&trade; 6 Flex: Real-Time PCR System, 96 or 384-well, with laptop.</li>
-                    <li>Nanovue Plus &amp; Nanodrop spectrophotometers, 16-well Take3 plate for spectrophotometry on the H1 Synergy microplate reader, and a Qubit 4 Fluorometer.</li>
-                </ol>
-            </details>
-
-            <details class="equipment-category">
-                <summary>
-                    <span class="equipment-cat-icon">&#9879;&#65039;</span>
-                    <span class="equipment-cat-title">Biological Assay Technologies</span>
-                    <span class="equipment-cat-count">7 items</span>
-                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </summary>
-                <ol class="equipment-list">
-                    <li>Bio-Tek Synergy H1MF hybrid multimode microplate reader with top and bottom fluorescence intensity, UV-visible absorbance, luminescence, fluorescence polarization, TRF &amp; TR-FRET detection. Take3 plate available for spectrophotometry.</li>
-                    <li>Luminex MAGPIX&reg; System: A multiplexing unit with magnetic bead technology runs 50 different tests in a single reaction volume and reads 96-well-plate in 60 minutes.</li>
-                    <li>GE Amersham 680R gel imaging system for DNA and protein gels capable of chemiluminescence and fluorescence in Western blots.</li>
-                    <li>Bio-Rad NGC Quest 10 System. An FPLC (fast protein liquid chromatography) system for protein purification to homogeneity.</li>
-                    <li>One (1) Invitrogen iBind Automated Western Systems that automate the western blot processing (immunodetection) steps.</li>
-                    <li>Two (2) Invitrogen iBlot Gel Transfer Devices to perform Western blotting transfer within several minutes without the need for buffers.</li>
-                    <li>Three (2) Invitrogen Mini Gel Tanks that allow electrophoresis of 1 or 2 mini gels, with power supplies and mini-blot transfer modules.</li>
-                </ol>
-            </details>
-
-            <details class="equipment-category">
-                <summary>
-                    <span class="equipment-cat-icon">&#128300;</span>
-                    <span class="equipment-cat-title">Biomedical Imaging</span>
-                    <span class="equipment-cat-count">7 items</span>
-                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </summary>
-                <ol class="equipment-list">
-                    <li>Nikon Eclipse TE2000-S: fluorescence microscope that includes new optics, digital cameras and software.</li>
-                    <li>Nikon Eclipse 90i upright microscope equipped with BF, FL, and DIC optics, motorized focus and Nikon 100W mercury power supply, a Lumenera 3 digital camera, Image-Pro Plus image analysis software, and Dell Optiplex 5040 workstation.</li>
-                    <li>JEOL JEM-1400 transmission electron microscope with 120 kV accelerating voltage; electron gun assembly with Cool Beam Illumination System - LaB6 filament standard with a comprehensive Energy Dispersive X-ray Microanalysis system, including all the tools required to perform qualitative and quantitative analysis, image capture, image centric analysis, and X-ray spectral analysis. Accessories include a NanoSprint43L-Mark II AMT 43-megapixel bottom-mount camera, double-tilt beryllium specimen holder, high-tilt specimen retainer, and hard x-ray aperture for HR PP, Aztec Energy standard EDS, and Xplore Detector standard microanalysis system with Xplore Large Area Analytical Drift Detector.</li>
-                    <li>JCM-7000 NeoScope&trade; Benchtop Scanning Electron Microscope offers high-resolution imaging capabilities, allowing for detailed visualization of sample surfaces. It can achieve magnifications up to 100,000x, with a resolution of 8 nm.</li>
-                    <li>Leica STELLARIS 5 Confocal Microscope with integrated White Light Laser, Acousto-Optical Beam Splitter, Power HyD S detectors, and ImageCompass smart user interface; capable of multicolor FL, DIC, 3D, and stage-top incubation for live-cell imaging at 10x, 20x, and 63x (oil) objectives.</li>
-                    <li>Tokai Hit Stage Top Incubator maintains precise control of temperature, humidity, and CO2 for live-cell imaging on the Leica Stellaris 5.</li>
-                    <li>Leica S9i digital stereo microscope with a zoom range of .61x - 5.5x for a total magnification of 6.1x - 55x with 10x eyepieces. Integrated 10 M.P. camera with 1080P HD video display and capture via HDMI cable.</li>
-                </ol>
-            </details>
-
-            <details class="equipment-category">
-                <summary>
-                    <span class="equipment-cat-icon">&#9883;&#65039;</span>
-                    <span class="equipment-cat-title">Nanomaterials Research</span>
-                    <span class="equipment-cat-count">1 item</span>
-                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </summary>
-                <ol class="equipment-list">
-                    <li>Zetasizer Nano: for characterization of nanomaterials such as size, aggregation and charge.</li>
-                </ol>
-            </details>
-
-            <details class="equipment-category">
-                <summary>
-                    <span class="equipment-cat-icon">&#129502;</span>
-                    <span class="equipment-cat-title">Molecular Separations and Identification</span>
-                    <span class="equipment-cat-count">7 items</span>
-                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </summary>
-                <ol class="equipment-list">
-                    <li>Xevo TQ-XS Triple Quadrupole Mass Spectrometer is a tandem quadrupole, atmospheric pressure ionization (API) mass spectrometer. It is designed for routine HPLC-MS/MS and UPLC-MS/MS analyses in quantitative and qualitative applications, and can operate at fast acquisition speeds compatible with UltraPerformance LC.</li>
-                    <li>Xevo TQ-GC Mass Spectrometry System is a robust Electron Ionization (EI) and Chemical Ionization (CI) Gas Chromatography (GC)-MS/MS platform that allows routine quantification of multiple contaminants in complex matrices.</li>
-                    <li>Flashsmart Elemental Analyzer for quantitative determination of nitrogen, carbon, hydrogen, sulfur and oxygen. Flexible handling of any sample type: solids, liquid, viscous, volatile and gas.</li>
-                    <li>NGC Quest 10 Chromatography System has automated 10 ml/min pumps that provide accurate gradients for high-resolution separation of proteins and biomolecules and supports automated sample injection using fixed or dynamic loops.</li>
-                    <li>Agilent 6546 Q-TOF LC/MS System with Agilent Jet Stream source, oil foreline pump, bundled PC, monitor, MassHunter software suite &ndash; at the low and high concentrations with simultaneous delivery of five orders of in-spectrum dynamic range and mass resolution over 60k (for high masses) and over 30k (for low masses).</li>
-                    <li>Agilent 7800 ICP-MS enables analysis of major and trace analytes in a single run &ndash; the wide dynamic range orthogonal detector system (ODS) enables direct analysis of major elements (100s or 1000s of ppm) and trace level analytes (single or sub-ppt) in a single run.</li>
-                    <li>Fluorolog-QM: enables steady-state and time-resolved luminescence measurements, including time-correlated single photon counting (TCSPC) and photoluminescence quantum yield (PLQY) measurements. All-reflective optics, resulting in exceptional focus across its entire wavelength range (180 nm to 5500 nm).</li>
-                </ol>
-            </details>
-
-            <details class="equipment-category">
-                <summary>
-                    <span class="equipment-cat-icon">&#129502;</span>
-                    <span class="equipment-cat-title">Tissue Preparation/Histology</span>
-                    <span class="equipment-cat-count">8 items</span>
-                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </summary>
-                <ol class="equipment-list">
-                    <li>PELCO Pella BioWavePro+ Microwave System: rapid processing of thin tissue sections for histological analysis (allows two to three assays per day).</li>
-                    <li>PELCO SteadyTemp&trade; Pro+ Solid State Chiller with Digital Control.</li>
-                    <li>Leica CM1860 cryostat for immunohistochemistry and histology applications.</li>
-                    <li>Leica paraffin embedding station.</li>
-                    <li>Leica rotary microtome for paraffin-embedded tissues.</li>
-                    <li>Ultramicrotome Station with a LEICA EM UC7 Ultramicrotome for consistent high quality Electron Microscopy (EM) sections at room temperature and a LEICA EM KMR3 Glass Knife Maker and Paraffin Embedding station.</li>
-                    <li>Covaris S2 Ultrasonicator: single-tube system for high-performance sample preparation using adaptive focused acoustic energy. GE Multitemp III water bath included for constant temperature.</li>
-                    <li>LABCONCO Freezone 2.5L Lyophilizer with vacuum pump, freeze drying glassware, and 8-port manifold.</li>
-                </ol>
-            </details>
-
-            <details class="equipment-category">
-                <summary>
-                    <span class="equipment-cat-icon">&#128187;</span>
-                    <span class="equipment-cat-title">Data Analysis</span>
-                    <span class="equipment-cat-count">3 items</span>
-                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </summary>
-                <ol class="equipment-list">
-                    <li>Two (2) Dell Precision 7920 Towers, Intel Xeon Silver 4214 2.2GHz, 3.2GHz Turbo, 12C, 9.6GT/s 2UPI, 16.5MB Cache, HT (85W) DDR4-2400 1st, NVIDIA Quadro P5000, 16GB, 4 DP, DL-DVI-D (7X20T), 256GB 4x64GB DDR4 2666MHz LRDIMM ECC Memory, 2.5" 1TB SATA Class 20 SSD.</li>
-                    <li>HP 2023 Pavilion 2-in-1 14" FHD Touch Screen Business Laptop, Intel Quad-Core i5-1135G7 2.4 GHz, 32GB DDR4, 1TB SSD, Fingerprint Reader, 8.5 Hours Battery, Bluetooth, Wifi, Windows 11 Pro, Gold, MarsPC.</li>
-                    <li>Software packages:
-                        <ul>
-                            <li>Graphpad Prism</li>
-                            <li>STATA statistical software</li>
-                            <li>FLOWJO flow cytometry software</li>
-                            <li>LipidSearch Lipid Identification software</li>
-                            <li>ImageQuantTL for gel/blot and image analysis</li>
-                            <li>DNASTAR Lasergene</li>
-                            <li>Spartan computational chemistry software</li>
-                            <li>Schrodinger/maestro for molecular modeling</li>
-                            <li>FIJI/ImageJ</li>
-                            <li>Cellprofiler</li>
-                        </ul>
-                    </li>
-                </ol>
-            </details>
-
-            <details class="equipment-category">
-                <summary>
-                    <span class="equipment-cat-icon">&#129440;</span>
-                    <span class="equipment-cat-title">Cell Culture</span>
-                    <span class="equipment-cat-count">2 items</span>
-                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </summary>
-                <ol class="equipment-list">
-                    <li>Dixon Room 218D is equipped with a Class II/Type B2 laminar flow hood suitable for microbiological studies involving BSL-2 agents.</li>
-                    <li>Dixon Room 207 is a multi-user cell culture facility equipped with CO2 incubators, a Zeiss Axiovert 200 inverted microscope, a microplate centrifuge, and a TC-20 automated cell counter.</li>
-                </ol>
-            </details>
-
-            <details class="equipment-category">
-                <summary>
-                    <span class="equipment-cat-icon">&#127744;</span>
-                    <span class="equipment-cat-title">Centrifugation</span>
-                    <span class="equipment-cat-count">3 items</span>
-                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </summary>
-                <ol class="equipment-list">
-                    <li>Beckman-Coulter Avanti J25I high speed centrifuge (max. 25000xg)</li>
-                    <li>Optima L-100XP ultracentrifuge (max. 802,400xg)</li>
-                    <li>Optima MAX-TL tabletop ultracentrifuge (max. 657,000xg)</li>
-                </ol>
-            </details>
-
-            <details class="equipment-category">
-                <summary>
-                    <span class="equipment-cat-icon">&#128736;&#65039;</span>
-                    <span class="equipment-cat-title">Other Multi-User Equipment</span>
-                    <span class="equipment-cat-count">9 items</span>
-                    <svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </summary>
-                <p style="margin: -0.25rem 1.5rem 0.75rem; font-size: 0.88rem; color: var(--secondary); font-style: italic;">Located in or near the Dixon Research Building</p>
-                <ol class="equipment-list count-from-4">
-                    <li>Real-Time PCR: MX3000P Real-Time PCR System. Multiplexing capabilities of 4 dyes using a photomultiplier tube (PMT) detector. The dynamic range of 7 orders of magnitude. The excitation range of 350mm&ndash;750mm and the emission range is 350mm&ndash;700mm.</li>
-                    <li>Eppendorf Thermal Cycler: Accepts multiple 0.2ml and 0.5ml tubes and it can perform gradient amplifications. It is ideal for routine PCR and cloning experiments.</li>
-                    <li>Allegra X-22R Centrifuge: Cooled bench-top centrifuge with rotors for microcentrifuge tubes, 15ml, and 50ml tubes.</li>
-                    <li>Electrophoresis: Various gel electrophoresis apparatus for nucleic acids and proteins including Ettan IPGphor II IEF System. A fully programmable integrated isoelectric focusing equipment capable of running up to 12 IPG strips (7, 11, 13, 18, or 24 cm) simultaneously. The system is cooled by a Peltier platform and has an integral 8000V power supply.</li>
-                    <li>Shaking Incubators ideal for cell culture studies, cell aeration, bacterial aeration, and metabolism studies. Accommodates multiple volumes of culture flasks and includes a static shelf for culture plates.</li>
-                    <li>Sample concentrator: Vacufuge Concentrator for concentrating DNA/RNA, nucleotides, proteins, and other samples in 96 x 1.5-2.0ml sample format. Automatic vacuum release prevents sample loss due to bumping and foaming.</li>
-                    <li>Nuclear Magnetic Resonance Spectrophotometer (NMR) (DI108): 400 MHz Ultrashield NMR BRUKER Bio Spin.</li>
-                    <li>Gas Chromatogram-Mass Spectrophotometers (GCMS) (Spencer Hall (SP) RMs 206 and 313 and DI113): HP 6890 GCMS system, which includes: HP 6890 series GC system, HP 5973 Mass Selective Detector (MSD), and Agilent 7683 Series injector. Agilent 6890N network GCMS system, which includes: Agilent 6890N Network GC system, Agilent 5973 inert Mass Selective Detector (MSD), Agilent G188 Network Head Space Sampler, Agilent 7683 Series Autosampler, and Agilent 7683B Series injector. Saturn 2200 GCMS system from Agilent Technologies (Varian) GCMS Qp50/50A system Shimadzu Scientific.</li>
-                    <li>Liquid Chromatogram-Mass Spectrophotometer (LCMS) (SP206): Agilent 1100 LC/MSD System, which includes: Agilent 1100 LC/MSD, G1322A Online Vacuum Degasser, G1311A Quaternary Pump G1313A, Automatic Liquid Sampler G1316A Column Compartment, and G1315B Diode Array Detector.</li>
-                </ol>
-            </details>
-        </div>
+        <div class="equipment-accordion" id="mcb-equipment-accordion"></div>
 
         <h2>Service Subscription</h2>
 
@@ -1201,138 +1000,14 @@
         </div>
 
         <h3>Subscription Costs Schedule</h3>
-        <div class="pricing-tiers">
-            <div class="pricing-tier featured">
-                <div class="pricing-tier-label">Most Frequent User</div>
-                <div class="pricing-tier-price">$6,000<span>/year</span></div>
-                <div class="pricing-tier-desc">Over 100 bookings per year</div>
-            </div>
-            <div class="pricing-tier">
-                <div class="pricing-tier-label">Frequent User</div>
-                <div class="pricing-tier-price">$4,000<span>/year</span></div>
-                <div class="pricing-tier-desc">40&ndash;100 bookings per year</div>
-            </div>
-            <div class="pricing-tier">
-                <div class="pricing-tier-label">Occasional User</div>
-                <div class="pricing-tier-price">$2,000<span>/year</span></div>
-                <div class="pricing-tier-desc">20&ndash;40 bookings per year</div>
-            </div>
-        </div>
+        <div class="pricing-tiers" id="mcb-pricing-tiers"></div>
         <p class="pricing-note">General services associated ad hoc with specific services, like freezers and purified water, have no associated cost (marked N/A below).</p>
 
         <h3>Main Services</h3>
-        <div class="service-categories">
-            <div class="service-category-card">
-                <h4><span class="service-category-icon">&#128300;</span>Microscopy</h4>
-                <div class="service-row"><span class="service-row-name">Fluorescence/Brightfield</span><span class="service-row-price">$20/hr</span></div>
-                <div class="service-row"><span class="service-row-name">Confocal</span><span class="service-row-price">$100/hr</span></div>
-                <div class="service-row"><span class="service-row-name">Scanner</span><span class="service-row-price">$100/hr</span></div>
-                <div class="service-row"><span class="service-row-name">EM</span><span class="service-row-price">$75/hr</span></div>
-            </div>
-
-            <div class="service-category-card">
-                <h4><span class="service-category-icon">&#129474;</span>Tissue Processing</h4>
-                <div class="service-row"><span class="service-row-name">EM Sample Prep, Thin</span><span class="service-row-price">$75/hr</span></div>
-                <div class="service-row"><span class="service-row-name">EM Sample Prep, Regular</span><span class="service-row-price">$50/hr</span></div>
-                <div class="service-row"><span class="service-row-name">Cryostat</span><span class="service-row-price">$30/hr</span></div>
-                <div class="service-row"><span class="service-row-name">Microtome</span><span class="service-row-price">$20/hr</span></div>
-            </div>
-
-            <div class="service-category-card">
-                <h4><span class="service-category-icon">&#129440;</span>Cellular</h4>
-                <div class="service-row"><span class="service-row-name">Cell Culture Room (Hood, Incubators, CO2)</span><span class="service-row-price">$20/hr</span></div>
-                <div class="service-row"><span class="service-row-name">Cell Analyzer</span><span class="service-row-price">$60/hr</span></div>
-                <div class="service-row"><span class="service-row-name">Cell Sorter</span><span class="service-row-price">$75/hr</span></div>
-            </div>
-
-            <div class="service-category-card">
-                <h4><span class="service-category-icon">&#129516;</span>Molecular</h4>
-                <div class="service-row"><span class="service-row-name">Gel Imager</span><span class="service-row-price">$20/hr</span></div>
-                <div class="service-row"><span class="service-row-name">Electrophoresis</span><span class="service-row-price">$20/hr</span></div>
-                <div class="service-row"><span class="service-row-name">Microplate Reader</span><span class="service-row-price">$20/hr</span></div>
-                <div class="service-row"><span class="service-row-name">MagPix (ELISA Multiplex)</span><span class="service-row-price">$200/hr</span></div>
-            </div>
-
-            <div class="service-category-card">
-                <h4><span class="service-category-icon">&#129504;</span>Genomics</h4>
-                <div class="service-row"><span class="service-row-name">MiSeq</span><span class="service-row-price">$275/sample</span></div>
-                <div class="service-row"><span class="service-row-name">TapeStation</span><span class="service-row-price">$50/tape</span></div>
-                <div class="service-row"><span class="service-row-name">RT-qPCR</span><span class="service-row-price">$30/hr</span></div>
-                <div class="service-row"><span class="service-row-name">Nanovue/Nanodrop</span><span class="service-row-price">$20/hr</span></div>
-            </div>
-
-            <div class="service-category-card">
-                <h4><span class="service-category-icon">&#9879;&#65039;</span>Proteomics</h4>
-                <div class="service-row"><span class="service-row-name">FPLC</span><span class="service-row-price">$80/hr</span></div>
-                <div class="service-row"><span class="service-row-name">LC-QTOF</span><span class="service-row-price">$650/hr</span></div>
-                <div class="service-row"><span class="service-row-name">ICP-MS</span><span class="service-row-price">$125/hr</span></div>
-                <div class="service-row"><span class="service-row-name">Fluorolog-QM</span><span class="service-row-price">$200/hr</span></div>
-            </div>
-
-            <div class="service-category-card">
-                <h4><span class="service-category-icon">&#127744;</span>Centrifugation</h4>
-                <div class="service-row"><span class="service-row-name">Avanti J-25i</span><span class="service-row-price na">N/A</span></div>
-                <div class="service-row"><span class="service-row-name">Optima L100XP Ultracentrifuge</span><span class="service-row-price na">N/A</span></div>
-                <div class="service-row"><span class="service-row-name">Optima MAX-TL TableTop</span><span class="service-row-price na">N/A</span></div>
-                <div class="service-row"><span class="service-row-name">Allegra X-30R</span><span class="service-row-price na">N/A</span></div>
-            </div>
-
-            <div class="service-category-card">
-                <h4><span class="service-category-icon">&#129522;</span>Refrigeration &amp; UltraFreeze</h4>
-                <div class="service-row"><span class="service-row-name">&minus;80&deg;C (4 units)</span><span class="service-row-price na">N/A</span></div>
-                <div class="service-row"><span class="service-row-name">&minus;20&deg;C (1 unit)</span><span class="service-row-price na">N/A</span></div>
-                <div class="service-row"><span class="service-row-name">Fridge (218 + Cell Culture Room)</span><span class="service-row-price na">N/A</span></div>
-                <div class="service-row"><span class="service-row-name">Sample Locator (Liquid Nitrogen)</span><span class="service-row-price na">N/A</span></div>
-            </div>
-
-            <div class="service-category-card">
-                <h4><span class="service-category-icon">&#128187;</span>Workstations</h4>
-                <div class="service-row"><span class="service-row-name">Windows (WS1)</span><span class="service-row-price na">N/A</span></div>
-                <div class="service-row"><span class="service-row-name">Linux (WS2)</span><span class="service-row-price na">N/A</span></div>
-                <div class="service-row"><span class="service-row-name">Imaging Laptop</span><span class="service-row-price na">N/A</span></div>
-            </div>
-
-            <div class="service-category-card center-last">
-                <h4><span class="service-category-icon">&#128736;&#65039;</span>Miscellaneous</h4>
-                <div class="service-row"><span class="service-row-name">Water Purification</span><span class="service-row-price na">N/A</span></div>
-                <div class="service-row"><span class="service-row-name">Autoclaves</span><span class="service-row-price na">N/A</span></div>
-                <div class="service-row"><span class="service-row-name">Lyophilizer</span><span class="service-row-price na">N/A</span></div>
-            </div>
-        </div>
+        <div class="service-categories" id="mcb-service-categories"></div>
 
         <h3>Other Services</h3>
-        <div class="other-services-list">
-            <div class="other-service-item">
-                <div class="other-service-icon">&#128172;</div>
-                <h4>Initial Consultation</h4>
-                <p>We provide a free initial consultation to discuss the specific needs of the researchers. This allows us to provide tailored recommendations for the effective use of our laboratory resources. This consultation is initiated and tracked in iLab.</p>
-            </div>
-            <div class="other-service-item">
-                <div class="other-service-icon">&#127891;</div>
-                <h4>Methods Training</h4>
-                <p>We provide training in the equipment offered by the core laboratory, to the extent of current faculty staff expertise. Training is scheduled and tracked in iLab and guided by training workflows to ensure a standard and acceptable level of proficiency.</p>
-            </div>
-            <div class="other-service-item">
-                <div class="other-service-icon">&#129514;</div>
-                <h4>Sample Pooling</h4>
-                <p>Equipment that may efficiently run samples from multiple researchers at once, such as the MiSeq and Lyophilizer, are scheduled and allotted in iLab.</p>
-            </div>
-            <div class="other-service-item">
-                <div class="other-service-icon">&#128220;</div>
-                <h4>Protocol Development</h4>
-                <p>We provide assistance in developing new protocols for investigators planning to use our resources. This service includes specific and detailed methods for equipment and services as well as advice on budgeting. Protocol development is initiated and tracked in iLab.</p>
-            </div>
-            <div class="other-service-item">
-                <div class="other-service-icon">&#128202;</div>
-                <h4>Statistical Consulting</h4>
-                <p>We provide advice and assistance in statistical analysis of data, including bioinformatics analysis and figure formatting. Statistical software such as R, SPSS, MATLAB, and Graphpad Prism are available for use and training.</p>
-            </div>
-            <div class="other-service-item">
-                <div class="other-service-icon">&#128443;&#65039;</div>
-                <h4>Image Analysis</h4>
-                <p>We provide advice and assistance for imaging analysis of biological images, including ImageQuant TL, ImageJ/FIJI, MATLAB, CellProfiler, and more.</p>
-            </div>
-        </div>
+        <div class="other-services-list" id="mcb-other-services"></div>
     </section>
 
     <footer>
@@ -1349,7 +1024,7 @@
                 <a href="mcb.html" aria-current="page">Molecular &amp; Cellular Biology Core</a>
                 <a href="arf.html">Animal Research Facility</a>
                 <a href="bbsu.html">Biostatistics and Bioinformatics Support Unit</a>
-                <a href="services.html">Services</a>
+                <a href="services.html">Request Services</a>
             </div>
 
             <div class="footer-section">
@@ -1372,6 +1047,134 @@
         </div>
     </footer>
 
+    <script>
+        window.rcmiSiteConfig = {
+            dataBasePath: "../data"
+        };
+    </script>
+    <script src="../js/FIELD_MAP.js?v=1"></script>
+    <script src="../js/common.js?v=1"></script>
+    <script>
+        (function () {
+            var helpers = window.rcmiSandboxHelpers;
+
+            if (!helpers || typeof helpers.loadDataset !== "function") {
+                throw new Error("Shared CSV helper API is unavailable.");
+            }
+
+            var chevronSvg = '<svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+
+            function renderStaff(staff) {
+                var grid = document.getElementById("mcb-staff-grid");
+                if (!grid) return;
+
+                grid.innerHTML = staff.filter(function (member) {
+                    return member.core === "mcb";
+                }).map(function (member) {
+                    var avatar = member.photoPath
+                        ? '<img src="' + helpers.escapeHtml(member.photoPath) + '" alt="' + helpers.escapeHtml(member.name) + '">'
+                        : helpers.escapeHtml(member.initials);
+                    return '<div class="team-card">' +
+                        '<div class="team-avatar">' + avatar + '</div>' +
+                        '<div class="team-name">' + helpers.escapeHtml(member.name) + '</div>' +
+                        '<div class="team-designation">' + helpers.escapeHtml(member.role) + '</div>' +
+                        '</div>';
+                }).join("");
+            }
+
+            function renderEquipment(categories) {
+                var accordion = document.getElementById("mcb-equipment-accordion");
+                if (!accordion) return;
+
+                accordion.innerHTML = categories.map(function (category) {
+                    var note = category.note
+                        ? '<p style="margin: -0.25rem 1.5rem 0.75rem; font-size: 0.88rem; color: var(--secondary); font-style: italic;">' + helpers.escapeHtml(category.note) + '</p>'
+                        : "";
+
+                    var items = category.items.map(function (item) {
+                        var subItems = item.subItems.length
+                            ? '<ul>' + item.subItems.map(function (sub) {
+                                return '<li>' + helpers.escapeHtml(sub) + '</li>';
+                            }).join("") + '</ul>'
+                            : "";
+                        return '<li>' + helpers.escapeHtml(item.description) + subItems + '</li>';
+                    }).join("");
+
+                    return '<details class="equipment-category"' + (category.openByDefault ? ' open' : '') + '>' +
+                        '<summary>' +
+                        '<span class="equipment-cat-icon">' + helpers.escapeHtml(category.icon) + '</span>' +
+                        '<span class="equipment-cat-title">' + helpers.escapeHtml(category.title) + '</span>' +
+                        '<span class="equipment-cat-count">' + category.items.length + ' item' + (category.items.length === 1 ? '' : 's') + '</span>' +
+                        chevronSvg +
+                        '</summary>' +
+                        note +
+                        '<ol class="equipment-list" style="counter-reset: eq-counter ' + (category.startNumber - 1) + ';">' + items + '</ol>' +
+                        '</details>';
+                }).join("");
+            }
+
+            function renderPricingTiers(tiers) {
+                var wrap = document.getElementById("mcb-pricing-tiers");
+                if (!wrap) return;
+
+                wrap.innerHTML = tiers.map(function (tier) {
+                    return '<div class="pricing-tier' + (tier.featured ? ' featured' : '') + '">' +
+                        '<div class="pricing-tier-label">' + helpers.escapeHtml(tier.label) + '</div>' +
+                        '<div class="pricing-tier-price">' + helpers.escapeHtml(tier.price) + '<span>' + helpers.escapeHtml(tier.period) + '</span></div>' +
+                        '<div class="pricing-tier-desc">' + helpers.escapeHtml(tier.description) + '</div>' +
+                        '</div>';
+                }).join("");
+            }
+
+            function renderServiceCategories(categories) {
+                var grid = document.getElementById("mcb-service-categories");
+                if (!grid) return;
+
+                var centerLastIndex = categories.length % 3 === 1 ? categories.length - 1 : -1;
+
+                grid.innerHTML = categories.map(function (category, index) {
+                    var rows = category.items.map(function (item) {
+                        var isNa = item.price === "N/A";
+                        return '<div class="service-row"><span class="service-row-name">' + helpers.escapeHtml(item.serviceName) + '</span><span class="service-row-price' + (isNa ? ' na' : '') + '">' + helpers.escapeHtml(item.price) + '</span></div>';
+                    }).join("");
+
+                    return '<div class="service-category-card' + (index === centerLastIndex ? ' center-last' : '') + '">' +
+                        '<h4><span class="service-category-icon">' + helpers.escapeHtml(category.icon) + '</span>' + helpers.escapeHtml(category.title) + '</h4>' +
+                        rows +
+                        '</div>';
+                }).join("");
+            }
+
+            function renderOtherServices(items) {
+                var list = document.getElementById("mcb-other-services");
+                if (!list) return;
+
+                list.innerHTML = items.map(function (item) {
+                    return '<div class="other-service-item">' +
+                        '<div class="other-service-icon">' + helpers.escapeHtml(item.icon) + '</div>' +
+                        '<h4>' + helpers.escapeHtml(item.title) + '</h4>' +
+                        '<p>' + helpers.escapeHtml(item.description) + '</p>' +
+                        '</div>';
+                }).join("");
+            }
+
+            Promise.all([
+                helpers.loadDataset("rccStaff").then(helpers.transformRccStaffRecords),
+                helpers.loadDataset("rccMcbEquipment").then(helpers.transformRccMcbEquipmentRecords),
+                helpers.loadDataset("rccMcbPricingTiers").then(helpers.transformRccMcbPricingTiersRecords),
+                helpers.loadDataset("rccMcbServices").then(helpers.transformRccMcbServicesRecords),
+                helpers.loadDataset("rccMcbOtherServices").then(helpers.transformRccMcbOtherServicesRecords)
+            ]).then(function (results) {
+                renderStaff(results[0]);
+                renderEquipment(results[1]);
+                renderPricingTiers(results[2]);
+                renderServiceCategories(results[3]);
+                renderOtherServices(results[4]);
+            }).catch(function (err) {
+                console.error("MCB page data could not be loaded:", err);
+            });
+        })();
+    </script>
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
 

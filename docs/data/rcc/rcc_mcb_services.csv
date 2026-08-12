@@ -1,0 +1,48 @@
+Row Type,Category ID,Is Active,Sort Order,Icon,Title,Item ID,Service Name,Price
+category,microscopy,Yes,10,🔬,Microscopy,,,
+item,microscopy,Yes,10,,,microscopy-10,Fluorescence/Brightfield,$20/hr
+item,microscopy,Yes,20,,,microscopy-20,Confocal,$100/hr
+item,microscopy,Yes,30,,,microscopy-30,Scanner,$100/hr
+item,microscopy,Yes,40,,,microscopy-40,EM,$75/hr
+category,tissue-processing,Yes,20,🧂,Tissue Processing,,,
+item,tissue-processing,Yes,10,,,tissue-processing-10,"EM Sample Prep, Thin",$75/hr
+item,tissue-processing,Yes,20,,,tissue-processing-20,"EM Sample Prep, Regular",$50/hr
+item,tissue-processing,Yes,30,,,tissue-processing-30,Cryostat,$30/hr
+item,tissue-processing,Yes,40,,,tissue-processing-40,Microtome,$20/hr
+category,cellular,Yes,30,🦠,Cellular,,,
+item,cellular,Yes,10,,,cellular-10,"Cell Culture Room (Hood, Incubators, CO2)",$20/hr
+item,cellular,Yes,20,,,cellular-20,Cell Analyzer,$60/hr
+item,cellular,Yes,30,,,cellular-30,Cell Sorter,$75/hr
+category,molecular,Yes,40,🧬,Molecular,,,
+item,molecular,Yes,10,,,molecular-10,Gel Imager,$20/hr
+item,molecular,Yes,20,,,molecular-20,Electrophoresis,$20/hr
+item,molecular,Yes,30,,,molecular-30,Microplate Reader,$20/hr
+item,molecular,Yes,40,,,molecular-40,MagPix (ELISA Multiplex),$200/hr
+category,genomics,Yes,50,🧠,Genomics,,,
+item,genomics,Yes,10,,,genomics-10,MiSeq,$275/sample
+item,genomics,Yes,20,,,genomics-20,TapeStation,$50/tape
+item,genomics,Yes,30,,,genomics-30,RT-qPCR,$30/hr
+item,genomics,Yes,40,,,genomics-40,Nanovue/Nanodrop,$20/hr
+category,proteomics,Yes,60,⚗️,Proteomics,,,
+item,proteomics,Yes,10,,,proteomics-10,FPLC,$80/hr
+item,proteomics,Yes,20,,,proteomics-20,LC-QTOF,$650/hr
+item,proteomics,Yes,30,,,proteomics-30,ICP-MS,$125/hr
+item,proteomics,Yes,40,,,proteomics-40,Fluorolog-QM,$200/hr
+category,centrifugation,Yes,70,🌀,Centrifugation,,,
+item,centrifugation,Yes,10,,,centrifugation-10,Avanti J-25i,N/A
+item,centrifugation,Yes,20,,,centrifugation-20,Optima L100XP Ultracentrifuge,N/A
+item,centrifugation,Yes,30,,,centrifugation-30,Optima MAX-TL TableTop,N/A
+item,centrifugation,Yes,40,,,centrifugation-40,Allegra X-30R,N/A
+category,refrigeration,Yes,80,🧲,Refrigeration & UltraFreeze,,,
+item,refrigeration,Yes,10,,,refrigeration-10,−80°C (4 units),N/A
+item,refrigeration,Yes,20,,,refrigeration-20,−20°C (1 unit),N/A
+item,refrigeration,Yes,30,,,refrigeration-30,Fridge (218 + Cell Culture Room),N/A
+item,refrigeration,Yes,40,,,refrigeration-40,Sample Locator (Liquid Nitrogen),N/A
+category,workstations,Yes,90,💻,Workstations,,,
+item,workstations,Yes,10,,,workstations-10,Windows (WS1),N/A
+item,workstations,Yes,20,,,workstations-20,Linux (WS2),N/A
+item,workstations,Yes,30,,,workstations-30,Imaging Laptop,N/A
+category,miscellaneous,Yes,100,🛠️,Miscellaneous,,,
+item,miscellaneous,Yes,10,,,miscellaneous-10,Water Purification,N/A
+item,miscellaneous,Yes,20,,,miscellaneous-20,Autoclaves,N/A
+item,miscellaneous,Yes,30,,,miscellaneous-30,Lyophilizer,N/A

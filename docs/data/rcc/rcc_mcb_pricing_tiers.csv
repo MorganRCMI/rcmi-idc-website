@@ -1,0 +1,4 @@
+Tier ID,Is Active,Sort Order,Label,Price,Period,Description,Featured
+most-frequent,Yes,10,Most Frequent User,"$6,000",/year,Over 100 bookings per year,Yes
+frequent,Yes,20,Frequent User,"$4,000",/year,40–100 bookings per year,No
+occasional,Yes,30,Occasional User,"$2,000",/year,20–40 bookings per year,No

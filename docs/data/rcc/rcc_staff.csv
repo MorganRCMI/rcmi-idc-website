@@ -1,0 +1,9 @@
+Staff ID,Is Active,Sort Order,Core,Name,Role,Initials,Photo Path
+mcb-wachira-james,Yes,10,mcb,James Wachira,Director,JW,../img/faculty/faculty_James_Wachira.jpg
+mcb-li-yuejin,Yes,20,mcb,YueJin Li,Co-Director,YL,../img/faculty/pilot_yuejin_li.jpg
+mcb-mullins-roger,Yes,30,mcb,Roger Mullins,Core Laboratory Manager,RM,
+mcb-murphy-kelley,Yes,40,mcb,Kelley Murphy,Core Laboratory Specialist,KM,
+arf-tulloch-ingrid,Yes,10,arf,Ingrid Tulloch,Director,IT,../img/faculty/pilot_ingrid-k-tulloch.jpg
+arf-mitchell-peyton,Yes,20,arf,Peyton Mitchell,Manager,PM,
+bbsu-hossain-mian,Yes,10,bbsu,Mian Hossain,Director,MH,
+bbsu-paudel-roshan,Yes,20,bbsu,Roshan Paudel,"Faculty Expert, Bioinformatics",RP,

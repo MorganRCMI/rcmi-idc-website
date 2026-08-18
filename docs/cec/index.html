@@ -116,6 +116,30 @@
             perspective: 1200px;
         }
 
+        .hero.hero-home {
+            background-image:
+                linear-gradient(135deg, rgba(3, 20, 41, 0.86) 0%, rgba(0, 61, 115, 0.78) 48%, rgba(10, 74, 127, 0.82) 100%),
+                url('../img/cec/hero-community.jpg');
+            background-size: cover;
+            background-position: center 35%;
+        }
+
+        .hero.hero-home::before {
+            display: none;
+        }
+
+        .hero-home .tagline {
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
+        }
+
+        .hero-home h1 {
+            text-shadow: 0 4px 18px rgba(0, 0, 0, 0.55);
+        }
+
+        .hero-home .subtitle {
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+        }
+
         .hero-content {
             max-width: 1400px;
             margin: 0 auto;
@@ -203,10 +227,15 @@
 
         .morgan-cares h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
+            font-size: 1.3rem;
             color: var(--primary);
             margin-bottom: 1.5rem;
             font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .cares-letter {
+            color: var(--secondary);
         }
 
         .morgan-cares h3 {
@@ -355,6 +384,10 @@
             color: var(--secondary);
         }
 
+        .award-box:not(a) p {
+            font-weight: 700;
+        }
+
         @media (max-width: 600px) {
             .award-grid {
                 grid-template-columns: 1fr;
@@ -379,66 +412,61 @@
             margin: 2rem auto;
         }
 
-        .stages-wrap {
-            width: calc(100% + 180px);
-            margin-left: -90px;
-            margin-right: -90px;
-        }
-
         .cares-stages {
             list-style: none;
             margin: 1.5rem 0;
             padding: 0;
             display: flex;
-            flex-wrap: nowrap;
-            justify-content: center;
-            gap: 0.85rem;
+            flex-direction: column;
+            gap: 1.25rem;
         }
 
         .cares-stages li {
-            flex: 1 1 0;
-            min-width: 0;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
             background: linear-gradient(135deg, var(--primary), #004d99);
             border: 1px solid transparent;
-            border-radius: 16px;
-            padding: 1.1rem 0.85rem;
-            text-align: center;
-            box-shadow: 0 8px 24px rgba(0, 51, 102, 0.18);
+            border-radius: 20px;
+            padding: 1.75rem 2rem;
+            text-align: left;
+            box-shadow: 0 12px 30px rgba(0, 51, 102, 0.18);
             transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         .cares-stages li:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 32px rgba(0, 51, 102, 0.14);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 36px rgba(0, 51, 102, 0.22);
         }
 
         .cares-stages .stage-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            margin: 0 auto 0.6rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            width: 54px;
+            height: 54px;
+            border-radius: 14px;
+            flex-shrink: 0;
+            margin: 0;
+            background: rgba(255, 255, 255, 0.15);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .cares-stages .stage-icon svg {
-            width: 18px;
-            height: 18px;
+            width: 26px;
+            height: 26px;
         }
 
         .cares-stages .stage-text {
-            line-height: 1.5;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.78rem;
+            line-height: 1.75;
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 0.98rem;
         }
 
         .cares-stages li strong {
             display: block;
             color: white;
-            font-size: 0.88rem;
-            margin-bottom: 0.3rem;
+            font-size: 1.05rem;
+            margin-bottom: 0.35rem;
         }
 
         .cares-stages .stage-desc {
@@ -446,6 +474,7 @@
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            font-weight: 700;
         }
 
         .cares-stages li.expanded .stage-desc {
@@ -455,7 +484,7 @@
 
         .cares-stages .stage-toggle {
             display: block;
-            margin: 0.6rem auto 0;
+            margin: 0.6rem 0 0;
             background: none;
             border: none;
             padding: 0;
@@ -508,6 +537,27 @@
             color: var(--primary);
         }
 
+        .btn-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white !important;
+            padding: 0.8rem 1.6rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            text-decoration: none !important;
+            box-shadow: 0 10px 24px rgba(255, 107, 53, 0.24);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(255, 107, 53, 0.3);
+        }
+
         footer {
             background: var(--dark);
             color: white;
@@ -550,58 +600,21 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
-        @media (max-width: 1100px) and (min-width: 769px) {
-            .cares-stages {
-                gap: 0.75rem;
-            }
-
-            .cares-stages li {
-                padding: 1.1rem 0.75rem;
-            }
-
-            .cares-stages .stage-icon {
-                width: 40px;
-                height: 40px;
-            }
-
-            .cares-stages li strong {
-                font-size: 0.92rem;
-            }
-
-            .cares-stages .stage-text {
-                font-size: 0.8rem;
-            }
-        }
-
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.4rem;
+            }
+
+            .morgan-cares h2 {
+                font-size: 0.92rem;
             }
 
             nav ul {
                 display: none;
             }
 
-            .cares-stages {
-                flex-wrap: wrap;
-            }
-
             .cares-stages li {
-                flex: 0 1 210px;
-                padding: 1.5rem 1.25rem;
-            }
-
-            .cares-stages .stage-icon {
-                width: 52px;
-                height: 52px;
-            }
-
-            .cares-stages li strong {
-                font-size: 1.05rem;
-            }
-
-            .cares-stages .stage-text {
-                font-size: 0.92rem;
+                padding: 1.25rem 1.5rem;
             }
         }
 
@@ -665,12 +678,12 @@
         <div class="hero-content">
             <div class="tagline">Morgan State University</div>
             <h1>Community<br>Engagement Core</h1>
-            <p class="subtitle">Connecting RCMI@Morgan's research to the communities it serves through outreach, partnership, and a Program Manager Steering Committee.</p>
+            <p class="subtitle">Facilitating community-campus research partnerships for health.</p>
         </div>
     </section>
 
     <section class="morgan-cares">
-        <h2>Morgan CARES</h2>
+        <h2>Morgan CARES (<span class="cares-letter">C</span>ommunity <span class="cares-letter">A</span>ligned <span class="cares-letter">RE</span>search <span class="cares-letter">S</span>olutions)</h2>
 
         <div class="video-embed">
             <iframe
@@ -683,6 +696,9 @@
         </div>
 
         <p>Health inequalities exist across Baltimore City and disproportionately affect minority communities. One-sided approaches designed to address these challenges are often ineffective, and Morgan CARES is about community power and input. We invite you to join our network of diverse and innovative stakeholders, to work together on issues that directly impact our communities. By joining, you have the opportunity to access mentorship, technical assistance, capacity-building opportunities, and seed funding.</p>
+
+        <h3>Who We Are</h3>
+        <p>Morgan CARES is a hub for community and academic leaders to connect and form long-lasting partnerships. We foster strong community-campus relationships, producing collaborative projects that promote health parity. Morgan CARES focuses on integrating community needs and perspectives into all stages of research. By working together to increase understanding and awareness of health disparities, the knowledge gained will lead to solutions that positively benefit community residents. This process is what drives our work, and it is known as Community-Based Participatory Research (CBPR).</p>
 
         <h3>The Morgan CARES Model</h3>
         <p>The Morgan CARES Model has been designed as a framework for conducting Community-based Participatory Research (CBPR). It provides a structure for developing a well-aligned community engagement and partnership approach. This model follows a multi-stage process. It is a measurable tool to track achievements and to assess long-standing CBPR partnership success for any given project.</p>
@@ -700,7 +716,7 @@
                         <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
                     </svg>
                 </div>
-                <span class="stage-text"><strong>Connection</strong><span class="stage-desc">Members gain foundational knowledge and skills, and enhance their interest in community research.</span><button class="stage-toggle" onclick="toggleStage(this)" type="button">Read more</button></span>
+                <span class="stage-text"><strong>Connection</strong><span class="stage-desc">Members gain foundational knowledge and skills, and enhance their interest in community research.</span></span>
             </li>
             <li>
                 <div class="stage-icon">
@@ -757,18 +773,17 @@
 
         <p>Read more about our model <a href="https://www.mdpi.com/1660-4601/19/19/12467" target="_blank" rel="noopener">here</a>.</p>
 
-        <h3>Who We Are</h3>
-        <p>Morgan CARES is a hub for community and academic leaders to connect and form long-lasting partnerships. We foster strong community-campus relationships, producing collaborative projects that promote health parity. Morgan CARES focuses on integrating community needs and perspectives into all stages of research. By working together to increase understanding and awareness of health disparities, the knowledge gained will lead to solutions that positively benefit community residents. This process is what drives our work, and it is known as Community-Based Participatory Research (CBPR).</p>
-
         <h3>Network Membership</h3>
-        <p>Members are affiliated with the Morgan CARES Network and participate in an exchange of resources and information. They receive regular communications about training, funding opportunities, and events. To sign up, submit the <a href="https://morgan-cares.smartmatchapp.com/client/submissionform/18/default/" target="_blank" rel="noopener">Network Registration Form</a>.</p>
+        <p>Members are affiliated with the Morgan CARES Network and participate in an exchange of resources and information. They receive regular communications about training, funding opportunities, and events.</p>
+        <a class="btn-cta" href="https://morgan-cares.smartmatchapp.com/client/submissionform/18/default/" target="_blank" rel="noopener">Submit the Network Registration Form</a>
 
         <h3>Partnership</h3>
         <p>Are you an existing member of the network who wants to take your engagement to the next level? Consider becoming a Partner! Partnership means that you are committed to community-engaged health initiatives. A primary goal of the work of Morgan CARES is to facilitate new connections and support community-campus partnerships that promote health in Baltimore City. To accomplish this, we are launching a new program called <a href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">PartnerLink</a>!</p>
         <p>After submitting the Network Registration Form, individuals who opt-in will create a profile and share information such as their affiliation, title/position, bio, headshot, and preferences for a new partner. The profiles will be viewable on the <a href="partnering.html">Partnering with Morgan CARES</a> page so that potential collaborators can find one another. With matching software, the Morgan CARES team can use the profile information provided to introduce individuals with complementary skills and interests.</p>
 
         <h3>&ldquo;Happy to Help You&rdquo; Hours</h3>
-        <p>We host &ldquo;Happy to Help You&rdquo; Hours twice weekly, on Mondays 3:00&ndash;4:00pm and Thursdays 9:30&ndash;10:30am. You can <a href="https://calendly.com/emma-mitchell-morgan/morgan-cares-happy-to-help-hour?month=2025-10" target="_blank" rel="noopener">schedule a 20-minute session</a> if you would like to workshop a project idea, discuss Seed Funding application requirements, or think together about potential partners that would be a good fit.</p>
+        <p>We host &ldquo;Happy to Help You&rdquo; Hours twice weekly, on Mondays 3:00&ndash;4:00pm and Thursdays 9:30&ndash;10:30am, if you would like to workshop a project idea, discuss Seed Funding application requirements, or think together about potential partners that would be a good fit.</p>
+        <a class="btn-cta" href="https://calendly.com/emma-mitchell-morgan/morgan-cares-happy-to-help-hour?month=2025-10" target="_blank" rel="noopener">Schedule a 20-Minute Session</a>
 
         <h3>The Morgan CARES Seed Funding Program</h3>
         <span class="now-accepting">NOW ACCEPTING APPLICATIONS!</span>
@@ -887,9 +902,10 @@
 
             <div class="footer-section">
                 <h4>Contact</h4>
-                <p>Portage Avenue Campus, Room 113</p>
-                <p>1700 E Cold Spring Lane</p>
-                <p>Baltimore, MD 21251</p>
+                <p>Hoen &amp; Co. Lithograph Campus</p>
+                <p>2101 E. Biddle Street, Stone Building</p>
+                <p>Suite 1204</p>
+                <p>Baltimore, MD 21213</p>
                 <p>Phone: 443-885-4534</p>
             </div>
 

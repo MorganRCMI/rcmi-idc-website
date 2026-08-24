@@ -1,0 +1,10 @@
+Member ID,Is Active,Sort Order,Name,Department,Rank,Rank Level,Expertise,Is Chair,Initials,Photo Path
+ziyadi-najat,Yes,10,Najat Ziyadi,Mathematics,Associate Professor,associate,Statistics,Yes,NZ,
+lan-yucheng,Yes,20,Yucheng Lan,Physics,Professor,professor,"Electron Microscopy, nanomaterials",No,YL,
+faraji-bahram,Yes,30,Bahram Faraji,Nutritional Sciences,Associate Professor,associate,Sequencing/microbiomes,No,BF,
+samokhvalov-alexander,Yes,40,Alexander Samokhvalov,Chemistry,Associate Professor,associate,Analytical Chemistry,No,AS,../img/faculty/pilot_alexander-samokhvalov.jpg
+li-zheng,Yes,50,Zheng Li,Engineering,Assistant Professor,assistant,Computational modeling of biological processes,No,ZL,
+fan-chunlei,Yes,60,Chunlei Fan,Biology,Professor,professor,"PhD program director, ecology and genomics",No,CF,../img/faculty/pilot_chunlei_fan.jpg
+mehravaran-shiva,Yes,70,Shiva Mehravaran,Biology,Associate Professor,associate,Co-Director RCMI@Morgan IDC; Interim Director MS Program in Biomedical Sciences,No,SM,../img/faculty/pilot_shiva-mehravaran.jpg
+warren-kimberly,Yes,80,Kimberly Warren,Psychology,Professor,professor,Director RCMI@Morgan CEC,No,KW,
+mack-naja,Yes,90,Naja Mack,Computer Science,Assistant Professor,assistant,"Human-centered computing, AI, machine learning",No,NM,

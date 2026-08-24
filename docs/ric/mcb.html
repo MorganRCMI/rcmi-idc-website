@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Molecular &amp; Cellular Biology Core - RCMI RCC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #FF6B35;
+            --accent: #F7931E;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #2c3e50;
+            --border: #e0e6ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s ease;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .logo:hover {
+            opacity: 0.9;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: clamp(1rem, 2vw, 2rem);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover,
+        nav a[aria-current="page"] {
+            color: var(--secondary);
+        }
+
+        nav a:hover::after,
+        nav a[aria-current="page"]::after {
+            width: 100%;
+        }
+
+        .page-header {
+            margin-top: 0;
+            padding: 6rem 5% 4rem;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            perspective: 1200px;
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 1;
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease-out;
+            will-change: transform;
+        }
+
+        .page-hero-content h1,
+        .page-hero-content p {
+            transform: translateZ(0);
+            transition: transform 0.2s ease-out;
+        }
+
+        .page-hero-content h1 {
+            transform: translateZ(45px);
+        }
+
+        .page-hero-content p {
+            transform: translateZ(15px);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page-hero-content,
+            .page-hero-content h1,
+            .page-hero-content p {
+                transform: none !important;
+                transition: none !important;
+            }
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: white;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.15rem;
+            max-width: 700px;
+        }
+
+        .page-content {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 4.5rem 5%;
+        }
+
+        .page-content > * {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .page-content > *.reveal-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page-content > * {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        .page-content > p {
+            max-width: 760px;
+        }
+
+        .page-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            color: var(--primary);
+            margin: 3.5rem 0 1.25rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+            font-weight: 800;
+        }
+
+        .page-content h2:first-child {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .field-link-heading {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            color: var(--primary);
+            font-weight: 800;
+            text-decoration: none;
+            margin: 3.5rem 0 1.25rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+            transition: color 0.2s ease;
+        }
+
+        .field-link-heading:hover {
+            color: var(--secondary);
+        }
+
+        .field-link-heading svg {
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .field-link-heading:hover svg {
+            transform: translate(2px, -2px);
+        }
+
+        .page-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin: 2rem 0 0.75rem;
+            font-weight: 700;
+        }
+
+        .page-content h3:first-of-type {
+            margin-top: 0.5rem;
+        }
+
+        .page-content p {
+            font-size: 1.05rem;
+            color: var(--text);
+            line-height: 1.85;
+            margin-bottom: 1.25rem;
+        }
+
+        .placeholder-note {
+            color: var(--secondary);
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        .workflow-image-wrap {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.75rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+            margin: 1.25rem 0 2rem;
+            overflow-x: auto;
+        }
+
+        .workflow-svg {
+            display: block;
+            width: 100%;
+            min-width: 640px;
+            max-width: 920px;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .workflow-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.25rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .workflow-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.82rem;
+            color: var(--text);
+        }
+
+        .workflow-legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .equipment-intro {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), #004d99);
+            border-radius: 20px;
+            padding: 1.75rem 2rem;
+            margin: 1.5rem 0 2rem;
+            box-shadow: 0 12px 30px rgba(0, 51, 102, 0.18);
+        }
+
+        .equipment-intro-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+
+        .equipment-intro p {
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 0.98rem;
+            line-height: 1.75;
+            margin: 0;
+        }
+
+        .equipment-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .equipment-category {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .equipment-category[open] {
+            box-shadow: 0 14px 36px rgba(0, 51, 102, 0.12);
+            border-color: rgba(255, 107, 53, 0.25);
+        }
+
+        .equipment-category summary {
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+            padding: 1.15rem 1.5rem;
+            cursor: pointer;
+            list-style: none;
+            user-select: none;
+        }
+
+        .equipment-category summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .equipment-cat-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            flex-shrink: 0;
+        }
+
+        .equipment-cat-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.08rem;
+            color: var(--primary);
+            font-weight: 700;
+            flex: 1;
+        }
+
+        .equipment-cat-count {
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: var(--secondary);
+            background: rgba(255, 107, 53, 0.08);
+            border: 1px solid rgba(255, 107, 53, 0.16);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .equipment-chevron {
+            width: 18px;
+            height: 18px;
+            color: var(--text);
+            opacity: 0.5;
+            flex-shrink: 0;
+            transition: transform 0.25s ease;
+        }
+
+        .equipment-category[open] .equipment-chevron {
+            transform: rotate(180deg);
+        }
+
+        .equipment-list {
+            margin: 0;
+            padding: 0 1.5rem 1.5rem;
+            list-style: none;
+            counter-reset: eq-counter;
+        }
+
+        .equipment-list.count-from-4 {
+            counter-reset: eq-counter 3;
+        }
+
+        .equipment-list > li {
+            counter-increment: eq-counter;
+            position: relative;
+            padding: 0.9rem 0 0.9rem 3rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.95rem;
+            line-height: 1.75;
+            color: var(--text);
+        }
+
+        .equipment-list > li::before {
+            content: counter(eq-counter);
+            position: absolute;
+            left: 0;
+            top: 0.75rem;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--light);
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 0.76rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .equipment-list ul {
+            margin: 0.6rem 0 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .equipment-list ul li {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 0.35rem 0.9rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* Service Subscription */
+        .subscription-banner {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            background: linear-gradient(135deg, #fff7f4, #ffffff);
+            border: 1.5px solid rgba(255, 107, 53, 0.22);
+            border-radius: 18px;
+            padding: 1.5rem 1.75rem;
+            margin: 0 0 2rem;
+        }
+
+        .subscription-banner-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .subscription-banner p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin: 0 0 0.6rem;
+        }
+
+        .subscription-banner p:last-child {
+            margin-bottom: 0;
+        }
+
+        .subscription-banner strong {
+            color: var(--primary);
+        }
+
+        .pricing-tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin: 0 0 2rem;
+        }
+
+        .pricing-tier {
+            background: white;
+            border: 1.5px solid var(--border);
+            border-radius: 18px;
+            padding: 1.85rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .pricing-tier:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 36px rgba(0, 51, 102, 0.14);
+            border-color: rgba(255, 107, 53, 0.3);
+        }
+
+        .pricing-tier.featured {
+            border-color: var(--secondary);
+            background: linear-gradient(160deg, #ffffff 0%, #fff6ef 100%);
+        }
+
+        .pricing-tier-label {
+            font-size: 0.76rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .pricing-tier-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 0.6rem;
+        }
+
+        .pricing-tier-price span {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text);
+            opacity: 0.7;
+        }
+
+        .pricing-tier-desc {
+            font-size: 0.86rem;
+            color: var(--text);
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .pricing-note {
+            font-size: 0.92rem;
+            color: var(--text);
+            opacity: 0.85;
+            line-height: 1.75;
+            margin: -0.75rem 0 2rem;
+        }
+
+        .service-categories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0 2rem;
+        }
+
+        .service-category-card.center-last {
+            grid-column: 2;
+        }
+
+        .service-category-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem 1.4rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .service-category-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 36px rgba(0, 51, 102, 0.12);
+            border-color: rgba(255, 107, 53, 0.25);
+        }
+
+        .service-category-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.88rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.65rem;
+            border-bottom: 2px solid rgba(255, 107, 53, 0.15);
+        }
+
+        .service-category-icon {
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.78rem;
+            flex-shrink: 0;
+        }
+
+        .service-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 0.6rem;
+            padding: 0.45rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.74rem;
+            line-height: 1.35;
+        }
+
+        .service-row:last-child {
+            border-bottom: none;
+        }
+
+        .service-row-name {
+            color: var(--text);
+        }
+
+        .service-row-price {
+            font-weight: 700;
+            color: var(--secondary);
+            white-space: nowrap;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        .service-row-price.na {
+            color: var(--text);
+            opacity: 0.4;
+            font-weight: 500;
+        }
+
+        .other-services-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .other-service-item {
+            position: relative;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.75rem 1.6rem 1.6rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .other-service-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 36px rgba(0, 51, 102, 0.12);
+            border-color: rgba(255, 107, 53, 0.25);
+        }
+
+        .other-service-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 13px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1.1rem;
+        }
+
+        .other-service-item h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .other-service-item p {
+            font-size: 0.92rem;
+            color: var(--text);
+            line-height: 1.75;
+            margin: 0;
+        }
+
+        .team-grid {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .team-card {
+            flex: 1 1 0;
+            min-width: 0;
+            text-align: center;
+        }
+
+        @media (max-width: 480px) {
+            .team-grid {
+                flex-wrap: wrap;
+            }
+
+            .team-card {
+                flex: 0 1 140px;
+            }
+        }
+
+        .team-avatar {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        .team-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 15%;
+            display: block;
+        }
+
+        .team-card:hover .team-avatar {
+            transform: scale(1.06);
+        }
+
+        .team-name {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.02rem;
+            line-height: 1.4;
+            margin-bottom: 0.35rem;
+        }
+
+        .team-designation {
+            font-size: 0.88rem;
+            color: var(--text);
+            opacity: 0.85;
+            line-height: 1.5;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover,
+        .footer-section a[aria-current="page"] {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .subscription-banner {
+                flex-direction: column;
+            }
+
+            .service-categories {
+                grid-template-columns: 1fr;
+            }
+
+            .service-category-card.center-last {
+                grid-column: 1;
+            }
+
+            .service-category-card h4 {
+                font-size: 1rem;
+            }
+
+            .service-row {
+                font-size: 0.88rem;
+            }
+
+            .service-row-price {
+                font-size: 0.82rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../styles/site-polish.css?v=1">
+    <link rel="stylesheet" href="../styles/hero-system.css?v=1">
+    <link rel="stylesheet" href="../styles/nav.css?v=2">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../" class="logo">RCMI <span>@ Morgan</span></a>
+            <ul id="menu">
+                <li><a href="./">Home</a></li>
+                <li><a href="mcb.html" aria-current="page">MCB</a></li>
+                <li><a href="arf.html">ARF</a></li>
+                <li><a href="bbsu.html">BBSU</a></li>
+                <li><a href="services.html">Request Services</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <div class="core-switcher">
+        <div class="core-switcher-inner">
+            <a href="../" class="core-switch-home">&larr; RCMI @ Morgan</a>
+            <div class="core-switch-pills">
+                <a href="../idc/" class="core-pill"><img src="../img/icons/idc-glasses-book.svg" alt="" width="16" height="16" class="core-pill-icon"> IDC</a>
+                <a href="../cec/" class="core-pill"><img src="../img/icons/community-cec.png" alt="" width="16" height="16" class="core-pill-icon"> CEC</a>
+                <a href="./" class="core-pill active">&#128300; RCC</a>
+                <a href="../research-project/" class="core-pill">&#128269; Research Project</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="page-header page-hero">
+        <div class="page-hero-content">
+            <h1>Molecular &amp; Cellular Biology Core</h1>
+            <p>Part of the Research Capacity Core (RCC), providing shared instrumentation, expertise, and support for molecular and cellular biology research.</p>
+        </div>
+    </section>
+
+    <section class="page-content">
+        <p>The Morgan State University Molecular &amp; Cellular Biology Core Laboratory (MCB) is a shared instrumentation laboratory that provides a comprehensive range of services to support modern experimental biomedical research. These include advanced equipment, technical assistance, training, and supplies to initiate research in the early years of implementation. The MCB is a state-of-the-art facility powered by a diverse team of qualified professionals focused on sequencing technology, flow cytometry, confocal microscopy, and molecular characterization, backed by a thorough array of laboratory support equipment. The facility covers several floors of the Richard N. Dixon Science Research Center to provide space for dedicated rooms, supplies, and specialized equipment to accommodate the needs of our users.</p>
+
+        <h2>Workflow</h2>
+        <div class="workflow-image-wrap">
+            <svg class="workflow-svg" viewBox="0 0 900 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MCB service workflow: Initial Consultation leads to either a self-guided booking and reservation, or to Core Support, which flows through Sample Receipt and Storage, Protocol Review, an optional Data Analysis by the Core Facility, and finally Data and Extra Samples returned to the client.">
+                <defs>
+                    <marker id="wfArrow" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                        <path d="M0,0 L0,6 L8,3 z" fill="#003366"></path>
+                    </marker>
+                    <linearGradient id="wfTerminalFill" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#003366"></stop>
+                        <stop offset="100%" stop-color="#004d99"></stop>
+                    </linearGradient>
+                </defs>
+
+                <!-- Row 1 -->
+                <polygon points="130,35 225,90 130,145 35,90" fill="white" stroke="#FF6B35" stroke-width="2.5"></polygon>
+                <text x="130" y="85" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Initial</text>
+                <text x="130" y="101" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Consultation</text>
+
+                <rect x="368" y="55" width="124" height="70" rx="10" fill="white" stroke="#003366" stroke-width="2"></rect>
+                <text x="430" y="86" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Self</text>
+                <text x="430" y="102" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Guided</text>
+
+                <rect x="608" y="55" width="164" height="70" rx="35" fill="url(#wfTerminalFill)"></rect>
+                <text x="690" y="86" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="white">Booking/</text>
+                <text x="690" y="102" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="white">Reservation</text>
+
+                <line x1="225" y1="90" x2="360" y2="90" stroke="#003366" stroke-width="2" marker-end="url(#wfArrow)"></line>
+                <line x1="492" y1="90" x2="600" y2="90" stroke="#003366" stroke-width="2" marker-end="url(#wfArrow)"></line>
+                <line x1="130" y1="145" x2="130" y2="262" stroke="#003366" stroke-width="2" marker-end="url(#wfArrow)"></line>
+
+                <!-- Row 2 -->
+                <rect x="58" y="270" width="144" height="70" rx="10" fill="white" stroke="#003366" stroke-width="2"></rect>
+                <text x="130" y="301" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Core</text>
+                <text x="130" y="317" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Support</text>
+
+                <rect x="298" y="263" width="150" height="84" rx="10" fill="white" stroke="#003366" stroke-width="2"></rect>
+                <text x="373" y="293" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Sample</text>
+                <text x="373" y="309" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Receipt &amp;</text>
+                <text x="373" y="325" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Storage</text>
+
+                <polygon points="592,250 685,305 592,360 499,305" fill="white" stroke="#FF6B35" stroke-width="2.5"></polygon>
+                <text x="592" y="300" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Protocol</text>
+                <text x="592" y="316" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="13" font-weight="700" fill="#003366">Review</text>
+
+                <rect x="742" y="253" width="152" height="104" rx="12" fill="url(#wfTerminalFill)"></rect>
+                <text x="818" y="288" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="12.5" font-weight="700" fill="white">Data &amp; Extra</text>
+                <text x="818" y="304" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="12.5" font-weight="700" fill="white">Samples</text>
+                <text x="818" y="320" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="12.5" font-weight="700" fill="white">Returned to</text>
+                <text x="818" y="336" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="12.5" font-weight="700" fill="white">Client</text>
+
+                <line x1="202" y1="305" x2="290" y2="305" stroke="#003366" stroke-width="2" marker-end="url(#wfArrow)"></line>
+                <line x1="448" y1="305" x2="491" y2="305" stroke="#003366" stroke-width="2" marker-end="url(#wfArrow)"></line>
+                <line x1="685" y1="305" x2="734" y2="305" stroke="#003366" stroke-width="2" marker-end="url(#wfArrow)"></line>
+
+                <!-- Row 3 -->
+                <rect x="500" y="392" width="184" height="70" rx="10" fill="white" stroke="#003366" stroke-width="2"></rect>
+                <text x="592" y="418" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="12.5" font-weight="700" fill="#003366">Optional Data</text>
+                <text x="592" y="434" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="12.5" font-weight="700" fill="#003366">Analysis by Core</text>
+                <text x="592" y="450" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="12.5" font-weight="700" fill="#003366">Facility</text>
+
+                <line x1="592" y1="360" x2="592" y2="384" stroke="#003366" stroke-width="2" marker-end="url(#wfArrow)"></line>
+                <polyline points="684,427 818,427 818,365" fill="none" stroke="#003366" stroke-width="2" marker-end="url(#wfArrow)"></polyline>
+            </svg>
+
+            <div class="workflow-legend">
+                <div class="workflow-legend-item">
+                    <span class="workflow-legend-swatch" style="background: white; border: 2px solid #FF6B35; transform: rotate(45deg);"></span>
+                    Decision point
+                </div>
+                <div class="workflow-legend-item">
+                    <span class="workflow-legend-swatch" style="background: white; border: 2px solid #003366;"></span>
+                    Process step
+                </div>
+                <div class="workflow-legend-item">
+                    <span class="workflow-legend-swatch" style="background: linear-gradient(135deg, #003366, #004d99);"></span>
+                    Start/end point
+                </div>
+            </div>
+        </div>
+
+        <h2>MCB Staff</h2>
+        <div class="team-grid" id="mcb-staff-grid"></div>
+
+        <a href="#" class="field-link-heading">
+            Equipment
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M7 7h10v10"></path></svg>
+        </a>
+
+        <div class="equipment-intro">
+            <div class="equipment-intro-icon">&#128300;</div>
+            <p>The MCB provides access to a wide array of equipment for biomedical research, focused on flow cytometry, genomic analysis, biological assays, biomedical imaging, nanomaterials research, molecular separation and identification, and histology. Tap a category below to see what's available.</p>
+        </div>
+
+        <div class="equipment-accordion" id="mcb-equipment-accordion"></div>
+
+        <h2>Service Subscription</h2>
+
+        <div class="subscription-banner">
+            <div class="subscription-banner-icon">&#128241;</div>
+            <div>
+                <p>Researchers schedule and reserve MCB services using <strong>iLab</strong> (my.ilabsolutions.com) via Quick Response (QR) codes conveniently located on-site by each room or instrument. Access is granted after an initial consultation for each service, to ensure that your specific needs and objectives are addressed effectively.</p>
+                <p>Internal (Morgan State) users are billed through the tiered Subscription plan below, based on how much they plan to use the suite of resources available at the core lab &mdash; this makes it easy for grant applicants to simply fill out a line item to declare their projected costs for institutional core support. <strong>Labs with no current active or eligible grant are subsidized at no cost.</strong> External or Industry researchers are charged &agrave; la carte per service, as detailed below. Prices are subject to change in line with current needs, availability, and consensus with other institutional cores.</p>
+            </div>
+        </div>
+
+        <h3>Subscription Costs Schedule</h3>
+        <div class="pricing-tiers" id="mcb-pricing-tiers"></div>
+        <p class="pricing-note">General services associated ad hoc with specific services, like freezers and purified water, have no associated cost (marked N/A below).</p>
+
+        <h3>Main Services</h3>
+        <div class="service-categories" id="mcb-service-categories"></div>
+
+        <h3>Other Services</h3>
+        <div class="other-services-list" id="mcb-other-services"></div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>RCMI @ Morgan</h4>
+                <p>Center for Urban Health Disparities Research and Innovation</p>
+                <p>Morgan State University</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="./">Home</a>
+                <a href="mcb.html" aria-current="page">Molecular &amp; Cellular Biology Core</a>
+                <a href="arf.html">Animal Research Facility</a>
+                <a href="bbsu.html">Biostatistics and Bioinformatics Support Unit</a>
+                <a href="services.html">Request Services</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Portage Avenue Campus, Room 113</p>
+                <p>1700 E Cold Spring Lane</p>
+                <p>Baltimore, MD 21251</p>
+                <p>Phone: 443-885-4534</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="mailto:diane.hughes@morgan.edu">Email Us</a>
+                <a href="https://www.morgan.edu/rcmi">RCMI Program</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year">2024</span> Morgan State University RCMI @ Morgan. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        window.rcmiSiteConfig = {
+            dataBasePath: "../data"
+        };
+    </script>
+    <script src="../js/FIELD_MAP.js?v=1"></script>
+    <script src="../js/common.js?v=1"></script>
+    <script>
+        (function () {
+            var helpers = window.rcmiSandboxHelpers;
+
+            if (!helpers || typeof helpers.loadDataset !== "function") {
+                throw new Error("Shared CSV helper API is unavailable.");
+            }
+
+            var chevronSvg = '<svg class="equipment-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+
+            function renderStaff(staff) {
+                var grid = document.getElementById("mcb-staff-grid");
+                if (!grid) return;
+
+                grid.innerHTML = staff.filter(function (member) {
+                    return member.core === "mcb";
+                }).map(function (member) {
+                    var avatar = member.photoPath
+                        ? '<img src="' + helpers.escapeHtml(member.photoPath) + '" alt="' + helpers.escapeHtml(member.name) + '">'
+                        : helpers.escapeHtml(member.initials);
+                    return '<div class="team-card">' +
+                        '<div class="team-avatar">' + avatar + '</div>' +
+                        '<div class="team-name">' + helpers.escapeHtml(member.name) + '</div>' +
+                        '<div class="team-designation">' + helpers.escapeHtml(member.role) + '</div>' +
+                        '</div>';
+                }).join("");
+            }
+
+            function renderEquipment(categories) {
+                var accordion = document.getElementById("mcb-equipment-accordion");
+                if (!accordion) return;
+
+                accordion.innerHTML = categories.map(function (category) {
+                    var note = category.note
+                        ? '<p style="margin: -0.25rem 1.5rem 0.75rem; font-size: 0.88rem; color: var(--secondary); font-style: italic;">' + helpers.escapeHtml(category.note) + '</p>'
+                        : "";
+
+                    var items = category.items.map(function (item) {
+                        var subItems = item.subItems.length
+                            ? '<ul>' + item.subItems.map(function (sub) {
+                                return '<li>' + helpers.escapeHtml(sub) + '</li>';
+                            }).join("") + '</ul>'
+                            : "";
+                        return '<li>' + helpers.escapeHtml(item.description) + subItems + '</li>';
+                    }).join("");
+
+                    return '<details class="equipment-category"' + (category.openByDefault ? ' open' : '') + '>' +
+                        '<summary>' +
+                        '<span class="equipment-cat-icon">' + helpers.escapeHtml(category.icon) + '</span>' +
+                        '<span class="equipment-cat-title">' + helpers.escapeHtml(category.title) + '</span>' +
+                        '<span class="equipment-cat-count">' + category.items.length + ' item' + (category.items.length === 1 ? '' : 's') + '</span>' +
+                        chevronSvg +
+                        '</summary>' +
+                        note +
+                        '<ol class="equipment-list" style="counter-reset: eq-counter ' + (category.startNumber - 1) + ';">' + items + '</ol>' +
+                        '</details>';
+                }).join("");
+            }
+
+            function renderPricingTiers(tiers) {
+                var wrap = document.getElementById("mcb-pricing-tiers");
+                if (!wrap) return;
+
+                wrap.innerHTML = tiers.map(function (tier) {
+                    return '<div class="pricing-tier' + (tier.featured ? ' featured' : '') + '">' +
+                        '<div class="pricing-tier-label">' + helpers.escapeHtml(tier.label) + '</div>' +
+                        '<div class="pricing-tier-price">' + helpers.escapeHtml(tier.price) + '<span>' + helpers.escapeHtml(tier.period) + '</span></div>' +
+                        '<div class="pricing-tier-desc">' + helpers.escapeHtml(tier.description) + '</div>' +
+                        '</div>';
+                }).join("");
+            }
+
+            function renderServiceCategories(categories) {
+                var grid = document.getElementById("mcb-service-categories");
+                if (!grid) return;
+
+                var centerLastIndex = categories.length % 3 === 1 ? categories.length - 1 : -1;
+
+                grid.innerHTML = categories.map(function (category, index) {
+                    var rows = category.items.map(function (item) {
+                        var isNa = item.price === "N/A";
+                        return '<div class="service-row"><span class="service-row-name">' + helpers.escapeHtml(item.serviceName) + '</span><span class="service-row-price' + (isNa ? ' na' : '') + '">' + helpers.escapeHtml(item.price) + '</span></div>';
+                    }).join("");
+
+                    return '<div class="service-category-card' + (index === centerLastIndex ? ' center-last' : '') + '">' +
+                        '<h4><span class="service-category-icon">' + helpers.escapeHtml(category.icon) + '</span>' + helpers.escapeHtml(category.title) + '</h4>' +
+                        rows +
+                        '</div>';
+                }).join("");
+            }
+
+            function renderOtherServices(items) {
+                var list = document.getElementById("mcb-other-services");
+                if (!list) return;
+
+                list.innerHTML = items.map(function (item) {
+                    return '<div class="other-service-item">' +
+                        '<div class="other-service-icon">' + helpers.escapeHtml(item.icon) + '</div>' +
+                        '<h4>' + helpers.escapeHtml(item.title) + '</h4>' +
+                        '<p>' + helpers.escapeHtml(item.description) + '</p>' +
+                        '</div>';
+                }).join("");
+            }
+
+            Promise.all([
+                helpers.loadDataset("rccStaff").then(helpers.transformRccStaffRecords),
+                helpers.loadDataset("rccMcbEquipment").then(helpers.transformRccMcbEquipmentRecords),
+                helpers.loadDataset("rccMcbPricingTiers").then(helpers.transformRccMcbPricingTiersRecords),
+                helpers.loadDataset("rccMcbServices").then(helpers.transformRccMcbServicesRecords),
+                helpers.loadDataset("rccMcbOtherServices").then(helpers.transformRccMcbOtherServicesRecords)
+            ]).then(function (results) {
+                renderStaff(results[0]);
+                renderEquipment(results[1]);
+                renderPricingTiers(results[2]);
+                renderServiceCategories(results[3]);
+                renderOtherServices(results[4]);
+            }).catch(function (err) {
+                console.error("MCB page data could not be loaded:", err);
+            });
+        })();
+    </script>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+            var revealTargets = document.querySelectorAll('.page-content > *');
+            var revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    entry.target.classList.toggle('reveal-visible', entry.isIntersecting);
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+            revealTargets.forEach(function (el) { revealObserver.observe(el); });
+        } else {
+            document.querySelectorAll('.page-content > *').forEach(function (el) {
+                el.classList.add('reveal-visible');
+            });
+        }
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            var pageHeroEl = document.querySelector('.page-header.page-hero');
+            var pageHeroContent = document.querySelector('.page-hero-content');
+
+            if (pageHeroEl && pageHeroContent) {
+                var maxTilt = 5;
+
+                pageHeroEl.addEventListener('mousemove', function (e) {
+                    var rect = pageHeroEl.getBoundingClientRect();
+                    var x = (e.clientX - rect.left) / rect.width;
+                    var y = (e.clientY - rect.top) / rect.height;
+                    var rotateY = (x - 0.5) * (maxTilt * 2);
+                    var rotateX = (0.5 - y) * (maxTilt * 2);
+                    pageHeroContent.style.transform = 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+                });
+
+                pageHeroEl.addEventListener('mouseleave', function () {
+                    pageHeroContent.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                });
+            }
+        }
+    </script>
+    <script src="../js/nav.js"></script>
+</body>
+</html>

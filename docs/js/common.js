@@ -97,6 +97,12 @@
         return { headers: headers, records: records };
     }
 
+    function escapeHtml(value) {
+        return String(value || "").replace(/[&<>"']/g, function (c) {
+            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+        });
+    }
+
     function isActiveCell(value) {
         if (typeof value === "boolean") {
             return value;
@@ -126,6 +132,12 @@
     function splitLines(value) {
         return String(value || "").split("\n").map(function (line) {
             return line.trim();
+        }).filter(Boolean);
+    }
+
+    function splitPipeList(value) {
+        return String(value || "").split("|").map(function (item) {
+            return item.trim();
         }).filter(Boolean);
     }
 
@@ -196,7 +208,7 @@
             validateHeaders(datasetKey, parsed.headers);
 
             return parsed.records.map(function (row, index) {
-                if (datasetKey === "research") {
+                if (contract.conditionalRequired) {
                     warnMissingConditionalHeaders(datasetKey, row["Row Type"], row, index);
                 }
                 return normalizeRow(row, contract.headerMap);
@@ -357,6 +369,243 @@
         });
     }
 
+    function transformRccLeadershipRecords(rows) {
+        return activeSorted(rows.map(function (row) {
+            return {
+                id: row.id,
+                isActive: isActiveCell(row.isActive),
+                sortOrder: Number(row.sortOrder) || 0,
+                name: row.name || "",
+                role: row.role || "",
+                title: row.title || "",
+                bio: row.bio || "",
+                photoPath: row.photoPath || "",
+                photoAlt: row.photoAlt || row.name || ""
+            };
+        }));
+    }
+
+    function transformRccRosterRecords(rows) {
+        return activeSorted(rows.map(function (row) {
+            return {
+                id: row.id,
+                isActive: isActiveCell(row.isActive),
+                sortOrder: Number(row.sortOrder) || 0,
+                name: row.name || "",
+                department: row.department || "",
+                rank: row.rank || "",
+                rankLevel: row.rankLevel || "",
+                expertise: row.expertise || "",
+                isChair: isActiveCell(row.isChair),
+                initials: row.initials || "",
+                photoPath: row.photoPath || ""
+            };
+        }));
+    }
+
+    function transformRccStaffRecords(rows) {
+        return activeSorted(rows.map(function (row) {
+            return {
+                id: row.id,
+                isActive: isActiveCell(row.isActive),
+                sortOrder: Number(row.sortOrder) || 0,
+                core: row.core || "",
+                name: row.name || "",
+                role: row.role || "",
+                initials: row.initials || "",
+                photoPath: row.photoPath || ""
+            };
+        }));
+    }
+
+    function transformRccMcbEquipmentRecords(rows) {
+        var categories = [];
+        var byId = {};
+
+        rows.forEach(function (row) {
+            if (row.rowType === "category") {
+                var category = {
+                    id: row.categoryId,
+                    isActive: isActiveCell(row.isActive),
+                    sortOrder: Number(row.sortOrder) || 0,
+                    icon: row.icon || "",
+                    title: row.title || "",
+                    note: row.note || "",
+                    openByDefault: isActiveCell(row.openByDefault),
+                    startNumber: Number(row.startNumber) || 1,
+                    items: []
+                };
+                categories.push(category);
+                byId[category.id] = category;
+                return;
+            }
+
+            if (row.rowType === "item") {
+                var parent = byId[row.categoryId];
+                if (!parent) {
+                    console.warn("[Workbook Contract] rccMcbEquipment item references unknown Category ID: " + row.categoryId);
+                    return;
+                }
+                parent.items.push({
+                    id: row.itemId,
+                    isActive: isActiveCell(row.isActive),
+                    sortOrder: Number(row.sortOrder) || 0,
+                    description: row.description || "",
+                    subItems: splitPipeList(row.subItems)
+                });
+                return;
+            }
+
+            console.warn("[Workbook Contract] rccMcbEquipment row with unknown Row Type: " + (row.rowType || "(blank)"));
+        });
+
+        categories.forEach(function (category) {
+            category.items = activeSorted(category.items);
+        });
+
+        return activeSorted(categories);
+    }
+
+    function transformRccMcbPricingTiersRecords(rows) {
+        return activeSorted(rows.map(function (row) {
+            return {
+                id: row.id,
+                isActive: isActiveCell(row.isActive),
+                sortOrder: Number(row.sortOrder) || 0,
+                label: row.label || "",
+                price: row.price || "",
+                period: row.period || "",
+                description: row.description || "",
+                featured: isActiveCell(row.featured)
+            };
+        }));
+    }
+
+    function transformRccMcbServicesRecords(rows) {
+        var categories = [];
+        var byId = {};
+
+        rows.forEach(function (row) {
+            if (row.rowType === "category") {
+                var category = {
+                    id: row.categoryId,
+                    isActive: isActiveCell(row.isActive),
+                    sortOrder: Number(row.sortOrder) || 0,
+                    icon: row.icon || "",
+                    title: row.title || "",
+                    items: []
+                };
+                categories.push(category);
+                byId[category.id] = category;
+                return;
+            }
+
+            if (row.rowType === "item") {
+                var parent = byId[row.categoryId];
+                if (!parent) {
+                    console.warn("[Workbook Contract] rccMcbServices item references unknown Category ID: " + row.categoryId);
+                    return;
+                }
+                parent.items.push({
+                    id: row.itemId,
+                    isActive: isActiveCell(row.isActive),
+                    sortOrder: Number(row.sortOrder) || 0,
+                    serviceName: row.serviceName || "",
+                    price: row.price || ""
+                });
+                return;
+            }
+
+            console.warn("[Workbook Contract] rccMcbServices row with unknown Row Type: " + (row.rowType || "(blank)"));
+        });
+
+        categories.forEach(function (category) {
+            category.items = activeSorted(category.items);
+        });
+
+        return activeSorted(categories);
+    }
+
+    function transformRccMcbOtherServicesRecords(rows) {
+        return activeSorted(rows.map(function (row) {
+            return {
+                id: row.id,
+                isActive: isActiveCell(row.isActive),
+                sortOrder: Number(row.sortOrder) || 0,
+                icon: row.icon || "",
+                title: row.title || "",
+                description: row.description || ""
+            };
+        }));
+    }
+
+    function transformRccArfAnimalHousingRecords(rows) {
+        return activeSorted(rows.map(function (row) {
+            return {
+                id: row.id,
+                isActive: isActiveCell(row.isActive),
+                sortOrder: Number(row.sortOrder) || 0,
+                species: row.species || "",
+                animalsPerCage: Number(row.animalsPerCage) || 0,
+                cagesPerRack: Number(row.cagesPerRack) || 0,
+                racks: Number(row.racks) || 0,
+                animalCount: Number(row.animalCount) || 0
+            };
+        }));
+    }
+
+    function transformRccArfEquipmentRecords(rows) {
+        return activeSorted(rows.map(function (row) {
+            return {
+                id: row.id,
+                isActive: isActiveCell(row.isActive),
+                sortOrder: Number(row.sortOrder) || 0,
+                icon: row.icon || "",
+                title: row.title || "",
+                description: row.description || ""
+            };
+        }));
+    }
+
+    function transformRccArfTrainingRecords(rows) {
+        return activeSorted(rows.map(function (row) {
+            return {
+                id: row.id,
+                isActive: isActiveCell(row.isActive),
+                sortOrder: Number(row.sortOrder) || 0,
+                icon: row.icon || "",
+                title: row.title || "",
+                description: row.description || "",
+                frequency: row.frequency || ""
+            };
+        }));
+    }
+
+    function transformRccBbsuResourcesRecords(rows) {
+        return activeSorted(rows.map(function (row) {
+            return {
+                id: row.id,
+                isActive: isActiveCell(row.isActive),
+                sortOrder: Number(row.sortOrder) || 0,
+                icon: row.icon || "",
+                title: row.title || "",
+                description: row.description || "",
+                subItems: splitPipeList(row.subItems)
+            };
+        }));
+    }
+
+    function transformRccBbsuServicesRecords(rows) {
+        return activeSorted(rows.map(function (row) {
+            return {
+                id: row.id,
+                isActive: isActiveCell(row.isActive),
+                sortOrder: Number(row.sortOrder) || 0,
+                text: row.text || ""
+            };
+        }));
+    }
+
     function splitPastUpcoming(events) {
         var today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -458,6 +707,7 @@
     }
 
     sandboxHelpers.loadDataset = loadDataset;
+    sandboxHelpers.escapeHtml = escapeHtml;
     sandboxHelpers.activeSorted = activeSorted;
     sandboxHelpers.buildPublicationIndex = buildPublicationIndex;
     sandboxHelpers.warnMissingProjectLinks = warnMissingProjectLinks;
@@ -465,6 +715,18 @@
     sandboxHelpers.transformResearchRecords = transformResearchRecords;
     sandboxHelpers.transformPublicationRecords = transformPublicationRecords;
     sandboxHelpers.transformEventsRecords = transformEventsRecords;
+    sandboxHelpers.transformRccLeadershipRecords = transformRccLeadershipRecords;
+    sandboxHelpers.transformRccRosterRecords = transformRccRosterRecords;
+    sandboxHelpers.transformRccStaffRecords = transformRccStaffRecords;
+    sandboxHelpers.transformRccMcbEquipmentRecords = transformRccMcbEquipmentRecords;
+    sandboxHelpers.transformRccMcbPricingTiersRecords = transformRccMcbPricingTiersRecords;
+    sandboxHelpers.transformRccMcbServicesRecords = transformRccMcbServicesRecords;
+    sandboxHelpers.transformRccMcbOtherServicesRecords = transformRccMcbOtherServicesRecords;
+    sandboxHelpers.transformRccArfAnimalHousingRecords = transformRccArfAnimalHousingRecords;
+    sandboxHelpers.transformRccArfEquipmentRecords = transformRccArfEquipmentRecords;
+    sandboxHelpers.transformRccArfTrainingRecords = transformRccArfTrainingRecords;
+    sandboxHelpers.transformRccBbsuResourcesRecords = transformRccBbsuResourcesRecords;
+    sandboxHelpers.transformRccBbsuServicesRecords = transformRccBbsuServicesRecords;
     sandboxHelpers.splitPastUpcoming = splitPastUpcoming;
     sandboxHelpers.getProjectsByFacultyId = getProjectsByFacultyId;
     sandboxHelpers.renderTagRow = renderTagRow;

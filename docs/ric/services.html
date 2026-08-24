@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - RCMI RCC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #FF6B35;
+            --accent: #F7931E;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #2c3e50;
+            --border: #e0e6ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s ease;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .logo:hover {
+            opacity: 0.9;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: clamp(1rem, 2vw, 2rem);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover,
+        nav a[aria-current="page"] {
+            color: var(--secondary);
+        }
+
+        nav a:hover::after,
+        nav a[aria-current="page"]::after {
+            width: 100%;
+        }
+
+        .page-header {
+            margin-top: 0;
+            padding: 6rem 5% 4rem;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            perspective: 1200px;
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 1;
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease-out;
+            will-change: transform;
+        }
+
+        .page-hero-content h1,
+        .page-hero-content p {
+            transform: translateZ(0);
+            transition: transform 0.2s ease-out;
+        }
+
+        .page-hero-content h1 {
+            transform: translateZ(45px);
+        }
+
+        .page-hero-content p {
+            transform: translateZ(15px);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page-hero-content,
+            .page-hero-content h1,
+            .page-hero-content p {
+                transform: none !important;
+                transition: none !important;
+            }
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: white;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.15rem;
+            max-width: 700px;
+        }
+
+        .page-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4.5rem 5%;
+        }
+
+        .page-section > * {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .page-section > *.reveal-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page-section > * {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        .page-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            color: var(--primary);
+            margin: 3.5rem 0 1.25rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+            font-weight: 800;
+        }
+
+        .page-section h2:first-child {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .page-section > p {
+            font-size: 1.05rem;
+            color: var(--text);
+            line-height: 1.85;
+            margin-bottom: 1.25rem;
+            max-width: 780px;
+        }
+
+        .service-source-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.75rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-source-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 32px rgba(0, 51, 102, 0.1);
+            border-color: rgba(255, 107, 53, 0.25);
+        }
+
+        .service-source-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .services-checklist {
+            list-style: none;
+            margin: 0.75rem 0 1.25rem;
+            padding: 0;
+        }
+
+        .services-checklist li {
+            padding: 0.65rem 0 0.65rem 2rem;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.96rem;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        .services-checklist li:last-child {
+            border-bottom: none;
+        }
+
+        .services-checklist li::before {
+            content: '\2713';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 0.85rem 1.6rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 24px rgba(255, 107, 53, 0.28);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 32px rgba(255, 107, 53, 0.34);
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover,
+        .footer-section a[aria-current="page"] {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../styles/site-polish.css?v=1">
+    <link rel="stylesheet" href="../styles/hero-system.css?v=1">
+    <link rel="stylesheet" href="../styles/nav.css?v=2">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../" class="logo">RCMI <span>@ Morgan</span></a>
+            <ul id="menu">
+                <li><a href="./">Home</a></li>
+                <li><a href="mcb.html">MCB</a></li>
+                <li><a href="arf.html">ARF</a></li>
+                <li><a href="bbsu.html">BBSU</a></li>
+                <li><a href="services.html" aria-current="page">Request Services</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <div class="core-switcher">
+        <div class="core-switcher-inner">
+            <a href="../" class="core-switch-home">&larr; RCMI @ Morgan</a>
+            <div class="core-switch-pills">
+                <a href="../idc/" class="core-pill"><img src="../img/icons/idc-glasses-book.svg" alt="" width="16" height="16" class="core-pill-icon"> IDC</a>
+                <a href="../cec/" class="core-pill"><img src="../img/icons/community-cec.png" alt="" width="16" height="16" class="core-pill-icon"> CEC</a>
+                <a href="./" class="core-pill active">&#128300; RCC</a>
+                <a href="../research-project/" class="core-pill">&#128269; Research Project</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="page-header page-hero">
+        <div class="page-hero-content">
+            <h1>Services</h1>
+            <p>Request and schedule services across the Research Capacity Core &mdash; MCB, ARF, and BBSU &mdash; all through iLab.</p>
+        </div>
+    </section>
+
+    <section class="page-section">
+        <h2>Requesting Services</h2>
+        <a class="btn-secondary" href="https://my.ilabsolutions.com" target="_blank" rel="noopener">Request Services on iLab &rarr;</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>RCMI @ Morgan</h4>
+                <p>Center for Urban Health Disparities Research and Innovation</p>
+                <p>Morgan State University</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="./">Home</a>
+                <a href="mcb.html">Molecular &amp; Cellular Biology Core</a>
+                <a href="arf.html">Animal Research Facility</a>
+                <a href="bbsu.html">Biostatistics and Bioinformatics Support Unit</a>
+                <a href="services.html" aria-current="page">Request Services</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Portage Avenue Campus, Room 113</p>
+                <p>1700 E Cold Spring Lane</p>
+                <p>Baltimore, MD 21251</p>
+                <p>Phone: 443-885-4534</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="mailto:diane.hughes@morgan.edu">Email Us</a>
+                <a href="https://www.morgan.edu/rcmi">RCMI Program</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year">2024</span> Morgan State University RCMI @ Morgan. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+            var revealTargets = document.querySelectorAll('.page-section > *');
+            var revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    entry.target.classList.toggle('reveal-visible', entry.isIntersecting);
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+            revealTargets.forEach(function (el) { revealObserver.observe(el); });
+        } else {
+            document.querySelectorAll('.page-section > *').forEach(function (el) {
+                el.classList.add('reveal-visible');
+            });
+        }
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            var pageHeroEl = document.querySelector('.page-header.page-hero');
+            var pageHeroContent = document.querySelector('.page-hero-content');
+
+            if (pageHeroEl && pageHeroContent) {
+                var maxTilt = 5;
+
+                pageHeroEl.addEventListener('mousemove', function (e) {
+                    var rect = pageHeroEl.getBoundingClientRect();
+                    var x = (e.clientX - rect.left) / rect.width;
+                    var y = (e.clientY - rect.top) / rect.height;
+                    var rotateY = (x - 0.5) * (maxTilt * 2);
+                    var rotateX = (0.5 - y) * (maxTilt * 2);
+                    pageHeroContent.style.transform = 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
+                });
+
+                pageHeroEl.addEventListener('mouseleave', function () {
+                    pageHeroContent.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                });
+            }
+        }
+    </script>
+    <script src="../js/nav.js"></script>
+</body>
+</html>

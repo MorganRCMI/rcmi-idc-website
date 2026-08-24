@@ -1,0 +1,11 @@
+Item ID,Is Active,Sort Order,Icon,Title,Description
+surgery-room,Yes,10,🧞,Surgery Room,"State-of-the-art surgery room with two surgery tables (one backdraft and one downdraft), digitized stereotaxic instruments, gas and chemical anesthesia system, animal physiological monitoring (Kent Scientific), and autoclave system for surgical sterilization."
+histology-lab,Yes,20,🔬,Histology Laboratory,"Biosafety level II cabinet, chemical fume hood for perfusions, HistoCore Arcadia tissue processing and embedding apparatus, and a Leica RM2255 fully automated rotary microtome."
+molecular-lab,Yes,30,🧬,Molecular Laboratory,"Hacker Bright cryostat, a Keyence BZ-XB fluorescence microscope with live-cell imaging and automated cell counting, refrigerated centrifuge, digital temperature shaking incubator, Wes™ Simple Western blot protein analysis apparatus, a microplate reader, and various small laboratory equipment items."
+behavior-testing,Yes,40,🎯,Behavior Testing Rooms,"Three rooms with automated operant conditioning chambers for fear conditioning and drug self-administration; light-dark boxes; modular mazes; a Rotarod for mice and rats with video recording; manual open-field, Elevated Plus, and T-Maze for mice and rats; and a T-maze for small aquatic species."
+bedding-water,Yes,50,💧,Bedding & Water Station,Automated bedding dispenser and water filling station.
+cage-washer,Yes,60,🪥,Cage Washer,Cabinet cage washer with separate clean and dirty sides.
+water-purification,Yes,70,🚿,Water Purification,Reverse osmosis purification water system.
+dry-ice-maker,Yes,80,❄️,Dry Ice Maker,On-site dry ice production for sample handling and transport.
+environmental-monitoring,Yes,90,🌡️,Environmental Monitoring,"Automated environmental monitoring system with 24-hour monitoring for rodent circadian rhythm studies, with environmental temperature and humidity controls."
+cold-storage,Yes,100,🪧,Cold Storage,Three freezers (including an ultra-low temperature freezer) and 2 refrigerators for sample storage.

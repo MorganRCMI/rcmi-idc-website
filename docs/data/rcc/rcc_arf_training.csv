@@ -1,0 +1,5 @@
+Item ID,Is Active,Sort Order,Icon,Title,Description,Frequency
+health-safety,Yes,10,🛡️,Health & Safety Training,Covers required safety practices for working in the facility.,4× per year
+rodent-handling,Yes,20,🐭,Rodent Handling & Care,"Basic rodent handling, animal care, and health monitoring training.","4× per year, or by appointment"
+research-design-iacuc,Yes,30,📋,Research Design & IACUC Consultation,Consultations for laboratory animal research design and IACUC protocol writing.,By appointment
+specialized-technique,Yes,40,🎯,Specialized Technique Training,Individualized training for specialized surgical and behavioral techniques or other technical procedures.,By appointment

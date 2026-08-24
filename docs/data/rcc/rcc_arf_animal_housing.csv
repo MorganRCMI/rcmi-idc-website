@@ -1,0 +1,5 @@
+Row ID,Is Active,Sort Order,Species,Animals Per Cage,Cages Per Rack,Racks,Animal Count
+rat-ivc,Yes,10,Rat individual ventilated housing in 2 rooms,2,30,3,720
+mouse-ivc,Yes,20,Mouse individual ventilated housing in 2 rooms,4,30,4,960
+mouse-biometric,Yes,30,Mouse individual biometric housing with 24-hour activity monitoring in 1 room,1,60,1,60
+aquaria-fish,Yes,40,Aquaria for housing fish in one room,4,12,2,96

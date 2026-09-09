@@ -6,7 +6,7 @@ import time
 
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-WORKBOOK_PATH = os.path.join(ROOT, "workbook", "rcmi_content.xlsx")
+WORKBOOK_PATH = os.path.join(ROOT, "workbook", "idc_content.xlsx")
 EXPORT_SCRIPT = os.path.join(ROOT, "scripts", "export_workbook_to_csv.py")
 POLL_INTERVAL_SECONDS = 1.0
 DEBOUNCE_SECONDS = 1.5
@@ -56,7 +56,7 @@ def watch():
         print(f"Error: Export script is missing: {EXPORT_SCRIPT}", file=sys.stderr)
         raise SystemExit(1)
 
-    log("watching workbook/rcmi_content.xlsx")
+    log("watching workbook/idc_content.xlsx")
     last_signature = get_file_signature(WORKBOOK_PATH)
     pending_since = None
     pending_signature = None

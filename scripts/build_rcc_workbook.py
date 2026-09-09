@@ -1,7 +1,6 @@
 #!/opt/homebrew/bin/python3
 import csv
 import datetime as dt
-import html
 import os
 import zipfile
 from xml.sax.saxutils import escape
@@ -9,7 +8,8 @@ from xml.sax.saxutils import escape
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WORKBOOK_DIR = os.path.join(ROOT, "workbook")
-OUTPUT = os.path.join(WORKBOOK_DIR, "idc_content.xlsx")
+DATA_DIR = os.path.join(ROOT, "docs", "data", "rcc")
+OUTPUT = os.path.join(WORKBOOK_DIR, "rcc_content.xlsx")
 
 
 def read_csv(path):
@@ -31,20 +31,24 @@ def read_csv(path):
 def start_here_rows():
     return [
         ["Section", "Instruction"],
-        ["Purpose", "This workbook controls website content for faculty, research, publications, and lookup values."],
+        ["Purpose", "This workbook controls website content for the Research Capacity Core (RCC) pages: rcc/index, rcc/arf, rcc/bbsu, and rcc/mcb."],
         ["Tab: START_HERE", "Instructions only. Use this tab to understand the workbook before editing any content tabs."],
-        ["Tab: faculty", "One row per faculty or staff profile. Edit profile text, tags, education, and contact details here."],
-        ["Tab: research", "One row per research area, project, or infrastructure item. Use Row Type to identify the kind of record."],
-        ["Tab: publications", "One row per publication. Link each publication to a research project using Project ID."],
-        ["Tab: LOOKUPS", "Stores dropdown values. Most users should not edit this tab."],
-        ["Edit These Fields", "Edit normal content fields such as names, titles, summaries, descriptions, tags, links, and Is Active values."],
-        ["Do Not Edit", "Do not rename tabs, do not rename headers, and do not change ID fields such as Faculty ID, Project ID, or Publication ID unless you are managing the workbook structure."],
+        ["Tab: rcc_leadership", "One row per RCC leadership profile shown on the RCC overview page."],
+        ["Tab: rcc_roster", "One row per RCC faculty roster member shown on the RCC overview page."],
+        ["Tab: rcc_staff", "One row per staff member shown on a core's page. Use the Core column (mcb, arf, or bbsu) to control which page a row appears on."],
+        ["Tab: rcc_mcb_equipment", "Molecular & Cellular Biology (MCB) equipment, grouped into categories. Use Row Type = category for a category header row, and Row Type = item for each piece of equipment under it. Every item row's Category ID must match a category row's Category ID."],
+        ["Tab: rcc_mcb_services", "MCB priced services, grouped into categories. Same Row Type = category / item pattern as rcc_mcb_equipment."],
+        ["Tab: rcc_mcb_other_services", "MCB flat list of additional services (no categories)."],
+        ["Tab: rcc_mcb_pricing_tiers", "MCB usage-based pricing tiers shown on the MCB page."],
+        ["Tab: rcc_arf_equipment", "Animal Research Facility (ARF) equipment list."],
+        ["Tab: rcc_arf_training", "ARF training offerings and how often each is offered."],
+        ["Tab: rcc_arf_animal_housing", "ARF animal housing capacity table."],
+        ["Tab: rcc_bbsu_resources", "Biostatistics & Bioinformatics Support Unit (BBSU) resources list."],
+        ["Tab: rcc_bbsu_services", "BBSU flat list of services."],
+        ["Edit These Fields", "Edit normal content fields such as names, titles, descriptions, prices, and Is Active values."],
+        ["Do Not Edit", "Do not rename tabs, do not rename headers, and do not change ID fields (Leader ID, Member ID, Staff ID, Item ID, Category ID, Tier ID, Row ID) unless you are managing the workbook structure."],
         ["Do Not Delete Rows", "Do not delete rows to remove content from the website. Keep the record and change Is Active to No instead."],
-        ["Visibility", "Use Is Active to hide content without deleting it. If a future Publish Status field is introduced, use that control instead of deleting rows."],
-        ["Dropdowns", "Use dropdown lists where provided. Do not type alternate values when a dropdown is available."],
-        ["Project Links", "Publications.Project ID must match an existing research.Project ID. Do not change Project ID values casually after records are linked."],
-        ["Sorting", "Sort the full sheet range if needed. Do not sort a single column by itself."],
-        ["Help", "If you need structural changes, update WORKBOOK_CONTRACT.md first so the workbook and parser stay aligned."],
+        ["Export", "After editing, run `npm run export-rcc-data` to regenerate the CSV files the website reads from."],
     ]
 
 
@@ -242,9 +246,9 @@ def core_xml():
         'xmlns:dcterms="http://purl.org/dc/terms/" '
         'xmlns:dcmitype="http://purl.org/dc/dcmitype/" '
         'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
-        '<dc:title>RCMI Content Workbook</dc:title>'
-        '<dc:creator>OpenAI Codex</dc:creator>'
-        '<cp:lastModifiedBy>OpenAI Codex</cp:lastModifiedBy>'
+        '<dc:title>RCC Content Workbook</dc:title>'
+        '<dc:creator>Claude</dc:creator>'
+        '<cp:lastModifiedBy>Claude</cp:lastModifiedBy>'
         f'<dcterms:created xsi:type="dcterms:W3CDTF">{created}</dcterms:created>'
         f'<dcterms:modified xsi:type="dcterms:W3CDTF">{created}</dcterms:modified>'
         '</cp:coreProperties>'
@@ -271,36 +275,56 @@ def app_xml(sheet_names):
     )
 
 
+# sheet_name -> (source csv filename, column widths, wrap columns)
+SHEET_SPECS = [
+    ("rcc_leadership", "rcc_leadership.csv",
+        {1: 18, 2: 10, 3: 10, 4: 22, 5: 12, 6: 40, 7: 70, 8: 32, 9: 20},
+        {6, 7}),
+    ("rcc_roster", "rcc_roster.csv",
+        {1: 18, 2: 10, 3: 10, 4: 20, 5: 18, 6: 22, 7: 14, 8: 30, 9: 10, 10: 10, 11: 32},
+        {8}),
+    ("rcc_staff", "rcc_staff.csv",
+        {1: 22, 2: 10, 3: 10, 4: 10, 5: 20, 6: 16, 7: 10, 8: 32},
+        set()),
+    ("rcc_mcb_pricing_tiers", "rcc_mcb_pricing_tiers.csv",
+        {1: 18, 2: 10, 3: 10, 4: 22, 5: 12, 6: 10, 7: 40, 8: 10},
+        {7}),
+    ("rcc_mcb_services", "rcc_mcb_services.csv",
+        {1: 10, 2: 18, 3: 10, 4: 10, 5: 8, 6: 24, 7: 20, 8: 40, 9: 14},
+        {8}),
+    ("rcc_mcb_other_services", "rcc_mcb_other_services.csv",
+        {1: 22, 2: 10, 3: 10, 4: 8, 5: 24, 6: 60},
+        {6}),
+    ("rcc_arf_animal_housing", "rcc_arf_animal_housing.csv",
+        {1: 14, 2: 10, 3: 10, 4: 44, 5: 16, 6: 16, 7: 10, 8: 14},
+        set()),
+    ("rcc_arf_equipment", "rcc_arf_equipment.csv",
+        {1: 18, 2: 10, 3: 10, 4: 8, 5: 24, 6: 60},
+        {6}),
+    ("rcc_arf_training", "rcc_arf_training.csv",
+        {1: 18, 2: 10, 3: 10, 4: 8, 5: 26, 6: 55, 7: 26},
+        {6}),
+    ("rcc_bbsu_resources", "rcc_bbsu_resources.csv",
+        {1: 16, 2: 10, 3: 10, 4: 8, 5: 18, 6: 60, 7: 30},
+        {6}),
+    ("rcc_bbsu_services", "rcc_bbsu_services.csv",
+        {1: 26, 2: 10, 3: 10, 4: 60},
+        {4}),
+    ("rcc_mcb_equipment", "rcc_mcb_equipment.csv",
+        {1: 10, 2: 18, 3: 10, 4: 10, 5: 8, 6: 24, 7: 24, 8: 12, 9: 12, 10: 20, 11: 60, 12: 30},
+        {11}),
+]
+
+
 def build_workbook():
-    faculty = read_csv(os.path.join(WORKBOOK_DIR, "faculty_template.csv"))
-    research = read_csv(os.path.join(WORKBOOK_DIR, "research_template.csv"))
-    publications = read_csv(os.path.join(WORKBOOK_DIR, "publications_template.csv"))
-    lookups = read_csv(os.path.join(WORKBOOK_DIR, "lookups_template.csv"))
     start_here = start_here_rows()
 
-    sheet_names = ["START_HERE", "faculty", "research", "publications", "LOOKUPS"]
-    sheets = [
-        sheet_xml(start_here, widths={1: 24, 2: 120}, freeze_top_row=False, wrap_cols={2}),
-        sheet_xml(
-            faculty,
-            widths={1: 28, 2: 12, 3: 12, 4: 28, 5: 24, 6: 28, 7: 28, 8: 20, 9: 60, 10: 30, 11: 14, 12: 28, 13: 28, 14: 28, 15: 28, 16: 18, 17: 18, 18: 18, 19: 18, 20: 18, 21: 18, 22: 22, 23: 48, 24: 20, 25: 18, 26: 26, 27: 28, 28: 28},
-            freeze_top_row=True,
-            wrap_cols={9, 23, 28},
-        ),
-        sheet_xml(
-            research,
-            widths={1: 18, 2: 34, 3: 12, 4: 12, 5: 34, 6: 55, 7: 12, 8: 24, 9: 24, 10: 24, 11: 24, 12: 24, 13: 24, 14: 24, 15: 22, 16: 70, 17: 18, 18: 18, 19: 18, 20: 18, 21: 18, 22: 32, 23: 20, 24: 18, 25: 16, 26: 16, 27: 26, 28: 28, 29: 40, 30: 28},
-            freeze_top_row=True,
-            wrap_cols={6, 16, 30},
-        ),
-        sheet_xml(
-            publications,
-            widths={1: 34, 2: 30, 3: 12, 4: 12, 5: 44, 6: 40, 7: 24, 8: 12, 9: 22, 10: 20, 11: 28, 12: 70, 13: 22, 14: 65, 15: 18, 16: 40, 17: 28, 18: 28},
-            freeze_top_row=True,
-            wrap_cols={5, 6, 12, 14, 18},
-        ),
-        sheet_xml(lookups, widths={1: 24, 2: 28, 3: 12}, freeze_top_row=True, wrap_cols=set()),
-    ]
+    sheet_names = ["START_HERE"] + [name for name, _file, _w, _wrap in SHEET_SPECS]
+    sheets = [sheet_xml(start_here, widths={1: 22, 2: 120}, freeze_top_row=False, wrap_cols={2})]
+
+    for _name, filename, widths, wrap_cols in SHEET_SPECS:
+        rows = read_csv(os.path.join(DATA_DIR, filename))
+        sheets.append(sheet_xml(rows, widths=widths, freeze_top_row=True, wrap_cols=wrap_cols))
 
     os.makedirs(WORKBOOK_DIR, exist_ok=True)
 

@@ -404,32 +404,7 @@
             <h2 class="section-title">RCMI Research Projects</h2>
         </div>
 
-        <div class="rp-grid">
-            <div class="rp-card">
-                <div class="rp-card-photo"><span style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, var(--primary), var(--secondary));color:white;font-family:'Playfair Display',serif;font-weight:700;font-size:1.6rem;">S</span></div>
-                <span class="project-status">Current</span>
-                <h3>Project 1: Wastewater-Based Epidemiology for COVID-19 Community Surveillance</h3>
-                <p class="rp-card-summary">Using wastewater-based epidemiology (WBE) to track SARS-CoV-2 community transmission and evaluate COVID-19 vaccine effectiveness among minority populations.</p>
-                <div class="rp-card-pi">Dr. Samendra Sherchan &middot; Department of Biology</div>
-                <a class="rp-card-link" href="project-sherchan.html">View Project &rarr;</a>
-            </div>
-            <div class="rp-card">
-                <div class="rp-card-photo"><img src="../img/faculty/pilot_ingrid-k-tulloch.jpg" alt="Dr. Ingrid K. Tulloch"></div>
-                <span class="project-status">Current</span>
-                <h3>Project 2: Discrimination, Geography &amp; Immune Cell Function</h3>
-                <p class="rp-card-summary">Investigating how geography, ethnicity, and discrimination experiences affect immune cell function and genomic regulation.</p>
-                <div class="rp-card-pi">Dr. Ingrid K. Tulloch &middot; Department of Psychology</div>
-                <a class="rp-card-link" href="project-ingrid-tulloch.html">View Project &rarr;</a>
-            </div>
-            <div class="rp-card">
-                <div class="rp-card-photo"><img src="../img/faculty/project_timothy_meeker.jpg" alt="Dr. Timothy Meeker"></div>
-                <span class="project-status">Current</span>
-                <h3>Project 3: Chemotherapy-Induced Neuropathy &amp; Non-Invasive Brain Stimulation</h3>
-                <p class="rp-card-summary">A randomized controlled trial testing transcranial direct current stimulation (tDCS) as a treatment for painful chemotherapy-induced neuropathy.</p>
-                <div class="rp-card-pi">Dr. Timothy Meeker &middot; Department of Biology</div>
-                <a class="rp-card-link" href="project-timothy-meeker.html">View Project &rarr;</a>
-            </div>
-        </div>
+        <div class="rp-grid" id="rp-grid"></div>
     </section>
 
     <footer>
@@ -468,6 +443,63 @@
         </div>
     </footer>
 
+    <script>
+        window.rcmiSiteConfig = {
+            dataBasePath: "../data"
+        };
+    </script>
+    <script src="../js/FIELD_MAP.js?v=1"></script>
+    <script src="../js/common.js?v=1"></script>
+    <script>
+        (function () {
+            var helpers = window.rcmiSandboxHelpers;
+
+            if (!helpers || typeof helpers.loadDataset !== "function") {
+                throw new Error("Shared CSV helper API is unavailable.");
+            }
+
+            function getInitials(name) {
+                var clean = String(name || "").replace(/^(Dr\.|Prof\.|Mr\.|Ms\.|Mrs\.|Dr|Prof)\s+/i, "");
+                var parts = clean.split(/\s+/).filter(Boolean);
+                return parts.length >= 2
+                    ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+                    : (parts[0] || "?").substring(0, 2).toUpperCase();
+            }
+
+            function renderPhoto(pi) {
+                if (pi && pi.photoPath) {
+                    return '<img src="' + helpers.escapeHtml(pi.photoPath) + '" alt="' + helpers.escapeHtml(pi.photoAlt || pi.name) + '">';
+                }
+                var initials = getInitials(pi ? pi.name : "");
+                return '<span style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, var(--primary), var(--secondary));color:white;font-family:\'Playfair Display\',serif;font-weight:700;font-size:1.6rem;">' + helpers.escapeHtml(initials) + '</span>';
+            }
+
+            Promise.all([
+                helpers.loadDataset("researchProjects"),
+                helpers.loadDataset("researchProjectPis")
+            ]).then(function (results) {
+                var projects = helpers.transformResearchProjectRecords(results[0]);
+                var pis = helpers.transformResearchProjectPiRecords(results[1]);
+                var piById = {};
+                pis.forEach(function (pi) { piById[pi.id] = pi; });
+
+                var grid = document.getElementById("rp-grid");
+                grid.innerHTML = projects.map(function (project) {
+                    var pi = piById[project.piId];
+                    return '<div class="rp-card">' +
+                        '<div class="rp-card-photo">' + renderPhoto(pi) + '</div>' +
+                        '<span class="project-status">' + helpers.escapeHtml(project.status) + '</span>' +
+                        '<h3>Project ' + helpers.escapeHtml(project.projectNumber) + ': ' + helpers.escapeHtml(project.cardTitle) + '</h3>' +
+                        '<p class="rp-card-summary">' + helpers.escapeHtml(project.cardSummary) + '</p>' +
+                        '<div class="rp-card-pi">' + helpers.escapeHtml(project.piName) + ' &middot; ' + helpers.escapeHtml(project.department) + '</div>' +
+                        '<a class="rp-card-link" href="project-' + encodeURIComponent(project.id) + '.html">View Project &rarr;</a>' +
+                        '</div>';
+                }).join("");
+            }).catch(function (err) {
+                console.error("Research projects could not be loaded:", err);
+            });
+        })();
+    </script>
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
 

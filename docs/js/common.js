@@ -20,7 +20,7 @@
     }
 
     function fetchText(path) {
-        return fetch(path).then(function (response) {
+        return fetch(path, { cache: "no-cache" }).then(function (response) {
             if (!response.ok) {
                 console.warn("[Workbook Contract] Missing expected file: " + path + " (" + response.status + ")");
                 throw new Error("HTTP " + response.status + " while loading " + path);
@@ -606,6 +606,156 @@
         }));
     }
 
+    function transformResearchProjectRecords(rows) {
+        return activeSorted(rows.map(function (row) {
+            return {
+                id: row.id,
+                isActive: isActiveCell(row.isActive),
+                sortOrder: Number(row.sortOrder) || 0,
+                projectNumber: row.projectNumber || "",
+                status: row.status || "",
+                cardTitle: row.cardTitle || "",
+                fullTitle: row.fullTitle || "",
+                cardSummary: row.cardSummary || "",
+                detailSummary: row.detailSummary || "",
+                description: row.description || "",
+                tags: pickValues(row, ["tag1", "tag2", "tag3", "tag4"]),
+                piId: row.piId || "",
+                piName: row.piName || "",
+                department: row.department || "",
+                fundingSource: row.fundingSource || "",
+                grantNumber: row.grantNumber || "",
+                startDate: row.startDate || "",
+                endDate: row.endDate || "",
+                links: [
+                    row.linkLabel1 && row.linkUrl1 ? { label: row.linkLabel1, url: row.linkUrl1 } : null,
+                    row.linkLabel2 && row.linkUrl2 ? { label: row.linkLabel2, url: row.linkUrl2 } : null
+                ].filter(Boolean)
+            };
+        }));
+    }
+
+    function transformResearchProjectPiRecords(rows) {
+        return activeSorted(rows.map(function (row) {
+            return {
+                id: row.id,
+                isActive: isActiveCell(row.isActive),
+                sortOrder: Number(row.sortOrder) || 0,
+                name: row.name || "",
+                title: row.title || "",
+                department: row.department || "",
+                email: row.email || "",
+                photoPath: row.photoPath || "",
+                photoAlt: row.photoAlt || row.name || "",
+                fallbackIcon: row.fallbackIcon || "",
+                office: row.office || "",
+                phone: row.phone || "",
+                education: pickValues(row, ["education1", "education2", "education3", "education4"]),
+                tags: pickValues(row, ["tag1", "tag2", "tag3", "tag4", "tag5", "tag6"]),
+                highlightHeading: row.highlightHeading || "",
+                highlightText: row.highlightText || "",
+                bio: row.bio || "",
+                achievements: splitLines(row.achievements),
+                fundingHighlights: splitLines(row.fundingHighlights),
+                spotlightTitle: row.spotlightTitle || "",
+                spotlightCitation: row.spotlightCitation || "",
+                spotlightAbstract: row.spotlightAbstract || "",
+                spotlightFunding: row.spotlightFunding || "",
+                spotlightUrl: row.spotlightUrl || "",
+                orcidUrl: row.orcidUrl || "",
+                googleScholarUrl: row.googleScholarUrl || "",
+                ncbiUrl: row.ncbiUrl || ""
+            };
+        }));
+    }
+
+    function transformCecTeamRecords(rows) {
+        return activeSorted(rows.map(function (row) {
+            return {
+                id: row.id,
+                isActive: isActiveCell(row.isActive),
+                sortOrder: Number(row.sortOrder) || 0,
+                group: row.group || "",
+                name: row.name || "",
+                badge: row.badge || "",
+                designation: row.designation || "",
+                photoPath: row.photoPath || "",
+                initials: row.initials || ""
+            };
+        }));
+    }
+
+    function transformCecTrainingEventRecords(rows) {
+        return activeSorted(rows.map(function (row) {
+            return {
+                id: row.id,
+                isActive: isActiveCell(row.isActive),
+                sortOrder: Number(row.sortOrder) || 0,
+                icon: row.icon || "",
+                title: row.title || "",
+                date: row.date || "",
+                description: row.description || "",
+                color: row.color || ""
+            };
+        }));
+    }
+
+    function transformCecPartnerRecords(rows) {
+        return activeSorted(rows.map(function (row) {
+            return {
+                id: row.id,
+                isActive: isActiveCell(row.isActive),
+                sortOrder: Number(row.sortOrder) || 0,
+                set: row.set || "",
+                name: row.name || "",
+                photoPath: row.photoPath || "",
+                initials: row.initials || "",
+                isLogo: isActiveCell(row.isLogo),
+                profileUrl: row.profileUrl || ""
+            };
+        }));
+    }
+
+    function transformCecSeedFundingDeadlineRecords(rows) {
+        return activeSorted(rows.map(function (row) {
+            return {
+                id: row.id,
+                isActive: isActiveCell(row.isActive),
+                sortOrder: Number(row.sortOrder) || 0,
+                awardType: row.awardType || "",
+                year: row.year || "",
+                dates: String(row.dates || "").split("|").map(function (d) { return d.trim(); }).filter(Boolean)
+            };
+        }));
+    }
+
+    function transformCecSeedFundingResourceRecords(rows) {
+        return activeSorted(rows.map(function (row) {
+            return {
+                id: row.id,
+                isActive: isActiveCell(row.isActive),
+                sortOrder: Number(row.sortOrder) || 0,
+                awardType: row.awardType || "",
+                icon: row.icon || "",
+                label: row.label || "",
+                url: row.url || ""
+            };
+        }));
+    }
+
+    function transformCecResourceLinkRecords(rows) {
+        return activeSorted(rows.map(function (row) {
+            return {
+                id: row.id,
+                isActive: isActiveCell(row.isActive),
+                sortOrder: Number(row.sortOrder) || 0,
+                group: row.group || "",
+                label: row.label || "",
+                url: row.url || ""
+            };
+        }));
+    }
+
     function splitPastUpcoming(events) {
         var today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -727,6 +877,14 @@
     sandboxHelpers.transformRccArfTrainingRecords = transformRccArfTrainingRecords;
     sandboxHelpers.transformRccBbsuResourcesRecords = transformRccBbsuResourcesRecords;
     sandboxHelpers.transformRccBbsuServicesRecords = transformRccBbsuServicesRecords;
+    sandboxHelpers.transformResearchProjectRecords = transformResearchProjectRecords;
+    sandboxHelpers.transformResearchProjectPiRecords = transformResearchProjectPiRecords;
+    sandboxHelpers.transformCecTeamRecords = transformCecTeamRecords;
+    sandboxHelpers.transformCecTrainingEventRecords = transformCecTrainingEventRecords;
+    sandboxHelpers.transformCecPartnerRecords = transformCecPartnerRecords;
+    sandboxHelpers.transformCecSeedFundingDeadlineRecords = transformCecSeedFundingDeadlineRecords;
+    sandboxHelpers.transformCecSeedFundingResourceRecords = transformCecSeedFundingResourceRecords;
+    sandboxHelpers.transformCecResourceLinkRecords = transformCecResourceLinkRecords;
     sandboxHelpers.splitPastUpcoming = splitPastUpcoming;
     sandboxHelpers.getProjectsByFacultyId = getProjectsByFacultyId;
     sandboxHelpers.renderTagRow = renderTagRow;

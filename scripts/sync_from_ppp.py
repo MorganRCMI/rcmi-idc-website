@@ -3,7 +3,7 @@
 sync_from_ppp.py
 
 Syncs faculty, research, and publications data from rcmi_ppp_data_tmp.xlsx
-(single source of truth) into rcmi_content.xlsx.
+(single source of truth) into idc_content.xlsx.
 
 Strategy:
   - Keep all existing Leadership/PI rows in faculty sheet
@@ -34,7 +34,7 @@ except ImportError:
     raise SystemExit(1)
 
 PPP_PATH = os.path.join(ROOT, "workbook", "rcmi_ppp_data_tmp.xlsx")
-CONTENT_PATH = os.path.join(ROOT, "workbook", "rcmi_content.xlsx")
+CONTENT_PATH = os.path.join(ROOT, "workbook", "idc_content.xlsx")
 BACKUP_PATH = os.path.join(ROOT, "workbook", "rcmi_content_backup_before_ppp_sync.xlsx")
 EXPORT_SCRIPT = os.path.join(ROOT, "scripts", "export_workbook_to_csv.py")
 
@@ -249,9 +249,9 @@ matched = sum(1 for p in publication_records if p.get("Project ID"))
 unmatched = len(publication_records) - matched
 print(f"  Matched to projects: {matched}  |  Unmatched: {unmatched}")
 
-# ── Load and update rcmi_content.xlsx ─────────────────────────────────────────
+# ── Load and update idc_content.xlsx ─────────────────────────────────────────
 
-print("\nLoading rcmi_content.xlsx ...")
+print("\nLoading idc_content.xlsx ...")
 content_wb = load_workbook(CONTENT_PATH)
 
 # Backup before modifying
@@ -364,7 +364,7 @@ print(f"  Added {len(publication_records)} new publications")
 
 # ── Save and export ───────────────────────────────────────────────────────────
 
-print("\nSaving rcmi_content.xlsx ...")
+print("\nSaving idc_content.xlsx ...")
 content_wb.save(CONTENT_PATH)
 
 print("Regenerating CSV exports ...")

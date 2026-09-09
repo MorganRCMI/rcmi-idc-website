@@ -1,7 +1,6 @@
 #!/opt/homebrew/bin/python3
 import csv
 import datetime as dt
-import html
 import os
 import zipfile
 from xml.sax.saxutils import escape
@@ -9,7 +8,8 @@ from xml.sax.saxutils import escape
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WORKBOOK_DIR = os.path.join(ROOT, "workbook")
-OUTPUT = os.path.join(WORKBOOK_DIR, "idc_content.xlsx")
+DATA_DIR = os.path.join(ROOT, "docs", "data", "cec")
+OUTPUT = os.path.join(WORKBOOK_DIR, "cec_content.xlsx")
 
 
 def read_csv(path):
@@ -31,20 +31,19 @@ def read_csv(path):
 def start_here_rows():
     return [
         ["Section", "Instruction"],
-        ["Purpose", "This workbook controls website content for faculty, research, publications, and lookup values."],
+        ["Purpose", "This workbook controls dynamic content for the Community Engagement Core (CEC / Morgan CARES) pages: cec/about, cec/training, cec/partnering, cec/seed-funding, and cec/resources."],
         ["Tab: START_HERE", "Instructions only. Use this tab to understand the workbook before editing any content tabs."],
-        ["Tab: faculty", "One row per faculty or staff profile. Edit profile text, tags, education, and contact details here."],
-        ["Tab: research", "One row per research area, project, or infrastructure item. Use Row Type to identify the kind of record."],
-        ["Tab: publications", "One row per publication. Link each publication to a research project using Project ID."],
-        ["Tab: LOOKUPS", "Stores dropdown values. Most users should not edit this tab."],
-        ["Edit These Fields", "Edit normal content fields such as names, titles, summaries, descriptions, tags, links, and Is Active values."],
-        ["Do Not Edit", "Do not rename tabs, do not rename headers, and do not change ID fields such as Faculty ID, Project ID, or Publication ID unless you are managing the workbook structure."],
+        ["Tab: cec_team", "Morgan CARES Steering Committee and Administrative Team, shown on the About page. Use the Group column (steering or admin) to control which section a row appears in."],
+        ["Tab: cec_training_events", "Monthly Training Series schedule shown on the Training page timeline. One row per event."],
+        ["Tab: cec_partners", "PartnerLink showcase members shown on the Partnering page. Use the Set column (base, 2, 3, or 4) to control grouping — 'base' is always visible, the others are shown when a viewer clicks a dot."],
+        ["Tab: cec_seed_funding_deadlines", "Application deadline cycles shown on the Seed Funding page. Use Award Type (initial or continuation) and the Dates column (pipe-separated, e.g. 'January 15|April 15')."],
+        ["Tab: cec_seed_funding_resources", "Document/guide links shown under each Seed Funding award section. Use Award Type (community or practitioner)."],
+        ["Tab: cec_resource_links", "Grouped external links shown on the Resources page (CONNECT, Reports, CBPR Resources, Community Resources, Funding Resources). Use the Group column to control which list a row appears in — it must exactly match one of those five names."],
+        ["Edit These Fields", "Edit normal content fields such as names, titles, dates, descriptions, and Is Active values."],
+        ["Do Not Edit", "Do not rename tabs, do not rename headers, and do not change ID fields unless you are managing the workbook structure."],
         ["Do Not Delete Rows", "Do not delete rows to remove content from the website. Keep the record and change Is Active to No instead."],
-        ["Visibility", "Use Is Active to hide content without deleting it. If a future Publish Status field is introduced, use that control instead of deleting rows."],
-        ["Dropdowns", "Use dropdown lists where provided. Do not type alternate values when a dropdown is available."],
-        ["Project Links", "Publications.Project ID must match an existing research.Project ID. Do not change Project ID values casually after records are linked."],
-        ["Sorting", "Sort the full sheet range if needed. Do not sort a single column by itself."],
-        ["Help", "If you need structural changes, update WORKBOOK_CONTRACT.md first so the workbook and parser stay aligned."],
+        ["Rich Text", "The Description field on cec_training_events supports basic HTML tags like <strong>...</strong> for emphasis."],
+        ["Export", "After editing, run `npm run export-cec-data` to regenerate the CSV files the website reads from."],
     ]
 
 
@@ -181,7 +180,7 @@ def root_rels():
         '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
         '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
         '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>'
-        '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/>'
+        '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" Target="docProps/core.xml"/>'
         '<Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/>'
         "</Relationships>"
     )
@@ -242,9 +241,9 @@ def core_xml():
         'xmlns:dcterms="http://purl.org/dc/terms/" '
         'xmlns:dcmitype="http://purl.org/dc/dcmitype/" '
         'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
-        '<dc:title>RCMI Content Workbook</dc:title>'
-        '<dc:creator>OpenAI Codex</dc:creator>'
-        '<cp:lastModifiedBy>OpenAI Codex</cp:lastModifiedBy>'
+        '<dc:title>CEC Content Workbook</dc:title>'
+        '<dc:creator>Claude</dc:creator>'
+        '<cp:lastModifiedBy>Claude</cp:lastModifiedBy>'
         f'<dcterms:created xsi:type="dcterms:W3CDTF">{created}</dcterms:created>'
         f'<dcterms:modified xsi:type="dcterms:W3CDTF">{created}</dcterms:modified>'
         '</cp:coreProperties>'
@@ -271,36 +270,37 @@ def app_xml(sheet_names):
     )
 
 
+SHEET_SPECS = [
+    ("cec_team", "cec_team.csv",
+        {1: 22, 2: 10, 3: 10, 4: 10, 5: 22, 6: 12, 7: 44, 8: 34, 9: 10},
+        set()),
+    ("cec_training_events", "cec_training_events.csv",
+        {1: 26, 2: 10, 3: 10, 4: 8, 5: 26, 6: 34, 7: 60, 8: 10},
+        {7}),
+    ("cec_partners", "cec_partners.csv",
+        {1: 26, 2: 10, 3: 10, 4: 8, 5: 24, 6: 40, 7: 10, 8: 10, 9: 70},
+        set()),
+    ("cec_seed_funding_deadlines", "cec_seed_funding_deadlines.csv",
+        {1: 20, 2: 10, 3: 10, 4: 14, 5: 10, 6: 40},
+        set()),
+    ("cec_seed_funding_resources", "cec_seed_funding_resources.csv",
+        {1: 26, 2: 10, 3: 10, 4: 14, 5: 8, 6: 44, 7: 60},
+        set()),
+    ("cec_resource_links", "cec_resource_links.csv",
+        {1: 30, 2: 10, 3: 10, 4: 22, 5: 60, 6: 60},
+        set()),
+]
+
+
 def build_workbook():
-    faculty = read_csv(os.path.join(WORKBOOK_DIR, "faculty_template.csv"))
-    research = read_csv(os.path.join(WORKBOOK_DIR, "research_template.csv"))
-    publications = read_csv(os.path.join(WORKBOOK_DIR, "publications_template.csv"))
-    lookups = read_csv(os.path.join(WORKBOOK_DIR, "lookups_template.csv"))
     start_here = start_here_rows()
 
-    sheet_names = ["START_HERE", "faculty", "research", "publications", "LOOKUPS"]
-    sheets = [
-        sheet_xml(start_here, widths={1: 24, 2: 120}, freeze_top_row=False, wrap_cols={2}),
-        sheet_xml(
-            faculty,
-            widths={1: 28, 2: 12, 3: 12, 4: 28, 5: 24, 6: 28, 7: 28, 8: 20, 9: 60, 10: 30, 11: 14, 12: 28, 13: 28, 14: 28, 15: 28, 16: 18, 17: 18, 18: 18, 19: 18, 20: 18, 21: 18, 22: 22, 23: 48, 24: 20, 25: 18, 26: 26, 27: 28, 28: 28},
-            freeze_top_row=True,
-            wrap_cols={9, 23, 28},
-        ),
-        sheet_xml(
-            research,
-            widths={1: 18, 2: 34, 3: 12, 4: 12, 5: 34, 6: 55, 7: 12, 8: 24, 9: 24, 10: 24, 11: 24, 12: 24, 13: 24, 14: 24, 15: 22, 16: 70, 17: 18, 18: 18, 19: 18, 20: 18, 21: 18, 22: 32, 23: 20, 24: 18, 25: 16, 26: 16, 27: 26, 28: 28, 29: 40, 30: 28},
-            freeze_top_row=True,
-            wrap_cols={6, 16, 30},
-        ),
-        sheet_xml(
-            publications,
-            widths={1: 34, 2: 30, 3: 12, 4: 12, 5: 44, 6: 40, 7: 24, 8: 12, 9: 22, 10: 20, 11: 28, 12: 70, 13: 22, 14: 65, 15: 18, 16: 40, 17: 28, 18: 28},
-            freeze_top_row=True,
-            wrap_cols={5, 6, 12, 14, 18},
-        ),
-        sheet_xml(lookups, widths={1: 24, 2: 28, 3: 12}, freeze_top_row=True, wrap_cols=set()),
-    ]
+    sheet_names = ["START_HERE"] + [name for name, _file, _w, _wrap in SHEET_SPECS]
+    sheets = [sheet_xml(start_here, widths={1: 22, 2: 120}, freeze_top_row=False, wrap_cols={2})]
+
+    for _name, filename, widths, wrap_cols in SHEET_SPECS:
+        rows = read_csv(os.path.join(DATA_DIR, filename))
+        sheets.append(sheet_xml(rows, widths=widths, freeze_top_row=True, wrap_cols=wrap_cols))
 
     os.makedirs(WORKBOOK_DIR, exist_ok=True)
 

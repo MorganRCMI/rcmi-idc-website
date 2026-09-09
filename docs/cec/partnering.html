@@ -603,6 +603,7 @@
     <link rel="stylesheet" href="../styles/site-polish.css?v=1">
     <link rel="stylesheet" href="../styles/hero-system.css?v=1">
     <link rel="stylesheet" href="../styles/nav.css?v=2">
+    <link rel="stylesheet" href="../styles/cec-polish.css?v=3">
 </head>
 <body>
     <header>
@@ -649,6 +650,21 @@
         <h2>Join the Morgan CARES Network</h2>
         <p>The Morgan CARES Network includes close to 500 community members, organizations, faculty members, students, and leaders. This is a vibrant ecosystem of individuals interested in community health and committed to collaboration. If you would like to join the network, fill out the <a href="https://morgan-cares.smartmatchapp.com/client/submissionform/18/default/" target="_blank" rel="noopener">Network Registration Form</a>. Once you receive the confirmation message, follow the instructions listed to complete a profile.</p>
 
+        <div class="cec-stats">
+            <div class="cec-stat">
+                <div class="cec-stat-num">~500</div>
+                <div class="cec-stat-label">people &amp; organizations in the Network</div>
+            </div>
+            <div class="cec-stat">
+                <div class="cec-stat-num">3</div>
+                <div class="cec-stat-label">ways to engage, from member to partner</div>
+            </div>
+            <div class="cec-stat">
+                <div class="cec-stat-num">1:1</div>
+                <div class="cec-stat-label">matching support through PartnerLink</div>
+            </div>
+        </div>
+
         <h3>PartnerLink</h3>
         <p>As a Network member, you can also opt into PartnerLink. A primary goal of our work at Morgan CARES is to facilitate new connections and support community-campus partnerships that promote health in Baltimore City. Morgan CARES provides linkage support to help potential collaborators connect with one another. With matching software, the team can use the profile information provided to introduce individuals with complementary skills and interests.</p>
 
@@ -661,178 +677,9 @@
         <h3>Our PartnerLink profiles</h3>
 
         <div class="partner-showcase-wrap">
-            <div class="dots-row">
-                <button type="button" class="dot" data-target="2" aria-label="Show more PartnerLink members, group 1"></button>
-                <button type="button" class="dot" data-target="3" aria-label="Show more PartnerLink members, group 2"></button>
-                <button type="button" class="dot" data-target="4" aria-label="Show more PartnerLink members, group 3"></button>
-            </div>
+            <div class="dots-row" id="partner-dots"></div>
 
-            <div class="partner-showcase">
-                <div class="partner-grid flow showcase-spacer" aria-hidden="true">
-                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
-                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
-                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
-                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
-                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
-                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
-                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
-                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
-                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
-                    <div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>
-                </div>
-
-                <div class="partner-grid flow set-base">
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar"><img src="../img/cec/partners/adriana-foster.jpg" alt="Adriana Foster"></div>
-                        <div class="partner-name">Adriana Foster</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar"><img src="../img/cec/partners/kimberly-warren.jpg" alt="Kimberly Warren"></div>
-                        <div class="partner-name">Kimberly Warren</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar"><img src="../img/cec/partners/kathy-evans.jpg" alt="Kathy Evans"></div>
-                        <div class="partner-name">Kathy Evans</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">JB</div>
-                        <div class="partner-name">Justin Bonny</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">TG</div>
-                        <div class="partner-name">Tasha Gooden</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">BT</div>
-                        <div class="partner-name">Beta Tau Alumni Chapter</div>
-                    </a>
-                </div>
-
-                <div class="partner-grid flow set-overlay" data-set="2">
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar"><img src="../img/cec/partners/vishnu-kumar.jpg" alt="Vishnu Kumar"></div>
-                        <div class="partner-name">Vishnu Kumar</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">LF</div>
-                        <div class="partner-name">Lening Olivera Figueroa</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">SC</div>
-                        <div class="partner-name">Sereta Collington</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">JB</div>
-                        <div class="partner-name">James Butler III</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">EM</div>
-                        <div class="partner-name">Ellen Molino</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">TR</div>
-                        <div class="partner-name">Tiaira Robinson</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">DL</div>
-                        <div class="partner-name">Dea Lott</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">TR</div>
-                        <div class="partner-name">Timothy Rich</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">SK</div>
-                        <div class="partner-name">Samia Kirchner</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar"><img class="avatar-logo" src="../img/cec/partners/stephanie-slowly-little.jpg" alt="Stephanie Slowly Little"></div>
-                        <div class="partner-name">Stephanie Slowly Little</div>
-                    </a>
-                </div>
-
-                <div class="partner-grid flow set-overlay" data-set="3">
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">DS</div>
-                        <div class="partner-name">Desdemona Smith</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar"><img src="../img/cec/partners/alphonso-mayo.jpg" alt="Alphonso Mayo"></div>
-                        <div class="partner-name">Alphonso Mayo</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar"><img src="../img/cec/partners/emma-mitchell.jpg" alt="Emma Mitchell"></div>
-                        <div class="partner-name">Emma Mitchell</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">BL</div>
-                        <div class="partner-name">Brandon Logan</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">TK</div>
-                        <div class="partner-name">Tawanna Kane</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">RW</div>
-                        <div class="partner-name">Raven Willoughby</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar"><img class="avatar-logo" src="../img/cec/partners/brandon-clayton.jpg" alt="Brandon Clayton"></div>
-                        <div class="partner-name">Brandon Clayton</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">AD</div>
-                        <div class="partner-name">Akasha Dotson</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">BB</div>
-                        <div class="partner-name">Bonita Bordley</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">MM</div>
-                        <div class="partner-name">Marlyn Massey</div>
-                    </a>
-                </div>
-
-                <div class="partner-grid flow set-overlay" data-set="4">
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">MM</div>
-                        <div class="partner-name">Mark Mittelman</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">OA</div>
-                        <div class="partner-name">Oluwagbenga Alo</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">AK</div>
-                        <div class="partner-name">Antony Kinyua</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">SJ</div>
-                        <div class="partner-name">Shawna Jones</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">ZJ</div>
-                        <div class="partner-name">Zenobia Judd-Williams</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">RT</div>
-                        <div class="partner-name">Dr. Renee Tengella</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">MO</div>
-                        <div class="partner-name">Michelle Ogunwole</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar">NP</div>
-                        <div class="partner-name">Nia Pettiford</div>
-                    </a>
-                    <a class="partner-card" href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">
-                        <div class="partner-avatar"><img src="../img/cec/partners/elisha-johnson.jpg" alt="Elisha Johnson"></div>
-                        <div class="partner-name">Elisha Johnson</div>
-                    </a>
-                </div>
-            </div>
+            <div class="partner-showcase" id="partner-showcase"></div>
         </div>
 
         <p>Got questions? Reach out to <a href="mailto:morgancares@morgan.edu">morgancares@morgan.edu</a>.</p>
@@ -849,8 +696,32 @@
             <a class="btn-schedule" href="https://calendly.com/emma-mitchell-morgan/morgan-cares-happy-to-help-hour?month=2025-10" target="_blank" rel="noopener">Schedule a Session</a>
         </div>
 
-        <h3>Network Membership vs. Being a Partner of Morgan CARES vs. Joining a Collaborative Partnership</h3>
-        <p>Network Membership means that you will be affiliated with Morgan CARES and participate in the exchange of information and resources. Members receive announcements, newsletters, and opportunities for training and capacity-building. Some organizations are Partners of Morgan CARES. That involves a long-term collaboration with an established Memorandum of Understanding. Organizational staff and Morgan CARES staff work together on toward agreed upon goals and on shared activities. Joining a Collaborative Partnership refers to instances where individuals or organizations work with one another. Morgan CARES has seed funding programs that provide resources to support these kinds of partnerships. Collaborators that would like to propose a health-related initiative that would positively impact Baltimore communities can apply to either the Community Award Program or Practitioner Research Award. Check out at our <a href="seed-funding.html">Seed Funding Programs</a> page to learn more. At any level you choose, Morgan CARES offers programming to facilitate relationship-building, bi-directional learning, and community-based participatory research.</p>
+        <h3>Three ways to engage</h3>
+        <p>Whichever level you choose, Morgan CARES offers programming to facilitate relationship-building, bi-directional learning, and community-based participatory research.</p>
+
+        <div class="cec-perks cec-perks--3">
+            <div class="cec-perk">
+                <div class="cec-perk-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <h4>Network Member</h4>
+                <p>You are affiliated with Morgan CARES and part of the exchange of information and resources &mdash; announcements, newsletters, and opportunities for training and capacity-building.</p>
+            </div>
+            <div class="cec-perk">
+                <div class="cec-perk-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+                </div>
+                <h4>Partner of Morgan CARES</h4>
+                <p>A long-term collaboration with an established Memorandum of Understanding, where organizational staff and Morgan CARES staff work toward agreed-upon goals and shared activities.</p>
+            </div>
+            <div class="cec-perk">
+                <div class="cec-perk-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                </div>
+                <h4>Collaborative Partnership</h4>
+                <p>Individuals or organizations working together on a Baltimore health initiative. Seed funding &mdash; the Community Award and Practitioner Research Award &mdash; supports these teams. <a href="seed-funding.html">See Seed Funding Programs</a>.</p>
+            </div>
+        </div>
     </section>
 
     <footer>
@@ -890,6 +761,82 @@
     </footer>
 
     <script>
+        window.rcmiSiteConfig = {
+            dataBasePath: "../data"
+        };
+    </script>
+    <script src="../js/FIELD_MAP.js?v=1"></script>
+    <script src="../js/common.js?v=1"></script>
+    <script>
+        (function () {
+            var helpers = window.rcmiSandboxHelpers;
+
+            if (!helpers || typeof helpers.loadDataset !== "function") {
+                throw new Error("Shared CSV helper API is unavailable.");
+            }
+
+            function renderPartnerCard(partner) {
+                var avatar = partner.photoPath
+                    ? '<img' + (partner.isLogo ? ' class="avatar-logo"' : '') + ' src="' + helpers.escapeHtml(partner.photoPath) + '" alt="' + helpers.escapeHtml(partner.name) + '">'
+                    : helpers.escapeHtml(partner.initials);
+                return '<a class="partner-card" href="' + helpers.escapeHtml(partner.profileUrl) + '" target="_blank" rel="noopener">' +
+                    '<div class="partner-avatar">' + avatar + '</div>' +
+                    '<div class="partner-name">' + helpers.escapeHtml(partner.name) + '</div>' +
+                    '</a>';
+            }
+
+            helpers.loadDataset("cecPartners").then(function (rows) {
+                var partners = helpers.transformCecPartnerRecords(rows);
+                var bySet = {};
+                partners.forEach(function (p) {
+                    if (!bySet[p.set]) bySet[p.set] = [];
+                    bySet[p.set].push(p);
+                });
+
+                var overlaySets = Object.keys(bySet).filter(function (key) { return key !== "base"; }).sort();
+                var maxCount = Math.max.apply(null, Object.keys(bySet).map(function (key) { return bySet[key].length; }).concat(0));
+
+                var spacerHtml = '<div class="partner-grid flow showcase-spacer" aria-hidden="true">' +
+                    Array(maxCount).fill('<div class="partner-card"><div class="partner-avatar">--</div><div class="partner-name">spacer</div></div>').join("") +
+                    '</div>';
+
+                var baseHtml = '<div class="partner-grid flow set-base">' +
+                    (bySet.base || []).map(renderPartnerCard).join("") +
+                    '</div>';
+
+                var overlayHtml = overlaySets.map(function (setKey) {
+                    return '<div class="partner-grid flow set-overlay" data-set="' + helpers.escapeHtml(setKey) + '">' +
+                        bySet[setKey].map(renderPartnerCard).join("") +
+                        '</div>';
+                }).join("");
+
+                document.getElementById("partner-showcase").innerHTML = spacerHtml + baseHtml + overlayHtml;
+
+                document.getElementById("partner-dots").innerHTML = overlaySets.map(function (setKey, index) {
+                    return '<button type="button" class="dot" data-target="' + helpers.escapeHtml(setKey) + '" aria-label="Show more PartnerLink members, group ' + (index + 1) + '"></button>';
+                }).join("");
+
+                var partnerDots = document.querySelectorAll('.dots-row .dot');
+                partnerDots.forEach(function (dot) {
+                    dot.addEventListener('click', function () {
+                        var wasActive = dot.classList.contains('is-active');
+                        partnerDots.forEach(function (d) { d.classList.remove('is-active'); });
+                        document.querySelectorAll('.partner-showcase .set-overlay').forEach(function (el) {
+                            el.classList.remove('is-active');
+                        });
+                        if (!wasActive) {
+                            dot.classList.add('is-active');
+                            var target = document.querySelector('.partner-showcase .set-overlay[data-set="' + dot.dataset.target + '"]');
+                            if (target) target.classList.add('is-active');
+                        }
+                    });
+                });
+            }).catch(function (err) {
+                console.error("CEC partners could not be loaded:", err);
+            });
+        })();
+    </script>
+    <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -927,22 +874,6 @@
                 el.classList.add('reveal-visible');
             });
         }
-
-        var partnerDots = document.querySelectorAll('.dots-row .dot');
-        partnerDots.forEach(function (dot) {
-            dot.addEventListener('click', function () {
-                var wasActive = dot.classList.contains('is-active');
-                partnerDots.forEach(function (d) { d.classList.remove('is-active'); });
-                document.querySelectorAll('.partner-showcase .set-overlay').forEach(function (el) {
-                    el.classList.remove('is-active');
-                });
-                if (!wasActive) {
-                    dot.classList.add('is-active');
-                    var target = document.querySelector('.partner-showcase .set-overlay[data-set="' + dot.dataset.target + '"]');
-                    if (target) target.classList.add('is-active');
-                }
-            });
-        });
     </script>
     <script src="../js/nav.js"></script>
 </body>

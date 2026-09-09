@@ -13,7 +13,7 @@
     }
 
     window.workbookContract = {
-        workbookFile: "rcmi_content.xlsx",
+        workbookFile: "idc_content.xlsx",
         lookups: {
             facultyCategories: ["RCMI Leadership", "RCMI IDC leadership", "IDC Pilot Faculties"],
             summaryLabels: ["Research Interests", "Role & Expertise"],
@@ -457,6 +457,213 @@
                     "Item ID": "itemId",
                     "Description": "description",
                     "Sub Items": "subItems"
+                }
+            },
+            researchProjects: {
+                file: resolveDataFile("research-project/research_projects.csv"),
+                requiredHeaders: [
+                    "Project ID",
+                    "Is Active",
+                    "Sort Order",
+                    "Project Number",
+                    "Card Title",
+                    "Full Title",
+                    "PI ID"
+                ],
+                headerMap: {
+                    "Project ID": "id",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Project Number": "projectNumber",
+                    "Status": "status",
+                    "Card Title": "cardTitle",
+                    "Full Title": "fullTitle",
+                    "Card Summary": "cardSummary",
+                    "Detail Summary": "detailSummary",
+                    "Description": "description",
+                    "Tag 1": "tag1",
+                    "Tag 2": "tag2",
+                    "Tag 3": "tag3",
+                    "Tag 4": "tag4",
+                    "PI ID": "piId",
+                    "PI Name": "piName",
+                    "Department": "department",
+                    "Funding Source": "fundingSource",
+                    "Grant Number": "grantNumber",
+                    "Start Date": "startDate",
+                    "End Date": "endDate",
+                    "Link Label 1": "linkLabel1",
+                    "Link URL 1": "linkUrl1",
+                    "Link Label 2": "linkLabel2",
+                    "Link URL 2": "linkUrl2"
+                }
+            },
+            researchProjectPis: {
+                file: resolveDataFile("research-project/research_project_pis.csv"),
+                requiredHeaders: [
+                    "PI ID",
+                    "Is Active",
+                    "Sort Order",
+                    "Name",
+                    "Title",
+                    "Bio"
+                ],
+                headerMap: {
+                    "PI ID": "id",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Name": "name",
+                    "Title": "title",
+                    "Department": "department",
+                    "Email": "email",
+                    "Photo Path": "photoPath",
+                    "Photo Alt": "photoAlt",
+                    "Fallback Icon": "fallbackIcon",
+                    "Office": "office",
+                    "Phone": "phone",
+                    "Education 1": "education1",
+                    "Education 2": "education2",
+                    "Education 3": "education3",
+                    "Education 4": "education4",
+                    "Tag 1": "tag1",
+                    "Tag 2": "tag2",
+                    "Tag 3": "tag3",
+                    "Tag 4": "tag4",
+                    "Tag 5": "tag5",
+                    "Tag 6": "tag6",
+                    "Highlight Heading": "highlightHeading",
+                    "Highlight Text": "highlightText",
+                    "Bio": "bio",
+                    "Achievements": "achievements",
+                    "Funding Highlights": "fundingHighlights",
+                    "Spotlight Title": "spotlightTitle",
+                    "Spotlight Citation": "spotlightCitation",
+                    "Spotlight Abstract": "spotlightAbstract",
+                    "Spotlight Funding": "spotlightFunding",
+                    "Spotlight URL": "spotlightUrl",
+                    "ORCID URL": "orcidUrl",
+                    "Google Scholar URL": "googleScholarUrl",
+                    "NCBI URL": "ncbiUrl"
+                }
+            },
+            cecTeam: {
+                file: resolveDataFile("cec/cec_team.csv"),
+                requiredHeaders: [
+                    "Member ID",
+                    "Is Active",
+                    "Sort Order",
+                    "Group",
+                    "Name"
+                ],
+                headerMap: {
+                    "Member ID": "id",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Group": "group",
+                    "Name": "name",
+                    "Badge": "badge",
+                    "Designation": "designation",
+                    "Photo Path": "photoPath",
+                    "Initials": "initials"
+                }
+            },
+            cecTrainingEvents: {
+                file: resolveDataFile("cec/cec_training_events.csv"),
+                requiredHeaders: [
+                    "Event ID",
+                    "Is Active",
+                    "Sort Order",
+                    "Title",
+                    "Date"
+                ],
+                headerMap: {
+                    "Event ID": "id",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Icon": "icon",
+                    "Title": "title",
+                    "Date": "date",
+                    "Description": "description",
+                    "Color": "color"
+                }
+            },
+            cecPartners: {
+                file: resolveDataFile("cec/cec_partners.csv"),
+                requiredHeaders: [
+                    "Partner ID",
+                    "Is Active",
+                    "Sort Order",
+                    "Set",
+                    "Name"
+                ],
+                headerMap: {
+                    "Partner ID": "id",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Set": "set",
+                    "Name": "name",
+                    "Photo Path": "photoPath",
+                    "Initials": "initials",
+                    "Is Logo": "isLogo",
+                    "Profile URL": "profileUrl"
+                }
+            },
+            cecSeedFundingDeadlines: {
+                file: resolveDataFile("cec/cec_seed_funding_deadlines.csv"),
+                requiredHeaders: [
+                    "Deadline ID",
+                    "Is Active",
+                    "Sort Order",
+                    "Award Type",
+                    "Year",
+                    "Dates"
+                ],
+                headerMap: {
+                    "Deadline ID": "id",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Award Type": "awardType",
+                    "Year": "year",
+                    "Dates": "dates"
+                }
+            },
+            cecSeedFundingResources: {
+                file: resolveDataFile("cec/cec_seed_funding_resources.csv"),
+                requiredHeaders: [
+                    "Resource ID",
+                    "Is Active",
+                    "Sort Order",
+                    "Award Type",
+                    "Label",
+                    "URL"
+                ],
+                headerMap: {
+                    "Resource ID": "id",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Award Type": "awardType",
+                    "Icon": "icon",
+                    "Label": "label",
+                    "URL": "url"
+                }
+            },
+            cecResourceLinks: {
+                file: resolveDataFile("cec/cec_resource_links.csv"),
+                requiredHeaders: [
+                    "Link ID",
+                    "Is Active",
+                    "Sort Order",
+                    "Group",
+                    "Label",
+                    "URL"
+                ],
+                headerMap: {
+                    "Link ID": "id",
+                    "Is Active": "isActive",
+                    "Sort Order": "sortOrder",
+                    "Group": "group",
+                    "Label": "label",
+                    "URL": "url"
                 }
             }
         }

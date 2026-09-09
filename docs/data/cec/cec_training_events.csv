@@ -1,0 +1,11 @@
+Event ID,Is Active,Sort Order,Icon,Title,Date,Description,Color
+intro-cbpr,Yes,10,📚,Introduction to CBPR,Sep 8: 12:00–1:00 PM – Virtual.,<strong>CBPR Overview Workshop.</strong> An introductory training on Community-Based Participatory Research principles and practice.,#339af0
+project-budgeting,Yes,20,📊,Project Budgeting,Oct 13: 12:00–1:00 PM – Virtual.,"<strong>Co-Developing a Project Budget Workshop.</strong> Presenting considerations, pitfalls, grant budget categories, and more.",#f5a623
+partnership-development,Yes,30,🤝,Partnership Development,Nov 12: 11:00 AM–1:30 PM – In-person.,<strong>Networking Event.</strong> Focused on community-academic partnerships research.,#ff6b6b
+annual-symposium,Yes,40,🏆,Annual Symposium,Dec 11: 10:00 AM–3:00 PM – In-person.,"<strong>Dissemination &amp; Networking Event.</strong> Recognizing award recipients, academic and community partners, and researchers.",#e64980
+proposal-writing,Yes,50,✏️,Proposal Writing,Jan 29: 10:00 AM–2:00 PM – In-person.,"<strong>Proposal Development Co-writing Session.</strong> Collaborative writing time, coupled with real-time consultation.",#20c997
+evening-of-gratitude,Yes,60,🌅,Evening of Gratitude,Feb 15: 4:00–6:00 PM – In-person.,"<strong>Cross-Institutional Collaboration.</strong> Celebrating community partners’ achievements in research in partnership with JHU, ICTR, and UMB.",#4263eb
+engagement-dissemination,Yes,70,📣,Engagement & Dissemination,February 2027: Date-Time TBD – Virtual Workshop.,"Translating findings, co-authoring, and sustainability planning.",#9c6ade
+funding-opportunities,Yes,80,💵,Funding Opportunities,February 2027: Date-Time TBD.,<strong>Grant Funding Workshop.</strong> Funding sources to support health research projects.,#2f9e44
+proposal-development,Yes,90,🎯,Proposal Development,March 2027: Date-Time TBD.,"<strong>Proposal Development Workshop.</strong> Presenting CBPR basics, including data analysis, IRB, and data analysis/lifecycle.",#c9950c
+equitable-ai,Yes,100,🤖,Equitable Use of AI,April 2027: Date-Time TBD – Virtual Workshop.,<strong>Using AI in Research Workshop.</strong> Discussing equitable and ethical use of AI in research and community engagement.,#7048e8

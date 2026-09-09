@@ -18,12 +18,11 @@ except ImportError as exc:
     raise SystemExit(1) from exc
 
 
-WORKBOOK_PATH = os.path.join(ROOT, "workbook", "idc_content.xlsx")
+WORKBOOK_PATH = os.path.join(ROOT, "workbook", "research_project_content.xlsx")
+DATA_DIR = os.path.join(ROOT, "docs", "data", "research-project")
 TARGETS = {
-    "faculty": os.path.join(ROOT, "docs", "data", "faculty.csv"),
-    "research": os.path.join(ROOT, "docs", "data", "research.csv"),
-    "publications": os.path.join(ROOT, "docs", "data", "publications.csv"),
-    "events": os.path.join(ROOT, "docs", "data", "events.csv"),
+    "research_projects": os.path.join(DATA_DIR, "research_projects.csv"),
+    "research_project_pis": os.path.join(DATA_DIR, "research_project_pis.csv"),
 }
 
 
@@ -42,8 +41,6 @@ def normalize_cell(value):
 
 def read_sheet_rows(worksheet):
     rows = []
-
-    # Find the maximum column to ensure all columns are included (including trailing empty ones)
     max_col = worksheet.max_column
 
     for row in worksheet.iter_rows(min_col=1, max_col=max_col, values_only=True):
@@ -56,12 +53,10 @@ def read_sheet_rows(worksheet):
     if not rows:
         return rows
 
-    # Find the maximum width across all rows
     header_width = max(len(row) for row in rows)
     normalized = []
 
     for row in rows:
-        # Ensure each row has exactly header_width columns
         if len(row) < header_width:
             row = row + [""] * (header_width - len(row))
         elif len(row) > header_width:
@@ -111,7 +106,7 @@ def export():
     finally:
         workbook.close()
 
-    print("Regenerated CSV files from workbook:")
+    print("Regenerated CSV files from Research Project workbook:")
     for sheet_name, target_path, row_count in summaries:
         rel_path = os.path.relpath(target_path, ROOT)
         print(f"- {sheet_name} -> {rel_path} ({row_count} data rows)")

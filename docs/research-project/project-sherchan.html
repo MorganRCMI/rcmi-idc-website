@@ -403,32 +403,10 @@
     <section class="section-wrap">
         <div class="section-header">
             <div class="section-label">Current Project</div>
-            <h2 class="section-title">Project 1</h2>
+            <h2 class="section-title" id="project-label">Project</h2>
         </div>
 
-        <div class="project-card">
-            <span class="project-status">Current</span>
-            <h3>Wastewater-Based Epidemiology for COVID-19 Community Surveillance and Vaccine Effectiveness Among Minority Populations</h3>
-            <p class="project-summary">Using wastewater-based epidemiology (WBE) to track SARS-CoV-2 community transmission and evaluate COVID-19 vaccine effectiveness among minority populations, combining laboratory science, predictive modeling, and community engagement.</p>
-            <p>Severe acute respiratory syndrome coronavirus-2 (SARS-CoV-2), the causative agent of coronavirus disease (COVID-19), remains a public health concern. The main transmission route of SARS-CoV-2 is person to person through respiratory droplets/aerosols. Recent studies, however, indicate that SARS-CoV-2 virus RNA can be detected in the feces of infected individuals, even after respiratory symptoms have subsided. Wastewater-Based Epidemiology (WBE) is a powerful and promising tool for community surveillance, but little information is available on how to utilize this inexpensive early-warning system for public health action and addressing environmental health disparities. In addition, two vaccines against SARS-CoV-2 have been approved and are being distributed in the US. In light of this, the overall goal of this project is to determine the effectiveness of vaccination among minority populations and to develop and validate predictive models for forecasting COVID-19 using WBE, drawing on expertise in laboratory experiments, mathematical and artificial intelligence (AI) modeling, molecular detection, and field surveys. <strong>Aim 1</strong> is to determine if SARS-CoV-2 and other emerging pathogens' concentration in wastewater correlates with COVID-19 community transmission in high-risk areas. <strong>Aim 2</strong> is to develop and validate predictive models for SARS-CoV-2 infection prevalence based on detection in wastewater. <strong>Aim 3</strong> is to foster community engagement in COVID-19 research and dissemination of research findings through WBE.</p>
-
-            <div class="project-tags">
-                <span class="project-tag">Wastewater-Based Epidemiology</span>
-                <span class="project-tag">COVID-19 Surveillance</span>
-                <span class="project-tag">Vaccine Effectiveness</span>
-                <span class="project-tag">Health Disparities</span>
-            </div>
-
-            <div class="project-meta">
-                <div class="meta-item"><span class="meta-label">Principal Investigator:</span><span>Dr. Samendra Sherchan</span></div>
-                <div class="meta-item"><span class="meta-label">Department:</span><span>Department of Biology</span></div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://www.canva.com/design/DAGmrH0PpwQ/7dxxrsZ_nGsh9TQXyP5RFA/edit#page-1" target="_blank" rel="noopener">View Project Materials &rarr;</a>
-                <a href="https://sites.google.com/site/sherchanlab/home?authuser=0" target="_blank" rel="noopener">Sherchan Lab Website &rarr;</a>
-            </div>
-        </div>
+        <div class="project-card" id="project-card"></div>
     </section>
 
     <section class="section-wrap">
@@ -437,14 +415,7 @@
             <h2 class="section-title">Principal Investigator</h2>
         </div>
 
-        <div class="pi-brief">
-            <div class="pi-brief-photo">S</div>
-            <div>
-                <h3>Dr. Samendra Sherchan</h3>
-                <div class="pi-title">Professor; PI, RCMI Research Project 1</div>
-                <a class="pi-brief-link" href="../idc/faculty-profile.html#project_sherchan">View Profile &rarr;</a>
-            </div>
-        </div>
+        <div class="pi-brief" id="pi-brief"></div>
     </section>
 
     <footer>
@@ -483,6 +454,86 @@
         </div>
     </footer>
 
+    <script>
+        window.rcmiSiteConfig = {
+            dataBasePath: "../data"
+        };
+    </script>
+    <script src="../js/FIELD_MAP.js?v=1"></script>
+    <script src="../js/common.js?v=1"></script>
+    <script>
+        (function () {
+            var PROJECT_ID = "sherchan";
+            var helpers = window.rcmiSandboxHelpers;
+
+            if (!helpers || typeof helpers.loadDataset !== "function") {
+                throw new Error("Shared CSV helper API is unavailable.");
+            }
+
+            function getInitials(name) {
+                var clean = String(name || "").replace(/^(Dr\.|Prof\.|Mr\.|Ms\.|Mrs\.|Dr|Prof)\s+/i, "");
+                var parts = clean.split(/\s+/).filter(Boolean);
+                return parts.length >= 2
+                    ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+                    : (parts[0] || "?").substring(0, 2).toUpperCase();
+            }
+
+            function renderPhoto(pi) {
+                if (pi && pi.photoPath) {
+                    return '<img src="' + helpers.escapeHtml(pi.photoPath) + '" alt="' + helpers.escapeHtml(pi.photoAlt || pi.name) + '">';
+                }
+                return helpers.escapeHtml(getInitials(pi ? pi.name : ""));
+            }
+
+            Promise.all([
+                helpers.loadDataset("researchProjects"),
+                helpers.loadDataset("researchProjectPis")
+            ]).then(function (results) {
+                var projects = helpers.transformResearchProjectRecords(results[0]);
+                var pis = helpers.transformResearchProjectPiRecords(results[1]);
+                var project = projects.filter(function (p) { return p.id === PROJECT_ID; })[0];
+                var pi = pis.filter(function (p) { return p.id === PROJECT_ID; })[0];
+
+                if (!project) {
+                    document.getElementById("project-card").innerHTML = "<p>We couldn&rsquo;t find this project. <a href=\"./\">Back to Research Project</a></p>";
+                    return;
+                }
+
+                document.title = project.piName + " - RCMI Research Project - RCMI @ Morgan";
+                document.getElementById("project-label").textContent = "Project " + project.projectNumber;
+
+                var metaRows = [
+                    { label: "Principal Investigator:", value: project.piName },
+                    { label: "Department:", value: project.department }
+                ];
+                if (project.fundingSource) metaRows.push({ label: "Funding Source:", value: project.fundingSource });
+                if (project.grantNumber) metaRows.push({ label: "Grant Number:", value: project.grantNumber });
+                if (project.startDate && project.endDate) metaRows.push({ label: "Timeline:", value: project.startDate + " – " + project.endDate });
+
+                document.getElementById("project-card").innerHTML =
+                    '<span class="project-status">' + helpers.escapeHtml(project.status) + '</span>' +
+                    '<h3>' + helpers.escapeHtml(project.fullTitle) + '</h3>' +
+                    '<p class="project-summary">' + helpers.escapeHtml(project.detailSummary) + '</p>' +
+                    '<p>' + project.description + '</p>' +
+                    (project.tags.length ? '<div class="project-tags">' + project.tags.map(function (tag) { return '<span class="project-tag">' + helpers.escapeHtml(tag) + '</span>'; }).join("") + '</div>' : '') +
+                    '<div class="project-meta">' + metaRows.map(function (row) { return '<div class="meta-item"><span class="meta-label">' + row.label + '</span><span>' + helpers.escapeHtml(row.value) + '</span></div>'; }).join("") + '</div>' +
+                    (project.links.length ? '<div class="project-links">' + project.links.map(function (link) { return '<a href="' + helpers.escapeHtml(link.url) + '" target="_blank" rel="noopener">' + helpers.escapeHtml(link.label) + ' &rarr;</a>'; }).join("") + '</div>' : '');
+
+                if (pi) {
+                    document.getElementById("pi-brief").innerHTML =
+                        '<div class="pi-brief-photo">' + renderPhoto(pi) + '</div>' +
+                        '<div>' +
+                        '<h3>' + helpers.escapeHtml(pi.name) + '</h3>' +
+                        '<div class="pi-title">' + helpers.escapeHtml(pi.title) + '</div>' +
+                        '<a class="pi-brief-link" href="pi-profile.html#' + encodeURIComponent(pi.id) + '">View Profile &rarr;</a>' +
+                        '</div>';
+                }
+            }).catch(function (err) {
+                console.error("Research project could not be loaded:", err);
+                document.getElementById("project-card").innerHTML = "<p>Sorry, we couldn&rsquo;t load this project right now.</p>";
+            });
+        })();
+    </script>
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>

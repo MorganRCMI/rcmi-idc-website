@@ -412,37 +412,82 @@
             margin: 2rem auto;
         }
 
+        /* Full-bleed band that breaks out of the 820px column so the
+           five stages read as a distinct, prominent step-by-step strip. */
+        .stages-wrap {
+            position: relative;
+            left: 50%;
+            right: 50%;
+            width: 100vw;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            padding: 3.5rem 5%;
+            background: linear-gradient(180deg, #eef2f7 0%, #f8f9fa 100%);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stages-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .stages-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            font-weight: 700;
+            text-align: center;
+            margin: 0 0 2.25rem;
+        }
+
         .cares-stages {
             list-style: none;
-            margin: 1.5rem 0;
+            margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            align-items: start;
         }
 
         .cares-stages li {
             display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            background: linear-gradient(135deg, var(--primary), #004d99);
+            flex-direction: column;
+            gap: 0.85rem;
+            background: linear-gradient(160deg, var(--primary), #004d99);
             border: 1px solid transparent;
-            border-radius: 20px;
-            padding: 1.75rem 2rem;
+            border-radius: 18px;
+            padding: 1.6rem 1.35rem;
             text-align: left;
             box-shadow: 0 12px 30px rgba(0, 51, 102, 0.18);
             transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         .cares-stages li:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 36px rgba(0, 51, 102, 0.22);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0, 51, 102, 0.26);
+        }
+
+        .cares-stages .stage-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .cares-stages .stage-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--accent);
         }
 
         .cares-stages .stage-icon {
-            width: 54px;
-            height: 54px;
-            border-radius: 14px;
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
             flex-shrink: 0;
             margin: 0;
             background: rgba(255, 255, 255, 0.15);
@@ -452,29 +497,31 @@
         }
 
         .cares-stages .stage-icon svg {
-            width: 26px;
-            height: 26px;
+            width: 24px;
+            height: 24px;
         }
 
         .cares-stages .stage-text {
-            line-height: 1.75;
+            line-height: 1.6;
             color: rgba(255, 255, 255, 0.92);
-            font-size: 0.98rem;
+            font-size: 0.92rem;
+            display: flex;
+            flex-direction: column;
         }
 
         .cares-stages li strong {
             display: block;
             color: white;
-            font-size: 1.05rem;
-            margin-bottom: 0.35rem;
+            font-size: 1.02rem;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
         }
 
         .cares-stages .stage-desc {
             display: -webkit-box;
-            -webkit-line-clamp: 2;
+            -webkit-line-clamp: 4;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            font-weight: 700;
         }
 
         .cares-stages li.expanded .stage-desc {
@@ -483,22 +530,38 @@
         }
 
         .cares-stages .stage-toggle {
-            display: block;
+            align-self: flex-start;
             margin: 0.6rem 0 0;
             background: none;
             border: none;
             padding: 0;
-            color: white;
+            color: var(--accent);
             text-decoration: underline;
             text-underline-offset: 2px;
-            font-size: 0.82rem;
-            font-weight: 600;
+            font-size: 0.8rem;
+            font-weight: 700;
             cursor: pointer;
             font-family: inherit;
         }
 
         .cares-stages .stage-toggle:hover {
-            color: var(--accent);
+            color: white;
+        }
+
+        @media (max-width: 1000px) {
+            .cares-stages {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 560px) {
+            .stages-wrap {
+                padding: 2.5rem 5%;
+            }
+
+            .cares-stages {
+                grid-template-columns: 1fr;
+            }
         }
 
         .video-embed {
@@ -640,6 +703,7 @@
     <link rel="stylesheet" href="../styles/site-polish.css?v=1">
     <link rel="stylesheet" href="../styles/hero-system.css?v=1">
     <link rel="stylesheet" href="../styles/nav.css?v=2">
+    <link rel="stylesheet" href="../styles/cec-polish.css?v=3">
 </head>
 <body>
     <header>
@@ -695,80 +759,138 @@
             </iframe>
         </div>
 
-        <p>Health inequalities exist across Baltimore City and disproportionately affect minority communities. One-sided approaches designed to address these challenges are often ineffective, and Morgan CARES is about community power and input. We invite you to join our network of diverse and innovative stakeholders, to work together on issues that directly impact our communities. By joining, you have the opportunity to access mentorship, technical assistance, capacity-building opportunities, and seed funding.</p>
+        <p>Health inequalities exist across Baltimore City and disproportionately affect minority communities. One-sided approaches designed to address these challenges are often ineffective, and Morgan CARES is about community power and input. We invite you to join our network of diverse and innovative stakeholders, to work together on issues that directly impact our communities.</p>
+
+        <blockquote class="cec-quote">Morgan CARES is about community power and input.</blockquote>
+
+        <p>By joining the Network, you have the opportunity to access:</p>
+
+        <div class="cec-perks">
+            <div class="cec-perk">
+                <div class="cec-perk-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <h4>Mentorship</h4>
+                <p>Guidance from experienced community and academic partners.</p>
+            </div>
+            <div class="cec-perk">
+                <div class="cec-perk-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                </div>
+                <h4>Technical Assistance</h4>
+                <p>Hands-on support for study design, methods, and logistics.</p>
+            </div>
+            <div class="cec-perk">
+                <div class="cec-perk-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                </div>
+                <h4>Capacity Building</h4>
+                <p>Workshops and training that grow research skills over time.</p>
+            </div>
+            <div class="cec-perk">
+                <div class="cec-perk-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v10M15 9.5c0-1.4-1.34-2.5-3-2.5s-3 1.1-3 2.5 1.34 2.5 3 2.5 3 1.1 3 2.5-1.34 2.5-3 2.5-3-1.1-3-2.5"></path></svg>
+                </div>
+                <h4>Seed Funding</h4>
+                <p>Grants that turn community-led ideas into funded projects.</p>
+            </div>
+        </div>
 
         <h3>Who We Are</h3>
-        <p>Morgan CARES is a hub for community and academic leaders to connect and form long-lasting partnerships. We foster strong community-campus relationships, producing collaborative projects that promote health parity. Morgan CARES focuses on integrating community needs and perspectives into all stages of research. By working together to increase understanding and awareness of health disparities, the knowledge gained will lead to solutions that positively benefit community residents. This process is what drives our work, and it is known as Community-Based Participatory Research (CBPR).</p>
+        <p>Morgan CARES is a hub for community and academic leaders to connect and form long-lasting partnerships. We foster strong community-campus relationships, producing collaborative projects that promote health parity. Morgan CARES focuses on integrating community needs and perspectives into all stages of research. By working together to increase understanding and awareness of health disparities, the knowledge gained will lead to solutions that positively benefit community residents.</p>
+
+        <div class="cec-callout">
+            <div class="cec-callout-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+            </div>
+            <p>This process is known as <strong>Community-Based Participatory Research (CBPR)</strong> — community members and researchers share every stage of the work, from framing the question to acting on the findings.</p>
+        </div>
 
         <h3>The Morgan CARES Model</h3>
         <p>The Morgan CARES Model has been designed as a framework for conducting Community-based Participatory Research (CBPR). It provides a structure for developing a well-aligned community engagement and partnership approach. This model follows a multi-stage process. It is a measurable tool to track achievements and to assess long-standing CBPR partnership success for any given project.</p>
 
         <img class="model-wheel" src="../img/icons/morgan-cares-model-wheel.png" alt="The Morgan CARES Model: a five-stage cycle of Connection, Partnership Development, Innovation, Collaborative Action, and Outcome/Impact, surrounded by Communication, Peer &amp; Mentoring Support, and Monitoring &amp; Evaluation.">
 
-        <h3>Five Stages of The CARES Model</h3>
-
         <div class="stages-wrap">
+        <div class="stages-inner">
+        <h3 class="stages-heading">Five Stages of The CARES Model</h3>
         <ol class="cares-stages">
             <li>
-                <div class="stage-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                    </svg>
+                <div class="stage-head">
+                    <span class="stage-num">1</span>
+                    <div class="stage-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                    </div>
                 </div>
-                <span class="stage-text"><strong>Connection</strong><span class="stage-desc">Members gain foundational knowledge and skills, and enhance their interest in community research.</span></span>
+                <span class="stage-text"><strong>Connection</strong><span class="stage-desc">Members gain foundational knowledge and skills, and enhance their interest in community research.</span><button class="stage-toggle" onclick="toggleStage(this)" type="button">Read more</button></span>
             </li>
             <li>
-                <div class="stage-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="9" cy="7" r="4"></circle>
-                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                    </svg>
+                <div class="stage-head">
+                    <span class="stage-num">2</span>
+                    <div class="stage-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
                 </div>
                 <span class="stage-text"><strong>Partnership Development</strong><span class="stage-desc">Occurs when members commit to increasing their engagement from "Membership" to "Partnership". At this time members connect with others who have complementary skills and interests, and engage in training, discussions, and networking opportunities together.</span><button class="stage-toggle" onclick="toggleStage(this)" type="button">Read more</button></span>
             </li>
             <li>
-                <div class="stage-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M9 18h6"></path>
-                        <path d="M10 22h4"></path>
-                        <path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2.3h6c0-1.1.4-1.8 1-2.3A7 7 0 0 0 12 2z"></path>
-                    </svg>
+                <div class="stage-head">
+                    <span class="stage-num">3</span>
+                    <div class="stage-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 18h6"></path>
+                            <path d="M10 22h4"></path>
+                            <path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2.3h6c0-1.1.4-1.8 1-2.3A7 7 0 0 0 12 2z"></path>
+                        </svg>
+                    </div>
                 </div>
                 <span class="stage-text"><strong>Innovation</strong><span class="stage-desc">Once partners have formalized their commitment to work together, they collaboratively design a research project and secure funding with support from the Morgan CARES team.</span><button class="stage-toggle" onclick="toggleStage(this)" type="button">Read more</button></span>
             </li>
             <li>
-                <div class="stage-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M2 15l6 -6l3 2"></path>
-                        <path d="M22 15l-6 -6l-3 2"></path>
-                        <rect x="9.5" y="9" width="5" height="4" rx="2"></rect>
-                    </svg>
+                <div class="stage-head">
+                    <span class="stage-num">4</span>
+                    <div class="stage-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 15l6 -6l3 2"></path>
+                            <path d="M22 15l-6 -6l-3 2"></path>
+                            <rect x="9.5" y="9" width="5" height="4" rx="2"></rect>
+                        </svg>
+                    </div>
                 </div>
                 <span class="stage-text"><strong>Collaborative Action</strong><span class="stage-desc">At this stage, funding (or other resources) has been secured, and partnerships have initiated project activities. Partners have access to our Community Center to support project activities and logistical support to further sustain their collaborative activities.</span><button class="stage-toggle" onclick="toggleStage(this)" type="button">Read more</button></span>
             </li>
             <li>
-                <div class="stage-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 22v-7"></path>
-                        <path d="M9 22h6"></path>
-                        <path d="M8 15c0 -2 1.5 -3 4 -3s4 1 4 3"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                        <path d="M8 7h8"></path>
-                        <path d="M12 3c-1.5 1.5 -1.5 5.5 0 8"></path>
-                        <path d="M12 3c1.5 1.5 1.5 5.5 0 8"></path>
-                        <path d="M12 0.3v1.2"></path>
-                        <path d="M17.6 2.4l-0.85 0.85"></path>
-                        <path d="M20.5 7h-1.2"></path>
-                        <path d="M17.6 11.6l-0.85 -0.85"></path>
-                        <path d="M6.4 2.4l0.85 0.85"></path>
-                    </svg>
+                <div class="stage-head">
+                    <span class="stage-num">5</span>
+                    <div class="stage-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22v-7"></path>
+                            <path d="M9 22h6"></path>
+                            <path d="M8 15c0 -2 1.5 -3 4 -3s4 1 4 3"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                            <path d="M8 7h8"></path>
+                            <path d="M12 3c-1.5 1.5 -1.5 5.5 0 8"></path>
+                            <path d="M12 3c1.5 1.5 1.5 5.5 0 8"></path>
+                            <path d="M12 0.3v1.2"></path>
+                            <path d="M17.6 2.4l-0.85 0.85"></path>
+                            <path d="M20.5 7h-1.2"></path>
+                            <path d="M17.6 11.6l-0.85 -0.85"></path>
+                            <path d="M6.4 2.4l0.85 0.85"></path>
+                        </svg>
+                    </div>
                 </div>
                 <span class="stage-text"><strong>Outcome and Impact</strong><span class="stage-desc">Partnerships now share the results of their efforts to various stakeholders. They receive additional support to help sustain projects/partnerships for long-term health promotion and impact on health practice or policy.</span><button class="stage-toggle" onclick="toggleStage(this)" type="button">Read more</button></span>
             </li>
         </ol>
+        </div>
         </div>
 
         <p>Read more about our model <a href="https://www.mdpi.com/1660-4601/19/19/12467" target="_blank" rel="noopener">here</a>.</p>
@@ -779,6 +901,8 @@
 
         <h3>Partnership</h3>
         <p>Are you an existing member of the network who wants to take your engagement to the next level? Consider becoming a Partner! Partnership means that you are committed to community-engaged health initiatives. A primary goal of the work of Morgan CARES is to facilitate new connections and support community-campus partnerships that promote health in Baltimore City. To accomplish this, we are launching a new program called <a href="https://morgan-cares.smartmatchapp.com/client/showcase/view/2/list/255e48ac4be96e62af0a5cf5721e88a5/" target="_blank" rel="noopener">PartnerLink</a>!</p>
+
+        <blockquote class="cec-quote">We facilitate new connections and support community-campus partnerships that promote health in Baltimore City.</blockquote>
         <p>After submitting the Network Registration Form, individuals who opt-in will create a profile and share information such as their affiliation, title/position, bio, headshot, and preferences for a new partner. The profiles will be viewable on the <a href="partnering.html">Partnering with Morgan CARES</a> page so that potential collaborators can find one another. With matching software, the Morgan CARES team can use the profile information provided to introduce individuals with complementary skills and interests.</p>
 
         <h3>&ldquo;Happy to Help You&rdquo; Hours</h3>
@@ -804,7 +928,27 @@
         <p>It is the hope that these awards facilitate the emergence of responsive, community-led public health initiatives that promote health equity across Baltimore City communities. New partners may engage in supportive activities and training for as long as they wish to forge a strong partnership before submitting an application. Partners who have existing collaborations may also apply.</p>
         <p>Applications are accepted on a rolling basis and are reviewed quarterly. See our <a href="seed-funding.html">Seed Funding Program</a> page for program descriptions, eligibility criteria, and more details.</p>
 
+        <hr class="cec-rule">
         <h3>The Morgan CARES Community Center</h3>
+
+        <div class="cec-stats">
+            <div class="cec-stat">
+                <div class="cec-stat-num">2020</div>
+                <div class="cec-stat-label">Community Center opened</div>
+            </div>
+            <div class="cec-stat">
+                <div class="cec-stat-num">200+</div>
+                <div class="cec-stat-label">sessions hosted in our first two years</div>
+            </div>
+            <div class="cec-stat">
+                <div class="cec-stat-num">2</div>
+                <div class="cec-stat-label">seed funding award tracks</div>
+            </div>
+            <div class="cec-stat">
+                <div class="cec-stat-num">2&times;/wk</div>
+                <div class="cec-stat-label">&ldquo;Happy to Help You&rdquo; hours</div>
+            </div>
+        </div>
         <p>The Morgan CARES Community Center is housed at the <a href="https://www.hoen.co/" target="_blank" rel="noopener">Hoen &amp; Co.</a> Lithograph Campus located at 2101 E. Biddle Street, Stone Building, Suite 1204, Baltimore, Maryland 21213. Morgan CARES opened the doors of its Community Center in 2020 amid the COVID-19 pandemic, and since then it has been used by various Network members for meetings, training sessions, presentations, and so much more. We hosted over 200 sessions in the facility during the first two years of operation, and we have been able to collaborate with countless community and academic partners.</p>
         <p>In addition to these programs and services, Morgan CARES also served as the Central Office for the <a href="http://www.icphr.org/" target="_blank" rel="noopener">International Collaboration for Participatory Health Research</a> until 2026. It currently houses the East Baltimore NAMI Metro Baltimore East Baltimore hub and is a site for <a href="https://www.hopewellcancersupport.org/" target="_blank" rel="noopener">HopeWell Cancer Support</a> programming.</p>
         <p>Please feel free to send us an email to learn more about our facility. Members of the Network are eligible to reserve space in the Community Center to support community engaged programming and research activities. To request use of the space, complete the <a href="https://docs.google.com/forms/d/e/1FAIpQLScccTzHH8MT82HhtFsD1afnBunArEylGAi0JoTPFs7aWIN9KA/viewform" target="_blank" rel="noopener">Space Reservation Request Form</a>.</p>
@@ -929,6 +1073,25 @@
             var expanded = li.classList.toggle('expanded');
             btn.textContent = expanded ? 'Read less' : 'Read more';
         }
+
+        // Only show a "Read more" toggle where the description is actually clipped.
+        (function () {
+            function syncStageToggles() {
+                document.querySelectorAll('.cares-stages li').forEach(function (li) {
+                    var desc = li.querySelector('.stage-desc');
+                    var btn = li.querySelector('.stage-toggle');
+                    if (!desc || !btn) return;
+                    var clipped = desc.scrollHeight - desc.clientHeight > 2;
+                    if (!clipped && !li.classList.contains('expanded')) {
+                        btn.hidden = true;
+                    } else {
+                        btn.hidden = false;
+                    }
+                });
+            }
+            syncStageToggles();
+            window.addEventListener('resize', syncStageToggles);
+        })();
 
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
             var revealTargets = document.querySelectorAll('.morgan-cares > *');

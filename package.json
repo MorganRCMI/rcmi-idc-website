@@ -10,6 +10,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx serve docs -p 3000",
     "export-data": "node scripts/run-python.js scripts/export_workbook_to_csv.py",
+    "export-rcc-data": "node scripts/run-python.js scripts/export_rcc_workbook_to_csv.py",
+    "export-research-project-data": "node scripts/run-python.js scripts/export_research_project_workbook_to_csv.py",
+    "export-cec-data": "node scripts/run-python.js scripts/export_cec_workbook_to_csv.py",
     "watch-data": "node scripts/run-python.js scripts/watch_workbook_and_export.py",
     "sync-data": "node scripts/run-python.js scripts/sync_from_ppp.py"
   },

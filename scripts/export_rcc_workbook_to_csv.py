@@ -18,12 +18,21 @@ except ImportError as exc:
     raise SystemExit(1) from exc
 
 
-WORKBOOK_PATH = os.path.join(ROOT, "workbook", "idc_content.xlsx")
+WORKBOOK_PATH = os.path.join(ROOT, "workbook", "rcc_content.xlsx")
+DATA_DIR = os.path.join(ROOT, "docs", "data", "rcc")
 TARGETS = {
-    "faculty": os.path.join(ROOT, "docs", "data", "faculty.csv"),
-    "research": os.path.join(ROOT, "docs", "data", "research.csv"),
-    "publications": os.path.join(ROOT, "docs", "data", "publications.csv"),
-    "events": os.path.join(ROOT, "docs", "data", "events.csv"),
+    "rcc_leadership": os.path.join(DATA_DIR, "rcc_leadership.csv"),
+    "rcc_roster": os.path.join(DATA_DIR, "rcc_roster.csv"),
+    "rcc_staff": os.path.join(DATA_DIR, "rcc_staff.csv"),
+    "rcc_mcb_pricing_tiers": os.path.join(DATA_DIR, "rcc_mcb_pricing_tiers.csv"),
+    "rcc_mcb_services": os.path.join(DATA_DIR, "rcc_mcb_services.csv"),
+    "rcc_mcb_other_services": os.path.join(DATA_DIR, "rcc_mcb_other_services.csv"),
+    "rcc_arf_animal_housing": os.path.join(DATA_DIR, "rcc_arf_animal_housing.csv"),
+    "rcc_arf_equipment": os.path.join(DATA_DIR, "rcc_arf_equipment.csv"),
+    "rcc_arf_training": os.path.join(DATA_DIR, "rcc_arf_training.csv"),
+    "rcc_bbsu_resources": os.path.join(DATA_DIR, "rcc_bbsu_resources.csv"),
+    "rcc_bbsu_services": os.path.join(DATA_DIR, "rcc_bbsu_services.csv"),
+    "rcc_mcb_equipment": os.path.join(DATA_DIR, "rcc_mcb_equipment.csv"),
 }
 
 
@@ -43,7 +52,9 @@ def normalize_cell(value):
 def read_sheet_rows(worksheet):
     rows = []
 
-    # Find the maximum column to ensure all columns are included (including trailing empty ones)
+    # It's extremely important that we're doing this via iter_rows rather than
+    # some other means. This ensures we always see the full column width,
+    # including trailing empty columns.
     max_col = worksheet.max_column
 
     for row in worksheet.iter_rows(min_col=1, max_col=max_col, values_only=True):
@@ -56,12 +67,10 @@ def read_sheet_rows(worksheet):
     if not rows:
         return rows
 
-    # Find the maximum width across all rows
     header_width = max(len(row) for row in rows)
     normalized = []
 
     for row in rows:
-        # Ensure each row has exactly header_width columns
         if len(row) < header_width:
             row = row + [""] * (header_width - len(row))
         elif len(row) > header_width:
@@ -111,7 +120,7 @@ def export():
     finally:
         workbook.close()
 
-    print("Regenerated CSV files from workbook:")
+    print("Regenerated CSV files from RCC workbook:")
     for sheet_name, target_path, row_count in summaries:
         rel_path = os.path.relpath(target_path, ROOT)
         print(f"- {sheet_name} -> {rel_path} ({row_count} data rows)")

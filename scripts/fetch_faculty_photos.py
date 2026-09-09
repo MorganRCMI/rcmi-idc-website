@@ -3,7 +3,7 @@
 fetch_faculty_photos.py
 
 Fetches faculty headshots from Morgan State profile pages and saves them
-to docs/img/faculty/. Updates Image Path in rcmi_content.xlsx, re-exports CSVs.
+to docs/img/faculty/. Updates Image Path in idc_content.xlsx, re-exports CSVs.
 
 Strategy (in order):
   1. Direct URL construction: /dept-slug/faculty-and-staff/name-slug
@@ -45,7 +45,7 @@ except ImportError:
     print("Error: openpyxl not found.", file=sys.stderr)
     raise SystemExit(1)
 
-WORKBOOK_PATH = os.path.join(ROOT, "workbook", "rcmi_content.xlsx")
+WORKBOOK_PATH = os.path.join(ROOT, "workbook", "idc_content.xlsx")
 PHOTO_DIR     = os.path.join(ROOT, "docs", "img", "faculty")
 EXPORT_SCRIPT = os.path.join(ROOT, "scripts", "export_workbook_to_csv.py")
 LOG_PATH      = os.path.join(ROOT, "scripts", "photo_fetch_log.txt")

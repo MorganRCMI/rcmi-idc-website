@@ -397,31 +397,10 @@
     <section class="section-wrap">
         <div class="section-header">
             <div class="section-label">Current Project</div>
-            <h2 class="section-title">Project 2</h2>
+            <h2 class="section-title" id="project-label">Project</h2>
         </div>
 
-        <div class="project-card">
-            <span class="project-status">Current</span>
-            <h3>Perceived Discrimination, Geography, and Demographic Effects on Immune Cell Function and Regulation</h3>
-            <p class="project-summary">Investigating how geography, ethnicity, and laboratory-manipulated discrimination experiences affect immune cell function and genomic regulation, using flow cytometry, immune cell challenges, and next-generation transcriptomics.</p>
-            <p>Immune-mediated inflammatory diseases are a health burden for approximately seven percent of the population of Western nations. Preliminary data suggest variations in ethnic identity and/or geography influence discrimination experiences and inflammatory response trends. The aim of this project is to determine how geography, ethnicity, and laboratory manipulation of discrimination experiences affect immune cell function and genomic regulation. Flow cytometry and immune cell challenges will be utilized to test monocytes from peripheral blood, and next-generation transcriptomics will assess genomic and epigenetic mechanisms. This RCMI@Morgan Research Project (Project 2) will test the hypothesis that geography, self-identified race, and ethnicity, interacting with discrimination conditions, significantly affect immune cell function through genomic and epigenetic mechanisms, with perceived discrimination as a moderating factor in immune cell outcomes. The transdisciplinary nature of the proposed study incorporates cutting-edge behavioral, epigenetic, and genomic techniques that can serve as a guide for other researchers interested in uncovering biopsychosocial mechanisms leading to poor health across diverse populations. The valuable insights on differential susceptibility to immune-mediated inflammatory diseases uncovered in this project can inform feasible interventions for these diseases in different population groups.</p>
-
-            <div class="project-tags">
-                <span class="project-tag">Immune-Mediated Inflammatory Disease</span>
-                <span class="project-tag">Perceived Discrimination</span>
-                <span class="project-tag">Genomics &amp; Epigenetics</span>
-                <span class="project-tag">Health Disparities</span>
-            </div>
-
-            <div class="project-meta">
-                <div class="meta-item"><span class="meta-label">Principal Investigator:</span><span>Dr. Ingrid K. Tulloch</span></div>
-                <div class="meta-item"><span class="meta-label">Department:</span><span>Department of Psychology</span></div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://tullochlab.com/" target="_blank" rel="noopener">Tulloch Lab Website &rarr;</a>
-            </div>
-        </div>
+        <div class="project-card" id="project-card"></div>
     </section>
 
     <section class="section-wrap">
@@ -430,16 +409,7 @@
             <h2 class="section-title">Principal Investigator</h2>
         </div>
 
-        <div class="pi-brief">
-            <div class="pi-brief-photo">
-                <img src="../img/faculty/pilot_ingrid-k-tulloch.jpg" alt="Dr. Ingrid K. Tulloch">
-            </div>
-            <div>
-                <h3>Dr. Ingrid K. Tulloch</h3>
-                <div class="pi-title">Associate Professor of Psychology and Psychometrics; PI, RCMI Research Project 2</div>
-                <a class="pi-brief-link" href="../idc/faculty-profile.html#project_ingrid_tulloch">View Profile &rarr;</a>
-            </div>
-        </div>
+        <div class="pi-brief" id="pi-brief"></div>
     </section>
 
     <footer>
@@ -478,6 +448,86 @@
         </div>
     </footer>
 
+    <script>
+        window.rcmiSiteConfig = {
+            dataBasePath: "../data"
+        };
+    </script>
+    <script src="../js/FIELD_MAP.js?v=1"></script>
+    <script src="../js/common.js?v=1"></script>
+    <script>
+        (function () {
+            var PROJECT_ID = "ingrid-tulloch";
+            var helpers = window.rcmiSandboxHelpers;
+
+            if (!helpers || typeof helpers.loadDataset !== "function") {
+                throw new Error("Shared CSV helper API is unavailable.");
+            }
+
+            function getInitials(name) {
+                var clean = String(name || "").replace(/^(Dr\.|Prof\.|Mr\.|Ms\.|Mrs\.|Dr|Prof)\s+/i, "");
+                var parts = clean.split(/\s+/).filter(Boolean);
+                return parts.length >= 2
+                    ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+                    : (parts[0] || "?").substring(0, 2).toUpperCase();
+            }
+
+            function renderPhoto(pi) {
+                if (pi && pi.photoPath) {
+                    return '<img src="' + helpers.escapeHtml(pi.photoPath) + '" alt="' + helpers.escapeHtml(pi.photoAlt || pi.name) + '">';
+                }
+                return helpers.escapeHtml(getInitials(pi ? pi.name : ""));
+            }
+
+            Promise.all([
+                helpers.loadDataset("researchProjects"),
+                helpers.loadDataset("researchProjectPis")
+            ]).then(function (results) {
+                var projects = helpers.transformResearchProjectRecords(results[0]);
+                var pis = helpers.transformResearchProjectPiRecords(results[1]);
+                var project = projects.filter(function (p) { return p.id === PROJECT_ID; })[0];
+                var pi = pis.filter(function (p) { return p.id === PROJECT_ID; })[0];
+
+                if (!project) {
+                    document.getElementById("project-card").innerHTML = "<p>We couldn&rsquo;t find this project. <a href=\"./\">Back to Research Project</a></p>";
+                    return;
+                }
+
+                document.title = project.piName + " - RCMI Research Project - RCMI @ Morgan";
+                document.getElementById("project-label").textContent = "Project " + project.projectNumber;
+
+                var metaRows = [
+                    { label: "Principal Investigator:", value: project.piName },
+                    { label: "Department:", value: project.department }
+                ];
+                if (project.fundingSource) metaRows.push({ label: "Funding Source:", value: project.fundingSource });
+                if (project.grantNumber) metaRows.push({ label: "Grant Number:", value: project.grantNumber });
+                if (project.startDate && project.endDate) metaRows.push({ label: "Timeline:", value: project.startDate + " – " + project.endDate });
+
+                document.getElementById("project-card").innerHTML =
+                    '<span class="project-status">' + helpers.escapeHtml(project.status) + '</span>' +
+                    '<h3>' + helpers.escapeHtml(project.fullTitle) + '</h3>' +
+                    '<p class="project-summary">' + helpers.escapeHtml(project.detailSummary) + '</p>' +
+                    '<p>' + project.description + '</p>' +
+                    (project.tags.length ? '<div class="project-tags">' + project.tags.map(function (tag) { return '<span class="project-tag">' + helpers.escapeHtml(tag) + '</span>'; }).join("") + '</div>' : '') +
+                    '<div class="project-meta">' + metaRows.map(function (row) { return '<div class="meta-item"><span class="meta-label">' + row.label + '</span><span>' + helpers.escapeHtml(row.value) + '</span></div>'; }).join("") + '</div>' +
+                    (project.links.length ? '<div class="project-links">' + project.links.map(function (link) { return '<a href="' + helpers.escapeHtml(link.url) + '" target="_blank" rel="noopener">' + helpers.escapeHtml(link.label) + ' &rarr;</a>'; }).join("") + '</div>' : '');
+
+                if (pi) {
+                    document.getElementById("pi-brief").innerHTML =
+                        '<div class="pi-brief-photo">' + renderPhoto(pi) + '</div>' +
+                        '<div>' +
+                        '<h3>' + helpers.escapeHtml(pi.name) + '</h3>' +
+                        '<div class="pi-title">' + helpers.escapeHtml(pi.title) + '</div>' +
+                        '<a class="pi-brief-link" href="pi-profile.html#' + encodeURIComponent(pi.id) + '">View Profile &rarr;</a>' +
+                        '</div>';
+                }
+            }).catch(function (err) {
+                console.error("Research project could not be loaded:", err);
+                document.getElementById("project-card").innerHTML = "<p>Sorry, we couldn&rsquo;t load this project right now.</p>";
+            });
+        })();
+    </script>
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>

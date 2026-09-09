@@ -458,6 +458,7 @@
     <link rel="stylesheet" href="../styles/site-polish.css?v=1">
     <link rel="stylesheet" href="../styles/hero-system.css?v=1">
     <link rel="stylesheet" href="../styles/nav.css?v=2">
+    <link rel="stylesheet" href="../styles/cec-polish.css?v=3">
 </head>
 <body>
     <header>
@@ -504,91 +505,10 @@
         <h2>Morgan CARES Steering Committee</h2>
         <p class="team-intro">This program is overseen by a Steering Committee that includes both community and academic voices. This committee serves as the governance body whose insights, guidance, and feedback provide crucial direction for Morgan CARES programs and services.</p>
 
-        <div class="team-grid">
-            <div class="team-card">
-                <div class="team-avatar">JB</div>
-                <div class="team-name">Ms. Jane Buccheri</div>
-                <span class="team-badge community">Community Leader</span>
-                <div class="team-designation">Resident of Southwest Baltimore City</div>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar">CD</div>
-                <div class="team-name">Ms. Christina Delgado</div>
-                <span class="team-badge community">Community Leader</span>
-                <div class="team-designation">Founder &amp; CEO at Tola's Room</div>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar">MG</div>
-                <div class="team-name">Ms. Mary Gunning</div>
-                <span class="team-badge community">Community Leader</span>
-                <div class="team-designation">Director, Catholic Charities Head Start of Baltimore City</div>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar">VO</div>
-                <div class="team-name">Dr. Valerie Odero-Marah</div>
-                <span class="team-badge academic">Academic Leader</span>
-                <div class="team-designation">Professor, Department of Biology</div>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar">PP</div>
-                <div class="team-name">Ms. Paula Purviance</div>
-                <span class="team-badge community">Community Leader</span>
-                <div class="team-designation">President, Hillen Road Community Improvement Association</div>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar">PS</div>
-                <div class="team-name">Dr. Payam Sheikhattari</div>
-                <span class="team-badge academic">Academic Leader</span>
-                <div class="team-designation">Professor, School of Community Health and Policy, Morgan State University</div>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar">ET</div>
-                <div class="team-name">Ms. Elizabeth Taylor</div>
-                <span class="team-badge community">Community Leader</span>
-                <div class="team-designation">Program Coordinator, Uplift Alliance</div>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar">AW</div>
-                <div class="team-name">Dr. Annette Woodroffe</div>
-                <span class="team-badge academic">Academic Leader</span>
-                <div class="team-designation">Director, Office of Community Services, Morgan State University</div>
-            </div>
-            <div class="team-card center-last">
-                <div class="team-avatar">VL</div>
-                <div class="team-name">Ms. Veronica Land-Davis</div>
-                <span class="team-badge community">Community Leader</span>
-                <div class="team-designation">Executive Director of HopeWell Cancer Support</div>
-            </div>
-        </div>
+        <div class="team-grid" id="steering-grid"></div>
 
         <h3 class="team-subheading">Morgan CARES Administrative Team</h3>
-        <div class="team-grid flow">
-            <div class="team-card">
-                <div class="team-avatar"><img src="../img/cec/team/kimberly-warren.jpg" alt="Dr. Kimberly Warren"></div>
-                <div class="team-name">Dr. Kimberly Warren</div>
-                <div class="team-designation">Director</div>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar"><img src="../img/cec/team/emma-mitchell.png" alt="Mrs. Emma Mitchell"></div>
-                <div class="team-name">Mrs. Emma Mitchell</div>
-                <div class="team-designation">Program Manager</div>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar"><img src="../img/cec/team/kathy-evans.jpg" alt="Ms. Kathy Evans"></div>
-                <div class="team-name">Ms. Kathy Evans</div>
-                <div class="team-designation">Training Coordinator</div>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar"><img src="../img/cec/team/adriana-foster.jpg" alt="Adriana Foster"></div>
-                <div class="team-name">Adriana Foster</div>
-                <div class="team-designation">Research Program Coordinator</div>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar">CB</div>
-                <div class="team-name">Ms. Cozette Boakye</div>
-                <div class="team-designation">Communications Specialist</div>
-            </div>
-        </div>
+        <div class="team-grid flow" id="admin-grid"></div>
     </section>
 
     <footer>
@@ -627,6 +547,62 @@
         </div>
     </footer>
 
+    <script>
+        window.rcmiSiteConfig = {
+            dataBasePath: "../data"
+        };
+    </script>
+    <script src="../js/FIELD_MAP.js?v=1"></script>
+    <script src="../js/common.js?v=1"></script>
+    <script>
+        (function () {
+            var helpers = window.rcmiSandboxHelpers;
+
+            if (!helpers || typeof helpers.loadDataset !== "function") {
+                throw new Error("Shared CSV helper API is unavailable.");
+            }
+
+            function renderAvatar(member) {
+                if (member.photoPath) {
+                    return '<img src="' + helpers.escapeHtml(member.photoPath) + '" alt="' + helpers.escapeHtml(member.name) + '">';
+                }
+                return helpers.escapeHtml(member.initials);
+            }
+
+            function badgeLabel(badge) {
+                return badge === "academic" ? "Academic Leader" : "Community Leader";
+            }
+
+            helpers.loadDataset("cecTeam").then(function (rows) {
+                var team = helpers.transformCecTeamRecords(rows);
+                var steering = team.filter(function (m) { return m.group === "steering"; });
+                var admin = team.filter(function (m) { return m.group === "admin"; });
+
+                var steeringHtml = steering.map(function (member, index) {
+                    var isLast = index === steering.length - 1;
+                    var centerLast = isLast && (steering.length % 4 === 1) ? " center-last" : "";
+                    return '<div class="team-card' + centerLast + '">' +
+                        '<div class="team-avatar">' + renderAvatar(member) + '</div>' +
+                        '<div class="team-name">' + helpers.escapeHtml(member.name) + '</div>' +
+                        (member.badge ? '<span class="team-badge ' + helpers.escapeHtml(member.badge) + '">' + badgeLabel(member.badge) + '</span>' : '') +
+                        '<div class="team-designation">' + helpers.escapeHtml(member.designation) + '</div>' +
+                        '</div>';
+                }).join("");
+                document.getElementById("steering-grid").innerHTML = steeringHtml;
+
+                var adminHtml = admin.map(function (member) {
+                    return '<div class="team-card">' +
+                        '<div class="team-avatar">' + renderAvatar(member) + '</div>' +
+                        '<div class="team-name">' + helpers.escapeHtml(member.name) + '</div>' +
+                        '<div class="team-designation">' + helpers.escapeHtml(member.designation) + '</div>' +
+                        '</div>';
+                }).join("");
+                document.getElementById("admin-grid").innerHTML = adminHtml;
+            }).catch(function (err) {
+                console.error("CEC team could not be loaded:", err);
+            });
+        })();
+    </script>
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
 

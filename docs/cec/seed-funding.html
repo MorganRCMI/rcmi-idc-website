@@ -767,6 +767,7 @@
     <link rel="stylesheet" href="../styles/site-polish.css?v=1">
     <link rel="stylesheet" href="../styles/hero-system.css?v=1">
     <link rel="stylesheet" href="../styles/nav.css?v=2">
+    <link rel="stylesheet" href="../styles/cec-polish.css?v=3">
 </head>
 <body>
     <header>
@@ -812,6 +813,13 @@
     <section class="page-content">
         <h2>Overview</h2>
         <p>Community-academic research partnerships using Community Based Participatory Research (CBPR) principles are essential for addressing health disparities. CBPR emphasizes equitable partnerships with communities, recognizing strengths and resources, treating them as a unit of identity. Successful CBPR entails building trust, balancing power, negotiating roles, and promoting shared governance. These partnerships create local ecosystems for networking, resource sharing, capacity building and mentorship. Engaging diverse leaders fosters co-learning and knowledge-sharing.</p>
+
+        <div class="cec-callout">
+            <div class="cec-callout-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
+            <p>Successful CBPR partnerships are built on <strong>trust, balanced power, negotiated roles, and shared governance</strong> &mdash; and that is exactly what these awards are designed to grow.</p>
+        </div>
 
         <p>With this in mind, Morgan CARES offers two seed funding programs to support the formation, maintenance, and success of collaborative research partnerships. With access to the Morgan CARES infrastructure, these partnerships can have lasting impact on community health.</p>
 
@@ -864,57 +872,11 @@
 
         <h4>NEW Community-Campus Partnerships, Initial Community Award ($2,000)</h4>
         <a class="award-cycle-label" href="https://drive.google.com/file/d/1LNhlrBNo42hMMi0aRtB3mlOqV82uEMb9/view?usp=sharing" target="_blank" rel="noopener">Community Award Application</a>
-        <div class="deadline-grid">
-            <div class="deadline-card">
-                <div class="deadline-card-header">
-                    <div class="deadline-card-icon">&#128197;</div>
-                    <div class="deadline-year">2026</div>
-                </div>
-                <div class="deadline-dates">
-                    <span class="deadline-date">January 15</span>
-                    <span class="deadline-date">April 15</span>
-                    <span class="deadline-date">July 15</span>
-                    <span class="deadline-date">September 15</span>
-                </div>
-            </div>
-            <div class="deadline-card">
-                <div class="deadline-card-header">
-                    <div class="deadline-card-icon">&#128197;</div>
-                    <div class="deadline-year">2028</div>
-                </div>
-                <div class="deadline-dates">
-                    <span class="deadline-date">January 15</span>
-                    <span class="deadline-date">April 15</span>
-                    <span class="deadline-date">July 15</span>
-                    <span class="deadline-date">September 15</span>
-                </div>
-            </div>
-        </div>
+        <div class="deadline-grid" id="deadline-grid-initial"></div>
 
         <h4>PREVIOUSLY FUNDED Community-Campus Partnerships, Continuation Award ($5,000)</h4>
         <span class="award-cycle-label">Continuation Application</span>
-        <div class="deadline-grid">
-            <div class="deadline-card">
-                <div class="deadline-card-header">
-                    <div class="deadline-card-icon">&#128197;</div>
-                    <div class="deadline-year">2027</div>
-                </div>
-                <div class="deadline-dates">
-                    <span class="deadline-date">January 15</span>
-                    <span class="deadline-date">July 15</span>
-                </div>
-            </div>
-            <div class="deadline-card">
-                <div class="deadline-card-header">
-                    <div class="deadline-card-icon">&#128197;</div>
-                    <div class="deadline-year">2029</div>
-                </div>
-                <div class="deadline-dates">
-                    <span class="deadline-date">January 15</span>
-                    <span class="deadline-date">July 15</span>
-                </div>
-            </div>
-        </div>
+        <div class="deadline-grid" id="deadline-grid-continuation"></div>
 
         <h3 class="eligibility-heading">Eligible applications must&hellip;</h3>
         <ul class="resource-list">
@@ -929,20 +891,7 @@
         </ul>
 
         <h3>Interested in Applying?</h3>
-        <div class="resource-grid">
-            <a class="resource-card" href="https://drive.google.com/file/d/1OJLXlBY5TfupSZc0Y9pCTkGWw5CdcQZm/view?usp=sharing" target="_blank" rel="noopener">
-                <div class="resource-card-icon">&#128196;</div>
-                <span class="resource-card-label">Community Award Overview &amp; Guidance</span>
-            </a>
-            <a class="resource-card" href="https://drive.google.com/file/d/1TSriQlK4eStqGp6KiZUfgLRp-uGtkxeL/view?usp=drive_link" target="_blank" rel="noopener">
-                <div class="resource-card-icon">&#10067;</div>
-                <span class="resource-card-label">Frequently Asked Questions</span>
-            </a>
-            <a class="resource-card" href="https://drive.google.com/file/d/1knKcxWAyv4Jy2Z6EFERqLrMoiUIvrMgS/view?usp=sharing" target="_blank" rel="noopener">
-                <div class="resource-card-icon">&#128161;</div>
-                <span class="resource-card-label">Project Examples</span>
-            </a>
-        </div>
+        <div class="resource-grid" id="resource-grid-community"></div>
 
         <h2 id="practitioner-award">Practitioner Research Award Program</h2>
 
@@ -978,24 +927,7 @@
         </ul>
 
         <h3>Interested in Applying?</h3>
-        <div class="resource-grid">
-            <a class="resource-card" href="https://drive.google.com/file/d/1otPLMwj4Li7VJkufe-UwYWtR5TZIU-KU/view?usp=sharing" target="_blank" rel="noopener">
-                <div class="resource-card-icon">&#128196;</div>
-                <span class="resource-card-label">Practitioner Research Award Overview &amp; Guidance</span>
-            </a>
-            <a class="resource-card" href="https://drive.google.com/file/d/1haNa6qJIIVIJDvp5e-4xCBf6Qj0rtzCW/view?usp=sharing" target="_blank" rel="noopener">
-                <div class="resource-card-icon">&#127891;</div>
-                <span class="resource-card-label">Practitioner Research Educational Guide</span>
-            </a>
-            <a class="resource-card" href="https://drive.google.com/file/d/1vgHwwTBeIK_kVH1_b0V4GWwQ_pm0Q0AY/view?usp=sharing" target="_blank" rel="noopener">
-                <div class="resource-card-icon">&#128202;</div>
-                <span class="resource-card-label">Practitioner Research Case Studies</span>
-            </a>
-            <a class="resource-card" href="https://drive.google.com/file/d/1LNhlrBNo42hMMi0aRtB3mlOqV82uEMb9/view?usp=sharing" target="_blank" rel="noopener">
-                <div class="resource-card-icon">&#10067;</div>
-                <span class="resource-card-label">Frequently Asked Questions</span>
-            </a>
-        </div>
+        <div class="resource-grid" id="resource-grid-practitioner"></div>
 
         <h2>Application Review</h2>
         <p>Partnerships can submit applications any time using this <a href="https://docs.google.com/forms/d/e/1FAIpQLSfy2qip78mwYO8NKHGmLFJYUJhSErjpBU_51hMgttVYRO-rlg/viewform" target="_blank" rel="noopener">Community Award Application</a> or the <a href="https://docs.google.com/forms/d/e/1FAIpQLSeNovZInG5yuxlky3ZD2I9ZEO7xk3qiqDQnGA7b1PsZrAeUAQ/viewform?usp=send_form" target="_blank" rel="noopener">Practitioner Research Award Application</a>. Applications will be reviewed on a quarterly basis, on the following dates:</p>
@@ -1043,6 +975,61 @@
         </div>
     </footer>
 
+    <script>
+        window.rcmiSiteConfig = {
+            dataBasePath: "../data"
+        };
+    </script>
+    <script src="../js/FIELD_MAP.js?v=1"></script>
+    <script src="../js/common.js?v=1"></script>
+    <script>
+        (function () {
+            var helpers = window.rcmiSandboxHelpers;
+
+            if (!helpers || typeof helpers.loadDataset !== "function") {
+                throw new Error("Shared CSV helper API is unavailable.");
+            }
+
+            function renderDeadlineCard(deadline) {
+                return '<div class="deadline-card">' +
+                    '<div class="deadline-card-header">' +
+                    '<div class="deadline-card-icon">&#128197;</div>' +
+                    '<div class="deadline-year">' + helpers.escapeHtml(deadline.year) + '</div>' +
+                    '</div>' +
+                    '<div class="deadline-dates">' +
+                    deadline.dates.map(function (date) { return '<span class="deadline-date">' + helpers.escapeHtml(date) + '</span>'; }).join("") +
+                    '</div>' +
+                    '</div>';
+            }
+
+            function renderResourceCard(resource) {
+                return '<a class="resource-card" href="' + helpers.escapeHtml(resource.url) + '" target="_blank" rel="noopener">' +
+                    '<div class="resource-card-icon">' + resource.icon + '</div>' +
+                    '<span class="resource-card-label">' + helpers.escapeHtml(resource.label) + '</span>' +
+                    '</a>';
+            }
+
+            helpers.loadDataset("cecSeedFundingDeadlines").then(function (rows) {
+                var deadlines = helpers.transformCecSeedFundingDeadlineRecords(rows);
+                var initial = deadlines.filter(function (d) { return d.awardType === "initial"; });
+                var continuation = deadlines.filter(function (d) { return d.awardType === "continuation"; });
+                document.getElementById("deadline-grid-initial").innerHTML = initial.map(renderDeadlineCard).join("");
+                document.getElementById("deadline-grid-continuation").innerHTML = continuation.map(renderDeadlineCard).join("");
+            }).catch(function (err) {
+                console.error("CEC seed funding deadlines could not be loaded:", err);
+            });
+
+            helpers.loadDataset("cecSeedFundingResources").then(function (rows) {
+                var resources = helpers.transformCecSeedFundingResourceRecords(rows);
+                var community = resources.filter(function (r) { return r.awardType === "community"; });
+                var practitioner = resources.filter(function (r) { return r.awardType === "practitioner"; });
+                document.getElementById("resource-grid-community").innerHTML = community.map(renderResourceCard).join("");
+                document.getElementById("resource-grid-practitioner").innerHTML = practitioner.map(renderResourceCard).join("");
+            }).catch(function (err) {
+                console.error("CEC seed funding resources could not be loaded:", err);
+            });
+        })();
+    </script>
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
 

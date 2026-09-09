@@ -3,7 +3,7 @@
 sync_from_master.py
 
 Reads PPP and SS pilot faculty + RCMI pilot publications from the master Excel
-workbook and upserts them into rcmi_content.xlsx, then regenerates all CSVs.
+workbook and upserts them into idc_content.xlsx, then regenerates all CSVs.
 
 Usage:
   python3 scripts/sync_from_master.py           # run for real
@@ -29,7 +29,7 @@ except ImportError:
     raise SystemExit(1)
 
 MASTER_PATH   = "/Users/mind/Library/CloudStorage/GoogleDrive-joain1@morgan.edu/Shared drives/Team REC IDC/Pilot Grants/02_Faculty_cleaned_wip.xlsx"
-WORKBOOK_PATH = os.path.join(ROOT, "workbook", "rcmi_content.xlsx")
+WORKBOOK_PATH = os.path.join(ROOT, "workbook", "idc_content.xlsx")
 EXPORT_SCRIPT = os.path.join(ROOT, "scripts", "export_workbook_to_csv.py")
 DRY_RUN       = "--dry-run" in sys.argv
 

@@ -582,6 +582,13 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
+        .video-thumb iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
         .video-thumb .play-btn {
             width: 64px;
             height: 64px;
@@ -767,12 +774,12 @@
     <link rel="stylesheet" href="../styles/site-polish.css?v=1">
     <link rel="stylesheet" href="../styles/hero-system.css?v=1">
     <link rel="stylesheet" href="../styles/nav.css?v=2">
-    <link rel="stylesheet" href="../styles/cec-polish.css?v=3">
+    <link rel="stylesheet" href="../styles/cec-polish.css?v=6">
 </head>
 <body>
     <header>
         <nav>
-            <a href="../" class="logo">RCMI <span>@ Morgan</span></a>
+            <a href="./" class="logo logo-cares"><img src="../img/cec/morgan-cares-logo.png" alt="Morgan CARES: Community-Aligned REsearch Solutions" width="783" height="459"></a>
             <ul id="menu">
                 <li><a href="./">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -828,7 +835,7 @@
             <a href="#practitioner-award">Practitioner Research Award &rarr;</a>
         </div>
 
-        <div class="video-thumb">
+        <div class="video-thumb" id="seed-funding-video">
             <div class="play-btn"></div>
             <span class="video-label">Community Award Video &mdash; Coming Soon</span>
         </div>
@@ -1019,8 +1026,26 @@
                 console.error("CEC seed funding deadlines could not be loaded:", err);
             });
 
+            // Turn a Google Drive or YouTube share link into an embeddable URL.
+            function toEmbedUrl(url) {
+                var drive = url.match(/drive\.google\.com\/file\/d\/([^/?#]+)/);
+                if (drive) return "https://drive.google.com/file/d/" + drive[1] + "/preview";
+                var youtube = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w-]{6,})/);
+                if (youtube) return "https://www.youtube.com/embed/" + youtube[1];
+                return url;
+            }
+
+            function renderVideo(video) {
+                var slot = document.getElementById("seed-funding-video");
+                if (!slot || !video || !video.url) return;
+                slot.innerHTML = '<iframe src="' + helpers.escapeHtml(toEmbedUrl(video.url)) + '" title="' +
+                    helpers.escapeHtml(video.label || "Morgan CARES Seed Funding Program") +
+                    '" loading="lazy" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+            }
+
             helpers.loadDataset("cecSeedFundingResources").then(function (rows) {
                 var resources = helpers.transformCecSeedFundingResourceRecords(rows);
+                renderVideo(resources.filter(function (r) { return r.awardType === "video"; })[0]);
                 var community = resources.filter(function (r) { return r.awardType === "community"; });
                 var practitioner = resources.filter(function (r) { return r.awardType === "practitioner"; });
                 document.getElementById("resource-grid-community").innerHTML = community.map(renderResourceCard).join("");

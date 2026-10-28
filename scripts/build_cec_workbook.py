@@ -37,7 +37,7 @@ def start_here_rows():
         ["Tab: cec_training_events", "Monthly Training Series schedule shown on the Training page timeline. One row per event."],
         ["Tab: cec_partners", "PartnerLink showcase members shown on the Partnering page. Use the Set column (base, 2, 3, or 4) to control grouping — 'base' is always visible, the others are shown when a viewer clicks a dot."],
         ["Tab: cec_seed_funding_deadlines", "Application deadline cycles shown on the Seed Funding page. Use Award Type (initial or continuation) and the Dates column (pipe-separated, e.g. 'January 15|April 15')."],
-        ["Tab: cec_seed_funding_resources", "Document/guide links shown under each Seed Funding award section. Use Award Type (community or practitioner)."],
+        ["Tab: cec_seed_funding_resources", "Document/guide links shown under each Seed Funding award section. Use Award Type (community or practitioner). One row with Award Type 'video' sets the video shown at the top of the Seed Funding page (paste the Google Drive or YouTube share link in URL)."],
         ["Tab: cec_resource_links", "Grouped external links shown on the Resources page (CONNECT, Reports, CBPR Resources, Community Resources, Funding Resources). Use the Group column to control which list a row appears in — it must exactly match one of those five names."],
         ["Edit These Fields", "Edit normal content fields such as names, titles, dates, descriptions, and Is Active values."],
         ["Do Not Edit", "Do not rename tabs, do not rename headers, and do not change ID fields unless you are managing the workbook structure."],

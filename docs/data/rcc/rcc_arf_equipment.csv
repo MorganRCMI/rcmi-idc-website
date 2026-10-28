@@ -1,8 +1,8 @@
 Item ID,Is Active,Sort Order,Icon,Title,Description
-surgery-room,Yes,10,🧞,Surgery Room,"State-of-the-art surgery room with two surgery tables (one backdraft and one downdraft), digitized stereotaxic instruments, gas and chemical anesthesia system, animal physiological monitoring (Kent Scientific), and autoclave system for surgical sterilization."
-histology-lab,Yes,20,🔬,Histology Laboratory,"Biosafety level II cabinet, chemical fume hood for perfusions, HistoCore Arcadia tissue processing and embedding apparatus, and a Leica RM2255 fully automated rotary microtome."
-molecular-lab,Yes,30,🧬,Molecular Laboratory,"Hacker Bright cryostat, a Keyence BZ-XB fluorescence microscope with live-cell imaging and automated cell counting, refrigerated centrifuge, digital temperature shaking incubator, Wes™ Simple Western blot protein analysis apparatus, a microplate reader, and various small laboratory equipment items."
-behavior-testing,Yes,40,🎯,Behavior Testing Rooms,"Three rooms with automated operant conditioning chambers for fear conditioning and drug self-administration; light-dark boxes; modular mazes; a Rotarod for mice and rats with video recording; manual open-field, Elevated Plus, and T-Maze for mice and rats; and a T-maze for small aquatic species."
+surgery-room,Yes,20,🩺,Small-Animal Surgery and Imaging,"A sterile-capable surgical suite with stereotaxic instruments, anesthesia systems, surgical sterilization equipment, and a Pearl Trilogy small-animal imaging system."
+histology-lab,Yes,30,🔬,Histology,"A BSL-2-capable laboratory equipped with automated tissue processing, embedding, microtomy, and tissue preparation systems."
+molecular-lab,Yes,40,🧬,Cellular and Molecular Analysis,"Advanced instrumentation including a Keyence fluorescence microscope, Wes Simple Western system, QuantStudio 6 Flex real-time PCR, cryostat, and access to confocal microscopy and other small instruments for protein and nucleic acid measurements."
+behavior-testing,Yes,10,🎯,Behavioral Neuroscience,"Four dedicated testing rooms equipped for operant conditioning, drug self-administration, maze testing, motor coordination, learning, memory, and anxiety-related behavioral assessments, as well as computerized human participant survey and behavior testing and statistical software."
 bedding-water,Yes,50,💧,Bedding & Water Station,Automated bedding dispenser and water filling station.
 cage-washer,Yes,60,🪥,Cage Washer,Cabinet cage washer with separate clean and dirty sides.
 water-purification,Yes,70,🚿,Water Purification,Reverse osmosis purification water system.

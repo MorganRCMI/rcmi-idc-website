@@ -451,6 +451,56 @@
             box-shadow: 0 14px 30px rgba(0, 51, 102, 0.26);
         }
 
+        /* Coffee hour recordings link */
+
+        .recordings-banner {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            padding: 1.5rem 2rem;
+            border: 1px solid var(--border);
+            border-left: 5px solid var(--secondary);
+            border-radius: 20px;
+            background: var(--light);
+            color: var(--primary);
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .recordings-banner:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(0, 51, 102, 0.12);
+        }
+
+        .recordings-banner-icon {
+            flex: 0 0 auto;
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .recordings-banner-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            flex: 1;
+        }
+
+        .recordings-banner-text strong {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+        }
+
+        .recordings-banner-text span {
+            color: var(--text);
+        }
+
+        .recordings-banner-arrow {
+            flex: 0 0 auto;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
         /* Past events */
 
         .past-events-list {
@@ -767,6 +817,17 @@
             </div>
 
             <div class="past-events-list" id="past-events-list"></div>
+        </section>
+
+        <section class="section" aria-label="Coffee hour recordings">
+            <a class="recordings-banner" href="https://drive.google.com/drive/folders/1zlN8CHHjB9pqDOkuliwBxHCOJbFCsfrs?usp=sharing" target="_blank" rel="noopener">
+                <span class="recordings-banner-icon" aria-hidden="true">&#9749;</span>
+                <span class="recordings-banner-text">
+                    <strong>Missed a Coffee Hour?</strong>
+                    <span>Click here to access our previous Coffee Hour Zoom recordings.</span>
+                </span>
+                <span class="recordings-banner-arrow" aria-hidden="true">&rarr;</span>
+            </a>
         </section>
 
         <section class="section">
